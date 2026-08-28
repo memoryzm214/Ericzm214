@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>面向未来的可持续设计</title>
+<meta name="description" content="湖北工业大学工业设计学院《可持续发展概论》交互课件：系统边界、雏菊世界模型、混沌初值敏感性与可持续发展时间轴。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@400;500&display=swap">
+<style>
+/* ============================================================
+   Design tokens — docs/design-system.md
+   ============================================================ */
+:root{
+  --c-bone:#F5F2EC; --c-sand:#E8E2D6; --c-clay:#DED6C7;
+  --c-ink:#14201A;  --c-forest:#22392C; --c-moss:#3F5B45;
+  --c-sage:#94A78D; --c-stone:#6E6A5F;  --c-rust:#B85C38;
+  --c-ochre:#D9A441;
+
+  --bg:var(--c-bone);
+  --bg-alt:var(--c-sand);
+  --surface:#FBF9F5;
+  --invert:var(--c-forest);
+  --invert-2:var(--c-moss);
+  --text:var(--c-ink);
+  --text-muted:var(--c-stone);
+  --text-invert:var(--c-bone);
+  --accent:var(--c-rust);
+  --accent-ink:#8E4326;
+  --accent-wash:rgba(184,92,56,.10);
+  --sage:var(--c-sage);
+  --ochre:#A87A1F;
+  --border:var(--c-clay);
+  --border-soft:rgba(20,32,26,.10);
+  --shadow-hover:0 8px 24px rgba(20,32,26,.08);
+  --shadow-overlay:0 24px 64px rgba(20,32,26,.16);
+
+  --font-display:"Fraunces","Noto Serif SC",Georgia,"Songti SC",serif;
+  --font-sans:"Inter Tight","Noto Sans SC",-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --fs-display:clamp(44px,6.5vw,104px);
+  --fs-h1:clamp(34px,4.2vw,64px);
+  --fs-h2:clamp(26px,3vw,44px);
+  --fs-h3:clamp(21px,2vw,30px);
+
+  --sp-1:4px;  --sp-2:8px;  --sp-3:12px; --sp-4:16px;
+  --sp-6:24px; --sp-8:32px; --sp-12:48px; --sp-16:64px;
+  --sp-24:96px; --sp-32:128px; --sp-40:160px;
+
+  --page-gutter:clamp(24px,5vw,96px);
+  --section-padding:clamp(96px,12vw,160px);
+  --container:1440px;
+  --gutter:24px;
+
+  --radius-sm:4px; --radius-md:8px; --radius-lg:16px; --radius-pill:999px;
+
+  --dur-fast:200ms; --dur-base:400ms; --dur-slow:700ms;
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --ease-io:cubic-bezier(.65,0,.35,1);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#101A14; --bg-alt:#17241C; --surface:#1B2B22;
+    --invert:#0A110D; --invert-2:#1E3226;
+    --text:#ECE8DE; --text-muted:#9BA695; --text-invert:#ECE8DE;
+    --accent:#E08155; --accent-ink:#EFA484; --accent-wash:rgba(224,129,85,.14);
+    --sage:#A8B9A0; --ochre:#E0B45C;
+    --border:#2C3F33; --border-soft:rgba(236,232,222,.12);
+    --shadow-hover:0 8px 24px rgba(0,0,0,.4);
+    --shadow-overlay:0 24px 64px rgba(0,0,0,.55);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101A14; --bg-alt:#17241C; --surface:#1B2B22;
+  --invert:#0A110D; --invert-2:#1E3226;
+  --text:#ECE8DE; --text-muted:#9BA695; --text-invert:#ECE8DE;
+  --accent:#E08155; --accent-ink:#EFA484; --accent-wash:rgba(224,129,85,.14);
+  --sage:#A8B9A0; --ochre:#E0B45C;
+  --border:#2C3F33; --border-soft:rgba(236,232,222,.12);
+  --shadow-hover:0 8px 24px rgba(0,0,0,.4);
+  --shadow-overlay:0 24px 64px rgba(0,0,0,.55);
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:var(--font-sans); font-size:16px; line-height:1.75;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+h1,h2,h3,h4,p,figure,ul,ol{margin:0}
+ul,ol{padding:0;list-style:none}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+.wrap{max-width:var(--container);margin-inline:auto;padding-inline:var(--page-gutter)}
+.section{padding-block:var(--section-padding);position:relative}
+.section--alt{background:var(--bg-alt)}
+.section--dark{background:var(--invert);color:var(--text-invert)}
+.section--dark .eyebrow{color:var(--sage)}
+.section--dark .lead,.section--dark .body{color:#C3CEBD}
+:root[data-theme="dark"] .section--dark .lead,
+:root[data-theme="dark"] .section--dark .body{color:#A8B39F}
+
+.eyebrow{
+  font-family:var(--font-mono); font-size:12px; font-weight:500;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--accent);
+  display:flex; align-items:center; gap:var(--sp-3);
+}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--border);max-width:120px}
+.section--dark .eyebrow::after{background:rgba(236,232,222,.2)}
+
+h2.h1{font-family:var(--font-display);font-size:var(--fs-h1);line-height:1.06;letter-spacing:-.02em;font-weight:600;text-wrap:balance}
+h3.h2{font-family:var(--font-display);font-size:var(--fs-h2);line-height:1.1;letter-spacing:-.015em;font-weight:600;text-wrap:balance}
+h4.h3{font-family:var(--font-display);font-size:var(--fs-h3);line-height:1.2;font-weight:600;text-wrap:balance}
+.lead{font-size:clamp(17px,1.5vw,20px);line-height:1.7;color:var(--text-muted);max-width:56ch}
+.body{font-size:16px;line-height:1.8;color:var(--text-muted);max-width:68ch}
+.body strong,.lead strong{color:var(--text);font-weight:500}
+.section-head{display:flex;flex-direction:column;gap:var(--sp-6);margin-bottom:var(--sp-16)}
+.section-head .lead{margin-top:var(--sp-2)}
+.tnum{font-variant-numeric:tabular-nums}
+
+/* ============================================================
+   Progress + nav
+   ============================================================ */
+.progress{position:fixed;inset:0 0 auto 0;height:2px;z-index:60;background:transparent;pointer-events:none}
+.progress__bar{height:100%;width:0;background:var(--accent);transform-origin:left}
+
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;height:68px;
+  display:flex;align-items:center;
+  transition:background var(--dur-base) var(--ease-out),
+             border-color var(--dur-base) var(--ease-out),
+             transform var(--dur-base) var(--ease-out);
+  border-bottom:1px solid transparent;
+}
+.nav.is-solid{background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);border-bottom-color:var(--border)}
+.nav.is-hidden{transform:translateY(-100%)}
+.nav__inner{max-width:var(--container);margin-inline:auto;padding-inline:var(--page-gutter);width:100%;display:flex;align-items:center;gap:var(--sp-8)}
+.nav__brand{font-family:var(--font-display);font-weight:600;font-size:17px;letter-spacing:-.01em;white-space:nowrap}
+.nav__links{display:flex;gap:var(--sp-6);margin-left:auto;align-items:center}
+.nav__link{
+  position:relative;font-size:13.5px;letter-spacing:.02em;color:var(--text-muted);
+  text-decoration:none;padding-block:4px;transition:color var(--dur-fast) var(--ease-out);
+}
+.nav__link::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--accent);
+  transform:scaleX(0);transform-origin:left;transition:transform 300ms var(--ease-out);
+}
+.nav__link:hover,.nav__link.is-active{color:var(--text)}
+.nav__link:hover::after,.nav__link.is-active::after{transform:scaleX(1)}
+.nav__theme{
+  width:36px;height:36px;border-radius:var(--radius-pill);border:1px solid var(--border);
+  display:grid;place-items:center;color:var(--text-muted);
+  transition:border-color var(--dur-fast),color var(--dur-fast),background var(--dur-fast);
+}
+.nav__theme:hover{color:var(--text);border-color:var(--text-muted)}
+.nav__theme svg{width:16px;height:16px}
+@media (max-width:900px){.nav__links .nav__link{display:none}}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero{
+  min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  padding-block:140px var(--sp-24);position:relative;overflow:hidden;
+}
+.hero__grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gutter);align-items:end}
+.hero__meta{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:var(--sp-4) var(--sp-8);
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:var(--sp-8)}
+.hero__meta span{display:flex;align-items:center;gap:var(--sp-2)}
+.hero__meta span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.hero__title{grid-column:1/10;font-family:var(--font-display);font-size:var(--fs-display);
+  line-height:.98;letter-spacing:-.03em;font-weight:600;text-wrap:balance}
+.hero__title em{font-style:normal;color:var(--accent)}
+.hero__en{grid-column:1/-1;font-family:var(--font-mono);font-size:clamp(12px,1.4vw,15px);
+  letter-spacing:.4em;text-transform:uppercase;color:var(--text-muted);margin-top:var(--sp-6)}
+.hero__intro{grid-column:1/6;margin-top:var(--sp-16)}
+.hero__scroll{grid-column:10/13;margin-top:var(--sp-16);display:flex;flex-direction:column;
+  gap:var(--sp-3);align-items:flex-start;color:var(--text-muted);font-family:var(--font-mono);
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.hero__scroll i{display:block;width:1px;height:56px;background:linear-gradient(var(--accent),transparent);
+  animation:drop 2.4s var(--ease-io) infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}
+  55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media (max-width:900px){
+  .hero__title,.hero__intro,.hero__scroll{grid-column:1/-1}
+  .hero__scroll{display:none}
+}
+
+/* stat strip */
+.stats{border-top:1px solid var(--border);margin-top:var(--sp-24);padding-top:var(--sp-8);
+  display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gutter)}
+.stat__num{font-family:var(--font-display);font-size:clamp(30px,3.4vw,52px);line-height:1;
+  font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat__num sub{font-size:.42em;vertical-align:baseline;color:var(--text-muted);
+  font-family:var(--font-sans);font-weight:400;margin-left:2px}
+.stat__label{font-size:13px;line-height:1.55;color:var(--text-muted);margin-top:var(--sp-3);max-width:22ch}
+@media (max-width:820px){.stats{grid-template-columns:repeat(2,1fr);row-gap:var(--sp-8)}}
+
+/* ============================================================
+   Reveal
+   ============================================================ */
+.rv{opacity:0;transform:translateY(24px);transition:opacity var(--dur-slow) var(--ease-out),transform var(--dur-slow) var(--ease-out)}
+.rv.is-in{opacity:1;transform:none}
+
+/* ============================================================
+   Perspective switch
+   ============================================================ */
+.switch{display:inline-flex;padding:4px;background:var(--bg-alt);border:1px solid var(--border);
+  border-radius:var(--radius-pill);gap:4px}
+.section--alt .switch{background:var(--bg)}
+.switch button{padding:9px 20px;border-radius:var(--radius-pill);font-size:13.5px;font-weight:500;
+  color:var(--text-muted);letter-spacing:.02em;transition:color var(--dur-fast),background var(--dur-fast)}
+.switch button[aria-pressed="true"]{background:var(--invert);color:var(--text-invert)}
+:root[data-theme="dark"] .switch button[aria-pressed="true"]{background:var(--accent);color:#101A14}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .switch button[aria-pressed="true"]{background:var(--accent);color:#101A14}}
+
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:var(--sp-8);align-items:stretch;margin-top:var(--sp-12)}
+.vs__col{border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-8);
+  background:var(--surface);transition:opacity var(--dur-base) var(--ease-out),
+  border-color var(--dur-base),transform var(--dur-base) var(--ease-out)}
+.vs__col[data-dim="true"]{opacity:.42}
+.vs__col[data-active="true"]{border-color:var(--accent);transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+.vs__label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:var(--sp-6)}
+.vs__col[data-active="true"] .vs__label{color:var(--accent)}
+.vs__list{display:flex;flex-direction:column;gap:var(--sp-6)}
+.vs__list li{font-family:var(--font-display);font-size:clamp(18px,1.7vw,24px);line-height:1.4;font-weight:400}
+.vs__list li + li{border-top:1px solid var(--border-soft);padding-top:var(--sp-6)}
+.vs__mid{display:grid;place-items:center;font-family:var(--font-display);font-size:20px;
+  color:var(--text-muted);font-style:italic}
+@media (max-width:820px){.vs{grid-template-columns:1fr;gap:var(--sp-4)}.vs__mid{padding-block:var(--sp-2)}}
+
+/* ============================================================
+   System boundary widget
+   ============================================================ */
+.boundary{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--sp-16);align-items:start;margin-top:var(--sp-12)}
+@media (max-width:960px){.boundary{grid-template-columns:1fr;gap:var(--sp-12)}}
+.opts{display:flex;flex-direction:column;gap:var(--sp-3)}
+.opt{display:flex;gap:var(--sp-4);align-items:flex-start;padding:var(--sp-4) var(--sp-6);
+  border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface);
+  cursor:pointer;transition:border-color var(--dur-fast),background var(--dur-fast)}
+.opt:hover{border-color:var(--text-muted)}
+.opt input{position:absolute;opacity:0;width:0;height:0}
+.opt__box{flex:0 0 auto;width:18px;height:18px;border:1.5px solid var(--text-muted);border-radius:3px;
+  margin-top:4px;display:grid;place-items:center;transition:all var(--dur-fast) var(--ease-out)}
+.opt__box svg{width:11px;height:11px;stroke:var(--bg);stroke-width:3;fill:none;
+  stroke-dasharray:16;stroke-dashoffset:16;transition:stroke-dashoffset var(--dur-fast) var(--ease-out)}
+.opt input:checked + .opt__box{background:var(--accent);border-color:var(--accent)}
+.opt input:checked + .opt__box svg{stroke-dashoffset:0}
+.opt input:focus-visible + .opt__box{outline:2px solid var(--accent);outline-offset:3px}
+.opt__t{display:block;font-size:15px;font-weight:500;line-height:1.5}
+.opt__d{display:block;font-size:13.5px;color:var(--text-muted);line-height:1.6;margin-top:3px}
+
+.gauge{border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--surface);padding:var(--sp-8)}
+.gauge__row{display:flex;justify-content:space-between;align-items:baseline;gap:var(--sp-4);margin-bottom:var(--sp-6)}
+.gauge__cap{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted)}
+.gauge__val{font-family:var(--font-display);font-size:clamp(32px,3.6vw,48px);font-weight:600;
+  line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.bars{display:flex;flex-direction:column;gap:var(--sp-4)}
+.bar__head{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
+.bar__head b{font-weight:500}
+.bar__head span{color:var(--text-muted);font-variant-numeric:tabular-nums}
+.bar__track{height:8px;border-radius:var(--radius-pill);background:var(--bg-alt);overflow:hidden}
+.bar__fill{height:100%;border-radius:var(--radius-pill);width:0;
+  transition:width var(--dur-slow) var(--ease-out),background var(--dur-base)}
+.gauge__note{margin-top:var(--sp-8);padding-top:var(--sp-6);border-top:1px solid var(--border);
+  font-size:14px;line-height:1.7;color:var(--text-muted);min-height:3.4em}
+.gauge__note b{color:var(--accent);font-weight:500}
+
+/* ============================================================
+   Loop diagram
+   ============================================================ */
+.loopwrap{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:var(--sp-16);align-items:center;margin-top:var(--sp-12)}
+@media (max-width:960px){.loopwrap{grid-template-columns:1fr;gap:var(--sp-12)}}
+.loopsvg{width:100%;height:auto;overflow:visible}
+.loopsvg .ring{fill:none;stroke:var(--border);stroke-width:1.5}
+.loopsvg .arc{fill:none;stroke:var(--accent);stroke-width:2;opacity:.35}
+.loopsvg .node{cursor:pointer}
+.loopsvg .node circle{fill:var(--surface);stroke:var(--border);stroke-width:1.5;
+  transition:stroke var(--dur-base) var(--ease-out),fill var(--dur-base) var(--ease-out),r var(--dur-base) var(--ease-out)}
+.loopsvg .node:hover circle{stroke:var(--text-muted)}
+.loopsvg .node.is-on circle{fill:var(--accent);stroke:var(--accent)}
+.loopsvg .node text{font-family:var(--font-sans);font-size:13px;font-weight:500;fill:var(--text);
+  text-anchor:middle;pointer-events:none;transition:fill var(--dur-base)}
+.loopsvg .node.is-on text{fill:#fff}
+:root[data-theme="dark"] .loopsvg .node.is-on text{fill:#101A14}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .loopsvg .node.is-on text{fill:#101A14}}
+.loopsvg .node tspan.idx{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;fill:var(--text-muted)}
+.loopsvg .node.is-on tspan.idx{fill:rgba(255,255,255,.75)}
+.loopsvg .dot{fill:var(--accent)}
+.loop__panel{border-left:2px solid var(--accent);padding-left:var(--sp-8);min-height:210px}
+.loop__idx{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;color:var(--accent);text-transform:uppercase}
+.loop__t{font-family:var(--font-display);font-size:var(--fs-h3);font-weight:600;margin:var(--sp-3) 0 var(--sp-4)}
+.loop__d{font-size:15px;line-height:1.8;color:var(--text-muted)}
+.loop__q{margin-top:var(--sp-6);font-size:13.5px;color:var(--text-muted);font-style:italic;
+  padding-top:var(--sp-4);border-top:1px solid var(--border-soft)}
+
+/* ============================================================
+   Case cards
+   ============================================================ */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gutter);margin-top:var(--sp-12)}
+@media (max-width:960px){.cases{grid-template-columns:1fr;gap:var(--sp-8)}}
+.case{border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--surface);
+  padding:var(--sp-8);display:flex;flex-direction:column;
+  transition:transform var(--dur-base) var(--ease-out),box-shadow var(--dur-base) var(--ease-out),border-color var(--dur-base)}
+.case:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:var(--text-muted)}
+.case__tag{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);display:inline-block;margin-bottom:var(--sp-6)}
+.case__t{font-family:var(--font-display);font-size:24px;font-weight:600;line-height:1.25;margin-bottom:var(--sp-4)}
+.case__sum{font-size:14.5px;line-height:1.75;color:var(--text-muted)}
+.case__more{overflow:hidden;max-height:0;transition:max-height var(--dur-slow) var(--ease-out)}
+.case__block{margin-top:var(--sp-6);padding-top:var(--sp-6);border-top:1px solid var(--border-soft)}
+.case__k{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:var(--sp-2)}
+.case__v{font-size:14.5px;line-height:1.75;color:var(--text-muted)}
+.case__toggle{margin-top:var(--sp-6);align-self:flex-start;font-size:13.5px;font-weight:500;
+  color:var(--accent);display:flex;align-items:center;gap:6px;position:relative;padding-bottom:2px}
+.case__toggle::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--accent);
+  transform:scaleX(0);transform-origin:left;transition:transform 300ms var(--ease-out)}
+.case__toggle:hover::after{transform:scaleX(1)}
+.case__toggle svg{width:12px;height:12px;transition:transform var(--dur-base) var(--ease-out)}
+.case[data-open="true"] .case__toggle svg{transform:rotate(180deg)}
+
+.poll{margin-top:auto;padding-top:var(--sp-8)}
+.poll__q{font-family:var(--font-display);font-size:17px;line-height:1.5;font-weight:600;margin-bottom:var(--sp-4)}
+.poll__btns{display:flex;gap:var(--sp-2)}
+.poll__btn{flex:1;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-pill);
+  font-size:13px;font-weight:500;color:var(--text-muted);
+  transition:all var(--dur-fast) var(--ease-out)}
+.poll__btn:hover{border-color:var(--accent);color:var(--accent)}
+.poll__btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .poll__btn[aria-pressed="true"]{color:#101A14}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .poll__btn[aria-pressed="true"]{color:#101A14}}
+.poll__res{margin-top:var(--sp-4);font-size:12.5px;color:var(--text-muted);font-variant-numeric:tabular-nums;
+  opacity:0;transition:opacity var(--dur-base)}
+.poll__res.is-on{opacity:1}
+.poll__meter{height:5px;border-radius:var(--radius-pill);background:var(--bg-alt);overflow:hidden;margin-top:6px;display:flex}
+.poll__meter i{display:block;height:100%;transition:width var(--dur-slow) var(--ease-out)}
+
+/* ============================================================
+   Timeline
+   ============================================================ */
+.tl__filters{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-bottom:var(--sp-12)}
+.chip{padding:8px 18px;border:1px solid var(--border);border-radius:var(--radius-pill);
+  font-size:13px;font-weight:500;color:var(--text-muted);letter-spacing:.02em;
+  transition:all var(--dur-fast) var(--ease-out);display:flex;align-items:center;gap:8px}
+.chip i{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.6}
+.chip:hover{border-color:var(--text-muted);color:var(--text)}
+.chip[aria-pressed="true"]{background:var(--invert);border-color:var(--invert);color:var(--text-invert)}
+:root[data-theme="dark"] .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#101A14}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#101A14}}
+
+.tl{position:relative;overflow-x:auto;overflow-y:hidden;padding-bottom:var(--sp-8);
+  scrollbar-width:thin;cursor:grab;-webkit-overflow-scrolling:touch}
+.tl.is-drag{cursor:grabbing;scroll-behavior:auto}
+.tl::-webkit-scrollbar{height:4px}
+.tl::-webkit-scrollbar-track{background:var(--border-soft);border-radius:2px}
+.tl::-webkit-scrollbar-thumb{background:var(--text-muted);border-radius:2px}
+.tl__track{display:flex;gap:var(--sp-6);padding-top:var(--sp-16);position:relative;min-width:max-content}
+.tl__track::before{content:"";position:absolute;left:0;right:0;top:calc(var(--sp-16) - 25px);height:1px;background:var(--border)}
+.tl__item{flex:0 0 240px;position:relative;padding-top:var(--sp-6);transition:opacity var(--dur-base) var(--ease-out)}
+.tl__item[hidden]{display:none}
+.tl__item.is-mute{opacity:.22}
+.tl__item::before{content:"";position:absolute;top:-25px;left:0;width:9px;height:9px;border-radius:50%;
+  background:var(--bg);border:1.5px solid var(--dotc);transform:translateY(-50%) translateY(4.5px);
+  transition:background var(--dur-fast),transform var(--dur-fast)}
+.tl__item:hover::before{background:var(--dotc);transform:translateY(-50%) translateY(4.5px) scale(1.35)}
+.tl__item[data-track="global"]{--dotc:var(--accent)}
+.tl__item[data-track="china"]{--dotc:#B08A2E}
+.tl__item[data-track="design"]{--dotc:var(--sage)}
+:root[data-theme="dark"] .tl__item[data-track="china"]{--dotc:var(--ochre)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tl__item[data-track="china"]{--dotc:var(--ochre)}}
+.tl__yr{font-family:var(--font-mono);font-size:13px;letter-spacing:.06em;color:var(--dotc);font-weight:500}
+.tl__t{font-family:var(--font-display);font-size:17px;font-weight:600;line-height:1.4;margin:6px 0 8px;text-wrap:balance}
+.tl__d{font-size:13.5px;line-height:1.7;color:var(--text-muted)}
+.tl__hint{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-muted);margin-top:var(--sp-4);display:flex;align-items:center;gap:8px}
+
+/* ============================================================
+   Tabs (dimensions)
+   ============================================================ */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:var(--sp-12);flex-wrap:wrap}
+.tab{padding:16px 28px 14px;font-size:15px;font-weight:500;color:var(--text-muted);position:relative;
+  transition:color var(--dur-fast)}
+.tab::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--accent);
+  transform:scaleX(0);transition:transform 300ms var(--ease-out)}
+.tab[aria-selected="true"]{color:var(--text)}
+.tab[aria-selected="true"]::after{transform:scaleX(1)}
+.tab span{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:var(--text-muted);margin-right:8px}
+.panel[hidden]{display:none}
+.panel{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:var(--sp-16);animation:fadein var(--dur-base) var(--ease-out)}
+@keyframes fadein{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media (max-width:960px){.panel{grid-template-columns:1fr;gap:var(--sp-8)}}
+.io{display:grid;grid-template-columns:1fr 1fr;gap:var(--gutter)}
+@media (max-width:700px){.io{grid-template-columns:1fr}}
+.io__card{border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--sp-6);background:var(--surface)}
+.io__k{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:var(--sp-3)}
+.io__t{font-weight:500;font-size:15px;margin-bottom:6px}
+.io__d{font-size:13.5px;line-height:1.7;color:var(--text-muted)}
+.factlist{display:flex;flex-direction:column;gap:var(--sp-4);margin-top:var(--sp-8)}
+.fact{display:flex;gap:var(--sp-6);align-items:baseline;padding-bottom:var(--sp-4);border-bottom:1px solid var(--border-soft)}
+.fact b{font-family:var(--font-display);font-size:26px;font-weight:600;color:var(--accent);
+  flex:0 0 130px;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.fact span{font-size:14px;line-height:1.7;color:var(--text-muted)}
+@media (max-width:600px){.fact{flex-direction:column;gap:var(--sp-2)}.fact b{flex:none}}
+
+/* ============================================================
+   Quadrant
+   ============================================================ */
+.quad{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--sp-16);align-items:center;margin-top:var(--sp-12)}
+@media (max-width:960px){.quad{grid-template-columns:1fr;gap:var(--sp-12)}}
+.quadsvg{width:100%;height:auto;overflow:visible;font-family:var(--font-sans)}
+.quadsvg .qcell{fill:var(--surface);stroke:var(--border);stroke-width:1;cursor:pointer;
+  transition:fill var(--dur-base) var(--ease-out)}
+.quadsvg .qcell:hover{fill:var(--accent-wash)}
+.quadsvg .qcell.is-on{fill:var(--accent-wash);stroke:var(--accent);stroke-width:1.5}
+.quadsvg .qlabel{font-size:12.5px;font-weight:500;fill:var(--text);pointer-events:none}
+.quadsvg .qsub{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.1em;fill:var(--text-muted);pointer-events:none}
+.quadsvg .axis{stroke:var(--text-muted);stroke-width:1}
+.quadsvg .axttl{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;fill:var(--text-muted)}
+.quadsvg .pt{fill:var(--accent);cursor:pointer;transition:r var(--dur-fast) var(--ease-out)}
+.quadsvg .pt:hover{r:8}
+.quadsvg .ptl{font-size:11px;fill:var(--text);pointer-events:none;font-weight:500}
+.quadsvg .ptv{font-family:var(--font-mono);font-size:9.5px;fill:var(--text-muted);pointer-events:none}
+.quad__panel{border-left:2px solid var(--accent);padding-left:var(--sp-8);min-height:190px}
+.quad__t{font-family:var(--font-display);font-size:var(--fs-h3);font-weight:600;margin-bottom:var(--sp-4)}
+.quad__d{font-size:15px;line-height:1.8;color:var(--text-muted)}
+.note{font-size:12.5px;line-height:1.7;color:var(--text-muted);margin-top:var(--sp-8);
+  padding-top:var(--sp-4);border-top:1px solid var(--border-soft);max-width:62ch}
+
+/* ============================================================
+   Daisyworld
+   ============================================================ */
+.dw{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--sp-16);margin-top:var(--sp-12);align-items:start}
+@media (max-width:1000px){.dw{grid-template-columns:1fr;gap:var(--sp-12)}}
+.dw__stage{border:1px solid rgba(236,232,222,.16);border-radius:var(--radius-lg);
+  background:rgba(255,255,255,.03);padding:var(--sp-8);display:flex;flex-direction:column;gap:var(--sp-6)}
+.dw__canvas{width:100%;aspect-ratio:1/1;display:block;border-radius:var(--radius-md)}
+.dw__readout{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-4);
+  border-top:1px solid rgba(236,232,222,.14);padding-top:var(--sp-6)}
+.dw__r b{display:block;font-family:var(--font-display);font-size:clamp(20px,2.2vw,30px);font-weight:600;
+  line-height:1;font-variant-numeric:tabular-nums;color:var(--text-invert)}
+.dw__r span{display:block;font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--sage);margin-top:8px}
+.dw__controls{display:flex;flex-direction:column;gap:var(--sp-8)}
+.dw__chart{width:100%;aspect-ratio:16/9;display:block;border:1px solid rgba(236,232,222,.16);
+  border-radius:var(--radius-md);background:rgba(255,255,255,.03)}
+.slider{display:flex;flex-direction:column;gap:var(--sp-3)}
+.slider__top{display:flex;justify-content:space-between;align-items:baseline}
+.slider__lab{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
+.slider__val{font-family:var(--font-display);font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--text-invert)}
+input[type="range"]{-webkit-appearance:none;appearance:none;width:100%;height:22px;background:transparent;cursor:pointer}
+input[type="range"]::-webkit-slider-runnable-track{height:3px;background:rgba(236,232,222,.22);border-radius:2px}
+input[type="range"]::-moz-range-track{height:3px;background:rgba(236,232,222,.22);border-radius:2px}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;
+  background:var(--accent);margin-top:-7.5px;border:2px solid var(--invert);
+  transition:transform var(--dur-fast) var(--ease-out)}
+input[type="range"]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);
+  border:2px solid var(--invert)}
+input[type="range"]:hover::-webkit-slider-thumb{transform:scale(1.15)}
+input[type="range"]:focus-visible::-webkit-slider-thumb{outline:2px solid var(--accent);outline-offset:3px}
+.dw__btns{display:flex;gap:var(--sp-3);flex-wrap:wrap}
+.btn-ghost{padding:11px 22px;border:1px solid rgba(236,232,222,.3);border-radius:var(--radius-pill);
+  font-size:13.5px;font-weight:500;color:var(--text-invert);letter-spacing:.02em;
+  transition:all var(--dur-fast) var(--ease-out)}
+.btn-ghost:hover{background:var(--text-invert);color:var(--invert);border-color:var(--text-invert)}
+.btn-ghost[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#101A14}
+.dw__legend{display:flex;flex-wrap:wrap;gap:var(--sp-6);font-size:12.5px;color:var(--sage)}
+.dw__legend span{display:flex;align-items:center;gap:8px}
+.dw__legend i{width:10px;height:10px;border-radius:50%;display:block}
+.dw__mech{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-6);margin-top:var(--sp-8);
+  padding-top:var(--sp-8);border-top:1px solid rgba(236,232,222,.14)}
+@media (max-width:640px){.dw__mech{grid-template-columns:1fr}}
+.dw__mech div{font-size:13.5px;line-height:1.8;color:#C3CEBD}
+.dw__mech b{display:block;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:8px;font-weight:500}
+
+/* ============================================================
+   Chaos
+   ============================================================ */
+.chaos{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--sp-16);align-items:start;margin-top:var(--sp-12)}
+@media (max-width:960px){.chaos{grid-template-columns:1fr;gap:var(--sp-12)}}
+.chaos__canvas{width:100%;aspect-ratio:2/1;display:block;border:1px solid var(--border);
+  border-radius:var(--radius-lg);background:var(--surface)}
+.chaos__ctrl{display:flex;flex-direction:column;gap:var(--sp-6)}
+.chaos__ctrl .slider__lab{color:var(--text-muted)}
+.chaos__ctrl .slider__val{color:var(--text)}
+.chaos__ctrl input[type="range"]::-webkit-slider-runnable-track{background:var(--border)}
+.chaos__ctrl input[type="range"]::-moz-range-track{background:var(--border)}
+.chaos__ctrl input[type="range"]::-webkit-slider-thumb{border-color:var(--bg)}
+.chaos__ctrl input[type="range"]::-moz-range-thumb{border-color:var(--bg)}
+.chaos__stat{display:flex;flex-direction:column;gap:var(--sp-2);padding:var(--sp-6);
+  border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface)}
+.chaos__stat b{font-family:var(--font-display);font-size:30px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1}
+.chaos__stat span{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)}
+.btn-solid{padding:11px 22px;border-radius:var(--radius-pill);background:var(--invert);color:var(--text-invert);
+  font-size:13.5px;font-weight:500;letter-spacing:.02em;transition:background var(--dur-fast) var(--ease-out)}
+.btn-solid:hover{background:var(--invert-2)}
+:root[data-theme="dark"] .btn-solid{background:var(--accent);color:#101A14}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn-solid{background:var(--accent);color:#101A14}}
+
+/* chain */
+.chain{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-top:var(--sp-16)}
+.chain__i{flex:1 1 150px;border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--sp-4) var(--sp-6);
+  background:var(--surface);opacity:.3;transform:translateY(8px);
+  transition:opacity var(--dur-base) var(--ease-out),transform var(--dur-base) var(--ease-out),
+             border-color var(--dur-base),background var(--dur-base)}
+.chain__i.is-on{opacity:1;transform:none}
+.chain__i.is-last{border-color:var(--accent);background:var(--accent-wash)}
+.chain__n{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;color:var(--accent)}
+.chain__t{font-size:14px;font-weight:500;margin-top:4px;line-height:1.45}
+
+/* ============================================================
+   Compare table
+   ============================================================ */
+.tablewrap{overflow-x:auto;margin-top:var(--sp-12);border:1px solid var(--border);border-radius:var(--radius-lg)}
+table{width:100%;border-collapse:collapse;min-width:640px;background:var(--surface)}
+th,td{text-align:left;padding:var(--sp-6);border-bottom:1px solid var(--border-soft);font-size:14.5px;line-height:1.7}
+thead th{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-muted);font-weight:500;background:var(--bg-alt)}
+tbody tr{transition:background var(--dur-fast)}
+tbody tr:hover{background:var(--accent-wash)}
+tbody tr:last-child td{border-bottom:none}
+td:first-child{font-weight:500;color:var(--text);white-space:nowrap}
+td:nth-child(2),td:nth-child(3){color:var(--text-muted)}
+
+/* ============================================================
+   Worksheet
+   ============================================================ */
+.ws{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--sp-16);align-items:start;margin-top:var(--sp-12)}
+@media (max-width:960px){.ws{grid-template-columns:1fr;gap:var(--sp-12)}}
+.ws__form{display:flex;flex-direction:column;gap:var(--sp-4)}
+.field{display:flex;flex-direction:column;gap:var(--sp-2)}
+.field label{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted)}
+.field input,.field textarea{
+  width:100%;background:var(--bg-alt);border:none;border-bottom:2px solid transparent;
+  border-radius:var(--radius-sm);padding:14px 16px;font-family:var(--font-sans);font-size:15px;
+  color:var(--text);line-height:1.6;resize:vertical;transition:background var(--dur-fast),border-color var(--dur-fast)}
+.section--alt .field input,.section--alt .field textarea{background:var(--bg)}
+.field input::placeholder,.field textarea::placeholder{color:var(--text-muted);opacity:.7}
+.field input:focus,.field textarea:focus{outline:none;border-bottom-color:var(--accent);background:var(--surface)}
+.field input:focus-visible,.field textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ws__actions{display:flex;gap:var(--sp-3);flex-wrap:wrap;align-items:center}
+.ws__count{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)}
+.ws__count.is-done{color:var(--accent)}
+.ws__list{display:flex;flex-direction:column;gap:var(--sp-3)}
+.ws__empty{border:1px dashed var(--border);border-radius:var(--radius-lg);padding:var(--sp-16) var(--sp-8);
+  text-align:center;color:var(--text-muted);font-size:14px;line-height:1.8}
+.entry{border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface);
+  padding:var(--sp-6);display:flex;gap:var(--sp-6);align-items:flex-start;
+  animation:fadein var(--dur-base) var(--ease-out)}
+.entry__n{font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:.1em;padding-top:3px}
+.entry__b{flex:1;min-width:0}
+.entry__t{font-weight:500;font-size:15.5px;line-height:1.5}
+.entry__w{font-size:14px;line-height:1.75;color:var(--text-muted);margin-top:4px;white-space:pre-wrap;overflow-wrap:anywhere}
+.entry__x{flex:0 0 auto;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;
+  color:var(--text-muted);transition:background var(--dur-fast),color var(--dur-fast)}
+.entry__x:hover{background:var(--accent-wash);color:var(--accent)}
+.entry__x svg{width:12px;height:12px}
+
+/* ============================================================
+   Topics + footer
+   ============================================================ */
+.topics{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gutter);margin-top:var(--sp-12)}
+@media (max-width:1000px){.topics{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.topics{grid-template-columns:1fr}}
+.topic{border-top:2px solid var(--accent);padding-top:var(--sp-6);
+  transition:transform var(--dur-base) var(--ease-out)}
+.topic:hover{transform:translateY(-4px)}
+.topic__n{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;color:var(--accent)}
+.topic__t{font-family:var(--font-display);font-size:19px;font-weight:600;margin:var(--sp-3) 0 var(--sp-4);line-height:1.35}
+.topic__d{font-size:13.5px;line-height:1.75;color:var(--text-muted)}
+.topic__m{font-family:var(--font-mono);font-size:11px;line-height:1.7;color:var(--text-muted);
+  margin-top:var(--sp-4);padding-top:var(--sp-4);border-top:1px solid var(--border-soft)}
+
+.foot{background:var(--invert);color:var(--text-invert);padding-block:var(--sp-24)}
+.foot__grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gutter)}
+.foot__brand{grid-column:1/6}
+@media (max-width:900px){.foot__brand,.foot__col{grid-column:1/-1!important}}
+.foot__t{font-family:var(--font-display);font-size:clamp(26px,3vw,38px);font-weight:600;line-height:1.15;letter-spacing:-.02em}
+.foot__s{font-family:var(--font-mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--sage);margin-top:var(--sp-4)}
+.foot__col{grid-column:span 2}
+.foot__col:nth-of-type(2){grid-column:7/9}
+.foot__col:nth-of-type(3){grid-column:9/11}
+.foot__col:nth-of-type(4){grid-column:11/13}
+.foot__k{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin-bottom:var(--sp-4)}
+.foot__v{font-size:14px;line-height:1.9;color:#C3CEBD}
+.foot__bot{margin-top:var(--sp-16);padding-top:var(--sp-6);border-top:1px solid rgba(236,232,222,.15);
+  display:flex;justify-content:space-between;gap:var(--sp-6);flex-wrap:wrap;font-size:13px;color:var(--sage)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+  .hero__scroll i{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="progress"><div class="progress__bar" id="bar"></div></div>
+
+<nav class="nav" id="nav">
+  <div class="nav__inner">
+    <span class="nav__brand">可持续设计 · 概论</span>
+    <div class="nav__links">
+      <a class="nav__link" href="#what">何为可持续设计</a>
+      <a class="nav__link" href="#system">系统边界</a>
+      <a class="nav__link" href="#cases">案例</a>
+      <a class="nav__link" href="#history">时间轴</a>
+      <a class="nav__link" href="#dimensions">三大维度</a>
+      <a class="nav__link" href="#daisy">雏菊世界</a>
+      <a class="nav__link" href="#chaos">非线性</a>
+      <a class="nav__link" href="#work">课后作业</a>
+      <button class="nav__theme" id="theme" type="button" aria-label="切换深浅色主题" title="切换深浅色主题">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2"></circle>
+          <path d="M12 2.6v2M12 19.4v2M2.6 12h2M19.4 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ======================= HERO ======================= -->
+<header class="hero wrap" id="top">
+  <div class="hero__grid">
+    <div class="hero__meta">
+      <span>湖北工业大学 工业设计学院</span>
+      <span>主讲 · 张萌</span>
+      <span>可持续发展概论</span>
+    </div>
+    <h1 class="hero__title">面向未来的<br><em>可持续</em>设计</h1>
+    <p class="hero__en">Sustainable&nbsp;Design</p>
+    <div class="hero__intro">
+      <p class="lead">可持续设计源于可持续发展理念，是设计界对经济发展与环境、社会等要素之间关系的理论反思，并在此基础上不断寻求变革与转型的设计实践。</p>
+      <p class="body" style="margin-top:var(--sp-6)">它的理念演进，是从相对孤立的、以物为中心的视角，逐渐向更加系统的、以人为中心的视角转变。</p>
+    </div>
+    <div class="hero__scroll"><i></i>向下滚动</div>
+  </div>
+
+  <div class="stats" id="stats">
+    <div class="stat">
+      <div class="stat__num" data-to="66" data-suffix="%">0<sub>%</sub></div>
+      <p class="stat__label">地球自然资源已被人类消耗的比例（《千年生态系统评估报告》，2005）</p>
+    </div>
+    <div class="stat">
+      <div class="stat__num" data-to="24" data-suffix="%">0<sub>%</sub></div>
+      <p class="stat__label">地球陆地表面已被开垦为耕地的比例</p>
+    </div>
+    <div class="stat">
+      <div class="stat__num" data-to="95" data-suffix="%">0<sub>%</sub></div>
+      <p class="stat__label">北极圈内多年冰面积在 35 年间的减少幅度</p>
+    </div>
+    <div class="stat">
+      <div class="stat__num" data-to="2" data-suffix="个" data-dec="0">0<sub>个地球</sub></div>
+      <p class="stat__label">按当前速度消耗资源，2050 年所需的资源总量</p>
+    </div>
+  </div>
+</header>
+
+<!-- ======================= 何为可持续设计 ======================= -->
+<section class="section" id="what">
+  <div class="wrap">
+    <div class="section-head rv">
+      <p class="eyebrow">01 / 本质思考</p>
+      <h2 class="h1">可持续设计首先是<br>一种问题识别方式</h2>
+      <p class="lead">它与“绿色设计”“生态设计”以及“社会设计”等概念密切相关，同时又有着自身的特征与系统性。切换下方视角，观察同一个设计任务如何被重新定义。</p>
+    </div>
+
+    <div class="rv">
+      <div class="switch" role="group" aria-label="切换设计视角">
+        <button type="button" data-side="0" aria-pressed="false">传统产品设计视角</button>
+        <button type="button" data-side="1" aria-pressed="true">可持续设计视角</button>
+      </div>
+
+      <div class="vs" id="vs">
+        <div class="vs__col" data-col="0">
+          <p class="vs__label">传统产品设计视角</p>
+          <ul class="vs__list">
+            <li>关注造型与功能</li>
+            <li>解决单点需求</li>
+            <li>交付一个产品</li>
+          </ul>
+        </div>
+        <div class="vs__mid">V.S.</div>
+        <div class="vs__col" data-col="1">
+          <p class="vs__label">可持续设计视角</p>
+          <ul class="vs__list">
+            <li>关注生命周期与系统关系</li>
+            <li>识别长期影响和责任边界</li>
+            <li>设计产品、服务与行为条件</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 系统边界 ======================= -->
+<section class="section section--alt" id="system">
+  <div class="wrap">
+    <div class="section-head rv">
+      <p class="eyebrow">02 / 一次性外卖包装</p>
+      <h2 class="h1">问题不只在材料</h2>
+      <p class="lead">外卖包装让消费更便利，但也把大量一次性塑料、纸、餐具和配送袋推入城市废弃物流。问题还在平台效率、用户习惯、清洗回收成本和城市管理。</p>
+      <p class="body"><strong>动手试试：</strong>勾选你愿意纳入计算的系统环节，看看“哪个方案更环保”这个结论会不会翻转。可持续设计需要比较系统总消耗，而不是只比较单个包装是否“环保”。</p>
+    </div>
+
+    <div class="boundary rv">
+      <div class="opts" id="opts">
+        <label class="opt">
+          <input type="checkbox" data-key="material" checked>
+          <span class="opt__box"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.5l3.2 3.2L12 3.8"/></svg></span>
+          <span><span class="opt__t">包装材料本身</span><span class="opt__d">一次性餐盒的塑料与纸；可重复餐盒的不锈钢或 PP 本体</span></span>
+        </label>
+        <label class="opt">
+          <input type="checkbox" data-key="delivery">
+          <span class="opt__box"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.5l3.2 3.2L12 3.8"/></svg></span>
+          <span><span class="opt__t">配送与物流</span><span class="opt__d">骑手配送、可重复餐盒的返程回收与集中转运</span></span>
+        </label>
+        <label class="opt">
+          <input type="checkbox" data-key="washing">
+          <span class="opt__box"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.5l3.2 3.2L12 3.8"/></svg></span>
+          <span><span class="opt__t">清洗与再处理</span><span class="opt__d">门店或集中清洗的水耗、能耗、洗涤剂；一次性方案此项接近于零</span></span>
+        </label>
+        <label class="opt">
+          <input type="checkbox" data-key="behavior">
+          <span class="opt__box"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.5l3.2 3.2L12 3.8"/></svg></span>
+          <span><span class="opt__t">用户行为与归还率</span><span class="opt__d">押金机制、归还便利度；归还率越低，可重复方案的分摊成本越高</span></span>
+        </label>
+        <label class="opt">
+          <input type="checkbox" data-key="waste">
+          <span class="opt__box"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.5l3.2 3.2L12 3.8"/></svg></span>
+          <span><span class="opt__t">末端废弃物处理</span><span class="opt__d">城市清运、填埋与焚烧，以及混合材料难以回收的部分</span></span>
+        </label>
+      </div>
+
+      <div class="gauge">
+        <div class="gauge__row">
+          <span class="gauge__cap">当前系统边界内 · 单次使用相对影响</span>
+        </div>
+        <div class="bars">
+          <div>
+            <div class="bar__head"><b>一次性外卖包装</b><span id="v-single">—</span></div>
+            <div class="bar__track"><div class="bar__fill" id="f-single" style="background:var(--accent)"></div></div>
+          </div>
+          <div>
+            <div class="bar__head"><b>可重复餐盒 + 押金回收</b><span id="v-reuse">—</span></div>
+            <div class="bar__track"><div class="bar__fill" id="f-reuse" style="background:var(--sage)"></div></div>
+          </div>
+        </div>
+        <p class="gauge__note" id="note"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 循环系统 ======================= -->
+<section class="section" id="loop">
+  <div class="wrap">
+    <div class="section-head rv">
+      <p class="eyebrow">03 / 关键参与者与流动关系</p>
+      <h2 class="h1">从链条到闭环</h2>
+      <p class="lead">可持续设计不再把产品看作终点，而是把用户、材料、服务与回收视作一个持续流动的系统。点击任一环节，查看它承担的设计责任。</p>
+    </div>
+
+    <div class="loopwrap rv">
+      <svg class="loopsvg" viewBox="0 0 440 440" role="img" aria-label="用户需求、产品材料、服务维护、回收再分配构成的循环系统图">
+        <circle class="ring" cx="220" cy="220" r="150"></circle>
+        <circle class="arc" cx="220" cy="220" r="150" stroke-dasharray="6 14" stroke-linecap="round"></circle>
+        <circle class="dot" id="flowdot" r="5" cx="220" cy="70"></circle>
+        <g class="node is-on" data-i="0" tabindex="0" role="button" aria-label="用户与需求">
+          <circle cx="220" cy="70" r="52"></circle>
+          <text x="220" y="64"><tspan class="idx" x="220" dy="0">01</tspan><tspan x="220" dy="20">用户 / 需求</tspan></text>
+        </g>
+        <g class="node" data-i="1" tabindex="0" role="button" aria-label="产品与材料">
+          <circle cx="370" cy="220" r="52"></circle>
+          <text x="370" y="214"><tspan class="idx" x="370" dy="0">02</tspan><tspan x="370" dy="20">产品 / 材料</tspan></text>
+        </g>
+        <g class="node" data-i="2" tabindex="0" role="button" aria-label="服务与维护">
+          <circle cx="220" cy="370" r="52"></circle>
+          <text x="220" y="364"><tspan class="idx" x="220" dy="0">03</tspan><tspan x="220" dy="20">服务 / 维护</tspan></text>
+        </g>
+        <g class="node" data-i="3" tabindex="0" role="button" aria-label="回收与再分配">
+          <circle cx="70" cy="220" r="52"></circle>
+          <text x="70" y="214"><tspan class="idx" x="70" dy="0">04</tspan><tspan x="70" dy="20">回收 / 再分配</tspan></text>
+        </g>
+      </svg>
+
+      <div class="loop__panel">
+        <p class="loop__idx" id="lp-idx">环节 01</p>
+        <h3 class="loop__t" id="lp-t">用户 / 需求</h3>
+        <p class="loop__d" id="lp-d"></p>
+        <p class="loop__q" id="lp-q"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 案例 ======================= -->
+<section class="section section--alt" id="cases">
+  <div class="wrap">
+    <div class="section-head rv">
+      <p class="eyebrow">04 / 案例研究</p>
+      <h2 class="h1">三个已经在运行的系统</h2>
+      <p class="lead">它们的共同点是：设计的对象不是造型，而是消费链条的重新组织。展开细节后，对每个案例的课堂追问投出你的判断。</p>
+    </div>
+
+    <div class="cases rv" id="cases-grid">
+      <article class="case" data-case="loop" data-open="false">
+        <p class="case__tag">可重复包装系统</p>
+        <h3 class="case__t">Loop</h3>
+        <p class="case__sum">TerraCycle / Loop 把包装从一次性消费品重新设计为可归还资产。消费者购买商品后归还容器，系统负责收集、清洗、再灌装和再次投放。</p>
+        <div class="case__more">
+          <div class="case__block"><p class="case__k">运行机制</p><p class="case__v">押金或账户机制降低容器流失；品牌、零售、清洗和物流共同承担循环责任。</p></div>
+          <div class="case__block"><p class="case__k">教材对应</p><p class="case__v">可持续发展、绿色设计与系统性设计。可持续设计不只是材料替换，而是消费链条的重新组织。</p></div>
+        </div>
+        <button class="case__toggle" type="button" aria-expanded="false">展开细节
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 4.5L6 8.5L10 4.5"/></svg>
+        </button>
+        <div class="poll" data-poll="loop">
+          <p class="poll__q">如果归还率低、清洗距离远，这个系统还可持续吗？</p>
+          <div class="poll__btns">
+            <button class="poll__btn" type="button" data-v="a" aria-pressed="false">仍然可持续</button>
+            <button class="poll__btn" type="button" data-v="b" aria-pressed="false">不再可持续</button>
+          </div>
+          <div class="poll__meter" aria-hidden="true"><i data-m="a" style="background:var(--accent)"></i><i data-m="b" style="background:var(--sage)"></i></div>
+          <p class="poll__res" role="status"></p>
+        </div>
+      </article>
+
+      <article class="case" data-case="tgtg" data-open="false">
+        <p class="case__tag">剩食平台</p>
+        <h3 class="case__t">Too Good To Go</h3>
+        <p class="case__sum">平台把商家临近售罄或过剩的食品打包为 Surprise Bags，用户低价购买并到店取走，让原本可能被丢弃的食品重新进入消费。</p>
+        <div class="case__more">
+          <div class="case__block"><p class="case__k">运行机制</p><p class="case__v">设计重点不是产品造型，而是信息匹配、时间窗口、价格激励和到店行为。剩食浪费在“卖不出去的最后一小时”被重新设计。</p></div>
+          <div class="case__block"><p class="case__k">教材对应</p><p class="case__v">社会创新设计与可持续消费。</p></div>
+        </div>
+        <button class="case__toggle" type="button" aria-expanded="false">展开细节
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 4.5L6 8.5L10 4.5"/></svg>
+        </button>
+        <div class="poll" data-poll="tgtg">
+          <p class="poll__q">它解决了食物浪费，还是把库存不确定性转移给了消费者？</p>
+          <div class="poll__btns">
+            <button class="poll__btn" type="button" data-v="a" aria-pressed="false">真正减少浪费</button>
+            <button class="poll__btn" type="button" data-v="b" aria-pressed="false">转移了不确定性</button>
+          </div>
+          <div class="poll__meter" aria-hidden="true"><i data-m="a" style="background:var(--accent)"></i><i data-m="b" style="background:var(--sage)"></i></div>
+          <p class="poll__res" role="status"></p>
+        </div>
+      </article>
+
+      <article class="case" data-case="fair" data-open="false">
+        <p class="case__tag">可维修硬件</p>
+        <h3 class="case__t">Fairphone</h3>
+        <p class="case__sum">Fairphone 将维修、替换零件、长期支持和供应链伦理作为手机产品价值的一部分，挑战电子产品频繁换新的默认逻辑。</p>
+        <div class="case__more">
+          <div class="case__block"><p class="case__k">运行机制</p><p class="case__v">模块化结构让电池、屏幕、摄像头等高故障部件可替换；通过零件销售和维修教程降低用户修理门槛。</p></div>
+          <div class="case__block"><p class="case__k">教材对应</p><p class="case__v">产品设计对资源消耗、社会公平和消费观念的影响。</p></div>
+        </div>
+        <button class="case__toggle" type="button" aria-expanded="false">展开细节
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 4.5L6 8.5L10 4.5"/></svg>
+        </button>
+        <div class="poll" data-poll="fair">
+          <p class="poll__q">当可维修性提高成本和厚度时，用户是否愿意为可持续价值买单？</p>
+          <div class="poll__btns">
+            <button class="poll__btn" type="button" data-v="a" aria-pressed="false">愿意买单</button>
+            <button class="poll__btn" type="button" data-v="b" aria-pressed="false">不愿意</button>
+          </div>
+          <div class="poll__meter" aria-hidden="true"><i data-m="a" style="background:var(--accent)"></i><i data-m="b" style="background:var(--sage)"></i></div>
+          <p class="poll__res" role="status"></p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 时间轴 ======================= -->
+<section class="section" id="history">
+  <div class="wrap">
+    <div class="section-head rv">
+      <p class="eyebrow">05 / 历史演进</p>
+      <h2 class="h1">从《寂静的春天》<br>到人与自然和谐共生</h2>
+      <p class="lead">可持续性与设计从词汇上的联姻始于 20 世纪 90 年代中期，但它的思想准备用了整整三十年。按线索筛选，或拖动时间轴横向浏览。</p>
+    </div>
+
+    <div class="rv">
+      <div class="tl__filters" id="tl-filters">
+        <button class="chip" type="button" data-f="all" aria-pressed="true">全部</button>
+        <button class="chip" type="button" data-f="global" aria-pressed="false"><i style="color:var(--accent)"></i>全球进程</button>
+        <button class="chip" type="button" data-f="china" aria-pressed="false"><i style="color:var(--ochre)"></i>中国探索</button>
+        <button class="chip" type="button" data-f="design" aria-pressed="false"><i style="color:var(--sage)"></i>设计学科</button>
+      </div>
+
+      <div class="tl" id="tl" tabindex="0" role="region" aria-label="可持续发展大事时间轴，可横向滚动">
+        <div class="tl__track" id="tl-track"></div>
+      </div>
+      <p class="tl__hint">← 拖动 / 滚动浏览 · 方向键可移动 →</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 三大维度 ======================= -->
+<section class="section section--alt" id="dimensions">
+  <div class="wrap">
+    <div class="section-head rv">
+      <p class="eyebrow">06 / 三大维度</p>
+      <h2 class="h1">环境、社会、经济<br>必须协调发展</h2>
+      <p class="lead">直到种种危机出现，人类才慢慢领悟到，自然的限制也是一种保护，人与自然是一体的。否则，可持续发展只是虚幻的梦想或政治口号而已。</p>
+    </div>
+
+    <div class="rv">
+      <div class="tabs" role="tablist" aria-label="可持续发展的三大维度">
+        <button class="tab" role="tab" id="tab-env" aria-controls="p-env" aria-selected="true"><span>01</span>环境维度</button>
+        <button class="tab" role="tab" id="tab-soc" aria-controls="p-soc" aria-selected="false"><span>02</span>社会维度</button>
+        <button class="tab" role="tab" id="tab-eco" aria-controls="p-eco" aria-selected="false"><span>03</span>经济维度</button>
+      </div>
+
+      <div class="panel" id="p-env" role="tabpanel" aria-labelledby="tab-env">
+        <div>
+          <h3 class="h2" style="font-size:var(--fs-h3)">输入与输出</h3>
+          <p class="body" style="margin-top:var(--sp-4)">从生态系统的角度看，人类从自然界获取能量与物质（输入），同时将转化后的废气、废水、废物排放到自然界（输出）。环境维度的可持续性，就从这两个角度来理解。</p>
+          <div class="factlist">
+            <div class="fact"><b>2/3</b><span>人类已消耗的地球自然资源比例（《千年生态系统评估报告》，2005）</span></div>
+            <div class="fact"><b>约 1℃</b><span>目前全球地表平均温度较工业化前的升幅（IPCC 第六次评估报告，2021）</span></div>
+            <div class="fact"><b>1.5℃</b><span>未来 20 年全球温升预计将达到或超过的阈值</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="eyebrow" style="margin-bottom:var(--sp-6)">输入 · 资源危机</p>
+          <div class="io">
+            <div class="io__card"><p class="io__k">土地资源</p><p class="io__t">24% 的陆地表面已被开垦</p><p class="io__d">过去 60 年全球开垦的土地比 18、19 世纪的总和还要多，自然生境快速消失。</p></div>
+            <div class="io__card"><p class="io__k">城市扩张</p><p class="io__t">人造环境不断扩大</p><p class="io__d">群居地从村庄变为小镇、都市，以至于偶尔的野猪、大象进入城市都会被视为新闻。</p></div>
+            <div class="io__card"><p class="io__k">矿产开发</p><p class="io__t">向地表以下不断发掘</p><p class="io__d">煤炭、石油、金属、稀有矿藏的开发，将人类活动范围拓展至前所未有的程度。</p></div>
+            <div class="io__card"><p class="io__k">生物多样性</p><p class="io__t">生境的根本性破坏</p><p class="io__d">大量动植物失去栖息地，种群减少或灭绝，破坏了生态系统的平衡。</p></div>
+          </div>
+          <p class="eyebrow" style="margin:var(--sp-12) 0 var(--sp-6)">输出 · 污染排放</p>
+          <div class="io">
+            <div class="io__card"><p class="io__k">气候变化</p><p class="io__t">以前所未有的速度变暖</p><p class="io__d">北半球春天解冻期比 150 年前提前 9 天，秋天霜冻开始时间晚约 10 天。</p></div>
+            <div class="io__card"><p class="io__k">极端天气</p><p class="io__t">水循环进一步加剧</p><p class="io__d">更强的降雨和洪水，在许多地区则意味着更严重的干旱。</p></div>
+            <div class="io__card"><p class="io__k">健康影响</p><p class="io__t">代价由底层民众承担</p><p class="io__d">伦敦毒雾、切尔诺贝利核泄漏、日本水俣病，长期影响成千上万普通人的健康。</p></div>
+            <div class="io__card"><p class="io__k">长期破坏</p><p class="io__t">水体与土壤难以恢复</p><p class="io__d">被污染过后的水体和土壤，往往要经历极长的时间才能恢复正常值。</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="p-soc" role="tabpanel" aria-labelledby="tab-soc" hidden>
+        <div>
+          <h3 class="h2" style="font-size:var(--fs-h3)">公平原则</h3>
+          <p class="body" style="margin-top:var(--sp-4)">社会可持续关注的重点是“公平原则”（equity principle）——这颗星球上的每个人都拥有获得生存与发展的空间与资源的权利。</p>
+          <div class="factlist">
+            <div class="fact"><b>HDI</b><span>人类发展指数，1990 年由联合国发展署提出，修正以单一 GDP 评估发展进程的方法</span></div>
+            <div class="fact"><b>代际公平</b><span>作为“托管人”，当代人有义务为子孙后代保存自然资源与文化资源</span></div>
+            <div class="fact"><b>代内公平</b><span>当代一部分人的发展，不能以损害另一部分人的发展为代价</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="eyebrow" style="margin-bottom:var(--sp-6)">人类发展指数的三个构成</p>
+          <div class="io">
+            <div class="io__card"><p class="io__k">健康</p><p class="io__t">预期寿命</p><p class="io__d">反映一个国家或地区人民的健康水平和医疗条件。</p></div>
+            <div class="io__card"><p class="io__k">知识</p><p class="io__t">教育水平</p><p class="io__d">包括成人识字率和平均受教育年限，反映知识获取能力。</p></div>
+            <div class="io__card"><p class="io__k">生活水平</p><p class="io__t">人均国内生产总值</p><p class="io__d">反映人民的生活水平和经济发展程度。</p></div>
+            <div class="io__card"><p class="io__k">缺口</p><p class="io__t">缺乏生态成本计算</p><p class="io__d">有学者因此提出更精确的定义：在生态环境的承载能力以内实现较高的福利水平。</p></div>
+          </div>
+          <p class="body" style="margin-top:var(--sp-12)">《能量与文明》的作者斯米尔认为：<strong>在较低的发展阶段，能量使用与人类发展指数才有线性关系；当发展到一定阶段之后，更大的能量投入却不能带来更高的社会发展。</strong>在发展水平十分接近的情况下，相对于德国和法国，美国的能量消耗却要高出近一倍。</p>
+        </div>
+      </div>
+
+      <div class="panel" id="p-eco" role="tabpanel" aria-labelledby="tab-eco" hidden>
+        <div>
+          <h3 class="h2" style="font-size:var(--fs-h3)">三重底线</h3>
+          <p class="body" style="margin-top:var(--sp-4)">John Elkington 提出的“三重底线”（triple bottom line, TBL），即经济底线、环境底线以及社会底线，成为商业可持续发展的重要框架。</p>
+          <div class="factlist">
+            <div class="fact"><b>经济底线</b><span>企业需长期保持生存和盈利能力</span></div>
+            <div class="fact"><b>环境底线</b><span>必须重视环境质量，不将成本外部化给自然</span></div>
+            <div class="fact"><b>社会底线</b><span>缩小贫富差距，促进健康和教育</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="eyebrow" style="margin-bottom:var(--sp-6)">可持续发展的三项基本原则</p>
+          <div class="io">
+            <div class="io__card"><p class="io__k">原则一</p><p class="io__t">公平性原则</p><p class="io__d">强调当代人与后代人之间的公平，以及当代不同群体之间的公平。</p></div>
+            <div class="io__card"><p class="io__k">原则二</p><p class="io__t">持续性原则</p><p class="io__d">发展必须在生态环境承载能力范围内进行，保证资源和环境的可持续利用。</p></div>
+            <div class="io__card"><p class="io__k">原则三</p><p class="io__t">共同性原则</p><p class="io__d">全球各国必须共同努力，协调行动，才能实现可持续发展目标。</p></div>
+            <div class="io__card"><p class="io__k">共识</p><p class="io__t">共同但有差别的责任</p><p class="io__d">1992 年《里约宣言》明确了各国对可持续发展负有共同但有差别的责任。</p></div>
+          </div>
+          <p class="body" style="margin-top:var(--sp-12)">Elkington 认为：<strong>一个可持续发展的企业不应从人类的痛苦中获利，也不应采取加剧社会问题的措施。</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 四象限 -->
+    <div style="margin-top:var(--sp-40)">
+      <div class="section-head rv" style="margin-bottom:var(--sp-8)">
+        <p class="eyebrow">福利水平 × 自然消耗</p>
+        <h3 class="h2">社会发展的四种模式</h3>
+        <p class="lead">以人类发展指数衡量福利水平，以生态足迹衡量自然消耗，可以界定出四个象限。点击象限查看说明。</p>
+      </div>
+
+      <div class="quad rv">
+        <svg class="quadsvg" viewBox="0 0 520 400" role="img" aria-label="福利水平与生态足迹构成的四象限图">
+          <rect class="qcell is-on" data-q="0" x="60" y="30"  width="200" height="150" rx="6"></rect>
+          <rect class="qcell"       data-q="1" x="262" y="30"  width="200" height="150" rx="6"></rect>
+          <rect class="qcell"       data-q="2" x="60" y="182" width="200" height="150" rx="6"></rect>
+          <rect class="qcell"       data-q="3" x="262" y="182" width="200" height="150" rx="6"></rect>
+
+          <text class="qsub" x="76" y="54">唯一可持续</text>
+          <text class="qlabel" x="76" y="76">高福利 · 低消耗</text>
+          <text class="qsub" x="278" y="54">多数发达国家</text>
+          <text class="qlabel" x="278" y="76">高福利 · 高消耗</text>
+          <text class="qsub" x="76" y="206">多数欠发达国家</text>
+          <text class="qlabel" x="76" y="228">低福利 · 低消耗</text>
+          <text class="qsub" x="278" y="206">部分转型国家</text>
+          <text class="qlabel" x="278" y="228">低福利 · 高消耗</text>
+
+          <line class="axis" x1="60" y1="345" x2="462" y2="345"></line>
+          <line class="axis" x1="45" y1="30" x2="45" y2="332"></line>
+          <text class="axttl" x="60" y="368">生态足迹 · 自然消耗 →</text>
+          <text class="axttl" x="0" y="0" transform="translate(38,332) rotate(-90)">人类发展指数 · 福利水平 →</text>
+
+          <g id="pts">
+            <circle class="pt" cx="430" cy="62"  r="6" data-n="澳大利亚" data-v="生态足迹为其生态承载力的 5.37 倍"></circle>
+            <circle class="pt" cx="400" cy="88"  r="6" data-n="美国"     data-v="生态足迹为其生态承载力的 4.75 倍"></circle>
+            <circle class="pt" cx="372" cy="112" r="6" data-n="加拿大"   data-v="生态足迹为其生态承载力的 4.72 倍"></circle>
+          </g>
+          <text class="ptl" x="430" y="48" text-anchor="middle">澳大利亚</text>
+          <text class="ptv" x="430" y="82" text-anchor="middle">5.37×</text>
+          <text class="ptl" x="392" y="106" text-anchor="end">美国</text>
+          <text class="ptv" x="392" y="118" text-anchor="end">4.75×</text>
+          <text class="ptl" x="364" y="130" text-anchor="end">加拿大</text>
+          <text class="ptv" x="364" y="142" text-anchor="end">4.72×</text>
+        </svg>
+
+        <div class="quad__panel">
+          <h4 class="quad__t" id="q-t"></h4>
+          <p class="quad__d" id="q-d"></p>
+          <p class="note" id="q-n"></p>
+        </div>
+      </div>
+      <p class="note rv">图中仅澳大利亚、美国、加拿大三点标注了课件给出的生态足迹倍数，其余象限为模式说明，点位不代表精确坐标。如果全球居民都像他们一样生活，至少需要 4~5 个地球才能满足人类的自然消耗需求。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 雏菊世界 ======================= -->
+<section class="section section--dark" id="daisy">
+  <div class="wrap">
+    <div class="section-head rv">
+      <p class="eyebrow">07 / 盖亚假说</p>
+      <h2 class="h1">雏菊世界模型</h2>
+      <p class="lead">詹姆斯·洛夫洛克与安德鲁·沃森在 1983 年提出的计算机模拟模型，用于验证盖亚假说中“生物通过反馈机制调节行星环境”的核心思想：即使没有有意识的意图，生命群落也可能通过自然选择与环境反馈，维持行星环境的稳定。</p>
+      <p class="body">下面是这个模型的实时仿真。<strong>拖动太阳光度滑块，或点亮“自动演化”，观察行星温度如何被雏菊“按住”。</strong></p>
+    </div>
+
+    <div class="dw rv">
+      <div class="dw__stage">
+        <canvas class="dw__canvas" id="dw-canvas" width="600" height="600" role="img" aria-label="雏菊世界行星表面模拟，黑白雏菊覆盖率随太阳光度变化"></canvas>
+        <div class="dw__legend">
+          <span><i style="background:#20211F"></i>黑雏菊 · 吸热</span>
+          <span><i style="background:#F2EFE6"></i>白雏菊 · 反光</span>
+          <span><i style="background:#8C8163"></i>裸地</span>
+        </div>
+        <div class="dw__readout">
+          <div class="dw__r"><b id="dw-temp">—</b><span>行星温度 ℃</span></div>
+          <div class="dw__r"><b id="dw-black">—</b><span>黑雏菊 %</span></div>
+          <div class="dw__r"><b id="dw-white">—</b><span>白雏菊 %</span></div>
+        </div>
+      </div>
+
+      <div class="dw__controls">
+        <div class="slider">
+          <div class="slider__top">
+            <label class="slider__lab" for="dw-lum">太阳光度 Luminosity</label>
+            <span class="slider__val" id="dw-lumv">1.00</span>
+          </div>
+          <input type="range" id="dw-lum" min="0.6" max="1.7" step="0.005" value="1">
+        </div>
+
+        <canvas class="dw__chart" id="dw-chart" width="800" height="450" role="img" aria-label="行星温度随太阳光度变化的曲线，对比有生命与无生命两种情况"></canvas>
+        <div class="dw__legend">
+          <span><i style="background:var(--accent)"></i>有雏菊的行星</span>
+          <span><i style="background:#8FA089"></i>无生命的行星</span>
+        </div>
+
+        <div class="dw__btns">
+          <button class="btn-ghost" type="button" id="dw-auto" aria-pressed="false">自动演化</button>
+          <button class="btn-ghost" type="button" id="dw-reset">重置</button>
+        </div>
+
+        <div class="dw__mech">
+          <div><b>外部增温</b>白雏菊扩张 → 反射更多光 → 行星降温</div>
+          <div><b>外部降温</b>黑雏菊扩张 → 吸收更多热量 → 行星升温</div>
+        </div>
+
+        <p class="body" style="color:#C3CEBD;max-width:none">设计师由此开始思考：<strong style="color:var(--text-invert)">如果地球是一个自我调节的系统，那么我们的设计是否也应该遵循这种自组织、自适应的原则？</strong>这种思考促使设计从单一的人类中心主义，转向更加整体的生态系统观。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 非线性 / 混沌 ======================= -->
+<section class="section" id="chaos">
+  <div class="wrap">
+    <div class="section-head rv">
+      <p class="eyebrow">08 / 非线性科学</p>
+      <h2 class="h1">微小的因，<br>无尽的复杂</h2>
+      <p class="lead">非线性科学认为，在许多真实系统中，微小的输入变化可能导致巨大结果，且整体特性不等于局部特性的简单和。混沌运动在动力学上是确定的，它的不可预测性来源于运动的不稳定性。</p>
+      <p class="body">下图是两条<strong>规则完全相同</strong>的轨迹，唯一的差别是初始值相差一个极小的量。调节这个差值，看它们要走多少步才会彻底分道扬镳。</p>
+    </div>
+
+    <div class="chaos rv">
+      <canvas class="chaos__canvas" id="ch-canvas" width="900" height="450" role="img" aria-label="两条初值极微小差异的轨迹随迭代逐渐发散的折线图"></canvas>
+      <div class="chaos__ctrl">
+        <div class="slider">
+          <div class="slider__top">
+            <label class="slider__lab" for="ch-eps">初始差异 Δx₀</label>
+            <span class="slider__val" id="ch-epsv">1e-4</span>
+          </div>
+          <input type="range" id="ch-eps" min="-9" max="-2" step="0.1" value="-4">
+        </div>
+        <div class="chaos__stat">
+          <b id="ch-steps">—</b>
+          <span>步之后两条轨迹完全分离</span>
+        </div>
+        <p class="body" style="font-size:14px">在巴西一只蝴蝶翅膀的拍打能在美国得克萨斯州产生一场龙卷风——1972 年 12 月 29 日，洛伦兹在美国科学发展学会第 139 次会议上发表《蝴蝶效应》，由此提出了天气的不可准确预报性。</p>
+        <button class="btn-solid" type="button" id="ch-run" style="align-self:flex-start">重新演算</button>
+      </div>
+    </div>
+
+    <div style="margin-top:var(--sp-24)">
+      <p class="eyebrow rv" style="margin-bottom:var(--sp-6)">因果链 · 丢了一个钉子</p>
+      <div class="chain rv" id="chain"></div>
+    </div>
+
+    <div style="margin-top:var(--sp-40)">
+      <div class="section-head rv" style="margin-bottom:0">
+        <p class="eyebrow">从结构主义到后结构主义</p>
+        <h3 class="h2">世界不再是线性的一维视域</h3>
+        <p class="lead">一切以“后”为标榜的文化转型与文化批评，无非都是想说明一个问题：当今的世界从科学到技术，从社会到观念，从建筑到城市，形成的远远不是以往那种线性的一维视域。</p>
+      </div>
+      <div class="tablewrap rv">
+        <table>
+          <thead><tr><th>维度</th><th>结构主义</th><th>后结构主义</th></tr></thead>
+          <tbody>
+            <tr><td>时间背景</td><td>20 世纪初 — 中期</td><td>20 世纪 60 年代后</td></tr>
+            <tr><td>核心观点</td><td>世界有可分析的稳定结构</td><td>结构是流动的、开放的</td></tr>
+            <tr><td>意义来源</td><td>元素在整体系统中的关系</td><td>意义不断被重构，没有终极解释</td></tr>
+            <tr><td>研究目标</td><td>揭示普遍的结构规律</td><td>揭示意义生产的过程与差异</td></tr>
+            <tr><td>态度</td><td>强调科学性与客观性</td><td>质疑确定性，强调多样性与解构</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note rv">当代设计正在形成不断在推动中趋于自我完善的网状发展结构，超越了传统的线性思维模式。非线性设计不仅仅是一种连续流动状的形体，更应当明确这种形体作为结果，是对周边自然环境因素的分析与对自然有机体形成逻辑的借鉴。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 课后作业 ======================= -->
+<section class="section section--alt" id="work">
+  <div class="wrap">
+    <div class="section-head rv">
+      <p class="eyebrow">09 / 课后作业</p>
+      <h2 class="h1">生活中有哪些<br>“不可持续”的产品或现象？</h2>
+      <p class="lead">要求：寻找 3—5 种“不可持续”的产品或现象，并解释“不可持续”具体表现在哪里。下方的记录会保存在你自己的浏览器里，随时可以复制导出。</p>
+    </div>
+
+    <div class="ws rv">
+      <form class="ws__form" id="ws-form">
+        <div class="field">
+          <label for="ws-name">产品或现象</label>
+          <input type="text" id="ws-name" placeholder="例如：奶茶店的一次性塑料杯与吸管" maxlength="60" required>
+        </div>
+        <div class="field">
+          <label for="ws-why">不可持续表现在哪里</label>
+          <textarea id="ws-why" rows="5" placeholder="从材料、生命周期、系统关系、责任边界、用户行为等角度说明……" maxlength="500" required></textarea>
+        </div>
+        <div class="ws__actions">
+          <button class="btn-solid" type="submit">添加记录</button>
+          <button class="chip" type="button" id="ws-copy">复制全部</button>
+          <span class="ws__count" id="ws-count">0 / 建议 3–5 条</span>
+        </div>
+      </form>
+
+      <div>
+        <div class="ws__list" id="ws-list"></div>
+        <div class="ws__empty" id="ws-empty">还没有记录。<br>先从你今天用过、然后丢掉的东西开始想。</div>
+      </div>
+    </div>
+
+    <div style="margin-top:var(--sp-40)">
+      <div class="section-head rv" style="margin-bottom:0">
+        <p class="eyebrow">课程设计选题方向</p>
+        <h3 class="h2">四个可选主题</h3>
+      </div>
+      <div class="topics rv">
+        <article class="topic">
+          <p class="topic__n">方向 01</p>
+          <h4 class="topic__t">艺术疗愈设计</h4>
+          <p class="topic__d">为抑郁症、孤独症、狂躁症、失亲者、失恋者、失友者，打开心灵枷锁，重回正常生活。</p>
+          <p class="topic__m">传统绘画 / 现代装置艺术 / 数字艺术 / AI 生成艺术 / 空间艺术</p>
+        </article>
+        <article class="topic">
+          <p class="topic__n">方向 02</p>
+          <h4 class="topic__t">创意文具与文件管理</h4>
+          <p class="topic__d">围绕办公或学习场景中的文具使用、资料整理、文件归档、会议记录、桌面收纳等需求展开。</p>
+          <p class="topic__m">低碳材料 / 模块化结构 / 可持续使用 / 高效体验</p>
+        </article>
+        <article class="topic">
+          <p class="topic__n">方向 03</p>
+          <h4 class="topic__t">时尚生活设计</h4>
+          <p class="topic__d">时尚生活方式是“时间”与“崇尚”的相加。从国潮崛起到可持续实践，从虚拟衣橱到慢生活哲学。</p>
+          <p class="topic__m">服装 / 服饰 / 珠宝 / 配饰 / 虚拟时尚</p>
+        </article>
+        <article class="topic">
+          <p class="topic__n">方向 04</p>
+          <h4 class="topic__t">“她力量”设计</h4>
+          <p class="topic__d">女性在教育、职业、家庭、科技、网络等多样环境下的处境与精神状态，讲述她们的挑战、选择、成长与影响。</p>
+          <p class="topic__m">多元性别共建视角 / 更温柔、有力、公正的社会结构</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FOOTER ======================= -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <p class="foot__t">面向未来的<br>可持续设计</p>
+        <p class="foot__s">Sustainable Design</p>
+      </div>
+      <div class="foot__col"><p class="foot__k">课程</p><p class="foot__v">可持续发展概论<br>探索人类与自然<br>和谐共生的未来之路</p></div>
+      <div class="foot__col"><p class="foot__k">开设</p><p class="foot__v">湖北工业大学<br>工业设计学院</p></div>
+      <div class="foot__col"><p class="foot__k">主讲</p><p class="foot__v">张萌</p></div>
+    </div>
+    <div class="foot__bot">
+      <span>人们将自然逻辑输入机器的同时，也把技术逻辑带到了生命之中。</span>
+      <span>道法自然</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+var RM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var $  = function(s,c){return (c||document).querySelector(s);};
+var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){return null;}}
+
+/* ---------- theme ---------- */
+(function(){
+  var root=document.documentElement, btn=$("#theme");
+  var saved=store("sd-theme");
+  if(saved==="dark"||saved==="light")root.setAttribute("data-theme",saved);
+  btn.addEventListener("click",function(){
+    var cur=root.getAttribute("data-theme");
+    if(!cur)cur=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";
+    var next=cur==="dark"?"light":"dark";
+    root.setAttribute("data-theme",next);
+    store("sd-theme",next);
+    document.dispatchEvent(new CustomEvent("themechange"));
+  });
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",function(){
+    if(!root.getAttribute("data-theme"))document.dispatchEvent(new CustomEvent("themechange"));
+  });
+})();
+function cssv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+
+/* ---------- progress + nav ---------- */
+(function(){
+  var bar=$("#bar"), nav=$("#nav"), last=0, links=$$(".nav__link"), ticking=false;
+  var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1));});
+  function frame(){
+    var y=window.scrollY, h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0?(y/h)*100:0)+"%";
+    nav.classList.toggle("is-solid",y>80);
+    if(y>320&&y>last+4)nav.classList.add("is-hidden");
+    else if(y<last-4||y<=320)nav.classList.remove("is-hidden");
+    last=y;
+    var mid=y+window.innerHeight*0.35, act=-1;
+    for(var i=0;i<secs.length;i++){if(secs[i]&&secs[i].offsetTop<=mid)act=i;}
+    links.forEach(function(a,i){a.classList.toggle("is-active",i===act);});
+    ticking=false;
+  }
+  window.addEventListener("scroll",function(){
+    if(!ticking){ticking=true;requestAnimationFrame(frame);}
+  },{passive:true});
+  frame();
+})();
+
+/* ---------- reveal ---------- */
+(function(){
+  var els=$$(".rv");
+  if(RM||!("IntersectionObserver" in window)){els.forEach(function(e){e.classList.add("is-in");});return;}
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("is-in");io.unobserve(e.target);}});
+  },{rootMargin:"0px 0px -12% 0px"});
+  els.forEach(function(e){io.observe(e);});
+})();
+
+/* ---------- count-up ---------- */
+(function(){
+  var host=$("#stats"); if(!host)return;
+  var nums=$$(".stat__num",host), done=false;
+  function run(){
+    if(done)return; done=true;
+    nums.forEach(function(el){
+      var to=parseFloat(el.dataset.to), sub=el.querySelector("sub"), t0=null, D=1200;
+      if(RM){el.firstChild.nodeValue=String(to);return;}
+      function step(t){
+        if(!t0)t0=t;
+        var p=Math.min((t-t0)/D,1), e=1-Math.pow(1-p,4);
+        el.firstChild.nodeValue=String(Math.round(to*e));
+        if(p<1)requestAnimationFrame(step);
+      }
+      el.firstChild.nodeValue="0";
+      if(sub)el.appendChild(sub);
+      requestAnimationFrame(step);
+    });
+  }
+  if(!("IntersectionObserver" in window)){run();return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){run();io.disconnect();}});},{threshold:.3});
+  io.observe(host);
+})();
+
+/* ---------- perspective switch ---------- */
+(function(){
+  var sw=$(".switch"); if(!sw)return;
+  var btns=$$("button",sw), cols=$$(".vs__col");
+  function set(i){
+    btns.forEach(function(b,j){b.setAttribute("aria-pressed",String(j===i));});
+    cols.forEach(function(c,j){
+      c.dataset.active=String(j===i);
+      c.dataset.dim=String(j!==i);
+    });
+  }
+  btns.forEach(function(b,i){b.addEventListener("click",function(){set(i);});});
+  set(1);
+})();
+
+/* ---------- system boundary ---------- */
+(function(){
+  var opts=$$("#opts input"); if(!opts.length)return;
+  /* 相对影响权重：值越大代表该环节在此方案下的负担越重（教学用示意模型） */
+  var W={
+    single:{material:62,delivery:14,washing:0, behavior:0, waste:38},
+    reuse: {material:12,delivery:26,washing:34,behavior:30,waste:5}
+  };
+  var NOTES={
+    "":"至少选择一个环节，才能开始比较。",
+    material:"只比较包装材料时，可重复餐盒<b>压倒性占优</b>——这正是最常见的、也最容易误导人的结论。",
+    delivery:"加入配送与返程回收后，差距开始缩小：可重复方案需要额外的物流里程。",
+    washing:"清洗一旦计入，可重复方案的能耗与水耗浮出水面。<b>清洗距离越远，优势流失越快。</b>",
+    behavior:"归还率是整个系统的命门。<b>用户不还，循环就不成立</b>，前面所有的材料优势都会被摊薄。",
+    waste:"末端废弃物处理重新拉开差距：一次性方案把成本推给了城市清运系统。"
+  };
+  var vS=$("#v-single"), vR=$("#v-reuse"), fS=$("#f-single"), fR=$("#f-reuse"), note=$("#note");
+  function calc(){
+    var keys=opts.filter(function(o){return o.checked;}).map(function(o){return o.dataset.key;});
+    var s=0,r=0;
+    keys.forEach(function(k){s+=W.single[k];r+=W.reuse[k];});
+    var max=Math.max(s,r,1);
+    fS.style.width=(s/max*100)+"%";
+    fR.style.width=(r/max*100)+"%";
+    vS.textContent=keys.length?s.toFixed(0):"—";
+    vR.textContent=keys.length?r.toFixed(0):"—";
+    if(!keys.length){note.innerHTML=NOTES[""];return;}
+    var lastKey=keys[keys.length-1];
+    var verdict = s>r ? "当前边界下，<b>可重复方案更优</b>。" :
+                  r>s ? "当前边界下，<b>一次性方案反而更优</b>。" :
+                        "当前边界下，<b>两者持平</b>。";
+    note.innerHTML=verdict+" "+(NOTES[lastKey]||"");
+  }
+  opts.forEach(function(o){o.addEventListener("change",calc);});
+  calc();
+})();
+
+/* ---------- loop diagram ---------- */
+(function(){
+  var svg=$(".loopsvg"); if(!svg)return;
+  var nodes=$$(".node",svg), dot=$("#flowdot");
+  var DATA=[
+    {t:"用户 / 需求",d:"设计的起点不是造型，而是识别真实需求，以及需求被满足的方式。用户习惯、购买动机与使用频率，共同决定了整个系统的物质流规模。",q:"追问：这个需求必须由一件新产品来满足吗？"},
+    {t:"产品 / 材料",d:"材料选择、结构设计与生命周期在此确定。模块化、可拆解、单一材质，都是为了让产品在末端仍有被重新利用的可能。",q:"追问：它坏了以后，谁能修，修得起吗？"},
+    {t:"服务 / 维护",d:"以“成果”和“效益”取代物质产品的消耗——Manzini 所说的产品服务系统，正是让使用而非占有成为价值交付的方式。",q:"追问：延长一年寿命，比换一个“环保材料”影响更大吗？"},
+    {t:"回收 / 再分配",d:"回收不是链条的终点，而是回到起点的通道。押金、逆向物流、再制造与二手流通，决定了闭环能否真正闭合。",q:"追问：回收成本由谁承担，才不会让循环停摆？"}
+  ];
+  var P=[[220,70],[370,220],[220,370],[70,220]];
+  function sel(i){
+    nodes.forEach(function(n,j){n.classList.toggle("is-on",j===i);});
+    $("#lp-idx").textContent="环节 0"+(i+1);
+    $("#lp-t").textContent=DATA[i].t;
+    $("#lp-d").textContent=DATA[i].d;
+    $("#lp-q").textContent=DATA[i].q;
+  }
+  nodes.forEach(function(n,i){
+    n.addEventListener("click",function(){sel(i);});
+    n.addEventListener("keydown",function(e){
+      if(e.key==="Enter"||e.key===" "){e.preventDefault();sel(i);}
+    });
+  });
+  sel(0);
+  if(!RM){
+    var a=0;
+    (function spin(){
+      a+=0.006;
+      dot.setAttribute("cx",String(220+150*Math.sin(a)));
+      dot.setAttribute("cy",String(220-150*Math.cos(a)));
+      requestAnimationFrame(spin);
+    })();
+  }
+})();
+
+/* ---------- case cards ---------- */
+(function(){
+  $$(".case").forEach(function(card){
+    var btn=$(".case__toggle",card), more=$(".case__more",card);
+    btn.addEventListener("click",function(){
+      var open=card.dataset.open==="true";
+      card.dataset.open=String(!open);
+      btn.setAttribute("aria-expanded",String(!open));
+      btn.childNodes[0].nodeValue=open?"展开细节":"收起细节";
+      more.style.maxHeight=open?"0px":more.scrollHeight+"px";
+    });
+  });
+
+  $$(".poll").forEach(function(poll){
+    var key="sd-poll-"+poll.dataset.poll;
+    var btns=$$(".poll__btn",poll), res=$(".poll__res",poll);
+    var mA=$('[data-m="a"]',poll), mB=$('[data-m="b"]',poll);
+    function read(){
+      try{return JSON.parse(store(key)||'{"a":0,"b":0,"me":null}');}
+      catch(e){return {a:0,b:0,me:null};}
+    }
+    function paint(s){
+      var tot=s.a+s.b;
+      btns.forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.v===s.me));});
+      if(!tot){res.classList.remove("is-on");mA.style.width="0";mB.style.width="0";return;}
+      var pa=Math.round(s.a/tot*100);
+      mA.style.width=pa+"%"; mB.style.width=(100-pa)+"%";
+      res.textContent="本机累计 "+tot+" 票 · "+pa+"% / "+(100-pa)+"%";
+      res.classList.add("is-on");
+    }
+    btns.forEach(function(b){
+      b.addEventListener("click",function(){
+        var s=read(), v=b.dataset.v;
+        if(s.me===v)return;
+        if(s.me)s[s.me]=Math.max(0,s[s.me]-1);
+        s[v]++; s.me=v;
+        store(key,JSON.stringify(s));
+        paint(s);
+      });
+    });
+    paint(read());
+  });
+})();
+
+/* ---------- timeline ---------- */
+(function(){
+  var track=$("#tl-track"); if(!track)return;
+  var E=[
+    ["1962","global","《寂静的春天》出版","蕾切尔·卡逊首次反思过度使用化学农药与肥料导致的环境污染，被认为是世界环保运动的奠基石。"],
+    ["1969","global","美国《国家环境政策法》","美国国会通过该法并成立环境保护局，之后陆续通过清洁空气法和清洁水法。"],
+    ["1970","global","首个“地球日”","参议员纳尔逊发起，当天超过 2000 万人在纽约、华盛顿、旧金山等地游行集会。"],
+    ["1970","design","《为真实的世界设计》","帕帕奈克提出“设计伦理”，主张设计师担负对社会和生态变化的责任。初版在瑞典出版，1971 年才出英文版。"],
+    ["1971","global","绿色和平成立","著名环保组织成立，环保运动进入高潮。"],
+    ["1972","global","《增长的极限》","罗马俱乐部用系统理论和计算机模型预测 1972—2100 年的发展轨迹，首次将系统思考应用于全球环境问题。"],
+    ["1972","global","斯德哥尔摩人类环境会议","联合国首次召开，通过《人类环境宣言》，决定成立联合国环境规划署（UNEP）。"],
+    ["1972","china","中国参加人类环境会议","中国的可持续发展行动由此起步。"],
+    ["1973","china","第一次全国环境保护会议","通过中国第一个环境保护文件《关于保护和改善环境的若干规定》，确定“保护环境、造福人民”的方针。"],
+    ["1978","china","环境保护写入宪法","宪法第一次列入“国家保护环境和自然资源，防治污染和其他公害”。"],
+    ["1980","global","“可持续发展”一词首次出现","见于 IUCN、UNEP 与 WWF 联合发表的《世界自然保护战略》。"],
+    ["1983","global","世界环境与发展委员会成立","联合国成立 WECD，由挪威首相布伦特兰夫人担任主席。"],
+    ["1987","global","《我们共同的未来》","布伦特兰报告提出沿用至今的定义：既能满足当代人的需要，又不对后代人满足其需要的能力构成危害的发展。"],
+    ["1989","china","《中华人民共和国环境保护法》","中国环境立法体系确立。"],
+    ["1990","global","人类发展指数（HDI）","联合国发展署在《1990 年人类发展报告》中提出，修正以单一 GDP 评估发展进程的方法。"],
+    ["1992","global","里约地球峰会","《里约宣言》第一次将可持续发展视为一项人类“权利”，推出《21 世纪议程》、UNFCCC 与 CBD。"],
+    ["1992","china","中国承诺履行《21 世纪议程》","中国参加里约联合国环境发展大会并作出庄严承诺。"],
+    ["1994","design","超越绿色设计","开放大学的 Dewberry 与 Goggin 认为，可持续设计要面对“产品”以外更复杂的社会、经济与道德条件的制约。"],
+    ["1994","china","《中国 21 世纪议程》","中国发布本国的可持续发展行动纲领。"],
+    ["1995","design","可持续设计中心成立","英国萨里艺术设计学院成立该中心并开设硕士课程，提出可持续设计是针对创造、使用与处理产品的“系统”进行分析与优化。"],
+    ["1995","china","写入“九五”计划","中国正式将可持续发展战略纳入国民经济和社会发展计划。"],
+    ["1997","china","十五大","强调“在现代化建设中必须实施可持续发展战略”。"],
+    ["2000s","design","产品服务系统","米兰理工大学 Manzini 提出：通过整合“产品及服务”构建可持续解决方案，以“成果”和“效益”取代物质产品的消耗。"],
+    ["2003","china","科学发展观","十六届三中全会提出坚持以人为本，树立全面、协调、可持续的发展观。"],
+    ["2005","china","“生态文明”概念提出","中央人口资源环境工作座谈会提出；十七大把生态文明建设列入全面建设小康社会的目标。"],
+    ["2005","global","《千年生态系统评估报告》","联合国指出人类已经消耗了地球上 2/3 的自然资源。"],
+    ["2010","china","绿色、低碳发展理念","“十二五”规划建议明确提出。"],
+    ["2012","china","美丽中国","十八大要求把生态文明建设融入经济、政治、文化、社会建设的各方面和全过程。"],
+    ["2017","china","人与自然和谐共生","十九大将其作为习近平新时代中国特色社会主义思想的基本方略之一。"],
+    ["2021","global","IPCC 第六次评估报告","人类活动致使气候以前所未有的速度变暖；全球地表平均温度较工业化前高出约 1℃。"]
+  ];
+  var frag=document.createDocumentFragment();
+  E.forEach(function(e){
+    var d=document.createElement("article");
+    d.className="tl__item"; d.dataset.track=e[1];
+    var y=document.createElement("p"); y.className="tl__yr"; y.textContent=e[0];
+    var t=document.createElement("h4"); t.className="tl__t"; t.textContent=e[2];
+    var s=document.createElement("p"); s.className="tl__d"; s.textContent=e[3];
+    d.appendChild(y);d.appendChild(t);d.appendChild(s);
+    frag.appendChild(d);
+  });
+  track.appendChild(frag);
+
+  var items=$$(".tl__item",track);
+  $$("#tl-filters .chip").forEach(function(chip){
+    chip.addEventListener("click",function(){
+      var f=chip.dataset.f;
+      $$("#tl-filters .chip").forEach(function(c){c.setAttribute("aria-pressed",String(c===chip));});
+      items.forEach(function(it){
+        var on = f==="all" || it.dataset.track===f;
+        it.classList.toggle("is-mute",!on);
+      });
+    });
+  });
+
+  /* drag to scroll */
+  var tl=$("#tl"), down=false, sx=0, sl=0;
+  tl.addEventListener("pointerdown",function(e){
+    down=true; sx=e.clientX; sl=tl.scrollLeft; tl.classList.add("is-drag");
+    tl.setPointerCapture(e.pointerId);
+  });
+  tl.addEventListener("pointermove",function(e){
+    if(!down)return; e.preventDefault(); tl.scrollLeft=sl-(e.clientX-sx);
+  });
+  ["pointerup","pointercancel"].forEach(function(ev){
+    tl.addEventListener(ev,function(){down=false;tl.classList.remove("is-drag");});
+  });
+  tl.addEventListener("keydown",function(e){
+    if(e.key==="ArrowRight"){e.preventDefault();tl.scrollLeft+=264;}
+    if(e.key==="ArrowLeft"){e.preventDefault();tl.scrollLeft-=264;}
+  });
+})();
+
+/* ---------- tabs ---------- */
+(function(){
+  var tabs=$$(".tab"); if(!tabs.length)return;
+  function sel(i){
+    tabs.forEach(function(t,j){
+      t.setAttribute("aria-selected",String(j===i));
+      document.getElementById(t.getAttribute("aria-controls")).hidden = j!==i;
+    });
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener("click",function(){sel(i);});
+    t.addEventListener("keydown",function(e){
+      var n = e.key==="ArrowRight" ? i+1 : e.key==="ArrowLeft" ? i-1 : -1;
+      if(n<0||n>=tabs.length)return;
+      e.preventDefault(); tabs[n].focus(); sel(n);
+    });
+  });
+})();
+
+/* ---------- quadrant ---------- */
+(function(){
+  var cells=$$(".qcell"); if(!cells.length)return;
+  var D=[
+    {t:"高福利 · 低消耗",d:"唯一的可持续发展模式。目前几乎没有国家能够达到这一理想状态。",n:"这也是可持续设计真正的目标象限——在生态环境的承载能力以内，实现较高的福利水平。"},
+    {t:"高福利 · 高消耗",d:"大多数发达国家的发展模式，如美国、澳大利亚、加拿大等，生态足迹远超地球承载力。",n:"澳大利亚、美国、加拿大的生态足迹各为其生态承载力的 5.37、4.75、4.72 倍。"},
+    {t:"低福利 · 低消耗",d:"大多数欠发达国家。虽然生态足迹小，但人民生活水平低下。",n:"“低福利”国家能否通过对自然资源的合理使用提升本国整体福利，是未来国际政治的焦点议题之一。"},
+    {t:"低福利 · 高消耗",d:"部分发展中国家和转型国家，如俄罗斯等，资源利用效率低下。",n:"高投入未必换来高福利——发展模式本身的效率同样是可持续性的一部分。"}
+  ];
+  function sel(i){
+    cells.forEach(function(c,j){c.classList.toggle("is-on",j===i);});
+    $("#q-t").textContent=D[i].t; $("#q-d").textContent=D[i].d; $("#q-n").textContent=D[i].n;
+  }
+  cells.forEach(function(c,i){
+    c.addEventListener("click",function(){sel(i);});
+    c.addEventListener("mouseenter",function(){sel(i);});
+  });
+  $$(".pt").forEach(function(p){
+    p.addEventListener("mouseenter",function(){
+      $("#q-t").textContent=p.dataset.n; $("#q-d").textContent=p.dataset.v;
+      $("#q-n").textContent="如果全球居民都像他们一样生活，至少需要 4~5 个地球才能满足人类的自然消耗需求。";
+    });
+  });
+  sel(0);
+})();
+
+/* ---------- Daisyworld ---------- */
+(function(){
+  var cv=$("#dw-canvas"); if(!cv)return;
+  var ctx=cv.getContext("2d"), chart=$("#dw-chart"), cx=chart.getContext("2d");
+  var lum=$("#dw-lum"), lumv=$("#dw-lumv");
+  var oT=$("#dw-temp"), oB=$("#dw-black"), oW=$("#dw-white");
+  var auto=$("#dw-auto"), reset=$("#dw-reset");
+
+  /* Watson & Lovelock (1983) parameters */
+  var S=917, SIGMA=5.67e-8, Q=2.06e9, GAMMA=0.3;
+  var A_G=0.5, A_W=0.75, A_B=0.25, FLOOR=0.001;
+  var aw=0.01, ab=0.01, L=1, playing=false, dir=1;
+
+  function albedo(){ var x=1-aw-ab; return x*A_G + aw*A_W + ab*A_B; }
+  function planetK(l){ return Math.pow(l*S*(1-albedo())/SIGMA,0.25); }
+  function localK(Te,a){ var v=Q*(albedo()-a)+Math.pow(Te,4); return v>0?Math.pow(v,0.25):0; }
+  function beta(T){ var b=1-0.003265*Math.pow(295.5-T,2); return b>0?b:0; }
+  function step(dt){
+    var Te=planetK(L), x=1-aw-ab;
+    if(x<0)x=0;
+    var dw=aw*(x*beta(localK(Te,A_W))-GAMMA);
+    var db=ab*(x*beta(localK(Te,A_B))-GAMMA);
+    aw+=dw*dt; ab+=db*dt;
+    if(aw<FLOOR)aw=FLOOR; if(ab<FLOOR)ab=FLOOR;
+    if(aw>1)aw=1; if(ab>1)ab=1;
+    if(aw+ab>0.99){var s=0.99/(aw+ab);aw*=s;ab*=s;}
+  }
+  function deadK(l){ return Math.pow(l*S*(1-A_G)/SIGMA,0.25); }
+
+  /* planet tiles */
+  var N=26, cells=[];
+  (function(){
+    var r=N/2;
+    for(var i=0;i<N;i++)for(var j=0;j<N;j++){
+      var dx=i-r+0.5, dy=j-r+0.5;
+      if(dx*dx+dy*dy<=r*r)cells.push({x:i,y:j,k:Math.random()});
+    }
+    cells.sort(function(a,b){return a.k-b.k;});
+  })();
+
+  function drawPlanet(){
+    var W=cv.width, cell=W/N;
+    ctx.clearRect(0,0,W,W);
+    var nB=Math.round(ab*cells.length), nW=Math.round(aw*cells.length);
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(W/2,W/2,W/2-2,0,6.2832);
+    ctx.clip();
+    ctx.fillStyle="#8C8163";
+    ctx.fillRect(0,0,W,W);
+    for(var i=0;i<cells.length;i++){
+      var c=cells[i];
+      if(i<nB)ctx.fillStyle="#20211F";
+      else if(i>=cells.length-nW)ctx.fillStyle="#F2EFE6";
+      else continue;
+      ctx.beginPath();
+      ctx.arc(c.x*cell+cell/2,c.y*cell+cell/2,cell*0.42,0,6.2832);
+      ctx.fill();
+    }
+    /* terminator shading, clipped to the disc */
+    var g=ctx.createRadialGradient(W*0.34,W*0.3,W*0.05,W*0.5,W*0.5,W*0.58);
+    g.addColorStop(0,"rgba(255,255,255,.16)");
+    g.addColorStop(1,"rgba(0,0,0,.45)");
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,W);
+    ctx.restore();
+  }
+
+  /* temperature curve */
+  var deadPts=[], L0=0.6, L1=1.7;
+  (function(){for(var l=L0;l<=L1+1e-9;l+=0.01)deadPts.push([l,deadK(l)-273.15]);})();
+  var livePts=[];
+  (function(){
+    var sw=0.01, sb=0.01, saveW=aw, saveB=ab, saveL=L;
+    for(var l=L0;l<=L1+1e-9;l+=0.01){
+      aw=sw; ab=sb; L=l;
+      for(var k=0;k<3000;k++)step(0.05);
+      sw=aw; sb=ab;
+      livePts.push([l,planetK(l)-273.15]);
+    }
+    aw=saveW; ab=saveB; L=saveL;
+  })();
+
+  function drawChart(){
+    var W=chart.width, H=chart.height, pad=42;
+    var tMin=-20, tMax=90;
+    cx.clearRect(0,0,W,H);
+    var muted=cssv("--sage")||"#94A78D", acc=cssv("--accent")||"#B85C38";
+    function X(l){return pad+(l-L0)/(L1-L0)*(W-pad-16);}
+    function Y(t){return H-pad-(t-tMin)/(tMax-tMin)*(H-pad-18);}
+    /* grid */
+    cx.strokeStyle="rgba(236,232,222,.13)"; cx.lineWidth=1;
+    [0,20,40,60,80].forEach(function(t){
+      cx.beginPath();cx.moveTo(pad,Y(t));cx.lineTo(W-16,Y(t));cx.stroke();
+      cx.fillStyle=muted;cx.font="500 15px ui-monospace,monospace";cx.textAlign="right";
+      cx.fillText(t+"°",pad-8,Y(t)+5);
+    });
+    [0.6,0.9,1.2,1.5].forEach(function(l){
+      cx.fillStyle=muted;cx.textAlign="center";
+      cx.fillText(l.toFixed(1),X(l),H-pad+22);
+    });
+    cx.textAlign="left";cx.font="500 14px system-ui,sans-serif";
+    cx.fillText("行星温度",pad,22);
+    cx.textAlign="right";cx.fillText("太阳光度 →",W-16,H-pad+22);
+    function line(pts,color,dash){
+      cx.beginPath();cx.setLineDash(dash||[]);cx.strokeStyle=color;cx.lineWidth=2.5;
+      pts.forEach(function(p,i){var xx=X(p[0]),yy=Y(p[1]);i?cx.lineTo(xx,yy):cx.moveTo(xx,yy);});
+      cx.stroke();cx.setLineDash([]);
+    }
+    line(deadPts,"#8FA089",[5,6]);
+    line(livePts,acc);
+    /* live marker */
+    var t=planetK(L)-273.15;
+    cx.beginPath();cx.arc(X(L),Y(t),6,0,6.2832);cx.fillStyle=acc;cx.fill();
+    cx.beginPath();cx.moveTo(X(L),Y(tMin));cx.lineTo(X(L),Y(t));
+    cx.strokeStyle=acc;cx.globalAlpha=.35;cx.lineWidth=1;cx.stroke();cx.globalAlpha=1;
+  }
+
+  function readout(){
+    var t=planetK(L)-273.15;
+    oT.textContent=t.toFixed(1);
+    oB.textContent=(ab*100).toFixed(0);
+    oW.textContent=(aw*100).toFixed(0);
+    lumv.textContent=L.toFixed(2);
+  }
+
+  function tick(){
+    for(var i=0;i<24;i++)step(0.05);
+    if(playing){
+      L+=dir*0.0016;
+      if(L>=L1){L=L1;dir=-1;}
+      if(L<=L0){L=L0;dir=1;}
+      lum.value=String(L);
+    }
+    drawPlanet(); drawChart(); readout();
+    requestAnimationFrame(tick);
+  }
+
+  lum.addEventListener("input",function(){L=parseFloat(lum.value);playing=false;auto.setAttribute("aria-pressed","false");});
+  auto.addEventListener("click",function(){
+    playing=!playing; auto.setAttribute("aria-pressed",String(playing));
+    auto.textContent=playing?"暂停演化":"自动演化";
+  });
+  reset.addEventListener("click",function(){
+    aw=0.01;ab=0.01;L=1;lum.value="1";playing=false;
+    auto.setAttribute("aria-pressed","false");auto.textContent="自动演化";
+  });
+  document.addEventListener("themechange",function(){drawChart();});
+
+  for(var i=0;i<4000;i++)step(0.05);
+  if(RM){drawPlanet();drawChart();readout();}
+  else requestAnimationFrame(tick);
+})();
+
+/* ---------- chaos: logistic divergence ---------- */
+(function(){
+  var cv=$("#ch-canvas"); if(!cv)return;
+  var ctx=cv.getContext("2d");
+  var eps=$("#ch-eps"), epsv=$("#ch-epsv"), out=$("#ch-steps"), run=$("#ch-run");
+  var R=3.9, N=90, prog=N;
+
+  function series(x0){
+    var a=[x0], x=x0;
+    for(var i=0;i<N;i++){x=R*x*(1-x);a.push(x);}
+    return a;
+  }
+  function draw(){
+    var e=Math.pow(10,parseFloat(eps.value));
+    epsv.textContent=e.toExponential(0).replace("e-","e-");
+    var A=series(0.4), B=series(0.4+e);
+    var W=cv.width,H=cv.height,pad=30;
+    ctx.clearRect(0,0,W,H);
+    var acc=cssv("--accent")||"#B85C38", sg=cssv("--sage")||"#94A78D", bd=cssv("--border")||"#DED6C7";
+    function X(i){return pad+i/N*(W-pad*2);}
+    function Y(v){return H-pad-v*(H-pad*2);}
+    ctx.strokeStyle=bd;ctx.lineWidth=1;
+    [0,0.5,1].forEach(function(v){ctx.beginPath();ctx.moveTo(pad,Y(v));ctx.lineTo(W-pad,Y(v));ctx.stroke();});
+    function path(arr,color,w){
+      ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=w;
+      for(var i=0;i<=Math.min(prog,N);i++){var xx=X(i),yy=Y(arr[i]);i?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);}
+      ctx.stroke();
+    }
+    path(A,sg,2.5);
+    path(B,acc,2.5);
+    /* divergence marker */
+    var k=-1;
+    for(var i=0;i<=N;i++){if(Math.abs(A[i]-B[i])>0.25){k=i;break;}}
+    out.textContent = k<0 ? "> "+N : String(k);
+    if(k>=0&&k<=prog){
+      ctx.setLineDash([4,5]);ctx.strokeStyle=acc;ctx.globalAlpha=.55;ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(X(k),pad-6);ctx.lineTo(X(k),H-pad+6);ctx.stroke();
+      ctx.setLineDash([]);ctx.globalAlpha=1;
+      ctx.fillStyle=acc;ctx.font="500 13px ui-monospace,monospace";ctx.textAlign="center";
+      ctx.fillText("第 "+k+" 步",X(k),pad-12);
+    }
+  }
+  function animate(){
+    if(RM){prog=N;draw();return;}
+    prog=0;
+    (function f(){prog+=1.4;draw();if(prog<N)requestAnimationFrame(f);})();
+  }
+  eps.addEventListener("input",function(){prog=N;draw();});
+  run.addEventListener("click",animate);
+  document.addEventListener("themechange",draw);
+  window.addEventListener("resize",draw);
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){animate();io.disconnect();}});
+    },{threshold:.35});
+    io.observe(cv);
+  }else animate();
+  draw();
+})();
+
+/* ---------- causal chain ---------- */
+(function(){
+  var host=$("#chain"); if(!host)return;
+  var C=["丢了一个钉子","坏了一只蹄铁","折了一匹战马","伤了一位骑士","输了一场战争","亡了一个帝国"];
+  C.forEach(function(t,i){
+    var d=document.createElement("div");
+    d.className="chain__i"+(i===C.length-1?" is-last":"");
+    d.innerHTML='<p class="chain__n">'+String(i+1).padStart(2,"0")+'</p><p class="chain__t"></p>';
+    $(".chain__t",d).textContent=t;
+    host.appendChild(d);
+  });
+  var items=$$(".chain__i",host);
+  function play(){items.forEach(function(el,i){setTimeout(function(){el.classList.add("is-on");},RM?0:i*220);});}
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){play();io.disconnect();}});
+    },{threshold:.3});
+    io.observe(host);
+  }else play();
+})();
+
+/* ---------- worksheet ---------- */
+(function(){
+  var form=$("#ws-form"); if(!form)return;
+  var name=$("#ws-name"), why=$("#ws-why"), list=$("#ws-list"),
+      empty=$("#ws-empty"), count=$("#ws-count"), copy=$("#ws-copy");
+  var KEY="sd-worksheet";
+  function read(){try{return JSON.parse(store(KEY)||"[]");}catch(e){return [];}}
+  function write(a){store(KEY,JSON.stringify(a));}
+  function paint(){
+    var a=read();
+    list.textContent="";
+    empty.style.display=a.length?"none":"block";
+    a.forEach(function(it,i){
+      var el=document.createElement("div");
+      el.className="entry";
+      el.innerHTML='<span class="entry__n"></span><div class="entry__b"><p class="entry__t"></p><p class="entry__w"></p></div>'+
+        '<button class="entry__x" type="button" aria-label="删除这条记录"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 2l8 8M10 2l-8 8"/></svg></button>';
+      $(".entry__n",el).textContent=String(i+1).padStart(2,"0");
+      $(".entry__t",el).textContent=it.n;
+      $(".entry__w",el).textContent=it.w;
+      $(".entry__x",el).addEventListener("click",function(){
+        var arr=read(); arr.splice(i,1); write(arr); paint();
+      });
+      list.appendChild(el);
+    });
+    count.textContent=a.length+" / 建议 3–5 条";
+    count.classList.toggle("is-done",a.length>=3&&a.length<=5);
+  }
+  form.addEventListener("submit",function(e){
+    e.preventDefault();
+    var n=name.value.trim(), w=why.value.trim();
+    if(!n||!w)return;
+    var a=read(); a.push({n:n,w:w}); write(a);
+    name.value=""; why.value=""; name.focus(); paint();
+  });
+  copy.addEventListener("click",function(){
+    var a=read();
+    if(!a.length)return;
+    var txt="课后作业：生活中有哪些“不可持续”的产品或现象\n\n"+
+      a.map(function(it,i){return (i+1)+". "+it.n+"\n   不可持续表现："+it.w;}).join("\n\n");
+    var done=function(){copy.textContent="已复制";setTimeout(function(){copy.textContent="复制全部";},1800);};
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done,function(){});
+    }else{
+      var ta=document.createElement("textarea");
+      ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand("copy");done();}catch(err){}
+      document.body.removeChild(ta);
+    }
+  });
+  paint();
+})();
+
+})();
+</script>
+</body>
+</html>
