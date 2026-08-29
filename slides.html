@@ -1,0 +1,2487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>可持续发展概论 · 课堂讲义</title>
+<meta name="description" content="湖北工业大学工业设计学院《面向未来的可持续设计 · 可持续发展概论》45 分钟交互课件。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<style>
+/* ============================================================
+   讲课模式：浅底深字，单屏一页，固定不滚动
+   默认恒为浅色（投影可预期）；深色仅在手动切换时启用
+   ============================================================ */
+:root{
+  --white:#FFFFFF;
+  --mist:#F4F9F2;
+  --wash:#E6F2E2;
+  --wash-2:#D3E8CD;
+  --line:#D8E6D4;
+  --ink:#14231A;
+  --ink-2:#3A4A3F;
+  --slate:#5D6E62;
+  --green:#3D9B35;
+  --green-ink:#2C7A26;
+  --green-deep:#1F5B2C;
+  --leaf:#7CC46F;
+  --leaf-soft:#A8DA9C;
+  --tan:#A9812E;
+  --tan-soft:#F0E4C8;
+
+  --bg:var(--white);
+  --panel:var(--mist);
+  --panel-2:var(--wash);
+  --text:var(--ink);
+  --muted:var(--slate);
+  --accent:var(--green);
+  --accent-ink:var(--green-ink);
+  --accent-wash:rgba(61,155,53,.10);
+  --border:var(--line);
+  --shadow:0 6px 22px rgba(20,60,28,.08);
+  --shadow-lg:0 18px 48px rgba(20,60,28,.14);
+
+  --f-sans:"Inter Tight","Noto Sans SC",-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
+  --f-serif:"Noto Serif SC",Georgia,"Songti SC",serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  /* 针对 MacBook 14"（1512×982）标定的字号阶梯 */
+  --fs-hero:clamp(34px,6.0vh,62px);
+  --fs-title:clamp(25px,4.2vh,42px);
+  --fs-sub:clamp(17px,2.5vh,25px);
+  --fs-lead:clamp(14.5px,2.0vh,19.5px);
+  --fs-body:clamp(13px,1.78vh,17.5px);
+  --fs-small:clamp(11.5px,1.52vh,14.5px);
+  --fs-label:clamp(10px,1.28vh,12.5px);
+  --fs-num:clamp(26px,4.6vh,46px);
+
+  --gap:clamp(12px,1.9vh,22px);
+  --gap-2:clamp(18px,2.8vh,32px);
+  --pad-x:clamp(28px,3.6vw,64px);
+  --pad-y:clamp(20px,3.4vh,42px);
+  --rail:236px;
+  --r-sm:5px; --r-md:10px; --r-lg:16px; --r-pill:999px;
+  --dur:380ms;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+:root[data-theme="dark"]{
+  --bg:#0E1912; --panel:#16261A; --panel-2:#1B2E20;
+  --text:#E9F1E6; --muted:#9EB0A0;
+  --accent:#6FCB5E; --accent-ink:#8FDC7F; --accent-wash:rgba(111,203,94,.15);
+  --border:#283D2C; --line:#283D2C;
+  --wash:#1B2E20; --wash-2:#223a28; --tan:#D9BE7E; --tan-soft:#33301f;
+  --white:#16261A; --mist:#16261A; --green-deep:#0A120C;
+  --shadow:0 6px 22px rgba(0,0,0,.4);
+  --shadow-lg:0 18px 48px rgba(0,0,0,.55);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:var(--f-sans);font-size:var(--fs-body);line-height:1.7;
+  -webkit-font-smoothing:antialiased;overflow:hidden;
+}
+h1,h2,h3,h4,p,figure,ul,ol,figcaption{margin:0}
+ul,ol{padding:0;list-style:none}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+:focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:3px}
+
+/* ============================================================
+   壳：侧栏 + 舞台
+   ============================================================ */
+.app{display:flex;height:100vh;height:100svh;overflow:hidden}
+
+.rail{
+  width:var(--rail);flex:0 0 var(--rail);height:100%;
+  background:var(--panel);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;transition:margin-left var(--dur) var(--ease);
+}
+.app.rail-off .rail{margin-left:calc(var(--rail) * -1)}
+.rail__top{padding:16px 18px 12px;border-bottom:1px solid var(--border)}
+.rail__brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px;letter-spacing:-.01em}
+.rail__brand i{width:9px;height:9px;border-radius:2px;background:var(--accent);flex:0 0 auto}
+.rail__sub{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+.rail__list{flex:1;overflow-y:auto;padding:8px 0 14px;scrollbar-width:thin}
+.rail__list::-webkit-scrollbar{width:5px}
+.rail__list::-webkit-scrollbar-thumb{background:var(--wash-2);border-radius:3px}
+.rail__sec{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);padding:14px 18px 5px}
+.rail__i{display:flex;gap:9px;align-items:baseline;width:100%;text-align:left;
+  padding:5px 18px;font-size:12.5px;line-height:1.45;color:var(--muted);
+  border-left:2.5px solid transparent;transition:color 160ms,background 160ms,border-color 160ms}
+.rail__i b{font-family:var(--f-mono);font-size:10px;font-weight:500;opacity:.6;flex:0 0 20px}
+.rail__i:hover{color:var(--text);background:var(--accent-wash)}
+.rail__i.is-on{color:var(--accent-ink);border-left-color:var(--accent);background:var(--accent-wash);font-weight:500}
+.rail__i.is-on b{opacity:1}
+.rail__i.is-q b{color:var(--tan);opacity:1}
+.rail__foot{padding:10px 18px 14px;border-top:1px solid var(--border);
+  font-family:var(--f-mono);font-size:9.5px;line-height:1.8;color:var(--muted)}
+.rail__foot kbd{font-family:var(--f-mono);background:var(--wash);border:1px solid var(--border);
+  border-radius:3px;padding:0 4px;font-size:9px}
+
+.stage{flex:1;position:relative;height:100%;overflow:hidden;min-width:0}
+.bar{position:absolute;top:0;left:0;right:0;height:3px;background:var(--wash);z-index:8}
+.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width var(--dur) var(--ease)}
+
+/* ============================================================
+   幻灯片
+   ============================================================ */
+.s{
+  position:absolute;inset:0;padding:var(--pad-y) var(--pad-x) calc(var(--pad-y) + 26px);
+  display:none;flex-direction:column;overflow:hidden;
+}
+.s.is-on{display:flex;animation:slide-in 460ms var(--ease)}
+@keyframes slide-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.s--tint{background:var(--panel)}
+.s--wash{background:var(--wash)}
+
+.s__eyebrow{display:flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:var(--fs-label);
+  font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink);flex:0 0 auto}
+.s__eyebrow::after{content:"";flex:1;height:1px;background:var(--border);max-width:120px}
+.s__title{font-family:var(--f-serif);font-size:var(--fs-title);line-height:1.18;font-weight:700;
+  letter-spacing:-.01em;margin-top:8px;text-wrap:balance;flex:0 0 auto}
+.s__title em{font-style:normal;color:var(--accent-ink)}
+.s__deck{font-size:var(--fs-lead);line-height:1.65;color:var(--ink-2);margin-top:10px;max-width:78ch;flex:0 0 auto}
+:root[data-theme="dark"] .s__deck{color:var(--muted)}
+.s__main{flex:1;min-height:0;margin-top:var(--gap-2);display:flex;flex-direction:column}
+.s__foot{flex:0 0 auto;margin-top:var(--gap);font-size:var(--fs-small);color:var(--muted);
+  padding-top:10px;border-top:1px solid var(--border)}
+
+/* 页码 */
+.pager{position:absolute;right:calc(var(--pad-x) * .6);bottom:14px;display:flex;align-items:center;gap:12px;
+  font-family:var(--f-mono);font-size:12px;color:var(--muted);z-index:7}
+.pager__n{font-size:15px;color:var(--text);font-weight:500}
+.pager__b{width:26px;height:26px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center;
+  color:var(--muted);transition:all 160ms}
+.pager__b:hover{border-color:var(--accent);color:var(--accent-ink);background:var(--accent-wash)}
+.pager__b svg{width:11px;height:11px}
+.tag{position:absolute;left:var(--pad-x);bottom:14px;font-family:var(--f-mono);font-size:10.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted);z-index:7}
+
+/* ============================================================
+   通用版式
+   ============================================================ */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap-2);flex:1;min-height:0}
+.grid2--l{grid-template-columns:1.15fr .85fr}
+.grid2--r{grid-template-columns:.85fr 1.15fr}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);flex:1;min-height:0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);flex:1;min-height:0}
+.col{display:flex;flex-direction:column;gap:var(--gap);min-height:0;min-width:0}
+.col--c{justify-content:center}
+.fill{flex:1;min-height:0}
+
+.media{position:relative;overflow:hidden;border-radius:var(--r-md);background:var(--wash);min-height:0}
+.media img{width:100%;height:100%;object-fit:cover}
+.media--fit{background:#fff}
+.media--fit img{object-fit:contain}
+:root[data-theme="dark"] .media--fit{background:#F2F6F0}
+.media--frame{border:1px solid var(--border)}
+.cap{font-size:var(--fs-small);line-height:1.55;color:var(--muted);margin-top:7px;flex:0 0 auto}
+
+/* 要点列表 —— 讲课主力版式 */
+.pts{display:flex;flex-direction:column;gap:var(--gap);min-height:0}
+.pt{display:flex;gap:13px;align-items:flex-start}
+.pt__i{flex:0 0 auto;width:23px;height:23px;border-radius:50%;background:var(--accent-wash);
+  color:var(--accent-ink);display:grid;place-items:center;font-family:var(--f-mono);
+  font-size:10.5px;font-weight:500;margin-top:2px}
+.pt__b{min-width:0}
+.pt__t{font-size:var(--fs-sub);font-weight:600;line-height:1.4;letter-spacing:-.005em}
+.pt__d{font-size:var(--fs-body);line-height:1.72;color:var(--ink-2);margin-top:3px}
+:root[data-theme="dark"] .pt__d{color:var(--muted)}
+.pt__d strong,.s__deck strong,.card__d strong{color:var(--accent-ink);font-weight:600}
+
+/* 卡片 */
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:clamp(14px,2.1vh,22px);display:flex;flex-direction:column;min-height:0;box-shadow:var(--shadow)}
+.s--tint .card,.s--wash .card{background:var(--white)}
+.card--flat{box-shadow:none}
+.card--accent{border-color:var(--accent);border-width:1.5px}
+.card__k{font-family:var(--f-mono);font-size:var(--fs-label);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent-ink);margin-bottom:7px}
+.card__t{font-size:var(--fs-sub);font-weight:600;line-height:1.35;margin-bottom:6px}
+.card__d{font-size:var(--fs-body);line-height:1.7;color:var(--ink-2);min-height:0}
+:root[data-theme="dark"] .card__d{color:var(--muted)}
+
+/* 数字 */
+.stat{display:flex;flex-direction:column;gap:2px}
+.stat b{font-family:var(--f-serif);font-size:var(--fs-num);line-height:1;font-weight:700;
+  color:var(--accent-ink);font-variant-numeric:tabular-nums}
+.stat span{font-size:var(--fs-small);line-height:1.5;color:var(--muted)}
+.statrow{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);
+  padding-top:var(--gap);border-top:1px solid var(--border);flex:0 0 auto}
+
+/* 引文 */
+.quote{font-family:var(--f-serif);font-size:clamp(17px,2.7vh,28px);line-height:1.55;font-weight:600;
+  color:var(--text);border-left:4px solid var(--accent);padding-left:clamp(14px,1.6vw,22px)}
+.quote cite{display:block;font-family:var(--f-sans);font-size:var(--fs-small);font-weight:400;
+  font-style:normal;color:var(--muted);margin-top:10px}
+
+/* 表格 */
+.tbl{width:100%;border-collapse:collapse;font-size:var(--fs-body)}
+.tbl th,.tbl td{text-align:left;padding:clamp(7px,1.25vh,13px) 14px;border-bottom:1px solid var(--border);line-height:1.55}
+.tbl thead th{background:var(--accent);color:#fff;font-family:var(--f-mono);font-size:var(--fs-label);
+  letter-spacing:.12em;text-transform:uppercase;font-weight:500}
+.tbl thead th:first-child{border-radius:var(--r-sm) 0 0 0}
+.tbl thead th:last-child{border-radius:0 var(--r-sm) 0 0}
+.tbl tbody tr:nth-child(even){background:var(--panel)}
+.tbl td:first-child{font-weight:600;white-space:nowrap}
+.tbl td:not(:first-child){color:var(--ink-2)}
+:root[data-theme="dark"] .tbl td:not(:first-child){color:var(--muted)}
+
+/* ============================================================
+   封面
+   ============================================================ */
+.cover{justify-content:center;background:var(--white);position:relative;overflow:hidden}
+.cover__band{position:absolute;inset:0 0 0 auto;width:38%;background:var(--green-deep);z-index:0}
+.cover__band img{width:100%;height:100%;object-fit:cover;opacity:.34}
+.cover__in{position:relative;z-index:1;max-width:60%}
+.cover__meta{display:flex;flex-wrap:wrap;gap:8px 22px;font-family:var(--f-mono);font-size:var(--fs-label);
+  letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:clamp(16px,2.6vh,30px)}
+.cover__meta span{display:flex;align-items:center;gap:7px}
+.cover__meta span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.cover__t{font-family:var(--f-serif);font-size:var(--fs-hero);line-height:1.1;font-weight:700;letter-spacing:-.02em}
+.cover__t em{font-style:normal;color:var(--green)}
+.cover__en{font-family:var(--f-mono);font-size:clamp(11px,1.6vh,15px);letter-spacing:.42em;
+  text-transform:uppercase;color:var(--muted);margin-top:clamp(12px,1.8vh,20px)}
+.cover__d{font-size:var(--fs-lead);line-height:1.7;color:var(--ink-2);margin-top:clamp(16px,2.6vh,28px);max-width:52ch}
+.cover__hint{margin-top:clamp(18px,3vh,34px);display:inline-flex;align-items:center;gap:10px;
+  font-size:var(--fs-small);color:var(--muted);font-family:var(--f-mono);letter-spacing:.1em}
+.cover__hint kbd{background:var(--wash);border:1px solid var(--border);border-radius:4px;padding:2px 7px;font-size:11px}
+
+/* ============================================================
+   视频 Hook
+   ============================================================ */
+.hook{display:grid;grid-template-columns:1.28fr .72fr;gap:var(--gap-2);flex:1;min-height:0}
+.vbox{position:relative;border-radius:var(--r-lg);overflow:hidden;background:#0E1912;
+  border:1px solid var(--border);min-height:0;display:flex;align-items:center;justify-content:center}
+.vbox video{width:100%;height:100%;object-fit:contain;background:#0E1912;display:block}
+.vph{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  gap:12px;padding:clamp(18px,3vh,34px);text-align:center;align-items:center;
+  background:linear-gradient(150deg,#1F5B2C,#0E1912);color:#EAF3E8}
+.vph__ic{width:clamp(40px,6vh,58px);height:clamp(40px,6vh,58px);border-radius:50%;
+  border:2px solid var(--leaf);display:grid;place-items:center;color:var(--leaf)}
+.vph__ic svg{width:42%;height:42%}
+.vph__t{font-family:var(--f-serif);font-size:var(--fs-sub);font-weight:600}
+.vph__d{font-size:var(--fs-small);line-height:1.75;color:#B9D3B4;max-width:46ch}
+.vph code{font-family:var(--f-mono);background:rgba(255,255,255,.13);padding:2px 7px;border-radius:4px;font-size:.94em}
+.vph__lk{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:4px}
+.vph__lk a{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;color:#0E1912;background:var(--leaf);
+  padding:5px 11px;border-radius:var(--r-pill);text-decoration:none;transition:background 160ms}
+.vph__lk a:hover{background:#9BDA8E}
+
+.hookside{display:flex;flex-direction:column;gap:var(--gap);min-height:0;overflow:hidden}
+.tline{display:flex;flex-direction:column;gap:0;flex:1;min-height:0}
+.tline__i{display:flex;gap:13px;padding-bottom:clamp(8px,1.5vh,16px);position:relative}
+.tline__i:not(:last-child)::before{content:"";position:absolute;left:6.5px;top:19px;bottom:0;width:1.5px;background:var(--border)}
+.tline__d{flex:0 0 14px;height:14px;border-radius:50%;border:3px solid var(--accent);background:var(--white);
+  margin-top:4px;position:relative;z-index:1}
+.tline__i.is-key .tline__d{background:var(--accent)}
+.tline__y{font-family:var(--f-mono);font-size:var(--fs-label);letter-spacing:.1em;color:var(--accent-ink);font-weight:500}
+.tline__t{font-size:var(--fs-body);line-height:1.6;margin-top:2px}
+.tline__t b{font-weight:600}
+
+/* ============================================================
+   提问环节
+   ============================================================ */
+.s--ask{background:linear-gradient(155deg,var(--wash),var(--white) 62%)}
+:root[data-theme="dark"] .s--ask{background:linear-gradient(155deg,#1B2E20,#0E1912 62%)}
+.ask{display:flex;flex-direction:column;flex:1;min-height:0;gap:var(--gap-2)}
+.ask__q{font-family:var(--f-serif);font-size:clamp(22px,4.0vh,42px);line-height:1.35;font-weight:700;
+  text-wrap:balance;max-width:26ch}
+.ask__q em{font-style:normal;color:var(--accent-ink);border-bottom:4px solid var(--leaf-soft);padding-bottom:1px}
+.ask__row{display:grid;grid-template-columns:1.25fr .75fr;gap:var(--gap-2);flex:1;min-height:0}
+.hints{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);align-content:start}
+.hint{background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);
+  padding:clamp(11px,1.7vh,17px);cursor:pointer;position:relative;overflow:hidden;
+  transition:border-color 200ms,box-shadow 200ms,transform 200ms}
+.hint:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow)}
+.hint__k{font-family:var(--f-mono);font-size:var(--fs-label);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent-ink);display:flex;align-items:center;justify-content:space-between}
+.hint__k svg{width:11px;height:11px;transition:transform 260ms var(--ease)}
+.hint[aria-expanded="true"] .hint__k svg{transform:rotate(45deg)}
+.hint__t{display:block;font-size:var(--fs-body);font-weight:600;line-height:1.45;margin-top:6px}
+/* span 默认为行内元素，max-height / overflow 不生效，必须转成块级 */
+.hint__d{display:block;font-size:var(--fs-small);line-height:1.7;color:var(--ink-2);
+  max-height:0;overflow:hidden;transition:max-height 360ms var(--ease),margin-top 360ms var(--ease);margin-top:0}
+.hint[aria-expanded="true"] .hint__d{max-height:16em;margin-top:7px}
+:root[data-theme="dark"] .hint__d{color:var(--muted)}
+
+.timer{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:clamp(14px,2.2vh,24px);display:flex;flex-direction:column;gap:var(--gap);align-items:center;
+  justify-content:center;box-shadow:var(--shadow)}
+.timer__k{font-family:var(--f-mono);font-size:var(--fs-label);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.timer__ring{position:relative;width:clamp(96px,17vh,164px);aspect-ratio:1;flex:0 0 auto}
+.timer__ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.timer__ring circle{fill:none;stroke-width:7;stroke-linecap:round}
+.timer__bg{stroke:var(--wash-2)}
+.timer__fg{stroke:var(--accent);transition:stroke-dashoffset 1s linear,stroke 300ms}
+.timer.is-up .timer__fg{stroke:var(--tan)}
+.timer__t{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-mono);
+  font-size:clamp(21px,3.6vh,34px);font-weight:500;font-variant-numeric:tabular-nums;color:var(--text)}
+.timer__btns{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}
+.tbtn{padding:7px 15px;border:1px solid var(--border);border-radius:var(--r-pill);font-size:var(--fs-small);
+  font-weight:500;color:var(--muted);transition:all 160ms}
+.tbtn:hover{border-color:var(--accent);color:var(--accent-ink)}
+.tbtn.is-on{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* ============================================================
+   交互：视角切换 / 系统边界 / 循环图 / 投票 / 象限 / 仿真
+   ============================================================ */
+.sw{display:inline-flex;padding:4px;background:var(--wash);border:1px solid var(--border);
+  border-radius:var(--r-pill);gap:4px;align-self:flex-start;flex:0 0 auto}
+.sw button{padding:7px 18px;border-radius:var(--r-pill);font-size:var(--fs-small);font-weight:500;color:var(--muted)}
+.sw button[aria-pressed="true"]{background:var(--accent);color:#fff}
+
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:var(--gap);align-items:stretch;flex:1;min-height:0}
+.vs__c{border:1.5px solid var(--border);border-radius:var(--r-lg);padding:clamp(14px,2.2vh,26px);
+  background:var(--white);display:flex;flex-direction:column;justify-content:center;gap:var(--gap);
+  transition:opacity var(--dur) var(--ease),border-color var(--dur),transform var(--dur) var(--ease)}
+.vs__c[data-dim="true"]{opacity:.4}
+.vs__c[data-act="true"]{border-color:var(--accent);transform:translateY(-3px);box-shadow:var(--shadow)}
+.vs__k{font-family:var(--f-mono);font-size:var(--fs-label);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.vs__c[data-act="true"] .vs__k{color:var(--accent-ink)}
+.vs__l li{font-family:var(--f-serif);font-size:clamp(15px,2.35vh,23px);line-height:1.45;font-weight:600}
+.vs__l li+li{border-top:1px solid var(--border);padding-top:var(--gap);margin-top:var(--gap)}
+.vs__x{display:grid;place-items:center;font-family:var(--f-serif);font-size:var(--fs-sub);color:var(--muted);font-style:italic}
+
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;gap:11px;align-items:flex-start;padding:clamp(8px,1.35vh,14px) 14px;
+  border:1px solid var(--border);border-radius:var(--r-md);background:var(--white);cursor:pointer;
+  transition:border-color 160ms,box-shadow 160ms}
+.opt:hover{border-color:var(--accent);box-shadow:var(--shadow)}
+.opt input{position:absolute;opacity:0;width:0;height:0}
+.opt__b{flex:0 0 auto;width:17px;height:17px;border:1.5px solid var(--muted);border-radius:4px;margin-top:3px;
+  display:grid;place-items:center;transition:all 160ms}
+.opt__b svg{width:10px;height:10px;stroke:#fff;stroke-width:3;fill:none;stroke-dasharray:16;stroke-dashoffset:16;
+  transition:stroke-dashoffset 200ms var(--ease)}
+.opt input:checked+.opt__b{background:var(--accent);border-color:var(--accent)}
+.opt input:checked+.opt__b svg{stroke-dashoffset:0}
+.opt input:focus-visible+.opt__b{outline:2.5px solid var(--accent);outline-offset:3px}
+.opt__t{display:block;font-size:var(--fs-body);font-weight:600;line-height:1.4}
+.opt__d{display:block;font-size:var(--fs-small);line-height:1.55;color:var(--muted);margin-top:2px}
+
+.bars{display:flex;flex-direction:column;gap:var(--gap)}
+.bar2__h{display:flex;justify-content:space-between;font-size:var(--fs-body);margin-bottom:6px}
+.bar2__h b{font-weight:600}
+.bar2__h span{color:var(--muted);font-variant-numeric:tabular-nums;font-family:var(--f-mono)}
+.bar2__t{height:10px;border-radius:var(--r-pill);background:var(--wash);overflow:hidden}
+.bar2__f{height:100%;border-radius:var(--r-pill);width:0;transition:width 620ms var(--ease)}
+.verdict{font-size:var(--fs-body);line-height:1.7;color:var(--ink-2);padding-top:var(--gap);
+  border-top:1px solid var(--border);min-height:4.2em}
+:root[data-theme="dark"] .verdict{color:var(--muted)}
+.verdict b{color:var(--accent-ink);font-weight:600}
+
+.loopsvg{width:100%;height:100%;overflow:visible;max-height:100%}
+.loopsvg .ring{fill:none;stroke:var(--border);stroke-width:1.5}
+.loopsvg .arc{fill:none;stroke:var(--accent);stroke-width:2;opacity:.4}
+.loopsvg .nd{cursor:pointer}
+.loopsvg .nd circle{fill:var(--white);stroke:var(--border);stroke-width:1.5;transition:all var(--dur) var(--ease)}
+.loopsvg .nd:hover circle{stroke:var(--accent)}
+.loopsvg .nd.is-on circle{fill:var(--accent);stroke:var(--accent)}
+.loopsvg .nd text{font-family:var(--f-sans);font-size:15px;font-weight:600;fill:var(--text);
+  text-anchor:middle;pointer-events:none;transition:fill var(--dur)}
+.loopsvg .nd.is-on text{fill:#fff}
+.loopsvg .nd tspan.ix{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;fill:var(--muted)}
+.loopsvg .nd.is-on tspan.ix{fill:rgba(255,255,255,.8)}
+.loopsvg .dot{fill:var(--accent)}
+
+.poll__b{display:flex;gap:8px;margin-top:auto;padding-top:var(--gap)}
+.pbtn{flex:1;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--r-pill);
+  font-size:var(--fs-small);font-weight:600;color:var(--muted);transition:all 160ms}
+.pbtn:hover{border-color:var(--accent);color:var(--accent-ink)}
+.pbtn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.pmeter{height:6px;border-radius:var(--r-pill);background:var(--wash);overflow:hidden;margin-top:9px;display:flex}
+.pmeter i{display:block;height:100%;transition:width 620ms var(--ease)}
+.pres{margin-top:6px;font-family:var(--f-mono);font-size:var(--fs-label);color:var(--muted);
+  opacity:0;transition:opacity var(--dur)}
+.pres.is-on{opacity:1}
+
+.quadsvg{width:100%;height:100%;overflow:visible;font-family:var(--f-sans);max-height:100%}
+.quadsvg .qc{fill:var(--white);stroke:var(--border);stroke-width:1.2;cursor:pointer;transition:fill var(--dur)}
+.quadsvg .qc:hover{fill:var(--accent-wash)}
+.quadsvg .qc.is-on{fill:var(--accent-wash);stroke:var(--accent);stroke-width:2}
+.quadsvg .ql{font-size:14px;font-weight:600;fill:var(--text);pointer-events:none}
+.quadsvg .qs{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;fill:var(--muted);pointer-events:none}
+.quadsvg .ax{stroke:var(--muted);stroke-width:1.2}
+.quadsvg .axt{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;fill:var(--muted)}
+.quadsvg .pt2{fill:var(--accent);cursor:pointer}
+.quadsvg .ptl{font-size:12px;fill:var(--text);pointer-events:none;font-weight:600}
+.quadsvg .ptv{font-family:var(--f-mono);font-size:10.5px;fill:var(--muted);pointer-events:none}
+
+.dwrap{display:grid;grid-template-columns:.82fr 1.18fr;gap:var(--gap-2);flex:1;min-height:0}
+.dstage{display:flex;flex-direction:column;gap:var(--gap);min-height:0}
+.dcv{width:100%;flex:1;min-height:0;border-radius:var(--r-md);background:var(--panel);display:block}
+.dread{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;flex:0 0 auto}
+.dread div{background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:8px 11px}
+.dread b{display:block;font-family:var(--f-serif);font-size:clamp(17px,2.9vh,27px);font-weight:700;
+  line-height:1;color:var(--accent-ink);font-variant-numeric:tabular-nums}
+.dread span{display:block;font-family:var(--f-mono);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);margin-top:5px}
+.dctrl{display:flex;flex-direction:column;gap:var(--gap);min-height:0}
+.dchart{width:100%;flex:1;min-height:0;border:1px solid var(--border);border-radius:var(--r-md);
+  background:var(--white);display:block}
+.sld{display:flex;flex-direction:column;gap:5px;flex:0 0 auto}
+.sld__h{display:flex;justify-content:space-between;align-items:baseline}
+.sld__k{font-family:var(--f-mono);font-size:var(--fs-label);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.sld__v{font-family:var(--f-serif);font-size:var(--fs-sub);font-weight:700;font-variant-numeric:tabular-nums;color:var(--accent-ink)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:20px;background:transparent;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:4px;background:var(--wash-2);border-radius:2px}
+input[type=range]::-moz-range-track{height:4px;background:var(--wash-2);border-radius:2px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;height:17px;border-radius:50%;
+  background:var(--accent);margin-top:-6.5px;border:2px solid var(--white);box-shadow:var(--shadow)}
+input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;background:var(--accent);border:2px solid var(--white)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:var(--fs-small);color:var(--muted);flex:0 0 auto}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:9px;height:9px;border-radius:50%;display:block}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;flex:0 0 auto}
+.btn{padding:8px 17px;border-radius:var(--r-pill);background:var(--accent);color:#fff;
+  font-size:var(--fs-small);font-weight:600;transition:background 160ms}
+.btn:hover{background:var(--accent-ink)}
+.btn--o{background:transparent;color:var(--accent-ink);border:1.5px solid var(--border)}
+.btn--o:hover{background:var(--accent-wash);border-color:var(--accent)}
+.btn--o[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.chcv{width:100%;flex:1;min-height:0;border:1px solid var(--border);border-radius:var(--r-md);background:var(--white)}
+.chain{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;flex:0 0 auto}
+.chain__i{border:1px solid var(--border);border-radius:var(--r-md);padding:10px 12px;background:var(--white);
+  opacity:.28;transform:translateY(6px);transition:all var(--dur) var(--ease)}
+.chain__i.is-on{opacity:1;transform:none}
+.chain__i.is-last{border-color:var(--accent);background:var(--accent-wash)}
+.chain__n{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.14em;color:var(--accent-ink)}
+.chain__t{font-size:var(--fs-small);font-weight:600;margin-top:3px;line-height:1.35}
+
+/* 总览 */
+.ov{position:fixed;inset:0;z-index:60;background:rgba(20,35,26,.93);backdrop-filter:blur(7px);
+  display:none;padding:clamp(22px,4vh,48px);overflow-y:auto}
+.ov.is-on{display:block}
+.ov__t{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--leaf);margin-bottom:16px}
+.ov__g{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:9px}
+.ov__i{text-align:left;padding:10px 13px;border:1px solid rgba(255,255,255,.16);border-radius:var(--r-md);
+  color:#DCEBD8;font-size:12.5px;line-height:1.4;transition:all 160ms;background:rgba(255,255,255,.04)}
+.ov__i:hover{background:var(--leaf);color:#0E1912;border-color:var(--leaf)}
+.ov__i b{display:block;font-family:var(--f-mono);font-size:9.5px;opacity:.65;margin-bottom:3px;font-weight:500}
+.ov__i.is-on{border-color:var(--leaf);background:rgba(124,196,111,.2)}
+
+@media (max-width:1080px){
+  :root{--rail:0px}
+  .rail{position:fixed;z-index:40;width:236px;flex-basis:236px;margin-left:-236px}
+  .app.rail-on .rail{margin-left:0}
+  .hook,.dwrap,.ask__row,.grid2,.grid2--l,.grid2--r{grid-template-columns:1fr}
+  .grid3,.grid4{grid-template-columns:1fr 1fr}
+  .chain{grid-template-columns:repeat(3,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<div class="app" id="app">
+<aside class="rail" id="rail">
+  <div class="rail__top">
+    <div class="rail__brand"><i></i>可持续发展概论</div>
+    <div class="rail__sub">Sustainable Design · 45 min</div>
+  </div>
+  <nav class="rail__list" id="railList"></nav>
+  <div class="rail__foot">
+    <kbd>←</kbd> <kbd>→</kbd> 翻页 · <kbd>O</kbd> 总览<br>
+    <kbd>H</kbd> 收起侧栏 · <kbd>F</kbd> 全屏
+  </div>
+</aside>
+
+<main class="stage" id="stage">
+<div class="bar"><i id="barFill"></i></div>
+
+<!-- ============ 1 封面 ============ -->
+<section class="s cover" data-sec="导入" data-title="封面">
+  <div class="cover__band"><img src="assets/china-landscape.jpg" alt=""></div>
+  <div class="cover__in">
+    <div class="cover__meta">
+      <span>湖北工业大学 工业设计学院</span><span>主讲 · 张萌</span>
+    </div>
+    <h1 class="cover__t">面向未来的<br><em>可持续设计</em></h1>
+    <p class="cover__en">Sustainable Design</p>
+    <p class="cover__d">可持续设计源于可持续发展理念，是设计界对经济发展与环境、社会等要素之间关系的理论反思，并在此基础上不断寻求变革与转型的设计实践。</p>
+    <p class="cover__hint"><kbd>→</kbd> 开始 · 共 <span id="totalHint">—</span> 页</p>
+  </div>
+</section>
+
+<!-- ============ 2 视频 Hook ============ -->
+<section class="s s--tint" data-sec="导入" data-title="开场：一个人和一片沙漠">
+  <p class="s__eyebrow">开场</p>
+  <h2 class="s__title">一个人，一片沙漠，<em>和一棵跨越太平洋的树</em></h2>
+  <p class="s__deck">在讲理论之前，先看一个真实的故事。它同时关于三件事：种树、可持续，以及国际友谊。</p>
+  <div class="s__main">
+    <div class="hook">
+      <div class="vbox">
+        <video id="hookVideo" controls preload="metadata" playsinline poster="assets/china-landscape.jpg">
+          <source src="assets/hook.mp4" type="video/mp4">
+        </video>
+        <div class="vph" id="hookPh" hidden>
+          <div class="vph__ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+          <p class="vph__t">视频位 · 殷玉珍与赛考斯的治沙故事</p>
+          <p class="vph__d">把约 1 分钟的视频文件命名为 <code>hook.mp4</code>，放进本文件旁边的 <code>assets/</code> 文件夹，这里就会自动变成播放器。</p>
+          <div class="vph__lk">
+            <a href="http://www.news.cn/world/20240709/8c3d679f806747139b1a13fab691d063/c.html" target="_blank" rel="noopener">新华网 · 多为地球种下一片绿</a>
+            <a href="https://www.news.cn/world/20260712/10f82b22bcd8454d963b150b08583de7/c.html" target="_blank" rel="noopener">新华网 · 专访赛考斯</a>
+            <a href="https://www.news.cn/20260521/8534c0e6ead9426585b582d514b63052/c.html" target="_blank" rel="noopener">新华网 · 从 5000 美元到 5 万棵树</a>
+          </div>
+        </div>
+      </div>
+      <div class="hookside">
+        <div class="tline">
+          <div class="tline__i is-key">
+            <span class="tline__d"></span>
+            <div><p class="tline__y">1985</p><p class="tline__t">陕北姑娘<b>殷玉珍</b>嫁到内蒙古乌审旗井背塘，毛乌素沙漠腹地。风沙一刮就是几十天，方圆几十里只有她一户人家。</p></div>
+          </div>
+          <div class="tline__i">
+            <span class="tline__d"></span>
+            <div><p class="tline__y">1986 春</p><p class="tline__t">卖掉家里一只羊，换回 <b>600 棵树苗</b>。经风、经霜、经旱，最后活下来的<b>不到 10 棵</b>。</p></div>
+          </div>
+          <div class="tline__i">
+            <span class="tline__d"></span>
+            <div><p class="tline__y">她说</p><p class="tline__t">“10 棵能活，100 棵、1000 棵就能活。种！接着种！”——<b>宁肯种树累死，也不叫沙欺负死</b>。</p></div>
+          </div>
+          <div class="tline__i is-key">
+            <span class="tline__d"></span>
+            <div><p class="tline__y">1999.10</p><p class="tline__t">在洛阳教英语的美国外教<b>赛考斯</b>（Ronald Sacorski）从电视新闻里看到她的故事，通过波士顿一家机构为她<b>筹到 5000 美元</b>。</p></div>
+          </div>
+          <div class="tline__i is-key">
+            <span class="tline__d"></span>
+            <div><p class="tline__y">2026.08.23</p><p class="tline__t">分别 26 年后，两人在鄂尔多斯机场重逢拥抱，一起种下<b>“中美民间友谊树”</b>。</p></div>
+          </div>
+          <div class="tline__i">
+            <span class="tline__d"></span>
+            <div><p class="tline__y">至今</p><p class="tline__t">30 多万棵树，<b>7 万亩流沙披上绿衣</b>。她被授予“全国治沙造林英雄”称号。</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="s__foot">课堂提问：她做的是“环保”，还是“设计”？如果把这 40 年看成一个<strong>系统</strong>——树苗、水、资金、人、政策、国际关注——那么哪一个环节最脆弱？</p>
+</section>
+
+<!-- ============ 3 课程内容 ============ -->
+<section class="s" data-sec="导入" data-title="本节课的五个板块">
+  <p class="s__eyebrow">课程内容</p>
+  <h2 class="s__title">今天我们要回答五个问题</h2>
+  <p class="s__deck">本课程系统介绍可持续发展的核心概念、历史演进、理论框架及实践路径，帮助大家理解人类社会面临的环境、社会与经济挑战，探索可持续发展的中国道路与全球实践。</p>
+  <div class="s__main">
+    <div class="grid3">
+      <div class="card">
+        <p class="card__k">板块 01</p>
+        <p class="card__t">什么是可持续设计</p>
+        <p class="card__d">它不是一种风格，而是一种<strong>问题识别方式</strong>。我们会用外卖包装做一次系统边界的实测，并看三个正在运行的真实系统。</p>
+      </div>
+      <div class="card">
+        <p class="card__k">板块 02</p>
+        <p class="card__t">设计的觉醒</p>
+        <p class="card__d">从工艺美术运动到包豪斯，从商业设计的黄金年代到帕帕奈克的<strong>设计伦理</strong>——设计如何从“制造问题的一分子”重新回到解决问题。</p>
+      </div>
+      <div class="card">
+        <p class="card__k">板块 03</p>
+        <p class="card__t">可持续发展概论</p>
+        <p class="card__d">人与自然关系的五个阶段、环保运动的兴起、布伦特兰报告与里约峰会，以及<strong>中国的四阶段探索</strong>。</p>
+      </div>
+      <div class="card">
+        <p class="card__k">板块 04</p>
+        <p class="card__t">三大维度与争议</p>
+        <p class="card__d">环境、社会、经济如何协调？为什么高福利往往意味着高消耗？我们会用<strong>四象限模型</strong>看清各国的位置。</p>
+      </div>
+      <div class="card">
+        <p class="card__k">板块 05</p>
+        <p class="card__t">设计与自然</p>
+        <p class="card__d">道法自然、盖亚假说与<strong>雏菊世界模型</strong>；非线性科学、混沌与蝴蝶效应，如何改变了设计的思维方式。</p>
+      </div>
+      <div class="card card--accent">
+        <p class="card__k">贯穿全课</p>
+        <p class="card__t">三次课堂讨论</p>
+        <p class="card__d">课程中安排了三个提问环节，每次都有计时和思考角度提示。<strong>没有标准答案</strong>——重要的是你能否说清自己的边界假设。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 什么是可持续设计 ============ -->
+<section class="s" data-sec="一 · 何为可持续设计" data-title="什么是可持续设计">
+  <p class="s__eyebrow">01 / 定义</p>
+  <h2 class="s__title">什么是可持续设计</h2>
+  <div class="s__main">
+    <div class="grid2--l grid2">
+      <div class="col col--c">
+        <p class="quote">可持续设计（design for sustainability）源于可持续发展理念，是设计界对经济发展与环境、社会等要素之间关系的理论反思，并在此基础上不断寻求变革与转型的设计实践。</p>
+        <div class="pts">
+          <div class="pt"><span class="pt__i">1</span><div class="pt__b">
+            <p class="pt__t">范畴很宽</p>
+            <p class="pt__d">从本质上讲，<strong>任何倡导与践行可持续发展理念的设计教学、设计实践和设计研究活动</strong>，都属于可持续设计的范畴。</p></div></div>
+          <div class="pt"><span class="pt__i">2</span><div class="pt__b">
+            <p class="pt__t">视角在迁移</p>
+            <p class="pt__d">其理念演进是从相对孤立的、<strong>以物为中心</strong>的视角，逐渐向更加系统的、<strong>以人为中心</strong>的视角转变。</p></div></div>
+          <div class="pt"><span class="pt__i">3</span><div class="pt__b">
+            <p class="pt__t">没有定论</p>
+            <p class="pt__d">它与“绿色设计”“生态设计”以及“社会设计”等概念密切相关，同时又有着自身的特征与系统性。</p></div></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="media media--fit media--frame fill"><img src="assets/design-illus.jpg" alt="设计工作构成要素的插画"></div>
+        <p class="cap">传统意义上的“设计”，被认为是把一种计划、规划、设想通过视觉的形式传达出来的活动过程。纵观人类历史，人们通过劳动改造世界、创造文明，其最基础、最主要的创造活动就是造物。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 本质思考 V.S. ============ -->
+<section class="s s--tint" data-sec="一 · 何为可持续设计" data-title="两种视角的对照">
+  <p class="s__eyebrow">02 / 本质思考</p>
+  <h2 class="s__title">可持续设计首先是<em>一种问题识别方式</em></h2>
+  <p class="s__deck">同一个设计任务，换一种视角，问题的定义就完全不同。点击下方按钮切换，看两种视角各自关心什么。</p>
+  <div class="s__main" style="gap:var(--gap)">
+    <div class="sw" role="group" aria-label="切换设计视角">
+      <button type="button" aria-pressed="false">传统产品设计视角</button>
+      <button type="button" aria-pressed="true">可持续设计视角</button>
+    </div>
+    <div class="vs" id="vs">
+      <div class="vs__c" data-col="0">
+        <p class="vs__k">传统产品设计视角</p>
+        <ul class="vs__l"><li>关注造型与功能</li><li>解决单点需求</li><li>交付一个产品</li></ul>
+      </div>
+      <div class="vs__x">V.S.</div>
+      <div class="vs__c" data-col="1">
+        <p class="vs__k">可持续设计视角</p>
+        <ul class="vs__l"><li>关注生命周期与系统关系</li><li>识别长期影响和责任边界</li><li>设计产品、服务与行为条件</li></ul>
+      </div>
+    </div>
+  </div>
+  <p class="s__foot">注意第三行的差别：交付“一个产品”，和设计“产品、服务与<strong>行为条件</strong>“——后者意味着设计师要为用户怎么用、用多久、用完以后去哪里负责。</p>
+</section>
+
+<!-- ============ 6 外卖包装 ============ -->
+<section class="s" data-sec="一 · 何为可持续设计" data-title="一次性外卖包装">
+  <p class="s__eyebrow">03 / 一个身边的例子</p>
+  <h2 class="s__title">问题不只在材料</h2>
+  <div class="s__main">
+    <div class="grid2">
+      <div class="col">
+        <div class="grid2" style="gap:var(--gap)">
+          <div class="media fill"><img src="assets/pack-hand.jpg" alt="可重复使用的餐盒"></div>
+          <div class="media fill"><img src="assets/pack-babpul.jpg" alt="使用可重复餐盒进餐的场景"></div>
+        </div>
+        <div class="media media--fit media--frame fill"><img src="assets/pack-flow.jpg" alt="外卖餐盒回收流程图"></div>
+      </div>
+      <div class="col col--c">
+        <div class="pts">
+          <div class="pt"><span class="pt__i">1</span><div class="pt__b">
+            <p class="pt__t">便利的代价</p>
+            <p class="pt__d">外卖包装让消费更便利，但也把大量<strong>一次性塑料、纸、餐具和配送袋</strong>推入城市废弃物流。</p></div></div>
+          <div class="pt"><span class="pt__i">2</span><div class="pt__b">
+            <p class="pt__t">问题不只在材料</p>
+            <p class="pt__d">还在<strong>平台效率、用户习惯、清洗回收成本和城市管理</strong>。换一种“环保材料”并不能解决其中任何一项。</p></div></div>
+          <div class="pt"><span class="pt__i">3</span><div class="pt__b">
+            <p class="pt__t">可持续方案长什么样</p>
+            <p class="pt__d">可能涉及<strong>可重复餐盒、押金回收、门店清洗、骑手返程回收和用户激励</strong>——这是消费链条的重新组织，而不是一次材料替换。</p></div></div>
+          <div class="pt"><span class="pt__i">4</span><div class="pt__b">
+            <p class="pt__t">所以要比什么</p>
+            <p class="pt__d">需要比较<strong>系统总消耗</strong>，而不是只比较单个包装是否“环保”。下一页我们就来实测一次。</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7 系统边界（交互） ============ -->
+<section class="s s--wash" data-sec="一 · 何为可持续设计" data-title="★ 系统边界实测">
+  <p class="s__eyebrow">04 / 动手实测</p>
+  <h2 class="s__title">把边界画在哪里，<em>结论就在哪里翻转</em></h2>
+  <p class="s__deck">勾选你愿意纳入计算的环节，观察两个方案的相对影响如何变化。</p>
+  <div class="s__main">
+    <div class="grid2">
+      <div class="col">
+        <div class="opts" id="opts">
+          <label class="opt"><input type="checkbox" data-key="material" checked><span class="opt__b"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.5l3.2 3.2L12 3.8"/></svg></span>
+            <span><span class="opt__t">包装材料本身</span><span class="opt__d">一次性餐盒的塑料与纸；可重复餐盒的不锈钢或 PP 本体</span></span></label>
+          <label class="opt"><input type="checkbox" data-key="delivery"><span class="opt__b"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.5l3.2 3.2L12 3.8"/></svg></span>
+            <span><span class="opt__t">配送与物流</span><span class="opt__d">骑手配送、可重复餐盒的返程回收与集中转运</span></span></label>
+          <label class="opt"><input type="checkbox" data-key="washing"><span class="opt__b"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.5l3.2 3.2L12 3.8"/></svg></span>
+            <span><span class="opt__t">清洗与再处理</span><span class="opt__d">门店或集中清洗的水耗、能耗、洗涤剂；一次性方案此项接近于零</span></span></label>
+          <label class="opt"><input type="checkbox" data-key="behavior"><span class="opt__b"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.5l3.2 3.2L12 3.8"/></svg></span>
+            <span><span class="opt__t">用户行为与归还率</span><span class="opt__d">押金机制、归还便利度；归还率越低，可重复方案的分摊成本越高</span></span></label>
+          <label class="opt"><input type="checkbox" data-key="waste"><span class="opt__b"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.5l3.2 3.2L12 3.8"/></svg></span>
+            <span><span class="opt__t">末端废弃物处理</span><span class="opt__d">城市清运、填埋与焚烧，以及混合材料难以回收的部分</span></span></label>
+        </div>
+      </div>
+      <div class="col col--c">
+        <div class="card" style="gap:var(--gap)">
+          <p class="card__k">当前系统边界内 · 单次使用相对影响</p>
+          <div class="bars">
+            <div>
+              <div class="bar2__h"><b>一次性外卖包装</b><span id="vSingle">—</span></div>
+              <div class="bar2__t"><div class="bar2__f" id="fSingle" style="background:var(--tan)"></div></div>
+            </div>
+            <div>
+              <div class="bar2__h"><b>可重复餐盒 + 押金回收</b><span id="vReuse">—</span></div>
+              <div class="bar2__t"><div class="bar2__f" id="fReuse" style="background:var(--accent)"></div></div>
+            </div>
+          </div>
+          <p class="verdict" id="verdict"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8 循环系统（交互） ============ -->
+<section class="s" data-sec="一 · 何为可持续设计" data-title="★ 从链条到闭环">
+  <p class="s__eyebrow">05 / 关键参与者与流动关系</p>
+  <h2 class="s__title">从链条到闭环</h2>
+  <p class="s__deck">可持续设计不再把产品看作终点，而是把用户、材料、服务与回收视作一个持续流动的系统。点击任一环节查看它承担的设计责任。</p>
+  <div class="s__main">
+    <div class="grid2">
+      <div class="col" style="align-items:center;justify-content:center">
+        <svg class="loopsvg" viewBox="0 0 440 440" role="img" aria-label="用户需求、产品材料、服务维护、回收再分配构成的循环系统图">
+          <circle class="ring" cx="220" cy="220" r="150"></circle>
+          <circle class="arc" cx="220" cy="220" r="150" stroke-dasharray="6 14" stroke-linecap="round"></circle>
+          <circle class="dot" id="flowdot" r="6" cx="220" cy="70"></circle>
+          <g class="nd is-on" data-i="0" tabindex="0" role="button" aria-label="用户与需求">
+            <circle cx="220" cy="70" r="58"></circle>
+            <text x="220" y="63"><tspan class="ix" x="220" dy="0">01</tspan><tspan x="220" dy="22">用户 / 需求</tspan></text></g>
+          <g class="nd" data-i="1" tabindex="0" role="button" aria-label="产品与材料">
+            <circle cx="370" cy="220" r="58"></circle>
+            <text x="370" y="213"><tspan class="ix" x="370" dy="0">02</tspan><tspan x="370" dy="22">产品 / 材料</tspan></text></g>
+          <g class="nd" data-i="2" tabindex="0" role="button" aria-label="服务与维护">
+            <circle cx="220" cy="370" r="58"></circle>
+            <text x="220" y="363"><tspan class="ix" x="220" dy="0">03</tspan><tspan x="220" dy="22">服务 / 维护</tspan></text></g>
+          <g class="nd" data-i="3" tabindex="0" role="button" aria-label="回收与再分配">
+            <circle cx="70" cy="220" r="58"></circle>
+            <text x="70" y="213"><tspan class="ix" x="70" dy="0">04</tspan><tspan x="70" dy="22">回收 / 再分配</tspan></text></g>
+        </svg>
+      </div>
+      <div class="col col--c">
+        <div class="card card--accent">
+          <p class="card__k" id="lpIdx">环节 01</p>
+          <h3 class="s__title" style="font-size:var(--fs-sub);margin:0 0 8px" id="lpT">用户 / 需求</h3>
+          <p class="card__d" id="lpD"></p>
+          <p class="cap" style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-style:italic" id="lpQ"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9 提问 ① ============ -->
+<section class="s s--ask" data-sec="一 · 何为可持续设计" data-title="❓ 提问 ① 边界在哪里" data-q="1">
+  <p class="s__eyebrow">课堂讨论 · 第一次</p>
+  <div class="ask">
+    <h2 class="ask__q">你昨天点的那一次外卖，<em>责任边界应该画到哪里</em>？</h2>
+    <div class="ask__row">
+      <div class="hints" id="hints1">
+        <button class="hint" type="button" aria-expanded="false">
+          <span class="hint__k">思考角度 A<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 2v8M2 6h8"/></svg></span>
+          <span class="hint__t">谁在承担成本？</span>
+          <span class="hint__d">商家省下了洗碗的人工，平台赚了佣金，你付了餐费。那么清运、填埋、焚烧这部分成本，最终是谁在付？如果这笔钱由城市财政承担，它算不算这次消费的一部分？</span>
+        </button>
+        <button class="hint" type="button" aria-expanded="false">
+          <span class="hint__k">思考角度 B<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 2v8M2 6h8"/></svg></span>
+          <span class="hint__t">时间尺度拉多长？</span>
+          <span class="hint__d">这个餐盒的使用时长大约 30 分钟，但它在自然环境中的存在时长以百年计。设计一件用 30 分钟的东西时，我们通常按哪个尺度来考虑？</span>
+        </button>
+        <button class="hint" type="button" aria-expanded="false">
+          <span class="hint__k">思考角度 C<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 2v8M2 6h8"/></svg></span>
+          <span class="hint__t">如果所有人都这样？</span>
+          <span class="hint__d">一个人一次外卖的影响可以忽略不计。但把它乘以每天数千万单，系统会不会出现某个临界点？这正是从“单点需求”转向“系统关系”的意义。</span>
+        </button>
+        <button class="hint" type="button" aria-expanded="false">
+          <span class="hint__k">思考角度 D<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 2v8M2 6h8"/></svg></span>
+          <span class="hint__t">作为设计师，你能改什么？</span>
+          <span class="hint__d">你未必能改变平台的商业模式。但在餐盒结构、标识系统、归还流程、押金界面、骑手动线上，哪一处的微小改动，可能带来最大的系统效果？</span>
+        </button>
+      </div>
+      <div class="timer" data-timer>
+        <p class="timer__k">讨论计时</p>
+        <div class="timer__ring">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="timer__bg" cx="50" cy="50" r="44"></circle>
+            <circle class="timer__fg" cx="50" cy="50" r="44" stroke-dasharray="276.5" stroke-dashoffset="0"></circle>
+          </svg>
+          <span class="timer__t" data-t>1:00</span>
+        </div>
+        <div class="timer__btns">
+          <button class="tbtn" type="button" data-set="60">1 分钟</button>
+          <button class="tbtn" type="button" data-set="120">2 分钟</button>
+          <button class="tbtn" type="button" data-set="180">3 分钟</button>
+        </div>
+        <div class="timer__btns">
+          <button class="tbtn" type="button" data-go>开始</button>
+          <button class="tbtn" type="button" data-rst>重置</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="s__foot">点击任一“思考角度”展开提示。这一题没有标准答案——<strong>能把自己的边界假设说清楚，就是好答案</strong>。</p>
+</section>
+
+<!-- ============ 10 Loop ============ -->
+<section class="s" data-sec="二 · 三个真实案例" data-title="案例 A · Loop 可重复包装">
+  <p class="s__eyebrow">案例 A / 可重复包装系统</p>
+  <h2 class="s__title">Loop：<em>把包装从消费品变回资产</em></h2>
+  <div class="s__main">
+    <div class="grid2--r grid2">
+      <div class="col">
+        <div class="media fill"><img src="assets/case-loop.jpg" alt="Loop 系统中可归还的不锈钢冰淇淋容器"></div>
+        <p class="cap">TerraCycle / Loop 与品牌合作推出的可归还容器。</p>
+      </div>
+      <div class="col col--c">
+        <div class="pts">
+          <div class="pt"><span class="pt__i">背</span><div class="pt__b">
+            <p class="pt__t">案例背景</p>
+            <p class="pt__d">TerraCycle / Loop 把包装从一次性消费品<strong>重新设计为可归还资产</strong>。消费者购买商品后归还容器，系统负责收集、清洗、再灌装和再次投放。</p></div></div>
+          <div class="pt"><span class="pt__i">机</span><div class="pt__b">
+            <p class="pt__t">运行机制</p>
+            <p class="pt__d"><strong>押金或账户机制</strong>降低容器流失；品牌、零售、清洗和物流<strong>共同承担循环责任</strong>——没有任何一方能单独完成这个闭环。</p></div></div>
+          <div class="pt"><span class="pt__i">课</span><div class="pt__b">
+            <p class="pt__t">对应内容</p>
+            <p class="pt__d">可持续发展、绿色设计与系统性设计。要看到：可持续设计不只是材料替换，<strong>而是消费链条的重新组织</strong>。</p></div></div>
+        </div>
+        <div class="card card--accent" style="margin-top:var(--gap)">
+          <p class="card__k">课堂追问</p>
+          <p class="card__t" style="font-family:var(--f-serif)">如果归还率低、清洗距离远，这个系统还可持续吗？</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 Too Good To Go ============ -->
+<section class="s s--tint" data-sec="二 · 三个真实案例" data-title="案例 B · Too Good To Go">
+  <p class="s__eyebrow">案例 B / 剩食平台</p>
+  <h2 class="s__title">Too Good To Go：<em>重新设计最后一小时</em></h2>
+  <div class="s__main">
+    <div class="grid2--l grid2">
+      <div class="col col--c">
+        <div class="pts">
+          <div class="pt"><span class="pt__i">背</span><div class="pt__b">
+            <p class="pt__t">案例背景</p>
+            <p class="pt__d">平台把商家临近售罄或过剩的食品打包为 <strong>Surprise Bags</strong>，用户低价购买并到店取走，让原本可能被丢弃的食品重新进入消费。</p></div></div>
+          <div class="pt"><span class="pt__i">机</span><div class="pt__b">
+            <p class="pt__t">运行机制</p>
+            <p class="pt__d">它的设计重点不是产品造型，而是<strong>信息匹配、时间窗口、价格激励和到店行为</strong>。剩食浪费在“卖不出去的最后一小时”被重新设计。</p></div></div>
+          <div class="pt"><span class="pt__i">课</span><div class="pt__b">
+            <p class="pt__t">对应内容</p>
+            <p class="pt__d"><strong>社会创新设计与可持续消费</strong>。设计对象从“物”变成了“信息流与行为流”。</p></div></div>
+        </div>
+        <div class="card card--accent" style="margin-top:var(--gap)">
+          <p class="card__k">课堂追问</p>
+          <p class="card__t" style="font-family:var(--f-serif)">它解决了食物浪费，还是把库存不确定性转移给了消费者？</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="media fill"><img src="assets/case-tgtg.jpg" alt="店员手持 Too Good To Go 的剩食袋"></div>
+        <p class="cap">店员正在打包一份 Surprise Bag。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 12 Fairphone ============ -->
+<section class="s" data-sec="二 · 三个真实案例" data-title="案例 C · Fairphone 可维修手机">
+  <p class="s__eyebrow">案例 C / 可维修硬件</p>
+  <h2 class="s__title">Fairphone：<em>挑战“换新”的默认逻辑</em></h2>
+  <div class="s__main">
+    <div class="grid2--r grid2">
+      <div class="col">
+        <div class="media fill"><img src="assets/case-fairphone.jpg" alt="Fairphone 模块化可维修手机"></div>
+        <p class="cap">Change is in your hands —— Fairphone 的模块化结构。</p>
+      </div>
+      <div class="col col--c">
+        <div class="pts">
+          <div class="pt"><span class="pt__i">背</span><div class="pt__b">
+            <p class="pt__t">案例背景</p>
+            <p class="pt__d">Fairphone 将<strong>维修、替换零件、长期支持和供应链伦理</strong>作为手机产品价值的一部分，挑战电子产品频繁换新的默认逻辑。</p></div></div>
+          <div class="pt"><span class="pt__i">机</span><div class="pt__b">
+            <p class="pt__t">运行机制</p>
+            <p class="pt__d"><strong>模块化结构</strong>让电池、屏幕、摄像头等高故障部件可替换；同时通过零件销售和维修教程<strong>降低用户修理门槛</strong>。</p></div></div>
+          <div class="pt"><span class="pt__i">课</span><div class="pt__b">
+            <p class="pt__t">对应内容</p>
+            <p class="pt__d">产品设计对<strong>资源消耗、社会公平和消费观念</strong>的影响。延长一年寿命，往往比更换一种“环保材料”影响更大。</p></div></div>
+        </div>
+        <div class="card card--accent" style="margin-top:var(--gap)">
+          <p class="card__k">课堂追问</p>
+          <p class="card__t" style="font-family:var(--f-serif)">当可维修性提高成本和厚度时，用户是否愿意为可持续价值买单？</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 13 案例投票 ============ -->
+<section class="s s--wash" data-sec="二 · 三个真实案例" data-title="★ 三个追问 · 现场投票">
+  <p class="s__eyebrow">现场投票</p>
+  <h2 class="s__title">三个追问，<em>你站哪一边？</em></h2>
+  <p class="s__deck">每个案例都有一个没有标准答案的追问。先投票，再请两位同学说说理由。</p>
+  <div class="s__main">
+    <div class="grid3">
+      <div class="card" data-poll="loop">
+        <p class="card__k">Loop</p>
+        <p class="card__t" style="font-family:var(--f-serif)">如果归还率低、清洗距离远，这个系统还可持续吗？</p>
+        <p class="card__d">押金能提高归还率，但清洗和逆向物流会抵消一部分材料优势。</p>
+        <div class="poll__b">
+          <button class="pbtn" type="button" data-v="a" aria-pressed="false">仍然可持续</button>
+          <button class="pbtn" type="button" data-v="b" aria-pressed="false">不再可持续</button>
+        </div>
+        <div class="pmeter" aria-hidden="true"><i data-m="a" style="background:var(--accent)"></i><i data-m="b" style="background:var(--tan)"></i></div>
+        <p class="pres" role="status"></p>
+      </div>
+      <div class="card" data-poll="tgtg">
+        <p class="card__k">Too Good To Go</p>
+        <p class="card__t" style="font-family:var(--f-serif)">它解决了食物浪费，还是把库存不确定性转移给了消费者？</p>
+        <p class="card__d">用户拿到的是“盲盒”，商家的备货风险被部分转移了出去。</p>
+        <div class="poll__b">
+          <button class="pbtn" type="button" data-v="a" aria-pressed="false">真正减少浪费</button>
+          <button class="pbtn" type="button" data-v="b" aria-pressed="false">转移了风险</button>
+        </div>
+        <div class="pmeter" aria-hidden="true"><i data-m="a" style="background:var(--accent)"></i><i data-m="b" style="background:var(--tan)"></i></div>
+        <p class="pres" role="status"></p>
+      </div>
+      <div class="card" data-poll="fair">
+        <p class="card__k">Fairphone</p>
+        <p class="card__t" style="font-family:var(--f-serif)">当可维修性提高成本和厚度时，用户是否愿意为可持续价值买单？</p>
+        <p class="card__d">更厚、更贵、性能不占优——但可以用更久。</p>
+        <div class="poll__b">
+          <button class="pbtn" type="button" data-v="a" aria-pressed="false">愿意买单</button>
+          <button class="pbtn" type="button" data-v="b" aria-pressed="false">不愿意</button>
+        </div>
+        <div class="pmeter" aria-hidden="true"><i data-m="a" style="background:var(--accent)"></i><i data-m="b" style="background:var(--tan)"></i></div>
+        <p class="pres" role="status"></p>
+      </div>
+    </div>
+  </div>
+  <p class="s__foot">投票结果保存在本机浏览器，可以在不同班级重复使用；如需清零，点击已选按钮之外的另一个即可改票。</p>
+</section>
+
+<!-- ============ 14 设计的觉醒 ============ -->
+<section class="s" data-sec="三 · 设计的觉醒" data-title="工艺美术运动与包豪斯">
+  <p class="s__eyebrow">01 / 设计的觉醒</p>
+  <h2 class="s__title">设计始终是连通生产、<br>流通与消费的桥梁</h2>
+  <div class="s__main">
+    <div class="grid2--r grid2">
+      <div class="col">
+        <div class="media media--frame fill"><img src="assets/hist-city.jpg" alt="工业革命时期的城市与烟囱"></div>
+        <p class="cap">工业革命后，手工业时代的精湛技艺随贵族专享的奢华消费品一起逐渐消失。</p>
+      </div>
+      <div class="col col--c">
+        <div class="pts">
+          <div class="pt"><span class="pt__i">1</span><div class="pt__b">
+            <p class="pt__t">工业革命之后</p>
+            <p class="pt__d">手工业时代的精湛技艺逐渐消失，取而代之的是<strong>大批量生产、略显冷漠粗糙但可惠及普罗大众</strong>的工业化产品。</p></div></div>
+          <div class="pt"><span class="pt__i">2</span><div class="pt__b">
+            <p class="pt__t">工艺美术运动</p>
+            <p class="pt__d">约翰·拉斯金和威廉·莫里斯力图让设计更富有艺术感，复兴面临失传的手工艺传统。他们还肩负一项使命：通过更有创造力的工作，<strong>恢复工人“劳动的喜悦”</strong>。</p></div></div>
+          <div class="pt"><span class="pt__i">3</span><div class="pt__b">
+            <p class="pt__t">包豪斯（20 世纪初）</p>
+            <p class="pt__d">在<strong>充分肯定和接受工业化运动</strong>的前提下，融合技术与艺术，将设计回归到以“人本”为出发点的“功能主义”内涵，为现代设计学科与行业奠定了基础。</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 15 商业设计的兴起 ============ -->
+<section class="s s--tint" data-sec="三 · 设计的觉醒" data-title="商业设计的兴起">
+  <p class="s__eyebrow">02 / 20 世纪 20 年代起</p>
+  <h2 class="s__title">设计助力资本，<em>共同缔造“消费主义”</em></h2>
+  <div class="s__main">
+    <div class="grid2--l grid2">
+      <div class="col col--c">
+        <div class="pts">
+          <div class="pt"><span class="pt__i">1</span><div class="pt__b">
+            <p class="pt__t">商业设计走上舞台</p>
+            <p class="pt__d">20 世纪 20 年代，美国进入经济高速发展阶段，“商业设计”随之走向历史舞台，并助力资本，共同缔造了<strong>遍及全球的“消费主义”浪潮</strong>。</p></div></div>
+          <div class="pt"><span class="pt__i">2</span><div class="pt__b">
+            <p class="pt__t">运转的方式</p>
+            <p class="pt__d">设计在遵循“资本逻辑”的前提下，<strong>不断挖掘人的潜在欲望</strong>，推出花样翻新的商品，在无孔不入的营销之下，维系“消费社会”的运转和繁荣。</p></div></div>
+          <div class="pt"><span class="pt__i">3</span><div class="pt__b">
+            <p class="pt__t">进入历史中央</p>
+            <p class="pt__d">1949 年<strong>雷蒙德·罗维登上《时代周刊》封面</strong>，标志着设计进入历史舞台的中央地带，并在社会、经济发展中扮演重要角色。</p></div></div>
+          <div class="pt"><span class="pt__i">4</span><div class="pt__b">
+            <p class="pt__t">但是——</p>
+            <p class="pt__d">长期以来，服务于产业的设计一直充当着<strong>“手段”的角色</strong>，始终是企业赢利的工具。设计师的职责似乎只限于创造外观炫目的产品以促进销售，<strong>而对环境与社会问题视而不见</strong>。</p></div></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="media media--frame fill"><img src="assets/hist-commercial.jpg" alt="商业设计黄金年代的场景"></div>
+        <p class="cap">商业设计的黄金年代：设计成为刺激消费的引擎。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 16 反思与批判 ============ -->
+<section class="s" data-sec="三 · 设计的觉醒" data-title="设计的反思与批判">
+  <p class="s__eyebrow">03 / 1948 年起</p>
+  <h2 class="s__title">从“形式追随功能”<br>到<em>“风格追随销量”</em></h2>
+  <div class="s__main">
+    <div class="grid2--r grid2">
+      <div class="col">
+        <div class="media media--frame fill"><img src="assets/cubes.jpg" alt="抽象立方体结构，象征形式创新"></div>
+        <p class="cap">从“有计划废止”到市场上争奇斗艳的产品“形式创新”。</p>
+      </div>
+      <div class="col col--c">
+        <p class="quote">本应该以解决问题为其职能的“设计”，现如今反而成为<strong>制造问题或麻烦的一分子</strong>。<cite>内森·谢卓夫《设计反思：可持续设计策略与实践》</cite></p>
+        <div class="pts">
+          <div class="pt"><span class="pt__i">1</span><div class="pt__b">
+            <p class="pt__t">设计被指控</p>
+            <p class="pt__d">设计一直是刺激人们潜在欲望，塑造<strong>不可持续的幸福观、消费观和生活方式</strong>的直接操纵者，因此被指责为助长消费主义、加剧资源消耗与垃圾产出的罪魁祸首之一。</p></div></div>
+          <div class="pt"><span class="pt__i">2</span><div class="pt__b">
+            <p class="pt__t">1948 · 考夫曼的批评</p>
+            <p class="pt__d">美国 MOMA 博物馆的埃德加·考夫曼激烈批评当时的设计行业，是把教科书中的<strong>“形式追随功能”篡改为“风格追随销量”</strong>。</p></div></div>
+          <div class="pt"><span class="pt__i">3</span><div class="pt__b">
+            <p class="pt__t">于是设计界开始反思</p>
+            <p class="pt__d">在这样的大背景下，设计界开始认真反思自身应有的职能，<strong>也触发了可持续设计相关理念的产生</strong>。</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 17 帕帕奈克 ============ -->
+<section class="s s--tint" data-sec="三 · 设计的觉醒" data-title="帕帕奈克与设计伦理">
+  <p class="s__eyebrow">04 / 可持续设计的先驱</p>
+  <h2 class="s__title">维克多·帕帕奈克<em>与“设计伦理”</em></h2>
+  <div class="s__main">
+    <div class="grid2--r grid2">
+      <div class="col">
+        <div class="grid2" style="gap:var(--gap)">
+          <div class="media media--fit media--frame fill"><img src="assets/papanek-book.jpg" alt="《为真实的世界设计》书籍封面"></div>
+          <div class="media media--fit media--frame fill"><img src="assets/papanek-covers.jpg" alt="《为真实的世界设计》多个版本封面"></div>
+        </div>
+        <p class="cap">《为真实的世界设计》曾遭 <strong>12 家出版社拒绝</strong>，1970 年首先在瑞典出版，1971 年才在美国出版英文版。此书被译成多种语言，多次修订再版，影响深远。</p>
+      </div>
+      <div class="col col--c">
+        <div class="pts">
+          <div class="pt"><span class="pt__i">1</span><div class="pt__b">
+            <p class="pt__t">不合时宜的声音</p>
+            <p class="pt__d">20 世纪 60 年代末到 70 年代初，美国经济高速发展，工业界与设计界都对未来充满信心，而帕帕奈克却<strong>不合时宜地提出了“设计伦理”</strong>的概念。</p></div></div>
+          <div class="pt"><span class="pt__i">2</span><div class="pt__b">
+            <p class="pt__t">毫不妥协的批判</p>
+            <p class="pt__d">他对当时美国<strong>消费主义泛滥、城市能耗与污染大幅上升</strong>进行了毫不妥协的批判，主张设计师应该担负起对社会和生态变化的责任。</p></div></div>
+          <div class="pt"><span class="pt__i">3</span><div class="pt__b">
+            <p class="pt__t">扩展设计师的职责</p>
+            <p class="pt__d">他鼓励对社会问题、第三世界、底层人民投入关注，同时<strong>将环境与自然资源的保护纳入设计师的职责范畴</strong>，提出工业设计应当自我限制。</p></div></div>
+          <div class="pt"><span class="pt__i">4</span><div class="pt__b">
+            <p class="pt__t">留下了什么</p>
+            <p class="pt__d">他终其一生倡导的<strong>“有限资源论”</strong>，为后来掀起的“绿色设计运动”提供了理论基础，令之后几代设计师认识到自己应承担的社会及伦理价值。</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 18 历史渊源 ============ -->
+<section class="s" data-sec="三 · 设计的觉醒" data-title="可持续设计的历史渊源">
+  <p class="s__eyebrow">05 / 词汇上的联姻</p>
+  <h2 class="s__title">“可持续性”与“设计”，<em>始于 90 年代中期</em></h2>
+  <p class="s__deck">尽管人类在设计发展历程中体现朴素的可持续思想由来已久，但这两个词汇正式结合，只有三十年。</p>
+  <div class="s__main">
+    <div class="grid3">
+      <div class="card">
+        <p class="card__k">1994 · 英国开放大学</p>
+        <p class="card__t">超越绿色设计</p>
+        <p class="card__d">Emma Dewberry 与 Philip Goggin 认为，相对于绿色设计与生态设计，可持续设计要面对<strong>“产品”以外更加复杂的社会、经济以及道德等条件的制约</strong>。</p>
+      </div>
+      <div class="card">
+        <p class="card__k">1995 · 英国萨里艺术设计学院</p>
+        <p class="card__t">成立“可持续设计中心”</p>
+        <p class="card__d">并开设可持续设计硕士课程。他们提出，可持续设计是<strong>针对我们创造、使用以及处理产品的“系统”进行分析与改变（优化）</strong>。</p>
+      </div>
+      <div class="card">
+        <p class="card__k">21 世纪初 · 米兰理工大学</p>
+        <p class="card__t">Ezio Manzini：产品服务系统</p>
+        <p class="card__d">通过整合<strong>“产品及服务”</strong>以构建“可持续的解决方案”，以<strong>“成果”和“效益”去取代物质产品的消耗</strong>。</p>
+      </div>
+    </div>
+    <p class="s__foot" style="border-top:none;margin-top:var(--gap-2);font-size:var(--fs-body);color:var(--ink-2)">可持续设计是个<strong>极具包容性</strong>的概念：它继承了绿色设计与生态设计的基本理念与方法，但不仅强调保护生态环境，而是提倡<strong>兼顾环境效益、社会效益、使用者需求与企业发展的系统创新策略</strong>。</p>
+  </div>
+</section>
+
+<!-- ============ 19 提问 ② ============ -->
+<section class="s s--ask" data-sec="三 · 设计的觉醒" data-title="❓ 提问 ② 设计师的责任" data-q="2">
+  <p class="s__eyebrow">课堂讨论 · 第二次</p>
+  <div class="ask">
+    <h2 class="ask__q">设计师<em>有没有权利</em>拒绝一个“卖得好但不可持续”的项目？</h2>
+    <div class="ask__row">
+      <div class="hints">
+        <button class="hint" type="button" aria-expanded="false">
+          <span class="hint__k">思考角度 A<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 2v8M2 6h8"/></svg></span>
+          <span class="hint__t">帕帕奈克的答案</span>
+          <span class="hint__d">他主张“工业设计应该自我限制”。但他因此被行业孤立多年，书稿被 12 家出版社退回。理想主义的代价，由谁承担？</span>
+        </button>
+        <button class="hint" type="button" aria-expanded="false">
+          <span class="hint__k">思考角度 B<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 2v8M2 6h8"/></svg></span>
+          <span class="hint__t">“手段”还是“主体”</span>
+          <span class="hint__d">如果设计始终是“企业赢利的工具”，那么拒绝就等于失业。要让拒绝成为可能，行业需要什么样的制度条件——规范、认证、还是采购标准？</span>
+        </button>
+        <button class="hint" type="button" aria-expanded="false">
+          <span class="hint__k">思考角度 C<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 2v8M2 6h8"/></svg></span>
+          <span class="hint__t">拒绝之外的第三条路</span>
+          <span class="hint__d">除了“做”和“不做”，还有“改着做”。在不推翻商业目标的前提下，你能改动的最小单元是什么？这往往比拒绝更有效。</span>
+        </button>
+        <button class="hint" type="button" aria-expanded="false">
+          <span class="hint__k">思考角度 D<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 2v8M2 6h8"/></svg></span>
+          <span class="hint__t">回到殷玉珍</span>
+          <span class="hint__d">她没有权力、没有资金、没有技术支持，只有一只羊换来的 600 棵树苗。约束条件极端不利时，她改变了什么？这对你有什么启发？</span>
+        </button>
+      </div>
+      <div class="timer" data-timer>
+        <p class="timer__k">讨论计时</p>
+        <div class="timer__ring">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="timer__bg" cx="50" cy="50" r="44"></circle>
+            <circle class="timer__fg" cx="50" cy="50" r="44" stroke-dasharray="276.5" stroke-dashoffset="0"></circle>
+          </svg>
+          <span class="timer__t" data-t>2:00</span>
+        </div>
+        <div class="timer__btns">
+          <button class="tbtn" type="button" data-set="60">1 分钟</button>
+          <button class="tbtn" type="button" data-set="120">2 分钟</button>
+          <button class="tbtn" type="button" data-set="180">3 分钟</button>
+        </div>
+        <div class="timer__btns">
+          <button class="tbtn" type="button" data-go>开始</button>
+          <button class="tbtn" type="button" data-rst>重置</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="s__foot">建议请 2—3 位同学发言，正反两方各一位。<strong>争议本身就是教学内容</strong>——可持续发展在学术界同样没有统一答案。</p>
+</section>
+
+<!-- ============ 20 可持续发展的定义 ============ -->
+<section class="s" data-sec="四 · 可持续发展概论" data-title="可持续发展的定义">
+  <p class="s__eyebrow">01 / 1987 · 布伦特兰报告</p>
+  <h2 class="s__title">沿用至今的那一句定义</h2>
+  <div class="s__main">
+    <div class="grid2--l grid2">
+      <div class="col col--c">
+        <p class="quote">可持续发展是<strong>既能满足当代人的需要，又不对后代人满足其需要的能力构成危害</strong>的发展。<cite>《我们共同的未来》（布伦特兰报告），1987 年</cite></p>
+        <div class="grid3" style="flex:0 0 auto">
+          <div class="card card--flat"><p class="card__k">原则一</p><p class="card__t">公平性</p><p class="card__d">当代人与后代人之间的公平，以及当代不同群体之间的公平。</p></div>
+          <div class="card card--flat"><p class="card__k">原则二</p><p class="card__t">持续性</p><p class="card__d">发展必须在生态环境承载能力范围内进行。</p></div>
+          <div class="card card--flat"><p class="card__k">原则三</p><p class="card__t">共同性</p><p class="card__d">全球各国必须共同努力、协调行动。</p></div>
+        </div>
+        <p class="cap">报告强调两个基本观点：<strong>一是人类要发展，尤其是穷人要发展；二是发展有限度，不能危及后代人的生存和发展。</strong></p>
+      </div>
+      <div class="col">
+        <div class="media media--fit media--frame fill"><img src="assets/brundtland.jpg" alt="格罗·哈莱姆·布伦特兰肖像"></div>
+        <p class="cap"><strong>格罗·哈莱姆·布伦特兰</strong>——历任挪威首相、世界卫生组织总干事。1984 年担任联合国环境与发展委员会主席期间主持起草该报告，推动可持续发展理念纳入 1992 年里约峰会。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 21 东西方视角 ============ -->
+<section class="s s--tint" data-sec="四 · 可持续发展概论" data-title="东西方视角">
+  <p class="s__eyebrow">02 / 概念的来源与根系</p>
+  <h2 class="s__title">西方的术语，<em>东方的智慧</em></h2>
+  <div class="s__main">
+    <div class="grid2--r grid2">
+      <div class="col">
+        <div class="media media--frame fill"><img src="assets/shanshui.jpg" alt="中国传统山水画"></div>
+        <p class="cap">天人合一 · 道法自然 · 因地制宜 · 物尽其用 · 适可而止</p>
+      </div>
+      <div class="col col--c">
+        <div class="pts">
+          <div class="pt"><span class="pt__i">1</span><div class="pt__b">
+            <p class="pt__t">术语兴起于西方</p>
+            <p class="pt__d">“可持续发展”是针对人类社会、经济发展与资源、环境<strong>愈演愈烈的冲突</strong>而提出的概念。近几十年来，随着经济高速发展，中国也遇到了同样的问题，<strong>并且挑战更加严峻</strong>。</p></div></div>
+          <div class="pt"><span class="pt__i">2</span><div class="pt__b">
+            <p class="pt__t">理念根植于中华文明源头</p>
+            <p class="pt__d">天人合一、道法自然、因地制宜、物尽其用、适可而止，都是有关人与自然关系的<strong>朴素却深刻的认知</strong>。</p></div></div>
+          <div class="pt"><span class="pt__i">3</span><div class="pt__b">
+            <p class="pt__t">当今学者的课题</p>
+            <p class="pt__d">如何将西方的可持续发展理念与东方的传统智慧相结合，融汇为当代人类共有的知识体系与精神财富，并服务于可持续社会转型以及<strong>人类命运共同体</strong>的构建。</p></div></div>
+          <div class="pt"><span class="pt__i">4</span><div class="pt__b">
+            <p class="pt__t">三个主要方面</p>
+            <p class="pt__d">以<strong>自然资源的高效利用和良好的生态环境</strong>为基础，以<strong>经济发展</strong>为前提，以<strong>谋求社会的全面进步</strong>为目标。</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 22 人与自然：史前 ============ -->
+<section class="s" data-sec="四 · 可持续发展概论" data-title="人与自然 ① 史前社会">
+  <p class="s__eyebrow">03 / 人与自然的互动 · 阶段一</p>
+  <h2 class="s__title">走出非洲，<em>就已经在改变生态</em></h2>
+  <div class="s__main">
+    <div class="grid2--r grid2">
+      <div class="col">
+        <div class="media media--fit media--frame fill"><img src="assets/nat-megafauna.jpg" alt="早期人类与大型哺乳动物的线描插画"></div>
+        <p class="cap">澳大利亚和美洲的生物大灭绝，其时间与智人到达的时间相吻合。</p>
+      </div>
+      <div class="col col--c">
+        <div class="pts">
+          <div class="pt"><span class="pt__i">1</span><div class="pt__b">
+            <p class="pt__t">人类并非天然的统治者</p>
+            <p class="pt__d">在生态系统中，人类因为存在着大量天敌，也<strong>不居于食物链顶端</strong>。但人类通过群居与合作发展出独特的社群，并以<strong>集体学习</strong>的形式发展出文化。</p></div></div>
+          <div class="pt"><span class="pt__i">2</span><div class="pt__b">
+            <p class="pt__t">靠文化而非进化取胜</p>
+            <p class="pt__d">人类通过文化，而非单纯的自然进化，<strong>更快、更好地适应了环境</strong>，逐渐在生物圈中占据了主导地位。</p></div></div>
+          <div class="pt"><span class="pt__i">3</span><div class="pt__b">
+            <p class="pt__t">约 20 万年前走出非洲</p>
+            <p class="pt__d">由于能够使用工具和火，并以群体形式生活，人类<strong>从一开始就显示出对环境的巨大影响力</strong>。</p></div></div>
+        </div>
+        <div class="statrow" style="grid-template-columns:repeat(2,1fr)">
+          <div class="stat"><b>47 → 13</b><span>北美原有 47 属大型哺乳动物，人类到达后的两千年内消失了 34 属</span></div>
+          <div class="stat"><b>万余年前</b><span>我们的祖先就已经深刻地改变了地球的生态环境</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 23 农业社会 ============ -->
+<section class="s s--tint" data-sec="四 · 可持续发展概论" data-title="人与自然 ② 农业社会">
+  <p class="s__eyebrow">03 / 人与自然的互动 · 阶段二</p>
+  <h2 class="s__title">局部已经很严重，<em>整体仍微不足道</em></h2>
+  <p class="s__deck">进入农业社会后，人类通过驯化动植物提高了能量转化效率，社会与文化复杂性不断提高，人口开始缓慢增长。三个文明核心区，留下了同一种教训。</p>
+  <div class="s__main">
+    <div class="grid2--r grid2">
+      <div class="col">
+        <div class="media media--fit media--frame fill"><img src="assets/nat-prehistory.jpg" alt="农业社会的自然景观线描"></div>
+      </div>
+      <div class="col col--c">
+        <div class="grid3" style="align-items:stretch">
+          <div class="card"><p class="card__k">两河流域</p><p class="card__t">土地变白</p>
+            <p class="card__d">公元前 2000 年出现“土地变白”的报告，显示过度耕种带来的<strong>盐碱化</strong>。到公元前 1800 年，粮食产量只有早期的 <strong>1/3</strong>，苏美尔农业随之崩溃。</p></div>
+          <div class="card"><p class="card__k">地中海地区</p><p class="card__t">从混合林到橄榄</p>
+            <p class="card__d">自然植被曾是橡树、山毛榉和松树等混合林，如今却以橄榄、葡萄和香草闻名——这正是<strong>砍伐森林、过度放牧与耕种</strong>导致土壤肥力下降的结果。</p></div>
+          <div class="card"><p class="card__k">中国黄河流域</p><p class="card__t">《诗经》里的森林</p>
+            <p class="card__d">曾记载黄土高原南部<strong>野鹿成群、虎豹出没、森林繁茂</strong>。但人口增长、大兴土木、毁林开荒，原始植被不断退化——黄河的泥沙正是上游植被破坏后土地被侵蚀的结果。</p></div>
+        </div>
+        <p class="cap">尽管如此，当时人类对自然环境的破坏还是有限的。即使在农业生产力最发达的时代和地区，<strong>人类造成的环境影响，即使局部已经很严重，从整体而言也是微不足道的</strong>。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 24 大航海时代 ============ -->
+<section class="s" data-sec="四 · 可持续发展概论" data-title="人与自然 ③ 大航海时代">
+  <p class="s__eyebrow">03 / 人与自然的互动 · 阶段三</p>
+  <h2 class="s__title">与其说是“人类中心主义”，<br><em>不如说是“资本中心主义”</em></h2>
+  <div class="s__main">
+    <div class="grid2--r grid2">
+      <div class="col">
+        <div class="media media--fit media--frame fill"><img src="assets/nat-ships.jpg" alt="大航海时代的帆船线描插画"></div>
+        <p class="cap">1492 年哥伦布开始东方之旅，“大航海时代”拉开序幕。</p>
+      </div>
+      <div class="col col--c">
+        <div class="pts">
+          <div class="pt"><span class="pt__i">1</span><div class="pt__b">
+            <p class="pt__t">一场巨大的一体化</p>
+            <p class="pt__d">西班牙殖民者到达美洲后，开拓荒地、烧毁森林、灭绝原住民，大面积种植甘蔗、烟草、玉米等经济作物，<strong>以前所未有的速度改变大陆的原生态系统</strong>。</p></div></div>
+          <div class="pt"><span class="pt__i">2</span><div class="pt__b">
+            <p class="pt__t">农业系统的长期破坏</p>
+            <p class="pt__d">为了快速获得利润，殖民者<strong>放弃了传统农业的间种、轮作、休耕</strong>等技术，随之带来土壤退化、地力耗尽、病虫害滋生，最终导致生态崩溃。</p></div></div>
+          <div class="pt"><span class="pt__i">3</span><div class="pt__b">
+            <p class="pt__t">阻断了自给自足的文明</p>
+            <p class="pt__d">无论北极还是热带，人类原本<strong>以自然为根基、被自然所约束</strong>，形成了高度发达的自给自足文明。西欧的全球扩张阻断了这一进程。</p></div></div>
+          <div class="pt"><span class="pt__i">4</span><div class="pt__b">
+            <p class="pt__t">代价的分配</p>
+            <p class="pt__d">殖民国家快速积累财富，率先进入高能量的现代社会，而被奴役的人民与土地至今未能消化这一后果。<strong>少部分人享受了发展的成果，全体人类承受了环境破坏的代价。</strong></p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 25 工业革命 ============ -->
+<section class="s s--tint" data-sec="四 · 可持续发展概论" data-title="人与自然 ④ 工业革命">
+  <p class="s__eyebrow">03 / 人与自然的互动 · 阶段四</p>
+  <h2 class="s__title">最先进的经济，<em>最严重的污染</em></h2>
+  <div class="s__main">
+    <div class="grid2">
+      <div class="col">
+        <div class="media media--fit media--frame fill"><img src="assets/nat-industrial.jpg" alt="工业革命时期林立的烟囱线描"></div>
+        <div class="media media--frame" style="flex:0 0 26%"><img src="assets/nat-smog.jpg" alt="1952 年伦敦烟雾事件中的街景"></div>
+        <p class="cap">1952 年 12 月 5 日，一股厚厚的黄色云层降落在伦敦——煤炭燃烧产生的二氧化硫和二氧化氮与寒冷雾气反应，使烟雾变得有毒。</p>
+      </div>
+      <div class="col col--c">
+        <div class="pts">
+          <div class="pt"><span class="pt__i">1</span><div class="pt__b">
+            <p class="pt__t">1780—1880 的一百年</p>
+            <p class="pt__d">蒸汽机使煤炭开采量迅速上升、价格下降，带动纺织、冶炼、交通快速发展。英国建立了<strong>世界上技术最先进、最有活力和最繁荣的经济</strong>，但也导致了英国历史上最严重的大气污染。</p></div></div>
+          <div class="pt"><span class="pt__i">2</span><div class="pt__b">
+            <p class="pt__t">1858 · 伦敦大恶臭</p>
+            <p class="pt__d">生活污水与工业废水都直接排放入河，造成严重的河流污染。1872 年，英国人<strong>罗伯特·史密斯第一次创造了“酸雨”这个词汇</strong>。</p></div></div>
+          <div class="pt"><span class="pt__i">3</span><div class="pt__b">
+            <p class="pt__t">直接后果：疾病流行</p>
+            <p class="pt__d">1831—1866 年，英国爆发了<strong>四次大规模霍乱</strong>。</p></div></div>
+        </div>
+        <div class="statrow" style="grid-template-columns:repeat(2,1fr)">
+          <div class="stat"><b>4 天 · 4000+</b><span>1952 年伦敦烟雾事件的 4 天内就有 4000 多人死亡，成为现代最严重的环境污染事件之一</span></div>
+          <div class="stat"><b>转折点</b><span>它也成为推动环境立法的重要转折点</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 26 大加速 ============ -->
+<section class="s" data-sec="四 · 可持续发展概论" data-title="人与自然 ⑤ 大加速">
+  <p class="s__eyebrow">03 / 人与自然的互动 · 阶段五</p>
+  <h2 class="s__title">大加速：<em>危机第一次直接进入客厅</em></h2>
+  <p class="s__deck">“二战”之后，严重的生态破坏与环境污染问题频频进入公众视野。随着无线电技术和家用电视机的普及，这些事件<strong>直接呈现在公众面前</strong>，激起了强烈的社会反响。</p>
+  <div class="s__main">
+    <div class="grid2--l grid2">
+      <div class="col col--c">
+        <table class="tbl">
+          <thead><tr><th>年份</th><th>事件</th><th>后果</th></tr></thead>
+          <tbody>
+            <tr><td>1952</td><td>伦敦毒雾事件</td><td>4 天内 4000 多人死亡</td></tr>
+            <tr><td>1956</td><td>日本熊本水俣病</td><td>由工业废水中的甲基汞引起</td></tr>
+            <tr><td>1969</td><td>美国圣巴巴拉海峡漏油</td><td>污染了数百公里海岸线</td></tr>
+            <tr><td>1984</td><td>印度博帕尔化工厂爆炸</td><td>57.5 万人丧命，20 万人残疾</td></tr>
+            <tr><td>1986</td><td>切尔诺贝利核泄漏</td><td>造成大范围放射性污染</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <div class="media media--fit media--frame fill"><img src="assets/nat-ice.jpg" alt="极地冰川景观"></div>
+        <div class="statrow" style="grid-template-columns:repeat(2,1fr);border-top:none;padding-top:0">
+          <div class="stat"><b>0.6℃</b><span>20 世纪全世界平均温度的攀升幅度</span></div>
+          <div class="stat"><b>95%</b><span>北极圈内多年冰面积在 35 年内的减少幅度</span></div>
+        </div>
+        <p class="cap">受气候变暖影响，北半球春天的解冻期比 150 年前<strong>提前了 9 天</strong>，秋天霜冻开始时间<strong>晚了约 10 天</strong>。这一切将对全球环境产生不可逆转的影响：气候灾难频发、海平面上升、瘟疫流行、粮食危机、动植物种群迁徙或灭绝。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 27 寂静的春天 ============ -->
+<section class="s s--tint" data-sec="四 · 可持续发展概论" data-title="环保觉醒 · 寂静的春天">
+  <p class="s__eyebrow">04 / 1962 · 环保运动的奠基石</p>
+  <h2 class="s__title">《寂静的春天》<em>与环保意识的觉醒</em></h2>
+  <div class="s__main">
+    <div class="grid2--r grid2">
+      <div class="col">
+        <div class="media media--fit media--frame fill"><img src="assets/silent-spring.jpg" alt="《寂静的春天》封面与作者蕾切尔·卡逊"></div>
+        <p class="cap">美国海洋生物学家蕾切尔·卡逊。</p>
+      </div>
+      <div class="col col--c">
+        <div class="pts">
+          <div class="pt"><span class="pt__i">1</span><div class="pt__b">
+            <p class="pt__t">1962 · 一本书</p>
+            <p class="pt__d">该书首次反思了因<strong>过度使用化学农药与肥料</strong>而导致的环境污染、生态破坏，最终可能给人类带来重大灾难。它被认为是<strong>世界环保运动的奠基石</strong>。</p></div></div>
+          <div class="pt"><span class="pt__i">2</span><div class="pt__b">
+            <p class="pt__t">1969 · 立法跟进</p>
+            <p class="pt__d">美国国会通过《国家环境政策法》并<strong>成立环境保护局</strong>，之后陆续通过清洁空气法和清洁水法。</p></div></div>
+          <div class="pt"><span class="pt__i">3</span><div class="pt__b">
+            <p class="pt__t">1970 · 地球日</p>
+            <p class="pt__d">4 月 22 日，参议员纳尔逊发起“地球日”活动，当天有<strong>超过 2000 万人</strong>在纽约、华盛顿、旧金山等地游行和集会。</p></div></div>
+          <div class="pt"><span class="pt__i">4</span><div class="pt__b">
+            <p class="pt__t">为什么是这个年代</p>
+            <p class="pt__d">同时期的<strong>反殖民、反越战、女权主义浪潮以及民权运动</strong>，带动了价值观的相互影响与传播，促使社会各界对环境议题产生了极高的关注度。1971 年“绿色和平”成立，环保运动进入高潮。</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 28 增长的极限 ============ -->
+<section class="s" data-sec="四 · 可持续发展概论" data-title="环保觉醒 · 增长的极限">
+  <p class="s__eyebrow">05 / 1972 · 系统思考的丰碑</p>
+  <h2 class="s__title">《增长的极限》<em>与系统思考</em></h2>
+  <div class="s__main">
+    <div class="grid2">
+      <div class="col">
+        <div class="media media--fit media--frame fill"><img src="assets/limits-illus.jpg" alt="指数增长与资源消耗的图解插画"></div>
+        <div class="media media--fit media--frame" style="flex:0 0 30%"><img src="assets/limits-book.jpg" alt="《增长的极限》书籍"></div>
+      </div>
+      <div class="col col--c">
+        <div class="pts">
+          <div class="pt"><span class="pt__i">1</span><div class="pt__b">
+            <p class="pt__t">罗马俱乐部的模型</p>
+            <p class="pt__d">该书利用<strong>系统理论和计算机模型</strong>，预测了人类从 1972 年到 2100 年的发展轨迹。</p></div></div>
+          <div class="pt"><span class="pt__i">2</span><div class="pt__b">
+            <p class="pt__t">指数增长的危险</p>
+            <p class="pt__d">指出随着指数增长的资源消耗和污染排放，人类<strong>将很快冲破地球环境的安全界限</strong>，造成粮食生产和世界人口的锐减。</p></div></div>
+          <div class="pt"><span class="pt__i">3</span><div class="pt__b">
+            <p class="pt__t">引发全球辩论</p>
+            <p class="pt__d">其观点引发了社会对未来人类发展的<strong>“乐观派”与“悲观派”</strong>的大争论，加深了人们对未来人类命运与发展道路的理解和认识。</p></div></div>
+          <div class="pt"><span class="pt__i">4</span><div class="pt__b">
+            <p class="pt__t">历史性意义</p>
+            <p class="pt__d">它被誉为人类发展问题研究的一块丰碑，<strong>首次将系统思考应用于全球环境问题</strong>——这也正是可持续设计方法论的源头之一。</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 29 概念正式提出（时间轴交互） ============ -->
+<section class="s s--wash" data-sec="四 · 可持续发展概论" data-title="★ 时间轴 · 概念的确立">
+  <p class="s__eyebrow">06 / 从斯德哥尔摩到里约</p>
+  <h2 class="s__title">概念是<em>怎样一步步被确立</em>的</h2>
+  <p class="s__deck">全球进程、中国探索与设计学科三条线索并行推进。点选下方标签可以只看其中一条。</p>
+  <div class="s__main">
+    <div class="col" style="gap:var(--gap)">
+      <div class="btnrow" id="tlFilters">
+        <button class="btn btn--o" type="button" data-f="all" aria-pressed="true">全部</button>
+        <button class="btn btn--o" type="button" data-f="global" aria-pressed="false">全球进程</button>
+        <button class="btn btn--o" type="button" data-f="china" aria-pressed="false">中国探索</button>
+        <button class="btn btn--o" type="button" data-f="design" aria-pressed="false">设计学科</button>
+      </div>
+      <div class="grid4" id="tlGrid" style="align-content:start;overflow-y:auto;gap:var(--gap)"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 30 里约 + 三重底线 ============ -->
+<section class="s" data-sec="四 · 可持续发展概论" data-title="里约峰会与三重底线">
+  <p class="s__eyebrow">07 / 1992 · 全球共识</p>
+  <h2 class="s__title">里约地球峰会<em>与三重底线</em></h2>
+  <div class="s__main">
+    <div class="grid2--r grid2">
+      <div class="col">
+        <div class="media media--fit media--frame fill"><img src="assets/rio.jpg" alt="里约热内卢地球峰会的线描插画"></div>
+        <p class="cap">1992 年，联合国环境与发展会议（UNCED）在巴西里约热内卢举行。</p>
+      </div>
+      <div class="col col--c">
+        <div class="pts">
+          <div class="pt"><span class="pt__i">1</span><div class="pt__b">
+            <p class="pt__t">《里约宣言》</p>
+            <p class="pt__d">第一次将可持续发展视为一项人类<strong>“权利”</strong>，明确了环境与发展之间互相冲突又相互依存的关系，同时明确了各国<strong>“共同但有差别的责任”</strong>。</p></div></div>
+          <div class="pt"><span class="pt__i">2</span><div class="pt__b">
+            <p class="pt__t">三份重要文件</p>
+            <p class="pt__d">《21 世纪议程》（Agenda 21）高度凝聚了人类对可持续发展理论的认识；同时提出了<strong>《联合国气候变化框架公约》（UNFCCC）</strong>和<strong>《生物多样性公约》（CBD）</strong>。</p></div></div>
+          <div class="pt"><span class="pt__i">3</span><div class="pt__b">
+            <p class="pt__t">走出联合国</p>
+            <p class="pt__d">从 90 年代开始，讨论逐渐超越联合国的号召，走向研究机构、大学，甚至<strong>工商和金融机构</strong>。世界银行指出：健康的环境对于可持续发展和健康的经济至关重要。</p></div></div>
+          <div class="pt"><span class="pt__i">4</span><div class="pt__b">
+            <p class="pt__t">三重底线（TBL）</p>
+            <p class="pt__d">John Elkington 提出<strong>经济底线、环境底线、社会底线</strong>。他认为：一个可持续发展的企业<strong>不应从人类的痛苦中获利</strong>，也不应采取加剧社会问题的措施。</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 31 SDGs ============ -->
+<section class="s s--tint" data-sec="四 · 可持续发展概论" data-title="联合国可持续发展目标">
+  <p class="s__eyebrow">08 / SDGs</p>
+  <h2 class="s__title">17 个目标，<em>一份共同的议程</em></h2>
+  <div class="s__main">
+    <div class="col">
+      <div class="media media--fit media--frame fill"><img src="assets/sdgs-17.jpg" alt="联合国可持续发展目标 SDGs 的 17 个图标"></div>
+      <div class="grid3" style="flex:0 0 auto">
+        <div class="card card--flat"><p class="card__k">观点一</p><p class="card__t">激进环保主义</p>
+          <p class="card__d">将可持续发展等同于激进的环境保护，部分欧洲学者甚至提出<strong>“去发展”（degrowth）</strong>，以最大限度地停止人类活动对自然环境的影响。</p></div>
+        <div class="card card--flat"><p class="card__k">观点二</p><p class="card__t">社会公平视角</p>
+          <p class="card__d">强调可持续发展的社会性，关注低收入群体的基本生存和福祉，<strong>质疑不加“区别责任”的环保法规</strong>，以及不符合“公平”原则的经济发展。</p></div>
+        <div class="card card--flat"><p class="card__k">观点三</p><p class="card__t">中国视角</p>
+          <p class="card__d">东部沿海接近中等发达国家水平，消费主义对年轻一代有巨大吸引力；同时刚完成脱贫攻坚，<strong>仍有大量中低收入人群，城乡差距巨大</strong>；气候异常、生态危机迫在眉睫。</p></div>
+      </div>
+    </div>
+  </div>
+  <p class="s__foot">这些不同视角迫使我们努力寻求<strong>一条符合中国国情的可持续发展之路</strong>。</p>
+</section>
+
+<!-- ============ 32 中国道路 ============ -->
+<section class="s" data-sec="四 · 可持续发展概论" data-title="中国的四阶段探索">
+  <p class="s__eyebrow">09 / 中国探索</p>
+  <h2 class="s__title">四个阶段，<em>一条本土道路</em></h2>
+  <p class="s__deck">中国承担了人口大国与经济大国的基本责任。从 1972 年首届人类环境会议至今，大致经历了四个阶段。</p>
+  <div class="s__main">
+    <div class="grid4">
+      <div class="card">
+        <p class="card__k">阶段一 · 1972—1989</p>
+        <p class="card__t">明确环保战略，推进环境立法</p>
+        <p class="card__d"><strong>1972</strong> 参加首次“人类环境会议”<br><strong>1973</strong> 第一次全国环境保护会议，通过《关于保护和改善环境的若干规定》，确定“保护环境、造福人民”方针<br><strong>1978</strong> 环境保护首次写入宪法<br><strong>1989</strong> 通过《中华人民共和国环境保护法》</p>
+      </div>
+      <div class="card">
+        <p class="card__k">阶段二 · 1992—1997</p>
+        <p class="card__t">确立可持续发展理念</p>
+        <p class="card__d"><strong>1992</strong> 参加里约大会，承诺履行《21 世纪议程》<br><strong>1994</strong> 发布《中国 21 世纪议程》<br><strong>1995</strong> 正式将可持续发展战略写入“九五”计划<br><strong>1997</strong> 十五大强调“在现代化建设中必须实施可持续发展战略”</p>
+      </div>
+      <div class="card">
+        <p class="card__k">阶段三 · 2003—2010</p>
+        <p class="card__t">生态文明的科学发展观</p>
+        <p class="card__d"><strong>2003</strong> 十六届三中全会提出“坚持以人为本，树立全面、协调、可持续的发展观”<br><strong>2005</strong> 提出“生态文明”概念；十七大将其列入全面建设小康社会目标<br><strong>2010</strong> “十二五”规划建议提出绿色、低碳发展理念</p>
+      </div>
+      <div class="card card--accent">
+        <p class="card__k">阶段四 · 2012 至今</p>
+        <p class="card__t">最大包容性的美丽中国建设战略</p>
+        <p class="card__d"><strong>2012</strong> 十八大要求把生态文明建设融入经济、政治、文化、社会建设的各方面和全过程，强调“尊重自然、顺应自然、保护自然”<br><strong>2017</strong> 十九大把“坚持人与自然和谐共生”作为基本方略之一</p>
+      </div>
+    </div>
+  </div>
+  <p class="s__foot">这一创新过程<strong>既有对世界先进经验的学习借鉴，也兼顾了中国具体的发展阶段与社会经济背景</strong>，是对可持续发展内涵的不断充实和拓展，也为构建“人类命运共同体”作出了积极探索。</p>
+</section>
+
+<!-- ============ 33 三大维度总览 ============ -->
+<section class="s s--tint" data-sec="五 · 三大维度" data-title="环境、社会、经济">
+  <p class="s__eyebrow">01 / 三大维度</p>
+  <h2 class="s__title">兼顾三者，<em>否则只是政治口号</em></h2>
+  <p class="s__deck">直到种种危机出现，人类才慢慢领悟到：<strong>自然的限制也是一种保护，人与自然是一体的，保护自然就是保护人类自身</strong>。而希冀获得一个更美好的未来，必须兼顾环境、社会、经济的协调发展。</p>
+  <div class="s__main">
+    <div class="col">
+      <div class="media media--fit media--frame fill"><img src="assets/three-dims.jpg" alt="环境、社会、经济三大维度的关系图"></div>
+      <div class="grid3" style="flex:0 0 auto">
+        <div class="card card--flat"><p class="card__k">维度一</p><p class="card__t">环境</p><p class="card__d">以自然资源的<strong>高效利用</strong>和良好的生态环境为<strong>基础</strong>。输入端是资源危机，输出端是污染排放。</p></div>
+        <div class="card card--flat"><p class="card__k">维度二</p><p class="card__t">经济</p><p class="card__d">以经济发展为<strong>前提</strong>。没有发展，谈不上可持续；但发展有限度，不能危及后代。</p></div>
+        <div class="card card--flat"><p class="card__k">维度三</p><p class="card__t">社会</p><p class="card__d">以谋求社会的<strong>全面进步</strong>为目标。核心是“公平原则”：每个人都拥有获得生存与发展的空间与资源的权利。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 34 环境维度：输入 ============ -->
+<section class="s" data-sec="五 · 三大维度" data-title="环境维度 · 输入：资源危机">
+  <p class="s__eyebrow">02 / 环境维度 · 输入端</p>
+  <h2 class="s__title">我们正在<em>透支一个星球</em></h2>
+  <p class="s__deck">从生态系统的角度看，人类从自然界获取能量与物质（<strong>输入</strong>），同时将转化后的废气、废水、废物排放到自然界（<strong>输出</strong>）。环境维度的可持续性，就从这两个角度来理解。</p>
+  <div class="s__main">
+    <div class="grid2--l grid2">
+      <div class="col col--c">
+        <div class="grid2" style="gap:var(--gap)">
+          <div class="card"><p class="card__k">土地资源</p><p class="card__t">24% 的陆地已被开垦</p>
+            <p class="card__d">过去 60 年全球开垦的土地<strong>比 18、19 世纪的总和还要多</strong>。沼泽、森林、草原被开垦利用，导致自然生境的快速消失。</p></div>
+          <div class="card"><p class="card__k">城市扩张</p><p class="card__t">人造环境不断扩大</p>
+            <p class="card__d">群居地从村庄变为小镇、都市，原生自然不断减小，<strong>以至于偶尔的野猪、大象进入城市，都会被视为新闻而广泛报道</strong>。</p></div>
+          <div class="card"><p class="card__k">矿产开发</p><p class="card__t">向地表以下不断发掘</p>
+            <p class="card__d">开发煤炭、石油、金属、稀有矿藏，都需要通过大规模协作和先进技术装备，<strong>向地表以下、海洋深处、山体内部不断发掘</strong>。</p></div>
+          <div class="card"><p class="card__k">生物多样性</p><p class="card__t">生境的根本性破坏</p>
+            <p class="card__d">高强度资源开发带来的最大负外部性。大量动植物失去栖息地，数量减少或种群灭绝，<strong>破坏了生态系统的平衡</strong>。</p></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="media media--fit media--frame fill"><img src="assets/ecosystem.jpg" alt="地球生态系统服务示意图"></div>
+        <div class="statrow" style="grid-template-columns:repeat(2,1fr)">
+          <div class="stat"><b>2/3</b><span>人类已消耗的地球自然资源比例（《千年生态系统评估报告》，2005）</span></div>
+          <div class="stat"><b>2 个地球</b><span>按目前速度消耗，到 2050 年所需的资源总量（WWF《2006 年度生命地球报告》）</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="s__foot">这一切都意味着，我们留给子孙后代的很可能是这样一个家园：<strong>一个资源匮乏、物种单一、缺乏活力的星球</strong>。</p>
+</section>
+
+<!-- ============ 35 环境维度：输出 ============ -->
+<section class="s s--tint" data-sec="五 · 三大维度" data-title="环境维度 · 输出：污染排放">
+  <p class="s__eyebrow">03 / 环境维度 · 输出端</p>
+  <h2 class="s__title">以前所未有的速度变暖</h2>
+  <div class="s__main">
+    <div class="grid2--r grid2">
+      <div class="col">
+        <div class="media media--frame fill"><img src="assets/nat-ice.jpg" alt="极地冰川景观"></div>
+        <p class="cap">2021 年 8 月《IPCC 第六次评估报告》第一工作组报告：<strong>人类活动致使气候以前所未有的速度变暖</strong>。</p>
+      </div>
+      <div class="col col--c">
+        <div class="pts">
+          <div class="pt"><span class="pt__i">1</span><div class="pt__b">
+            <p class="pt__t">气候变化</p>
+            <p class="pt__d">目前全球地表平均温度较工业化前高出<strong>约 1℃</strong>。从未来 20 年的平均温度变化预估来看，全球温升预计将<strong>达到或超过 1.5℃</strong>。</p></div></div>
+          <div class="pt"><span class="pt__i">2</span><div class="pt__b">
+            <p class="pt__t">极端天气</p>
+            <p class="pt__d">全球持续变暖将进一步加剧全球水循环，包括其变率、全球季风降水以及干湿事件的强度。由此导致<strong>更强的降雨和洪水，在许多地区则意味着更严重的干旱</strong>。</p></div></div>
+          <div class="pt"><span class="pt__i">3</span><div class="pt__b">
+            <p class="pt__t">健康影响</p>
+            <p class="pt__d">伦敦毒雾、切尔诺贝利核泄漏、日本水俣病，都对成千上万普通人的健康造成了长期影响，<strong>尤其是缺乏保障、无法逃离污染区域的底层民众</strong>。</p></div></div>
+          <div class="pt"><span class="pt__i">4</span><div class="pt__b">
+            <p class="pt__t">更严重的是长期破坏</p>
+            <p class="pt__d">环境污染对生物圈的长期破坏——被污染过后的水体和土壤，<strong>往往要经历极长的时间才能恢复正常值</strong>。</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 36 社会维度 ============ -->
+<section class="s" data-sec="五 · 三大维度" data-title="社会维度 · 公平与 HDI">
+  <p class="s__eyebrow">04 / 社会维度</p>
+  <h2 class="s__title">经济发达，<em>不必然带来社会公平</em></h2>
+  <div class="s__main">
+    <div class="grid2">
+      <div class="col">
+        <div class="media media--fit media--frame fill"><img src="assets/hdi-energy.jpg" alt="能量使用与人类发展指数关系的散点图"></div>
+        <p class="cap">《能量与文明》作者<strong>斯米尔</strong>：在较低的发展阶段，能量使用与人类发展指数才有线性关系；<strong>当发展到一定阶段之后，更大的能量投入却不能带来更高的社会发展</strong>。</p>
+      </div>
+      <div class="col col--c">
+        <div class="pts">
+          <div class="pt"><span class="pt__i">1</span><div class="pt__b">
+            <p class="pt__t">核心是“公平原则”</p>
+            <p class="pt__d">这颗星球上的<strong>每个人都拥有获得生存与发展的空间与资源的权利</strong>。在尊重基本权利与文化多样性基础上，创造平等的机会；促进建立一个民主、包容、团结、健康、安全和公平的社会。</p></div></div>
+          <div class="pt"><span class="pt__i">2</span><div class="pt__b">
+            <p class="pt__t">HDI：修正单一 GDP</p>
+            <p class="pt__d">联合国 1990 年提出<strong>人类发展指数</strong>，由<strong>预期寿命、教育水平、人均 GDP</strong> 三部分构成，用以修正之前以单一 GDP 评估发展进程的方法。</p></div></div>
+          <div class="pt"><span class="pt__i">3</span><div class="pt__b">
+            <p class="pt__t">HDI 的缺口</p>
+            <p class="pt__d">它将社会发展与经济发展关联，但<strong>缺乏对生态成本的计算</strong>。因此有学者提出更精确的定义：<strong>在生态环境的承载能力以内实现较高的福利水平</strong>。</p></div></div>
+          <div class="pt"><span class="pt__i">4</span><div class="pt__b">
+            <p class="pt__t">代际公平 × 代内公平</p>
+            <p class="pt__d">作为“托管人”，我们有义务为子孙后代保护好自然资源与文化资源；同时，<strong>当代一部分人的发展不能以损害另一部分人的发展为代价</strong>。</p></div></div>
+        </div>
+        <p class="cap">在发展水平十分接近的情况下，相对于德国和法国，<strong>美国的能量消耗却要高出近一倍</strong>。显然，这样的社会经济模式是不可持续的。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 37 四象限 ============ -->
+<section class="s s--wash" data-sec="五 · 三大维度" data-title="★ 四象限 · 社会发展的四种模式">
+  <p class="s__eyebrow">05 / 福利水平 × 自然消耗</p>
+  <h2 class="s__title">社会发展的<em>四种模式</em></h2>
+  <p class="s__deck">以人类发展指数衡量福利水平，以生态足迹衡量自然消耗，可以界定出四个象限。点击象限或国家查看说明。</p>
+  <div class="s__main">
+    <div class="grid2--l grid2">
+      <div class="col" style="justify-content:center">
+        <svg class="quadsvg" viewBox="0 0 520 400" role="img" aria-label="福利水平与生态足迹构成的四象限图">
+          <rect class="qc is-on" data-q="0" x="60" y="30"  width="200" height="150" rx="7"></rect>
+          <rect class="qc"       data-q="1" x="262" y="30"  width="200" height="150" rx="7"></rect>
+          <rect class="qc"       data-q="2" x="60" y="182" width="200" height="150" rx="7"></rect>
+          <rect class="qc"       data-q="3" x="262" y="182" width="200" height="150" rx="7"></rect>
+          <text class="qs" x="78" y="56">唯一可持续</text>
+          <text class="ql" x="78" y="80">高福利 · 低消耗</text>
+          <text class="qs" x="280" y="56">多数发达国家</text>
+          <text class="ql" x="280" y="80">高福利 · 高消耗</text>
+          <text class="qs" x="78" y="208">多数欠发达国家</text>
+          <text class="ql" x="78" y="232">低福利 · 低消耗</text>
+          <text class="qs" x="280" y="208">部分转型国家</text>
+          <text class="ql" x="280" y="232">低福利 · 高消耗</text>
+          <line class="ax" x1="60" y1="345" x2="462" y2="345"></line>
+          <line class="ax" x1="45" y1="30" x2="45" y2="332"></line>
+          <text class="axt" x="60" y="370">生态足迹 · 自然消耗 →</text>
+          <text class="axt" x="0" y="0" transform="translate(37,332) rotate(-90)">人类发展指数 · 福利水平 →</text>
+          <circle class="pt2" cx="430" cy="62"  r="7" data-n="澳大利亚" data-v="生态足迹为其生态承载力的 5.37 倍"></circle>
+          <circle class="pt2" cx="400" cy="90"  r="7" data-n="美国"     data-v="生态足迹为其生态承载力的 4.75 倍"></circle>
+          <circle class="pt2" cx="371" cy="118" r="7" data-n="加拿大"   data-v="生态足迹为其生态承载力的 4.72 倍"></circle>
+          <text class="ptl" x="430" y="46" text-anchor="middle">澳大利亚</text>
+          <text class="ptv" x="443" y="66">5.37×</text>
+          <text class="ptl" x="390" y="88" text-anchor="end">美国</text>
+          <text class="ptv" x="390" y="102" text-anchor="end">4.75×</text>
+          <text class="ptl" x="361" y="116" text-anchor="end">加拿大</text>
+          <text class="ptv" x="361" y="130" text-anchor="end">4.72×</text>
+        </svg>
+      </div>
+      <div class="col col--c">
+        <div class="card card--accent">
+          <p class="card__k" id="qK">象限说明</p>
+          <p class="card__t" style="font-family:var(--f-serif);font-size:var(--fs-sub)" id="qT"></p>
+          <p class="card__d" id="qD"></p>
+          <p class="cap" style="margin-top:12px;padding-top:11px;border-top:1px solid var(--border)" id="qN"></p>
+        </div>
+        <p class="cap">图中仅澳大利亚、美国、加拿大三点标注了课件给出的生态足迹倍数，其余象限为模式说明，点位不代表精确坐标。<strong>如果全球居民都像他们一样生活，至少需要 4~5 个地球</strong>才能满足人类的自然消耗需求。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 38 杯子的哲学 ============ -->
+<section class="s" data-sec="六 · 设计与自然" data-title="一项关于杯子的哲学思考">
+  <p class="s__eyebrow">01 / 设计的本质思考</p>
+  <h2 class="s__title">真的是<em>人类主导了杯子</em>吗？</h2>
+  <div class="s__main">
+    <div class="grid2--r grid2">
+      <div class="col">
+        <div class="media media--fit media--frame fill"><img src="assets/cups.jpg" alt="各种形态杯子的线描演化图"></div>
+      </div>
+      <div class="col col--c">
+        <div class="pts">
+          <div class="pt"><span class="pt__i">1</span><div class="pt__b">
+            <p class="pt__t">一只普通的杯子</p>
+            <p class="pt__d">源于容器的需求，源于一种物理形态，在人类的手上创造出无数种外形，由各种材质组成——<strong>这种演进被认为是设计</strong>。</p></div></div>
+          <div class="pt"><span class="pt__i">2</span><div class="pt__b">
+            <p class="pt__t">然而</p>
+            <p class="pt__d">你又何尝清楚，<strong>是否是杯子正利用人类制造工具的能力，进化出了自身的文明？</strong>似乎有种莫名的力量在催动着人类向大自然致敬，并学习它的生长逻辑，从而创造新的事物。</p></div></div>
+          <div class="pt"><span class="pt__i">3</span><div class="pt__b">
+            <p class="pt__t">重新看造物史</p>
+            <p class="pt__d">我们曾一直以为设计是人类能力的衍生，是人类掌握世界的方法与力量。然而反观造物设计的历史，<strong>人造物和人类其实一样，与我们共同身处在进化之中</strong>，他们创造的是另一个维度的文明。</p></div></div>
+          <div class="pt"><span class="pt__i">4</span><div class="pt__b">
+            <p class="pt__t">一句提醒</p>
+            <p class="pt__d"><strong>人类是他们的发现者和受益者，但并不是他们的神。</strong></p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 39 道法自然 + 盖亚 ============ -->
+<section class="s s--tint" data-sec="六 · 设计与自然" data-title="道法自然与盖亚假说">
+  <p class="s__eyebrow">02 / 绵延数百年的同一种思想</p>
+  <h2 class="s__title">从“道法自然”<em>到盖亚假说</em></h2>
+  <div class="s__main">
+    <div class="grid2">
+      <div class="col">
+        <div class="media media--fit media--frame fill"><img src="assets/daofa-ziran.jpg" alt="水墨风格的道法自然意境图"></div>
+        <div class="card card--flat">
+          <p class="card__k">老子 · 道法自然</p>
+          <p class="card__d">“道”作为宇宙万物的本源和运行法则，其核心特性就是<strong>顺应万物的自然本性，不强行干预</strong>，让一切按照自身的规律发展。这一思想强调人与自然、人与社会的和谐统一，反对违背自然规律的主观妄为，对中国传统文化中的生态观、处世哲学产生了深远影响。</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="media media--frame fill"><img src="assets/lovelock.jpg" alt="詹姆斯·洛夫洛克肖像"></div>
+        <div class="card card--flat">
+          <p class="card__k">詹姆斯·洛夫洛克 · 盖亚假说</p>
+          <p class="card__d">盖亚假说（Gaia Hypothesis）认为<strong>地球是一个自我调节的有机整体</strong>，所有生命与非生命系统相互作用，共同维持地球环境的稳定。这一类思想从斯宾塞到德日进再到盖亚假说，已经绵延数百年；而老子在上古时期<strong>用四个字便概括了它的基本形态</strong>。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="s__foot">设计师由此开始思考：<strong>如果地球是一个自我调节的系统，那么我们的设计是否也应该遵循这种自组织、自适应的原则？</strong>这种思考促使设计从单一的人类中心主义，转向更加整体的生态系统观。</p>
+</section>
+
+<!-- ============ 40 雏菊世界（交互仿真） ============ -->
+<section class="s" data-sec="六 · 设计与自然" data-title="★ 雏菊世界模型 · 实时仿真">
+  <p class="s__eyebrow">03 / Daisyworld · 1983</p>
+  <h2 class="s__title">雏菊世界模型：<em>没有意图的自我调节</em></h2>
+  <p class="s__deck">洛夫洛克与沃森提出的计算机模拟模型，用于验证盖亚假说：<strong>即使没有有意识的意图，生命群落也可能通过自然选择与环境反馈，维持行星环境的稳定</strong>。拖动滑块试试。</p>
+  <div class="s__main">
+    <div class="dwrap">
+      <div class="dstage">
+        <canvas class="dcv" id="dwCanvas" width="560" height="560" role="img" aria-label="雏菊世界行星表面模拟"></canvas>
+        <div class="legend">
+          <span><i style="background:#20211F"></i>黑雏菊 · 吸热</span>
+          <span><i style="background:#EDEAE0"></i>白雏菊 · 反光</span>
+          <span><i style="background:#8C8163"></i>裸地</span>
+        </div>
+        <div class="dread">
+          <div><b id="dwTemp">—</b><span>行星温度 ℃</span></div>
+          <div><b id="dwBlack">—</b><span>黑雏菊 %</span></div>
+          <div><b id="dwWhite">—</b><span>白雏菊 %</span></div>
+        </div>
+      </div>
+      <div class="dctrl">
+        <div class="sld">
+          <div class="sld__h"><label class="sld__k" for="dwLum">太阳光度 Luminosity</label><span class="sld__v" id="dwLumv">1.00</span></div>
+          <input type="range" id="dwLum" min="0.6" max="1.7" step="0.005" value="1">
+        </div>
+        <canvas class="dchart" id="dwChart" width="800" height="420" role="img" aria-label="行星温度随太阳光度变化的曲线"></canvas>
+        <div class="legend">
+          <span><i style="background:var(--accent)"></i>有雏菊的行星</span>
+          <span><i style="background:var(--muted)"></i>无生命的行星（虚线）</span>
+        </div>
+        <div class="btnrow">
+          <button class="btn btn--o" type="button" id="dwAuto" aria-pressed="false">自动演化</button>
+          <button class="btn btn--o" type="button" id="dwReset">重置</button>
+        </div>
+        <div class="grid2" style="flex:0 0 auto;gap:var(--gap)">
+          <div class="card card--flat"><p class="card__k">外部增温</p><p class="card__d">白雏菊扩张 → 反射更多光 → <strong>行星降温</strong></p></div>
+          <div class="card card--flat"><p class="card__k">外部降温</p><p class="card__d">黑雏菊扩张 → 吸收更多热量 → <strong>行星升温</strong></p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="s__foot">注意曲线：虚线（无生命行星）随光度<strong>线性上升</strong>；实线（有雏菊）被“按”在 20℃ 附近一大段——直到光度超出调节范围，生命崩溃，温度才失控跃升。</p>
+</section>
+
+<!-- ============ 41 非线性与混沌 ============ -->
+<section class="s s--tint" data-sec="六 · 设计与自然" data-title="★ 非线性科学与混沌">
+  <p class="s__eyebrow">04 / 非线性科学</p>
+  <h2 class="s__title">微小的因，<em>无尽的复杂</em></h2>
+  <p class="s__deck">非线性科学认为，在许多真实系统中，<strong>微小的输入变化可能导致巨大结果</strong>，且整体特性不等于局部特性的简单和。下图两条轨迹规则完全相同，只是初值差了一点点。</p>
+  <div class="s__main">
+    <div class="grid2--l grid2">
+      <div class="col">
+        <canvas class="chcv" id="chCanvas" width="820" height="380" role="img" aria-label="两条初值极微小差异的轨迹逐渐发散"></canvas>
+        <div class="sld">
+          <div class="sld__h"><label class="sld__k" for="chEps">初始差异 Δx₀</label><span class="sld__v" id="chEpsv">1e-4</span></div>
+          <input type="range" id="chEps" min="-9" max="-2" step="0.1" value="-4">
+        </div>
+        <div class="btnrow"><button class="btn" type="button" id="chRun">重新演算</button>
+          <span class="stat" style="margin-left:8px"><b id="chSteps" style="font-size:var(--fs-sub)">—</b><span>步之后两条轨迹完全分离</span></span></div>
+      </div>
+      <div class="col col--c">
+        <div class="pts">
+          <div class="pt"><span class="pt__i">1</span><div class="pt__b">
+            <p class="pt__t">什么是混沌</p>
+            <p class="pt__d">混沌（Chaos）指确定性系统产生的一种<strong>对初始条件具有敏感依赖性</strong>的回复性非周期运动。它和随机运动一样不可预测，但<strong>混沌运动在动力学上是确定的</strong>，其不可预测性来源于运动的不稳定性。</p></div></div>
+          <div class="pt"><span class="pt__i">2</span><div class="pt__b">
+            <p class="pt__t">对进化的启示</p>
+            <p class="pt__d">混沌理论揭示了从简单到复杂之间的关系：进化所遵循的不是常规的因果论，<strong>简单的因最终产生的，可能是无尽的复杂</strong>。</p></div></div>
+          <div class="pt"><span class="pt__i">3</span><div class="pt__b">
+            <p class="pt__t">对设计的要求</p>
+            <p class="pt__d">非线性设计不仅仅是一种连续流动状的形体，<strong>更应当明确这种形体作为结果，是对周边自然环境因素的分析与对自然有机体形成逻辑的借鉴</strong>。正因为各种影响因子的复杂性，才形成动态的整体“过程设计”所产生的不规则形体。</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 42 蝴蝶效应 ============ -->
+<section class="s" data-sec="六 · 设计与自然" data-title="蝴蝶效应与因果链">
+  <p class="s__eyebrow">05 / 1972 · 洛伦兹</p>
+  <h2 class="s__title">巴西蝴蝶的翅膀，<em>与得州的龙卷风</em></h2>
+  <div class="s__main">
+    <div class="grid2">
+      <div class="col">
+        <div class="media media--fit media--frame fill"><img src="assets/chaos-theory.jpg" alt="混沌理论示意图"></div>
+        <div class="media media--fit media--frame" style="flex:0 0 30%"><img src="assets/butterfly.jpg" alt="蝴蝶效应图示"></div>
+      </div>
+      <div class="col col--c">
+        <p class="quote">在巴西一只蝴蝶翅膀的拍打，<strong>能在美国得克萨斯州产生一场龙卷风</strong>。<cite>E.N. 洛伦兹，《蝴蝶效应》，1972 年 12 月 29 日，美国科学发展学会第 139 次会议</cite></p>
+        <p class="card__d">洛伦兹由此提出了<strong>天气的不可准确预报性</strong>。这个著名的例子解释了非线性系统中微小变化如何导致巨大后果，展示了复杂系统中因果关系的非线性特性。</p>
+        <div class="chain" id="chain"></div>
+      </div>
+    </div>
+  </div>
+  <p class="s__foot">混沌理论揭示：<strong>进化这种不可测的特性，使得人工对进化的“控制”笼罩上一层浓雾</strong>——如何解开这个答案，是人类在未来获得技术飞跃必须要逾越的门槛。</p>
+</section>
+
+<!-- ============ 43 结构主义 ============ -->
+<section class="s s--tint" data-sec="六 · 设计与自然" data-title="从结构主义到后结构主义">
+  <p class="s__eyebrow">06 / 网状发展结构</p>
+  <h2 class="s__title">世界不再是<em>线性的一维视域</em></h2>
+  <div class="s__main">
+    <div class="grid2--l grid2">
+      <div class="col col--c">
+        <table class="tbl">
+          <thead><tr><th>维度</th><th>结构主义</th><th>后结构主义</th></tr></thead>
+          <tbody>
+            <tr><td>时间背景</td><td>20 世纪初 — 中期</td><td>20 世纪 60 年代后</td></tr>
+            <tr><td>核心观点</td><td>世界有可分析的稳定结构</td><td>结构是流动的、开放的</td></tr>
+            <tr><td>意义来源</td><td>元素在整体系统中的关系</td><td>意义不断被重构，没有终极解释</td></tr>
+            <tr><td>研究目标</td><td>揭示普遍的结构规律</td><td>揭示意义生产的过程与差异</td></tr>
+            <tr><td>态度</td><td>强调科学性与客观性</td><td>质疑确定性，强调多样性与解构</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <div class="media media--fit media--frame fill"><img src="assets/design-transform.jpg" alt="全球化时代的设计转型插画"></div>
+        <div class="card card--flat">
+          <p class="card__d">全球化浪潮下，我们面临的是一个<strong>消解地域、消解专业化领域、消解本本主义</strong>后即将或正在产生剧变的时代。设计发展的本质，是每一次产业革命带来的升级对“设计”概念的重新定义及其研究方法的一次反思或批判。<strong>当代设计正在形成不断在推动中趋于自我完善的网状发展结构，超越了传统的线性思维模式。</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 44 提问 ③ ============ -->
+<section class="s s--ask" data-sec="七 · 收束" data-title="❓ 提问 ③ 回到设计" data-q="3">
+  <p class="s__eyebrow">课堂讨论 · 第三次</p>
+  <div class="ask">
+    <h2 class="ask__q">如果地球是一个<em>会自我调节的系统</em>，设计师还需要做什么？</h2>
+    <div class="ask__row">
+      <div class="hints">
+        <button class="hint" type="button" aria-expanded="false">
+          <span class="hint__k">思考角度 A<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 2v8M2 6h8"/></svg></span>
+          <span class="hint__t">调节是有范围的</span>
+          <span class="hint__d">回看雏菊世界：光度超过某个值后，调节机制就彻底失效，温度垂直上升。地球的调节能力同样有边界——设计能做的，也许是“不要把系统推出那个范围”。</span>
+        </button>
+        <button class="hint" type="button" aria-expanded="false">
+          <span class="hint__k">思考角度 B<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 2v8M2 6h8"/></svg></span>
+          <span class="hint__t">自组织能否被设计</span>
+          <span class="hint__d">雏菊没有意图，却维持了稳态。Loop 的押金、TGTG 的价格激励，本质上也是在设计一种“让个体自利行为汇成系统稳态”的机制。这算不算设计自组织？</span>
+        </button>
+        <button class="hint" type="button" aria-expanded="false">
+          <span class="hint__k">思考角度 C<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 2v8M2 6h8"/></svg></span>
+          <span class="hint__t">蝴蝶效应的两面</span>
+          <span class="hint__d">微小的因能产生无尽的复杂——这既意味着风险不可控，也意味着<strong>一个很小的设计改动可能撬动很大的系统变化</strong>。哪一面更值得押注？</span>
+        </button>
+        <button class="hint" type="button" aria-expanded="false">
+          <span class="hint__k">思考角度 D<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 2v8M2 6h8"/></svg></span>
+          <span class="hint__t">回到开头的那片沙漠</span>
+          <span class="hint__d">殷玉珍种下的第一批 600 棵树只活了不到 10 棵。四十年后是 7 万亩绿洲，还有一棵跨越太平洋的友谊树。这是自我调节，还是人的坚持？或者两者本就分不开？</span>
+        </button>
+      </div>
+      <div class="timer" data-timer>
+        <p class="timer__k">讨论计时</p>
+        <div class="timer__ring">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="timer__bg" cx="50" cy="50" r="44"></circle>
+            <circle class="timer__fg" cx="50" cy="50" r="44" stroke-dasharray="276.5" stroke-dashoffset="0"></circle>
+          </svg>
+          <span class="timer__t" data-t>3:00</span>
+        </div>
+        <div class="timer__btns">
+          <button class="tbtn" type="button" data-set="120">2 分钟</button>
+          <button class="tbtn" type="button" data-set="180">3 分钟</button>
+          <button class="tbtn" type="button" data-set="300">5 分钟</button>
+        </div>
+        <div class="timer__btns">
+          <button class="tbtn" type="button" data-go>开始</button>
+          <button class="tbtn" type="button" data-rst>重置</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 45 课后作业 ============ -->
+<section class="s" data-sec="七 · 收束" data-title="课后作业">
+  <p class="s__eyebrow">课后作业</p>
+  <h2 class="s__title">生活中有哪些<br>“<em>不可持续</em>“的产品或现象？</h2>
+  <div class="s__main">
+    <div class="grid2--r grid2">
+      <div class="col col--c">
+        <div class="card card--accent">
+          <p class="card__k">具体要求</p>
+          <p class="card__d" style="font-size:var(--fs-sub);line-height:1.8">
+            <strong>1.</strong> 寻找 <strong>3—5 种</strong>“不可持续”的产品或现象；<br>
+            <strong>2.</strong> 解释“不可持续”<strong>表现在哪里</strong>。</p>
+        </div>
+        <div class="pts">
+          <div class="pt"><span class="pt__i">提</span><div class="pt__b">
+            <p class="pt__t">可以从这些角度切入</p>
+            <p class="pt__d"><strong>材料</strong>（是否可回收、是否混合材质）· <strong>生命周期</strong>（使用时长 vs 存在时长）· <strong>系统关系</strong>（谁在为它的末端付费）· <strong>责任边界</strong>（生产者、平台、用户、城市）· <strong>用户行为</strong>（设计是否鼓励了浪费）</p></div></div>
+          <div class="pt"><span class="pt__i">忌</span><div class="pt__b">
+            <p class="pt__t">避免这样写</p>
+            <p class="pt__d">“塑料袋不环保，因为塑料不可降解”——这只说了材料。<strong>请至少说清一条系统关系</strong>：它为什么被大量使用？谁从中获益？改变它需要哪些环节同时配合？</p></div></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="media media--frame fill"><img src="assets/society-people.jpg" alt="多元背景的人群"></div>
+        <p class="cap">提示：从你今天用过、然后丢掉的东西开始想。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 46 选题方向 ============ -->
+<section class="s s--tint" data-sec="七 · 收束" data-title="课程设计选题方向">
+  <p class="s__eyebrow">课程设计</p>
+  <h2 class="s__title">四个可选主题方向</h2>
+  <div class="s__main">
+    <div class="grid4">
+      <div class="card">
+        <p class="card__k">方向 01</p><p class="card__t">艺术疗愈设计</p>
+        <p class="card__d">为抑郁症、孤独症、狂躁症、失亲者、失恋者、失友者，打开心灵枷锁，重回正常生活。</p>
+        <p class="cap" style="margin-top:auto;padding-top:11px;border-top:1px solid var(--border)">传统绘画 / 现代装置艺术 / 数字艺术 / AI 生成艺术 / 空间艺术</p>
+      </div>
+      <div class="card">
+        <p class="card__k">方向 02</p><p class="card__t">创意文具与文件管理</p>
+        <p class="card__d">围绕办公或学习场景中的文具使用、资料整理、文件归档、会议记录、桌面收纳等需求展开。</p>
+        <p class="cap" style="margin-top:auto;padding-top:11px;border-top:1px solid var(--border)">低碳材料 / 模块化结构 / 可持续使用 / 高效体验</p>
+      </div>
+      <div class="card">
+        <p class="card__k">方向 03</p><p class="card__t">时尚生活设计</p>
+        <p class="card__d">时尚生活方式是“时间”与“崇尚”的相加。从国潮崛起到可持续实践，从虚拟衣橱到慢生活哲学，核心在于通过服装、服饰、珠宝、配饰、虚拟时尚等媒介，实现功能需求、美学表达与文化认同的统一。</p>
+        <p class="cap" style="margin-top:auto;padding-top:11px;border-top:1px solid var(--border)">服装 / 服饰 / 珠宝 / 配饰 / 虚拟时尚</p>
+      </div>
+      <div class="card">
+        <p class="card__k">方向 04</p><p class="card__t">“她力量”设计</p>
+        <p class="card__d">女性在教育、职业、家庭、科技、网络等多样环境下的处境与精神状态，讲述她们的挑战、选择、成长与影响；鼓励通过多元性别共建的视角，呈现女性力量的丰富内涵与现实张力。</p>
+        <p class="cap" style="margin-top:auto;padding-top:11px;border-top:1px solid var(--border)">助力构建一个更温柔、有力、公正的社会结构</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 47 结束 ============ -->
+<section class="s cover" data-sec="七 · 收束" data-title="结束">
+  <div class="cover__band"><img src="assets/china-landscape.jpg" alt=""></div>
+  <div class="cover__in">
+    <div class="cover__meta"><span>本节课结束</span><span>谢谢</span></div>
+    <h1 class="cover__t">人们将自然逻辑输入机器的同时，<br><em>也把技术逻辑带到了生命之中</em></h1>
+    <p class="cover__d">可持续设计不是一种风格，而是一种问题识别方式——它要求我们在动手之前，先想清楚边界画在哪里、时间尺度有多长、谁在承担代价。</p>
+    <p class="cover__en" style="margin-top:clamp(20px,3.2vh,36px)">道法自然 · Sustainable Design</p>
+  </div>
+</section>
+
+<div class="tag" id="secTag"></div>
+<div class="pager">
+  <button class="pager__b" type="button" id="prevBtn" aria-label="上一页"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7.5 2L3.5 6l4 4"/></svg></button>
+  <span><span class="pager__n" id="curN">1</span> / <span id="totN">1</span></span>
+  <button class="pager__b" type="button" id="nextBtn" aria-label="下一页"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4.5 2l4 4-4 4"/></svg></button>
+</div>
+</main>
+</div>
+
+<div class="ov" id="ov"><p class="ov__t">全部页面 · 点击跳转 · 按 O 或 Esc 关闭</p><div class="ov__g" id="ovGrid"></div></div>
+
+<script>
+(function(){
+"use strict";
+var RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+var $=function(s,c){return (c||document).querySelector(s);};
+var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){return null;}}
+function cssv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+
+/* ================= 幻灯片导航 ================= */
+var slides=$$(".s"), cur=0, N=slides.length;
+var railList=$("#railList"), ovGrid=$("#ovGrid");
+$("#totN").textContent=N; $("#totalHint").textContent=N;
+
+(function buildNav(){
+  var lastSec=null, rf=document.createDocumentFragment(), of=document.createDocumentFragment();
+  slides.forEach(function(s,i){
+    var sec=s.dataset.sec||"", title=s.dataset.title||("第 "+(i+1)+" 页");
+    if(sec!==lastSec){
+      var h=document.createElement("p"); h.className="rail__sec"; h.textContent=sec;
+      rf.appendChild(h); lastSec=sec;
+    }
+    var b=document.createElement("button");
+    b.type="button"; b.className="rail__i"+(s.dataset.q?" is-q":""); b.dataset.i=i;
+    b.innerHTML='<b></b><span></span>';
+    b.firstChild.textContent=String(i+1).padStart(2,"0");
+    b.lastChild.textContent=title;
+    rf.appendChild(b);
+
+    var o=document.createElement("button");
+    o.type="button"; o.className="ov__i"; o.dataset.i=i;
+    o.innerHTML='<b></b><span></span>';
+    o.firstChild.textContent=String(i+1).padStart(2,"0")+" · "+sec;
+    o.lastChild.textContent=title;
+    of.appendChild(o);
+  });
+  railList.appendChild(rf); ovGrid.appendChild(of);
+})();
+
+var railBtns=$$(".rail__i"), ovBtns=$$(".ov__i");
+function go(n,scrollNav){
+  n=Math.max(0,Math.min(N-1,n));
+  if(n===cur && slides[n].classList.contains("is-on"))return;
+  slides.forEach(function(s,i){s.classList.toggle("is-on",i===n);});
+  railBtns.forEach(function(b,i){b.classList.toggle("is-on",i===n);});
+  ovBtns.forEach(function(b,i){b.classList.toggle("is-on",i===n);});
+  cur=n;
+  $("#curN").textContent=n+1;
+  $("#barFill").style.width=(N>1?(n/(N-1))*100:0)+"%";
+  $("#secTag").textContent=slides[n].dataset.sec||"";
+  if(scrollNav!==false&&railBtns[n])railBtns[n].scrollIntoView({block:"nearest"});
+  document.dispatchEvent(new CustomEvent("slide",{detail:{i:n,el:slides[n]}}));
+}
+railBtns.forEach(function(b){b.addEventListener("click",function(){go(+b.dataset.i);});});
+ovBtns.forEach(function(b){b.addEventListener("click",function(){go(+b.dataset.i);closeOv();});});
+$("#prevBtn").addEventListener("click",function(){go(cur-1);});
+$("#nextBtn").addEventListener("click",function(){go(cur+1);});
+
+var ov=$("#ov");
+function openOv(){ov.classList.add("is-on");}
+function closeOv(){ov.classList.remove("is-on");}
+ov.addEventListener("click",function(e){if(e.target===ov)closeOv();});
+
+document.addEventListener("keydown",function(e){
+  var t=e.target.tagName;
+  if(t==="INPUT"||t==="TEXTAREA")return;
+  if(e.key==="Escape"){closeOv();return;}
+  if(e.key==="o"||e.key==="O"){e.preventDefault();ov.classList.contains("is-on")?closeOv():openOv();return;}
+  if(ov.classList.contains("is-on"))return;
+  if(e.key==="ArrowRight"||e.key==="PageDown"||e.key===" "){e.preventDefault();go(cur+1);}
+  else if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();go(cur-1);}
+  else if(e.key==="Home"){e.preventDefault();go(0);}
+  else if(e.key==="End"){e.preventDefault();go(N-1);}
+  else if(e.key==="h"||e.key==="H"){$("#app").classList.toggle("rail-off");}
+  else if(e.key==="f"||e.key==="F"){
+    if(document.fullscreenElement)document.exitFullscreen();
+    else document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();
+  }
+  else if(e.key==="d"||e.key==="D"){
+    var r=document.documentElement;
+    r.setAttribute("data-theme",r.getAttribute("data-theme")==="dark"?"light":"dark");
+    document.dispatchEvent(new CustomEvent("themechange"));
+  }
+});
+go(0);
+
+/* ================= 视频兜底 ================= */
+(function(){
+  var v=$("#hookVideo"), ph=$("#hookPh"); if(!v)return;
+  var settled=false;
+  function ok(){ if(settled)return; settled=true; ph.hidden=true; v.style.display=""; }
+  function fail(){ if(settled)return; settled=true; v.style.display="none"; ph.hidden=false; }
+  /* 视频一旦读到元数据就判定为可用，超时兜底只在此之前生效 */
+  v.addEventListener("loadedmetadata",ok);
+  v.addEventListener("loadeddata",ok);
+  v.addEventListener("error",fail,true);
+  var s=v.querySelector("source");
+  if(s)s.addEventListener("error",fail);
+  setTimeout(function(){ if(!v.videoWidth && v.readyState===0) fail(); },4000);
+  document.addEventListener("slide",function(e){ if(e.detail.el!==v.closest(".s")&&!v.paused)v.pause(); });
+})();
+
+/* ================= 提问计时器 ================= */
+$$("[data-timer]").forEach(function(box){
+  var disp=$("[data-t]",box), fg=$(".timer__fg",box), C=276.5;
+  var total=parseInt(disp.textContent.split(":")[0],10)*60+parseInt(disp.textContent.split(":")[1],10);
+  var left=total, id=null;
+  function paint(){
+    var m=Math.floor(left/60), s=left%60;
+    disp.textContent=m+":"+String(s).padStart(2,"0");
+    fg.style.strokeDashoffset=String(C*(1-(total?left/total:0)));
+    box.classList.toggle("is-up",left===0);
+  }
+  function stop(){ if(id){clearInterval(id);id=null;} $("[data-go]",box).textContent="开始"; $("[data-go]",box).classList.remove("is-on"); }
+  $$("[data-set]",box).forEach(function(b){
+    b.addEventListener("click",function(){
+      stop(); total=left=+b.dataset.set;
+      $$("[data-set]",box).forEach(function(x){x.classList.toggle("is-on",x===b);});
+      paint();
+    });
+  });
+  $("[data-go]",box).addEventListener("click",function(){
+    if(id){stop();return;}
+    if(left===0)left=total;
+    this.textContent="暂停"; this.classList.add("is-on");
+    id=setInterval(function(){ left--; paint(); if(left<=0){left=0;paint();stop();} },1000);
+  });
+  $("[data-rst]",box).addEventListener("click",function(){ stop(); left=total; paint(); });
+  paint();
+});
+
+/* ================= 提示卡展开 ================= */
+$$(".hint").forEach(function(h){
+  h.addEventListener("click",function(){
+    h.setAttribute("aria-expanded", h.getAttribute("aria-expanded")==="true"?"false":"true");
+  });
+});
+
+/* ================= 视角切换 ================= */
+(function(){
+  var sw=$(".sw"); if(!sw)return;
+  var btns=$$("button",sw), cols=$$(".vs__c");
+  function set(i){
+    btns.forEach(function(b,j){b.setAttribute("aria-pressed",String(j===i));});
+    cols.forEach(function(c,j){c.dataset.act=String(j===i);c.dataset.dim=String(j!==i);});
+  }
+  btns.forEach(function(b,i){b.addEventListener("click",function(){set(i);});});
+  set(1);
+})();
+
+/* ================= 系统边界 ================= */
+(function(){
+  var opts=$$("#opts input"); if(!opts.length)return;
+  var W={single:{material:62,delivery:14,washing:0,behavior:0,waste:38},
+         reuse:{material:12,delivery:26,washing:34,behavior:30,waste:5}};
+  var NOTE={
+    "":"至少选择一个环节，才能开始比较。",
+    material:"只比较包装材料时，可重复餐盒<b>压倒性占优</b>——这正是最常见、也最容易误导人的结论。",
+    delivery:"加入配送与返程回收后，差距开始缩小：可重复方案需要额外的物流里程。",
+    washing:"清洗一旦计入，可重复方案的能耗与水耗浮出水面。<b>清洗距离越远，优势流失越快。</b>",
+    behavior:"归还率是整个系统的命门。<b>用户不还，循环就不成立</b>，前面所有的材料优势都会被摊薄。",
+    waste:"末端废弃物处理重新拉开差距：一次性方案把成本推给了城市清运系统。"
+  };
+  var vS=$("#vSingle"), vR=$("#vReuse"), fS=$("#fSingle"), fR=$("#fReuse"), vd=$("#verdict");
+  function calc(){
+    var keys=opts.filter(function(o){return o.checked;}).map(function(o){return o.dataset.key;});
+    var s=0,r=0; keys.forEach(function(k){s+=W.single[k];r+=W.reuse[k];});
+    var mx=Math.max(s,r,1);
+    fS.style.width=(s/mx*100)+"%"; fR.style.width=(r/mx*100)+"%";
+    vS.textContent=keys.length?String(s):"—"; vR.textContent=keys.length?String(r):"—";
+    if(!keys.length){vd.innerHTML=NOTE[""];return;}
+    var v = s>r?"当前边界下，<b>可重复方案更优</b>。" : r>s?"当前边界下，<b>一次性方案反而更优</b>。" : "当前边界下，<b>两者持平</b>。";
+    vd.innerHTML=v+" "+(NOTE[keys[keys.length-1]]||"");
+  }
+  opts.forEach(function(o){o.addEventListener("change",calc);});
+  calc();
+})();
+
+/* ================= 循环图 ================= */
+(function(){
+  var svg=$(".loopsvg"); if(!svg)return;
+  var nds=$$(".nd",svg), dot=$("#flowdot");
+  var D=[
+    {t:"用户 / 需求",d:"设计的起点不是造型，而是识别真实需求，以及需求被满足的方式。用户习惯、购买动机与使用频率，共同决定了整个系统的物质流规模。",q:"追问：这个需求必须由一件新产品来满足吗？"},
+    {t:"产品 / 材料",d:"材料选择、结构设计与生命周期在此确定。模块化、可拆解、单一材质，都是为了让产品在末端仍有被重新利用的可能。",q:"追问：它坏了以后，谁能修，修得起吗？"},
+    {t:"服务 / 维护",d:"以“成果”和“效益”取代物质产品的消耗——Manzini 所说的产品服务系统，正是让使用而非占有成为价值交付的方式。",q:"追问：延长一年寿命，比换一个“环保材料”影响更大吗？"},
+    {t:"回收 / 再分配",d:"回收不是链条的终点，而是回到起点的通道。押金、逆向物流、再制造与二手流通，决定了闭环能否真正闭合。",q:"追问：回收成本由谁承担，才不会让循环停摆？"}
+  ];
+  function sel(i){
+    nds.forEach(function(n,j){n.classList.toggle("is-on",j===i);});
+    $("#lpIdx").textContent="环节 0"+(i+1);
+    $("#lpT").textContent=D[i].t; $("#lpD").textContent=D[i].d; $("#lpQ").textContent=D[i].q;
+  }
+  nds.forEach(function(n,i){
+    n.addEventListener("click",function(){sel(i);});
+    n.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();sel(i);}});
+  });
+  sel(0);
+  if(!RM){var a=0;(function spin(){a+=0.006;
+    dot.setAttribute("cx",String(220+150*Math.sin(a)));
+    dot.setAttribute("cy",String(220-150*Math.cos(a)));
+    requestAnimationFrame(spin);})();}
+})();
+
+/* ================= 投票 ================= */
+$$("[data-poll]").forEach(function(card){
+  var key="sdp-"+card.dataset.poll, btns=$$(".pbtn",card), res=$(".pres",card);
+  var mA=$('[data-m="a"]',card), mB=$('[data-m="b"]',card);
+  function read(){try{return JSON.parse(store(key)||'{"a":0,"b":0,"me":null}');}catch(e){return{a:0,b:0,me:null};}}
+  function paint(s){
+    var tot=s.a+s.b;
+    btns.forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.v===s.me));});
+    if(!tot){res.classList.remove("is-on");mA.style.width="0";mB.style.width="0";return;}
+    var pa=Math.round(s.a/tot*100);
+    mA.style.width=pa+"%"; mB.style.width=(100-pa)+"%";
+    res.textContent="本机累计 "+tot+" 票 · "+pa+"% / "+(100-pa)+"%";
+    res.classList.add("is-on");
+  }
+  btns.forEach(function(b){
+    b.addEventListener("click",function(){
+      var s=read(), v=b.dataset.v; if(s.me===v)return;
+      if(s.me)s[s.me]=Math.max(0,s[s.me]-1);
+      s[v]++; s.me=v; store(key,JSON.stringify(s)); paint(s);
+    });
+  });
+  paint(read());
+});
+
+/* ================= 时间轴 ================= */
+(function(){
+  var grid=$("#tlGrid"); if(!grid)return;
+  var E=[
+    ["1962","global","《寂静的春天》","蕾切尔·卡逊首次反思过度使用化学农药导致的环境污染，被认为是世界环保运动的奠基石。"],
+    ["1970","design","《为真实的世界设计》","帕帕奈克提出“设计伦理”，主张设计师担负对社会和生态变化的责任。"],
+    ["1970","global","首个“地球日”","参议员纳尔逊发起，当天超过 2000 万人在美国各地游行集会。"],
+    ["1972","global","《增长的极限》","罗马俱乐部首次将系统思考应用于全球环境问题。"],
+    ["1972","global","斯德哥尔摩人类环境会议","联合国首次召开，通过《人类环境宣言》，决定成立 UNEP。"],
+    ["1972","china","中国参加人类环境会议","中国的可持续发展行动由此起步。"],
+    ["1973","china","第一次全国环境保护会议","通过《关于保护和改善环境的若干规定》，确定“保护环境、造福人民”方针。"],
+    ["1978","china","环境保护写入宪法","宪法第一次列入国家保护环境和自然资源的内容。"],
+    ["1980","global","“可持续发展”首次出现","见于 IUCN、UNEP 与 WWF 联合发表的《世界自然保护战略》。"],
+    ["1983","global","世界环境与发展委员会","联合国成立 WECD，由布伦特兰夫人担任主席。"],
+    ["1983","design","雏菊世界模型","洛夫洛克与沃森用计算机模拟验证盖亚假说的自我调节机制。"],
+    ["1987","global","《我们共同的未来》","布伦特兰报告提出沿用至今的可持续发展定义。"],
+    ["1989","china","《环境保护法》","中国环境立法体系确立。"],
+    ["1990","global","人类发展指数 HDI","联合国发展署提出，修正以单一 GDP 评估发展进程的方法。"],
+    ["1992","global","里约地球峰会","《里约宣言》首次将可持续发展视为一项人类“权利”。"],
+    ["1992","china","承诺履行《21 世纪议程》","中国参加里约大会并作出庄严承诺。"],
+    ["1994","design","超越绿色设计","Dewberry 与 Goggin：可持续设计要面对“产品”以外更复杂的制约。"],
+    ["1994","china","《中国 21 世纪议程》","中国发布本国的可持续发展行动纲领。"],
+    ["1995","design","可持续设计中心成立","英国萨里艺术设计学院成立并开设硕士课程。"],
+    ["1995","china","写入“九五”计划","正式纳入国民经济和社会发展计划。"],
+    ["1997","china","党的十五大","强调在现代化建设中必须实施可持续发展战略。"],
+    ["2000s","design","产品服务系统","Manzini：以“成果”和“效益”取代物质产品的消耗。"],
+    ["2003","china","科学发展观","十六届三中全会提出以人为本、全面协调可持续。"],
+    ["2005","china","“生态文明”概念","中央工作座谈会提出；十七大列入小康社会目标。"],
+    ["2005","global","《千年生态系统评估报告》","人类已经消耗了地球上 2/3 的自然资源。"],
+    ["2012","china","美丽中国","十八大把生态文明建设融入五位一体总体布局。"],
+    ["2017","china","人与自然和谐共生","十九大将其作为新时代基本方略之一。"],
+    ["2021","global","IPCC 第六次评估报告","全球地表平均温度较工业化前高出约 1℃。"]
+  ];
+  var COL={global:"var(--accent-ink)",china:"var(--tan)",design:"#3E7D68"};
+  var f=document.createDocumentFragment();
+  E.forEach(function(e){
+    var d=document.createElement("div");
+    d.className="card card--flat"; d.dataset.f=e[1];
+    d.style.borderLeft="3px solid "+COL[e[1]];
+    var k=document.createElement("p"); k.className="card__k"; k.textContent=e[0]; k.style.color=COL[e[1]];
+    var t=document.createElement("p"); t.className="card__t"; t.style.fontSize="var(--fs-body)"; t.textContent=e[2];
+    var s=document.createElement("p"); s.className="card__d"; s.style.fontSize="var(--fs-small)"; s.textContent=e[3];
+    d.appendChild(k);d.appendChild(t);d.appendChild(s); f.appendChild(d);
+  });
+  grid.appendChild(f);
+  var items=$$("[data-f]",grid);
+  $$("#tlFilters button").forEach(function(b){
+    b.addEventListener("click",function(){
+      var f=b.dataset.f;
+      $$("#tlFilters button").forEach(function(x){x.setAttribute("aria-pressed",String(x===b));});
+      items.forEach(function(it){ it.style.display=(f==="all"||it.dataset.f===f)?"":"none"; });
+    });
+  });
+})();
+
+/* ================= 四象限 ================= */
+(function(){
+  var cells=$$(".qc"); if(!cells.length)return;
+  var D=[
+    {t:"高福利 · 低消耗",d:"唯一的可持续发展模式。目前几乎没有国家能够达到这一理想状态。",n:"这也是可持续设计真正的目标象限——在生态环境的承载能力以内，实现较高的福利水平。"},
+    {t:"高福利 · 高消耗",d:"大多数发达国家的发展模式，如美国、澳大利亚、加拿大等，生态足迹远超地球承载力。",n:"澳大利亚、美国、加拿大的生态足迹各为其生态承载力的 5.37、4.75、4.72 倍。"},
+    {t:"低福利 · 低消耗",d:"大多数欠发达国家。虽然生态足迹小，但人民生活水平低下。",n:"“低福利”国家能否通过对自然资源的合理使用提升本国整体福利，是未来国际政治的焦点议题之一。"},
+    {t:"低福利 · 高消耗",d:"部分发展中国家和转型国家，如俄罗斯等，资源利用效率低下。",n:"高投入未必换来高福利——发展模式本身的效率同样是可持续性的一部分。"}
+  ];
+  function sel(i){
+    cells.forEach(function(c,j){c.classList.toggle("is-on",j===i);});
+    $("#qK").textContent="象限 0"+(i+1);
+    $("#qT").textContent=D[i].t; $("#qD").textContent=D[i].d; $("#qN").textContent=D[i].n;
+  }
+  cells.forEach(function(c,i){
+    c.addEventListener("click",function(){sel(i);});
+    c.addEventListener("mouseenter",function(){sel(i);});
+  });
+  $$(".pt2").forEach(function(p){
+    p.addEventListener("mouseenter",function(){
+      $("#qK").textContent="国家数据";
+      $("#qT").textContent=p.dataset.n; $("#qD").textContent=p.dataset.v;
+      $("#qN").textContent="如果全球居民都像他们一样生活，至少需要 4~5 个地球才能满足人类的自然消耗需求。";
+    });
+  });
+  sel(0);
+})();
+
+/* ================= Daisyworld ================= */
+(function(){
+  var cv=$("#dwCanvas"); if(!cv)return;
+  var ctx=cv.getContext("2d"), chart=$("#dwChart"), cx=chart.getContext("2d");
+  var lum=$("#dwLum"), lumv=$("#dwLumv");
+  var oT=$("#dwTemp"), oB=$("#dwBlack"), oW=$("#dwWhite");
+  var auto=$("#dwAuto"), reset=$("#dwReset");
+  var S=917,SIG=5.67e-8,Q=2.06e9,G=0.3,AG=0.5,AW=0.75,AB=0.25,FL=0.001;
+  var aw=0.01, ab=0.01, L=1, playing=false, dir=1, live=false;
+
+  function alb(){var x=1-aw-ab;return x*AG+aw*AW+ab*AB;}
+  function pK(l){return Math.pow(l*S*(1-alb())/SIG,0.25);}
+  function lK(Te,a){var v=Q*(alb()-a)+Math.pow(Te,4);return v>0?Math.pow(v,0.25):0;}
+  function beta(T){var b=1-0.003265*Math.pow(295.5-T,2);return b>0?b:0;}
+  function step(dt){
+    var Te=pK(L),x=1-aw-ab; if(x<0)x=0;
+    aw+=aw*(x*beta(lK(Te,AW))-G)*dt;
+    ab+=ab*(x*beta(lK(Te,AB))-G)*dt;
+    if(aw<FL)aw=FL; if(ab<FL)ab=FL;
+    if(aw>1)aw=1; if(ab>1)ab=1;
+    if(aw+ab>0.99){var s=0.99/(aw+ab);aw*=s;ab*=s;}
+  }
+  function deadK(l){return Math.pow(l*S*(1-AG)/SIG,0.25);}
+
+  var Nc=26, cells=[];
+  (function(){var r=Nc/2;
+    for(var i=0;i<Nc;i++)for(var j=0;j<Nc;j++){
+      var dx=i-r+0.5,dy=j-r+0.5;
+      if(dx*dx+dy*dy<=r*r)cells.push({x:i,y:j,k:Math.random()});
+    }
+    cells.sort(function(a,b){return a.k-b.k;});})();
+
+  function drawPlanet(){
+    var W=cv.width, cell=W/Nc;
+    ctx.clearRect(0,0,W,W);
+    var nB=Math.round(ab*cells.length), nW=Math.round(aw*cells.length);
+    ctx.save(); ctx.beginPath(); ctx.arc(W/2,W/2,W/2-3,0,6.2832); ctx.clip();
+    ctx.fillStyle="#8C8163"; ctx.fillRect(0,0,W,W);
+    for(var i=0;i<cells.length;i++){
+      var c=cells[i];
+      if(i<nB)ctx.fillStyle="#20211F";
+      else if(i>=cells.length-nW)ctx.fillStyle="#EDEAE0";
+      else continue;
+      ctx.beginPath(); ctx.arc(c.x*cell+cell/2,c.y*cell+cell/2,cell*0.42,0,6.2832); ctx.fill();
+    }
+    var g=ctx.createRadialGradient(W*.34,W*.3,W*.05,W*.5,W*.5,W*.58);
+    g.addColorStop(0,"rgba(255,255,255,.16)"); g.addColorStop(1,"rgba(0,0,0,.42)");
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,W); ctx.restore();
+  }
+
+  var L0=0.6,L1=1.7,deadPts=[],livePts=[];
+  (function(){for(var l=L0;l<=L1+1e-9;l+=0.01)deadPts.push([l,deadK(l)-273.15]);})();
+  (function(){
+    var sw=0.01,sb=0.01,kw=aw,kb=ab,kl=L;
+    for(var l=L0;l<=L1+1e-9;l+=0.01){
+      aw=sw;ab=sb;L=l;
+      for(var k=0;k<3000;k++)step(0.05);
+      sw=aw;sb=ab; livePts.push([l,pK(l)-273.15]);
+    }
+    aw=kw;ab=kb;L=kl;
+  })();
+
+  function drawChart(){
+    var W=chart.width,H=chart.height,pad=46,tMin=-20,tMax=90;
+    cx.clearRect(0,0,W,H);
+    var acc=cssv("--accent")||"#3D9B35", mu=cssv("--muted")||"#5D6E62", ln=cssv("--border")||"#D8E6D4";
+    function X(l){return pad+(l-L0)/(L1-L0)*(W-pad-18);}
+    function Y(t){return H-pad-(t-tMin)/(tMax-tMin)*(H-pad-20);}
+    cx.strokeStyle=ln; cx.lineWidth=1; cx.font="500 15px ui-monospace,monospace";
+    [0,20,40,60,80].forEach(function(t){
+      cx.beginPath();cx.moveTo(pad,Y(t));cx.lineTo(W-18,Y(t));cx.stroke();
+      cx.fillStyle=mu;cx.textAlign="right";cx.fillText(t+"°",pad-9,Y(t)+5);});
+    [0.6,0.9,1.2,1.5].forEach(function(l){
+      cx.fillStyle=mu;cx.textAlign="center";cx.fillText(l.toFixed(1),X(l),H-pad+24);});
+    cx.font="600 15px system-ui,sans-serif"; cx.fillStyle=mu;
+    cx.textAlign="left";cx.fillText("行星温度 ℃",pad,24);
+    cx.textAlign="right";cx.fillText("太阳光度 →",W-18,H-pad+24);
+    function line(p,c,d){cx.beginPath();cx.setLineDash(d||[]);cx.strokeStyle=c;cx.lineWidth=3;
+      p.forEach(function(q,i){var a=X(q[0]),b=Y(q[1]);i?cx.lineTo(a,b):cx.moveTo(a,b);});
+      cx.stroke();cx.setLineDash([]);}
+    line(deadPts,mu,[6,7]); line(livePts,acc);
+    var t=pK(L)-273.15;
+    cx.beginPath();cx.arc(X(L),Y(t),7,0,6.2832);cx.fillStyle=acc;cx.fill();
+    cx.beginPath();cx.moveTo(X(L),Y(tMin));cx.lineTo(X(L),Y(t));
+    cx.strokeStyle=acc;cx.globalAlpha=.35;cx.lineWidth=1.5;cx.stroke();cx.globalAlpha=1;
+  }
+  function readout(){
+    oT.textContent=(pK(L)-273.15).toFixed(1);
+    oB.textContent=(ab*100).toFixed(0);
+    oW.textContent=(aw*100).toFixed(0);
+    lumv.textContent=L.toFixed(2);
+  }
+  function tick(){
+    if(!live){requestAnimationFrame(tick);return;}
+    for(var i=0;i<24;i++)step(0.05);
+    if(playing){L+=dir*0.0016;
+      if(L>=L1){L=L1;dir=-1;} if(L<=L0){L=L0;dir=1;}
+      lum.value=String(L);}
+    drawPlanet();drawChart();readout();
+    requestAnimationFrame(tick);
+  }
+  lum.addEventListener("input",function(){L=parseFloat(lum.value);playing=false;
+    auto.setAttribute("aria-pressed","false");auto.textContent="自动演化";});
+  auto.addEventListener("click",function(){playing=!playing;
+    auto.setAttribute("aria-pressed",String(playing));
+    auto.textContent=playing?"暂停演化":"自动演化";});
+  reset.addEventListener("click",function(){aw=0.01;ab=0.01;L=1;lum.value="1";playing=false;
+    auto.setAttribute("aria-pressed","false");auto.textContent="自动演化";});
+  document.addEventListener("themechange",drawChart);
+  document.addEventListener("slide",function(e){
+    live = (e.detail.el === cv.closest(".s"));
+    if(live){drawPlanet();drawChart();readout();}
+    else playing=false;
+  });
+  for(var i=0;i<4000;i++)step(0.05);
+  drawPlanet();drawChart();readout();
+  if(!RM)requestAnimationFrame(tick);
+})();
+
+/* ================= 混沌 ================= */
+(function(){
+  var cv=$("#chCanvas"); if(!cv)return;
+  var ctx=cv.getContext("2d"), eps=$("#chEps"), epsv=$("#chEpsv"), out=$("#chSteps"), run=$("#chRun");
+  var R=3.9, N2=90, prog=N2, played=false;
+  function ser(x0){var a=[x0],x=x0;for(var i=0;i<N2;i++){x=R*x*(1-x);a.push(x);}return a;}
+  function draw(){
+    var e=Math.pow(10,parseFloat(eps.value));
+    epsv.textContent=e.toExponential(0);
+    var A=ser(0.4), B=ser(0.4+e), W=cv.width, H=cv.height, pad=26;
+    ctx.clearRect(0,0,W,H);
+    var acc=cssv("--accent")||"#3D9B35", tan=cssv("--tan")||"#A9812E", ln=cssv("--border")||"#D8E6D4";
+    function X(i){return pad+i/N2*(W-pad*2);}
+    function Y(v){return H-pad-v*(H-pad*2);}
+    ctx.strokeStyle=ln;ctx.lineWidth=1;
+    [0,0.5,1].forEach(function(v){ctx.beginPath();ctx.moveTo(pad,Y(v));ctx.lineTo(W-pad,Y(v));ctx.stroke();});
+    function path(a,c){ctx.beginPath();ctx.strokeStyle=c;ctx.lineWidth=2.6;
+      for(var i=0;i<=Math.min(prog,N2);i++){var x=X(i),y=Y(a[i]);i?ctx.lineTo(x,y):ctx.moveTo(x,y);}
+      ctx.stroke();}
+    path(A,tan); path(B,acc);
+    var k=-1; for(var i=0;i<=N2;i++){if(Math.abs(A[i]-B[i])>0.25){k=i;break;}}
+    out.textContent = k<0 ? "> "+N2 : String(k);
+    if(k>=0&&k<=prog){
+      ctx.setLineDash([4,5]);ctx.strokeStyle=acc;ctx.globalAlpha=.6;ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(X(k),pad-4);ctx.lineTo(X(k),H-pad+4);ctx.stroke();
+      ctx.setLineDash([]);ctx.globalAlpha=1;
+      ctx.fillStyle=acc;ctx.font="600 14px ui-monospace,monospace";ctx.textAlign="center";
+      ctx.fillText("第 "+k+" 步",X(k),pad-10);
+    }
+  }
+  function animate(){ if(RM){prog=N2;draw();return;} prog=0;
+    (function f(){prog+=1.5;draw();if(prog<N2)requestAnimationFrame(f);})(); }
+  eps.addEventListener("input",function(){prog=N2;draw();});
+  run.addEventListener("click",animate);
+  document.addEventListener("themechange",draw);
+  document.addEventListener("slide",function(e){
+    if(e.detail.el===cv.closest(".s")&&!played){played=true;setTimeout(animate,260);}
+  });
+  draw();
+})();
+
+/* ================= 因果链 ================= */
+(function(){
+  var host=$("#chain"); if(!host)return;
+  var C=["丢了一个钉子","坏了一只蹄铁","折了一匹战马","伤了一位骑士","输了一场战争","亡了一个帝国"];
+  C.forEach(function(t,i){
+    var d=document.createElement("div");
+    d.className="chain__i"+(i===C.length-1?" is-last":"");
+    var n=document.createElement("p");n.className="chain__n";n.textContent=("0"+(i+1)).slice(-2);
+    var p=document.createElement("p");p.className="chain__t";p.textContent=t;
+    d.appendChild(n);d.appendChild(p);host.appendChild(d);
+  });
+  var items=$$(".chain__i",host), done=false;
+  document.addEventListener("slide",function(e){
+    if(e.detail.el!==host.closest(".s")||done)return;
+    done=true;
+    items.forEach(function(el,i){setTimeout(function(){el.classList.add("is-on");},RM?0:i*200);});
+  });
+})();
+
+})();
+</script>
+</body>
+</html>
