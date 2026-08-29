@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>可持续发展概论 · 课堂讲义</title>
-<!-- 单文件版：图片全部内嵌。视频：本地双击打开时请点「本机文件」选视频；若想用在线嵌入，在本文件目录执行 python3 -m http.server 并访问 localhost:8000。 -->
+<!-- 单文件版：图片已内嵌。视频三选一：① 用 tools/embed-video.py 把 mp4 烧进本文件；② 把 hook.mp4 放进同目录 assets/；③ 页面上点「本机文件」现场选。 -->
 <meta name="description" content="湖北工业大学工业设计学院《面向未来的可持续设计 · 可持续发展概论》45 分钟交互课件。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -806,7 +806,9 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
         <iframe id="hookFrame" title="殷玉珍与赛考斯的治沙故事"
           src="https://player.bilibili.com/player.html?bvid=BV1A78t68E5c&amp;autoplay=0&amp;high_quality=1&amp;danmaku=0"
           allowfullscreen allow="fullscreen" scrolling="no" frameborder="0"></iframe>
-        <video id="hookVideo" controls preload="metadata" playsinline hidden></video>
+        <video id="hookVideo" controls preload="metadata" playsinline hidden>
+          <source id="hookSrc" src="assets/hook.mp4" type="video/mp4">
+        </video>
         <div class="vph" id="hookPh" hidden>
           <div class="vph__ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
           <p class="vph__t">视频位 · 殷玉珍与赛考斯的治沙故事</p>
@@ -2726,18 +2728,45 @@ go(0);
     });
   }
 
-  /* 恢复上次选择；file:// 下永远优先本机文件 */
+  /* ---- 播放优先级 ----
+     1) 同目录/内嵌的 hook.mp4（file:// 下也能播，最稳）
+     2) 上次用「本机文件」选过的视频（存在 IndexedDB）
+     3) 在线嵌入（仅 http(s)，平台不允许 file:// 内嵌）
+     4) 提示怎么办 */
+  function useLocalTag(cb){
+    var src=$("#hookSrc");
+    if(!src||!src.getAttribute("src")){cb(false);return;}
+    var probe=document.createElement("video");
+    probe.preload="metadata"; probe.muted=true;
+    var done=false;
+    function ok(){ if(done)return; done=true; cb(true); }
+    function no(){ if(done)return; done=true; cb(false); }
+    probe.addEventListener("loadedmetadata",ok);
+    probe.addEventListener("error",no);
+    probe.src=src.getAttribute("src");
+    setTimeout(no,3500);
+  }
+  function showTag(){
+    frame.hidden=true; frame.removeAttribute("src"); ph.hidden=true;
+    v.hidden=false; v.load();
+    $$(".vbar__b[data-bv]").forEach(function(x){x.classList.remove("is-on");});
+  }
+
   var saved=null; try{ saved=JSON.parse(store(KEY)||"null"); }catch(e){}
-  loadSaved(function(bl){
-    if(bl){ showBlob(bl); return; }
-    if(isFile){
-      showPh("本页是用 <code>file://</code> 直接打开的，视频网站不允许这种方式内嵌播放。<br>点<b>「本机文件」</b>选一段视频即可播放（选过一次会被记住）；<br>或在文件所在目录执行 <code>python3 -m http.server</code>，用 <code>localhost:8000</code> 打开本页以启用在线播放。");
-    } else {
-      showFrame(saved&&saved.t==="bv" ? saved.v : "BV1A78t68E5c");
-      var ok=false;
-      frame.addEventListener("load",function(){ ok=true; });
-      setTimeout(function(){ if(!ok&&!frame.hidden) showPh("在线播放器未能加载，可能是网络受限。<br>点<b>「本机文件」</b>选一段本地视频播放。"); },7000);
-    }
+  useLocalTag(function(hasLocal){
+    if(hasLocal && (!saved || saved.t!=="bv")){ showTag(); return; }
+    loadSaved(function(bl){
+      if(bl){ showBlob(bl); return; }
+      if(hasLocal){ showTag(); return; }
+      if(isFile){
+        showPh("本页是用 <code>file://</code> 打开的，视频网站不允许这样内嵌。<br>三选一：把视频命名为 <code>hook.mp4</code> 放进同目录的 <code>assets/</code> 文件夹；<br>或点<b>「本机文件」</b>直接选一段（会被记住）；<br>或在本目录执行 <code>python3 -m http.server</code> 后用 <code>localhost:8000</code> 打开。");
+      } else {
+        showFrame(saved&&saved.t==="bv" ? saved.v : "BV1A78t68E5c");
+        var ok2=false;
+        frame.addEventListener("load",function(){ ok2=true; });
+        setTimeout(function(){ if(!ok2&&!frame.hidden) showPh("在线播放器未能加载，可能是网络受限。<br>点<b>「本机文件」</b>选一段本地视频播放。"); },7000);
+      }
+    });
   });
 
   document.addEventListener("slide",function(e){
