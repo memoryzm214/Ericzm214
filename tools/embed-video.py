@@ -27,13 +27,33 @@ def human(n):
 def main():
     ap = argparse.ArgumentParser(description="把视频内嵌进课件 HTML")
     ap.add_argument("video", help="视频文件路径（建议 mp4 / H.264）")
-    ap.add_argument("-i", "--input", default=DEFAULT_IN, help=f"输入 HTML（默认 {DEFAULT_IN}）")
-    ap.add_argument("-o", "--output", default=DEFAULT_OUT, help=f"输出 HTML（默认 {DEFAULT_OUT}）")
+    ap.add_argument("-i", "--input", default=None, help=f"输入 HTML（默认自动找 {DEFAULT_IN}）")
+    ap.add_argument("-o", "--output", default=None, help=f"输出 HTML（默认 {DEFAULT_OUT}）")
     a = ap.parse_args()
 
-    for p in (a.video, a.input):
-        if not os.path.isfile(p):
-            sys.exit(f"找不到文件：{p}")
+    # 去掉从 Finder 拖进终端时可能带上的引号和首尾空格
+    a.video = a.video.strip().strip("'\"")
+
+    if not os.path.isfile(a.video):
+        sys.exit(f"找不到视频文件：{a.video}\n提示：可以把视频从访达直接拖进终端窗口，路径会自动填好。")
+
+    # 输入 HTML：先看当前目录，再看脚本旁边、脚本的上一层
+    if a.input:
+        src_html = a.input.strip().strip("'\"")
+    else:
+        here = os.path.dirname(os.path.abspath(__file__))
+        cands = [DEFAULT_IN,
+                 os.path.join(here, DEFAULT_IN),
+                 os.path.join(here, "..", DEFAULT_IN)]
+        src_html = next((p for p in cands if os.path.isfile(p)), None)
+        if not src_html:
+            sys.exit("找不到 slides-single.html。\n"
+                     "请把它和本脚本放到同一个文件夹，或用 -i 指定它的路径。")
+    a.input = os.path.normpath(src_html)
+
+    # 输出默认放在输入 HTML 旁边
+    a.output = a.output.strip().strip("'\"") if a.output else \
+        os.path.join(os.path.dirname(os.path.abspath(a.input)), DEFAULT_OUT)
 
     ext = os.path.splitext(a.video)[1].lower()
     mime = OK_EXT.get(ext) or mimetypes.guess_type(a.video)[0]
