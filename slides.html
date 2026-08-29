@@ -104,7 +104,8 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .rail__brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px;letter-spacing:-.01em}
 .rail__brand i{width:9px;height:9px;border-radius:2px;background:var(--accent);flex:0 0 auto}
 .rail__sub{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:5px}
-.rail__list{flex:1;overflow-y:auto;padding:8px 0 14px;scrollbar-width:thin}
+/* flex 子项必须显式 min-height:0，否则不会收缩，列表会溢出压到页脚上 */
+.rail__list{flex:1 1 auto;min-height:0;overflow-y:auto;padding:8px 0 14px;scrollbar-width:thin}
 .rail__list::-webkit-scrollbar{width:5px}
 .rail__list::-webkit-scrollbar-thumb{background:var(--wash-2);border-radius:3px}
 .rail__sec{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
@@ -117,8 +118,9 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .rail__i.is-on{color:var(--accent-ink);border-left-color:var(--accent);background:var(--accent-wash);font-weight:500}
 .rail__i.is-on b{opacity:1}
 .rail__i.is-q b{color:var(--tan);opacity:1}
+/* 等宽字体不含中文字形，小字号下回退会导致字形重叠：此处用无衬线，仅按键保留等宽 */
 .rail__foot{padding:10px 18px 14px;border-top:1px solid var(--border);
-  font-family:var(--f-mono);font-size:9.5px;line-height:1.8;color:var(--muted)}
+  font-family:var(--f-sans);font-size:11px;line-height:1.9;color:var(--muted)}
 .rail__foot kbd{font-family:var(--f-mono);background:var(--wash);border:1px solid var(--border);
   border-radius:3px;padding:0 4px;font-size:9px}
 
@@ -238,6 +240,24 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .cover__band{position:absolute;inset:0 0 0 auto;width:38%;background:var(--green-deep);z-index:0}
 .cover__band img{width:100%;height:100%;object-fit:cover;opacity:.34}
 .cover__in{position:relative;z-index:1;max-width:60%}
+
+/* 封面：左文右图 */
+.cv{display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(24px,3.2vw,56px);
+  flex:1;min-height:0;align-items:center;position:relative;z-index:1}
+.cv__l{display:flex;flex-direction:column;justify-content:center;min-width:0}
+.cv__r{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1.32fr 1fr;
+  gap:clamp(9px,1.3vh,15px);height:100%;max-height:78vh;min-height:0}
+.cv__r .media{border-radius:var(--r-lg);box-shadow:var(--shadow-lg)}
+.cv__r .media:first-child{grid-column:1/-1}
+.cv__r .media img{transition:transform 9s linear}
+.s.is-on .cv__r .media img{transform:scale(1.07)}
+.cv__strip{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.6vw,26px);
+  padding-top:clamp(12px,2vh,20px);margin-top:clamp(12px,2vh,20px);
+  border-top:1px solid var(--border);flex:0 0 auto;position:relative;z-index:1}
+.cv__s b{display:block;font-family:var(--f-serif);font-size:clamp(21px,3.4vh,34px);line-height:1;
+  font-weight:700;color:var(--accent-ink);font-variant-numeric:tabular-nums}
+.cv__s span{display:block;font-size:clamp(10.5px,1.35vh,13px);line-height:1.5;color:var(--muted);margin-top:6px}
+@media (max-width:1080px){.cv{grid-template-columns:1fr}.cv__r{display:none}}
 .cover__meta{display:flex;flex-wrap:wrap;gap:8px 22px;font-family:var(--f-mono);font-size:var(--fs-label);
   letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:clamp(16px,2.6vh,30px)}
 .cover__meta span{display:flex;align-items:center;gap:7px}
@@ -271,6 +291,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .vph__lk a{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;color:#0E1912;background:var(--leaf);
   padding:5px 11px;border-radius:var(--r-pill);text-decoration:none;transition:background 160ms}
 .vph__lk a:hover{background:#9BDA8E}
+.vph__pick{font-size:var(--fs-body);font-weight:600;color:#0E1912;background:var(--leaf);
+  padding:9px 22px;border-radius:var(--r-pill);transition:background 160ms,transform 160ms}
+.vph__pick:hover{background:#9BDA8E;transform:translateY(-1px)}
+.vph strong{color:#fff}
 
 .hookside{display:flex;flex-direction:column;gap:var(--gap);min-height:0;overflow:hidden}
 .tline{display:flex;flex-direction:column;gap:0;flex:1;min-height:0}
@@ -288,11 +312,11 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
    ============================================================ */
 .s--ask{background:linear-gradient(155deg,var(--wash),var(--white) 62%)}
 :root[data-theme="dark"] .s--ask{background:linear-gradient(155deg,#1B2E20,#0E1912 62%)}
-.ask{display:flex;flex-direction:column;flex:1;min-height:0;gap:var(--gap-2)}
+.ask{display:flex;flex-direction:column;flex:1 1 auto;min-height:0;gap:var(--gap-2)}
 .ask__q{font-family:var(--f-serif);font-size:clamp(22px,4.0vh,42px);line-height:1.35;font-weight:700;
   text-wrap:balance;max-width:26ch}
 .ask__q em{font-style:normal;color:var(--accent-ink);border-bottom:4px solid var(--leaf-soft);padding-bottom:1px}
-.ask__row{display:grid;grid-template-columns:1.25fr .75fr;gap:var(--gap-2);flex:1;min-height:0}
+.ask__row{display:grid;grid-template-columns:1.25fr .75fr;gap:var(--gap-2);flex:1 1 auto;min-height:0}
 .hints{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);align-content:start}
 .hint{background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);
   padding:clamp(11px,1.7vh,17px);cursor:pointer;position:relative;overflow:hidden;
@@ -474,8 +498,43 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
   .grid3,.grid4{grid-template-columns:1fr 1fr}
   .chain{grid-template-columns:repeat(3,1fr)}
 }
+/* ============================================================
+   入场动效：每次切到该页时重新播放
+   ============================================================ */
+[data-anim]{opacity:0;will-change:opacity,transform}
+[data-anim="up"]{transform:translateY(20px)}
+[data-anim="left"]{transform:translateX(-22px)}
+[data-anim="right"]{transform:translateX(22px)}
+[data-anim="scale"]{transform:scale(.94)}
+[data-anim="mask"]{clip-path:inset(0 0 105% 0);opacity:1;transform:none}
+[data-anim].anim-in{
+  opacity:1;transform:none;clip-path:inset(0 0 -12% 0);
+  transition:opacity 620ms var(--ease),transform 620ms var(--ease),clip-path 820ms var(--ease);
+}
+/* 循环图圆环描边 */
+.loopsvg .arc{stroke-dasharray:6 14}
+.s.is-on .loopsvg .ring{stroke-dasharray:943;stroke-dashoffset:943;animation:ring-draw 1400ms var(--ease) 160ms forwards}
+@keyframes ring-draw{to{stroke-dashoffset:0}}
+/* 条形从 0 长出 */
+.bar2__f{transform-origin:left}
+/* 象限格依次浮现 */
+.quadsvg .qc{transform-origin:center;transform-box:fill-box}
+.s.is-on .quadsvg .qc{animation:pop 520ms var(--ease) backwards}
+.s.is-on .quadsvg .qc:nth-of-type(1){animation-delay:60ms}
+.s.is-on .quadsvg .qc:nth-of-type(2){animation-delay:150ms}
+.s.is-on .quadsvg .qc:nth-of-type(3){animation-delay:240ms}
+.s.is-on .quadsvg .qc:nth-of-type(4){animation-delay:330ms}
+@keyframes pop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+/* 提问页标题下划线扫过 */
+.ask__q em{background-image:linear-gradient(var(--leaf-soft),var(--leaf-soft));
+  background-repeat:no-repeat;background-position:0 100%;background-size:0 4px;border-bottom:none;padding-bottom:2px}
+.s.is-on .ask__q em{animation:underline 900ms var(--ease) 420ms forwards}
+@keyframes underline{to{background-size:100% 4px}}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  [data-anim]{opacity:1!important;transform:none!important;clip-path:none!important}
+  .s.is-on .cv__r .media img{transform:none}
 }
 </style>
 </head>
@@ -499,15 +558,27 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
 
 <!-- ============ 1 封面 ============ -->
 <section class="s cover" data-sec="导入" data-title="封面">
-  <div class="cover__band"><img src="assets/china-landscape.jpg" alt=""></div>
-  <div class="cover__in">
-    <div class="cover__meta">
-      <span>湖北工业大学 工业设计学院</span><span>主讲 · 张萌</span>
+  <div class="cv">
+    <div class="cv__l">
+      <div class="cover__meta" data-anim="up">
+        <span>湖北工业大学 工业设计学院</span><span>主讲 · 张萌</span>
+      </div>
+      <h1 class="cover__t" data-anim="mask">面向未来的<br><em>可持续设计</em></h1>
+      <p class="cover__en" data-anim="up">Sustainable Design</p>
+      <p class="cover__d" data-anim="up">可持续设计源于可持续发展理念，是设计界对经济发展与环境、社会等要素之间关系的理论反思，并在此基础上不断寻求变革与转型的设计实践。</p>
+      <p class="cover__hint" data-anim="up"><kbd>→</kbd> 开始 · 共 <span id="totalHint">—</span> 页 · <kbd>O</kbd> 总览</p>
     </div>
-    <h1 class="cover__t">面向未来的<br><em>可持续设计</em></h1>
-    <p class="cover__en">Sustainable Design</p>
-    <p class="cover__d">可持续设计源于可持续发展理念，是设计界对经济发展与环境、社会等要素之间关系的理论反思，并在此基础上不断寻求变革与转型的设计实践。</p>
-    <p class="cover__hint"><kbd>→</kbd> 开始 · 共 <span id="totalHint">—</span> 页</p>
+    <div class="cv__r">
+      <div class="media" data-anim="scale"><img src="assets/china-landscape.jpg" alt="山水与城市共生的景观"></div>
+      <div class="media" data-anim="scale"><img src="assets/case-loop.jpg" alt="Loop 可重复包装容器"></div>
+      <div class="media" data-anim="scale"><img src="assets/earth.jpg" alt="从太空看到的地球"></div>
+    </div>
+  </div>
+  <div class="cv__strip">
+    <div class="cv__s" data-anim="up"><b data-count="66" data-suffix="%">0%</b><span>地球自然资源已被人类消耗的比例</span></div>
+    <div class="cv__s" data-anim="up"><b data-count="24" data-suffix="%">0%</b><span>陆地表面已被开垦为耕地的比例</span></div>
+    <div class="cv__s" data-anim="up"><b data-count="95" data-suffix="%">0%</b><span>北极多年冰 35 年间的减少幅度</span></div>
+    <div class="cv__s" data-anim="up"><b data-count="2" data-suffix=" 个">0 个</b><span>2050 年所需的地球数量</span></div>
   </div>
 </section>
 
@@ -525,12 +596,17 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
         <div class="vph" id="hookPh" hidden>
           <div class="vph__ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
           <p class="vph__t">视频位 · 殷玉珍与赛考斯的治沙故事</p>
-          <p class="vph__d">把约 1 分钟的视频文件命名为 <code>hook.mp4</code>，放进本文件旁边的 <code>assets/</code> 文件夹，这里就会自动变成播放器。</p>
+          <p class="vph__d">点击下方按钮，从本机选择一段约 1 分钟的视频即可播放。<strong>选过一次就会被记住</strong>，下次打开本页仍在。</p>
+          <div class="vph__lk">
+            <button class="vph__pick" type="button" id="hookPick">选择本机视频文件</button>
+          </div>
+          <p class="vph__d" style="font-size:11px;opacity:.8;margin-top:2px">素材可从以下报道页找到：</p>
           <div class="vph__lk">
             <a href="http://www.news.cn/world/20240709/8c3d679f806747139b1a13fab691d063/c.html" target="_blank" rel="noopener">新华网 · 多为地球种下一片绿</a>
             <a href="https://www.news.cn/world/20260712/10f82b22bcd8454d963b150b08583de7/c.html" target="_blank" rel="noopener">新华网 · 专访赛考斯</a>
             <a href="https://www.news.cn/20260521/8534c0e6ead9426585b582d514b63052/c.html" target="_blank" rel="noopener">新华网 · 从 5000 美元到 5 万棵树</a>
           </div>
+          <input type="file" id="hookFile" accept="video/*" hidden>
         </div>
       </div>
       <div class="hookside">
@@ -603,6 +679,12 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
         <p class="card__t">三次课堂讨论</p>
         <p class="card__d">课程中安排了三个提问环节，每次都有计时和思考角度提示。<strong>没有标准答案</strong>——重要的是你能否说清自己的边界假设。</p>
       </div>
+    </div>
+    <div class="grid4" style="flex:0 0 24%;margin-top:var(--gap);gap:var(--gap)">
+      <div class="media"><img src="assets/case-loop.jpg" alt="可重复包装容器"></div>
+      <div class="media"><img src="assets/papanek-book.jpg" alt="《为真实的世界设计》"></div>
+      <div class="media"><img src="assets/nat-ships.jpg" alt="大航海时代的帆船"></div>
+      <div class="media"><img src="assets/daofa-ziran.jpg" alt="道法自然水墨意境"></div>
     </div>
   </div>
 </section>
@@ -700,8 +782,8 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
   <p class="s__deck">勾选你愿意纳入计算的环节，观察两个方案的相对影响如何变化。</p>
   <div class="s__main">
     <div class="grid2">
-      <div class="col">
-        <div class="opts" id="opts">
+      <div class="col" style="min-height:0">
+        <div class="opts" id="opts" style="flex:0 0 auto">
           <label class="opt"><input type="checkbox" data-key="material" checked><span class="opt__b"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.5l3.2 3.2L12 3.8"/></svg></span>
             <span><span class="opt__t">包装材料本身</span><span class="opt__d">一次性餐盒的塑料与纸；可重复餐盒的不锈钢或 PP 本体</span></span></label>
           <label class="opt"><input type="checkbox" data-key="delivery"><span class="opt__b"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.5l3.2 3.2L12 3.8"/></svg></span>
@@ -713,6 +795,7 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
           <label class="opt"><input type="checkbox" data-key="waste"><span class="opt__b"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.5l3.2 3.2L12 3.8"/></svg></span>
             <span><span class="opt__t">末端废弃物处理</span><span class="opt__d">城市清运、填埋与焚烧，以及混合材料难以回收的部分</span></span></label>
         </div>
+        <div class="media media--fit media--frame" style="flex:1 1 0;min-height:0"><img src="assets/pack-flow.jpg" alt="外卖餐盒回收流程图"></div>
       </div>
       <div class="col col--c">
         <div class="card" style="gap:var(--gap)">
@@ -729,9 +812,13 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
           </div>
           <p class="verdict" id="verdict"></p>
         </div>
+        <div class="card card--flat">
+          <p class="card__k">为什么结论会翻转</p>
+          <p class="card__d">一次性方案把负担压在<strong>材料与末端处理</strong>；可重复方案把它挪到了<strong>清洗、逆向物流与用户归还</strong>。两者不是“谁更环保”，而是<strong>把成本放在系统的哪个位置</strong>——这个位置由谁承担，才是设计要回答的问题。</p>
+        </div>
       </div>
     </div>
-  </div>
+      </div>
 </section>
 
 <!-- ============ 8 循环系统（交互） ============ -->
@@ -766,6 +853,16 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
           <h3 class="s__title" style="font-size:var(--fs-sub);margin:0 0 8px" id="lpT">用户 / 需求</h3>
           <p class="card__d" id="lpD"></p>
           <p class="cap" style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-style:italic" id="lpQ"></p>
+        </div>
+        <div class="grid2" style="flex:0 0 auto;gap:var(--gap)">
+          <div class="card card--flat">
+            <p class="card__k">线性思维</p>
+            <p class="card__d">取材 → 制造 → 使用 → <strong>丢弃</strong>。终点是垃圾场，设计责任在交付时结束。</p>
+          </div>
+          <div class="card card--flat" style="border-color:var(--accent)">
+            <p class="card__k">闭环思维</p>
+            <p class="card__d">回收不是链条的终点，<strong>而是回到起点的通道</strong>。设计责任贯穿整个循环。</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1475,7 +1572,11 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
   <h2 class="s__title">17 个目标，<em>一份共同的议程</em></h2>
   <div class="s__main">
     <div class="col">
-      <div class="media media--fit media--frame fill"><img src="assets/sdgs-17.jpg" alt="联合国可持续发展目标 SDGs 的 17 个图标"></div>
+      <div class="grid2--l grid2" style="flex:1;min-height:0">
+        <div class="media media--fit media--frame"><img src="assets/sdgs-17.jpg" alt="联合国可持续发展目标 SDGs 的 17 个图标"></div>
+        <figure class="figure"><div class="media media--fit media--frame fill"><img src="assets/sdg-report.jpg" alt="联合国 2025 可持续发展目标报告封面"></div>
+          <figcaption class="cap">联合国 2025 可持续发展目标报告</figcaption></figure>
+      </div>
       <div class="grid3" style="flex:0 0 auto">
         <div class="card card--flat"><p class="card__k">观点一</p><p class="card__t">激进环保主义</p>
           <p class="card__d">将可持续发展等同于激进的环境保护，部分欧洲学者甚至提出<strong>“去发展”（degrowth）</strong>，以最大限度地停止人类活动对自然环境的影响。</p></div>
@@ -1624,6 +1725,7 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
             <p class="pt__t">代际公平 × 代内公平</p>
             <p class="pt__d">作为“托管人”，我们有义务为子孙后代保护好自然资源与文化资源；同时，<strong>当代一部分人的发展不能以损害另一部分人的发展为代价</strong>。</p></div></div>
         </div>
+        <div class="media media--fit media--frame" style="flex:0 0 27%"><img src="assets/equity-table.jpg" alt="代际公平与代内公平的对照表"></div>
         <p class="cap">在发展水平十分接近的情况下，相对于德国和法国，<strong>美国的能量消耗却要高出近一倍</strong>。显然，这样的社会经济模式是不可持续的。</p>
       </div>
     </div>
@@ -1672,6 +1774,11 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
           <p class="card__t" style="font-family:var(--f-serif);font-size:var(--fs-sub)" id="qT"></p>
           <p class="card__d" id="qD"></p>
           <p class="cap" style="margin-top:12px;padding-top:11px;border-top:1px solid var(--border)" id="qN"></p>
+        </div>
+        <div class="statrow" style="grid-template-columns:repeat(3,1fr)">
+          <div class="stat"><b data-count="5.37" data-dec="2" data-suffix="×">0×</b><span>澳大利亚的生态足迹相当于其生态承载力的倍数</span></div>
+          <div class="stat"><b data-count="4.75" data-dec="2" data-suffix="×">0×</b><span>美国</span></div>
+          <div class="stat"><b data-count="4.72" data-dec="2" data-suffix="×">0×</b><span>加拿大</span></div>
         </div>
         <p class="cap">图中仅澳大利亚、美国、加拿大三点标注了课件给出的生态足迹倍数，其余象限为模式说明，点位不代表精确坐标。<strong>如果全球居民都像他们一样生活，至少需要 4~5 个地球</strong>才能满足人类的自然消耗需求。</p>
       </div>
@@ -1767,9 +1874,12 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
           <button class="btn btn--o" type="button" id="dwAuto" aria-pressed="false">自动演化</button>
           <button class="btn btn--o" type="button" id="dwReset">重置</button>
         </div>
-        <div class="grid2" style="flex:0 0 auto;gap:var(--gap)">
-          <div class="card card--flat"><p class="card__k">外部增温</p><p class="card__d">白雏菊扩张 → 反射更多光 → <strong>行星降温</strong></p></div>
-          <div class="card card--flat"><p class="card__k">外部降温</p><p class="card__d">黑雏菊扩张 → 吸收更多热量 → <strong>行星升温</strong></p></div>
+        <div class="grid2" style="flex:0 0 26%;gap:var(--gap)">
+          <div class="media media--fit media--frame"><img src="assets/daisyworld-diagram.jpg" alt="雏菊世界自我调节原理图"></div>
+          <div class="col" style="gap:8px;justify-content:center">
+            <div class="card card--flat"><p class="card__k">外部增温</p><p class="card__d">白雏菊扩张 → 反射更多光 → <strong>行星降温</strong></p></div>
+            <div class="card card--flat"><p class="card__k">外部降温</p><p class="card__d">黑雏菊扩张 → 吸收更多热量 → <strong>行星升温</strong></p></div>
+          </div>
         </div>
       </div>
     </div>
@@ -1794,6 +1904,7 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
           <span class="stat" style="margin-left:8px"><b id="chSteps" style="font-size:var(--fs-sub)">—</b><span>步之后两条轨迹完全分离</span></span></div>
       </div>
       <div class="col col--c">
+        <div class="media media--frame" style="flex:0 0 30%"><img src="assets/nonlinear-form.jpg" alt="非线性的连续流动状形体"></div>
         <div class="pts">
           <div class="pt"><span class="pt__i">1</span><div class="pt__b">
             <p class="pt__t">什么是混沌</p>
@@ -1850,6 +1961,10 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
       </div>
       <div class="col">
         <div class="media media--fit media--frame fill"><img src="assets/design-transform.jpg" alt="全球化时代的设计转型插画"></div>
+        <div class="grid2" style="flex:0 0 22%;gap:var(--gap)">
+          <div class="media media--fit media--frame"><img src="assets/design-global.jpg" alt="全球化时代的设计"></div>
+          <div class="media media--fit media--frame"><img src="assets/design-dynamic.jpg" alt="设计是动态的"></div>
+        </div>
         <div class="card card--flat">
           <p class="card__d">全球化浪潮下，我们面临的是一个<strong>消解地域、消解专业化领域、消解本本主义</strong>后即将或正在产生剧变的时代。设计发展的本质，是每一次产业革命带来的升级对“设计”概念的重新定义及其研究方法的一次反思或批判。<strong>当代设计正在形成不断在推动中趋于自我完善的网状发展结构，超越了传统的线性思维模式。</strong></p>
         </div>
@@ -1864,7 +1979,8 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
   <div class="ask">
     <h2 class="ask__q">如果地球是一个<em>会自我调节的系统</em>，设计师还需要做什么？</h2>
     <div class="ask__row">
-      <div class="hints">
+      <div class="col" style="min-height:0;gap:var(--gap)">
+      <div class="hints" style="flex:0 0 auto">
         <button class="hint" type="button" aria-expanded="false">
           <span class="hint__k">思考角度 A<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 2v8M2 6h8"/></svg></span>
           <span class="hint__t">调节是有范围的</span>
@@ -1886,6 +2002,17 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
           <span class="hint__d">殷玉珍种下的第一批 600 棵树只活了不到 10 棵。四十年后是 7 万亩绿洲，还有一棵跨越太平洋的友谊树。这是自我调节，还是人的坚持？或者两者本就分不开？</span>
         </button>
       </div>
+      <div class="grid4" style="flex:1 1 0;min-height:0;gap:var(--gap)">
+        <figure class="figure"><div class="media media--fit media--frame fill"><img src="assets/daisyworld-diagram.jpg" alt="雏菊世界自我调节原理图"></div>
+          <figcaption class="cap">调节有范围</figcaption></figure>
+        <figure class="figure"><div class="media media--fit media--frame fill"><img src="assets/gaia-thinking.jpg" alt="人与地球相互作用的插画"></div>
+          <figcaption class="cap">自组织</figcaption></figure>
+        <figure class="figure"><div class="media media--fit media--frame fill"><img src="assets/butterfly.jpg" alt="蝴蝶效应图示"></div>
+          <figcaption class="cap">蝴蝶效应</figcaption></figure>
+        <figure class="figure"><div class="media fill"><img src="assets/china-landscape.jpg" alt="山水与城市共生的景观"></div>
+          <figcaption class="cap">回到沙漠</figcaption></figure>
+      </div>
+      </div>
       <div class="timer" data-timer>
         <p class="timer__k">讨论计时</p>
         <div class="timer__ring">
@@ -1906,7 +2033,7 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
         </div>
       </div>
     </div>
-  </div>
+      </div>
 </section>
 
 <!-- ============ 45 课后作业 ============ -->
@@ -2042,7 +2169,60 @@ function go(n,scrollNav){
   $("#barFill").style.width=(N>1?(n/(N-1))*100:0)+"%";
   $("#secTag").textContent=slides[n].dataset.sec||"";
   if(scrollNav!==false&&railBtns[n])railBtns[n].scrollIntoView({block:"nearest"});
+  animateSlide(slides[n]);
   document.dispatchEvent(new CustomEvent("slide",{detail:{i:n,el:slides[n]}}));
+}
+
+/* ---------- 入场动效 ---------- */
+/* 未手工标注 data-anim 的页面，自动把成组元素挑出来错峰入场 */
+var AUTO=".pt,.card,.io__card,.tline__i,.stat,.hint,.vs__c,.quote,.opt,.cv__s,"+
+         ".s__main > .col > .media,.s__main > .col > .figure,.tbl tbody tr,.topic";
+function animateSlide(s){
+  if(RM)return;
+  var picked=$$("[data-anim]",s);
+  if(!picked.length){
+    picked=$$(AUTO,s).slice(0,10);
+    picked.forEach(function(el){ if(!el.hasAttribute("data-anim"))el.setAttribute("data-anim","up"); });
+  }
+  picked.forEach(function(el){ el.classList.remove("anim-in"); });
+  /* 强制重排，保证再次进入本页时动画能重新播放 */
+  if(picked.length)void picked[0].offsetWidth;
+  picked.forEach(function(el,i){
+    setTimeout(function(){ el.classList.add("anim-in"); }, 90 + i*78);
+  });
+  countUp(s);
+  replayBars(s);
+}
+
+/* 数字滚动 */
+function countUp(s){
+  $$("[data-count]",s).forEach(function(el){
+    var to=parseFloat(el.dataset.count), suf=el.dataset.suffix||"",
+        dec=parseInt(el.dataset.dec||"0",10), t0=null, D=1100;
+    function fmt(v){ return dec>0 ? v.toFixed(dec) : String(Math.round(v)); }
+    if(RM){el.textContent=fmt(to)+suf;return;}
+    el.textContent=fmt(0)+suf;
+    function step(t){
+      if(!t0)t0=t;
+      var p=Math.min((t-t0)/D,1), e=1-Math.pow(1-p,4);
+      el.textContent=fmt(to*e)+suf;
+      if(p<1)requestAnimationFrame(step);
+    }
+    setTimeout(function(){requestAnimationFrame(step);},240);
+  });
+}
+
+/* 条形图重新长出 */
+function replayBars(s){
+  var bars=$$(".bar2__f",s);
+  if(!bars.length||RM)return;
+  bars.forEach(function(b){
+    var w=b.style.width;
+    b.style.transition="none"; b.style.width="0";
+    void b.offsetWidth;
+    b.style.transition="";
+    setTimeout(function(){ b.style.width=w; },260);
+  });
 }
 railBtns.forEach(function(b){b.addEventListener("click",function(){go(+b.dataset.i);});});
 ovBtns.forEach(function(b){b.addEventListener("click",function(){go(+b.dataset.i);closeOv();});});
@@ -2079,18 +2259,54 @@ go(0);
 
 /* ================= 视频兜底 ================= */
 (function(){
-  var v=$("#hookVideo"), ph=$("#hookPh"); if(!v)return;
+  var v=$("#hookVideo"), ph=$("#hookPh"), pick=$("#hookPick"), file=$("#hookFile");
+  if(!v)return;
   var settled=false;
-  function ok(){ if(settled)return; settled=true; ph.hidden=true; v.style.display=""; }
+  function ok(){ settled=true; ph.hidden=true; v.style.display=""; }
   function fail(){ if(settled)return; settled=true; v.style.display="none"; ph.hidden=false; }
-  /* 视频一旦读到元数据就判定为可用，超时兜底只在此之前生效 */
   v.addEventListener("loadedmetadata",ok);
   v.addEventListener("loadeddata",ok);
   v.addEventListener("error",fail,true);
-  var s=v.querySelector("source");
-  if(s)s.addEventListener("error",fail);
+  var srcEl=v.querySelector("source");
+  if(srcEl)srcEl.addEventListener("error",fail);
   setTimeout(function(){ if(!v.videoWidth && v.readyState===0) fail(); },4000);
   document.addEventListener("slide",function(e){ if(e.detail.el!==v.closest(".s")&&!v.paused)v.pause(); });
+
+  /* ---- 从本机挑选视频，并用 IndexedDB 记住 ---- */
+  function useBlob(blob){
+    if(srcEl)srcEl.remove();
+    v.src=URL.createObjectURL(blob);
+    v.load(); ok();
+  }
+  function db(cb){
+    if(!window.indexedDB){cb(null);return;}
+    var rq=indexedDB.open("sd-deck",1);
+    rq.onupgradeneeded=function(){ rq.result.createObjectStore("media"); };
+    rq.onsuccess=function(){ cb(rq.result); };
+    rq.onerror=function(){ cb(null); };
+  }
+  function save(blob){
+    db(function(d){ if(!d)return;
+      try{ d.transaction("media","readwrite").objectStore("media").put(blob,"hook"); }catch(e){}
+    });
+  }
+  function load(){
+    db(function(d){ if(!d)return;
+      try{
+        var rq=d.transaction("media","readonly").objectStore("media").get("hook");
+        rq.onsuccess=function(){ if(rq.result) useBlob(rq.result); };
+      }catch(e){}
+    });
+  }
+  if(pick&&file){
+    pick.addEventListener("click",function(){ file.click(); });
+    file.addEventListener("change",function(){
+      var f=file.files&&file.files[0];
+      if(!f)return;
+      useBlob(f); save(f);
+    });
+  }
+  load();
 })();
 
 /* ================= 提问计时器 ================= */
