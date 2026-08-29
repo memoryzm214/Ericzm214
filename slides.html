@@ -313,6 +313,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .vph__ic svg{width:42%;height:42%}
 .vph__t{font-family:var(--f-serif);font-size:var(--fs-sub);font-weight:600}
 .vph__d{font-size:var(--fs-small);line-height:1.75;color:#B9D3B4;max-width:46ch}
+.vph b{color:#fff}
 .vph code{font-family:var(--f-mono);background:rgba(255,255,255,.13);padding:2px 7px;border-radius:4px;font-size:.94em}
 .vph__lk{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:4px}
 .vph__lk a{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;color:#0E1912;background:var(--leaf);
@@ -398,6 +399,42 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .vs__l li+li{border-top:1px solid var(--border);padding-top:var(--gap);margin-top:var(--gap)}
 .vs__x{display:grid;place-items:center;font-family:var(--f-serif);font-size:var(--fs-sub);color:var(--muted);font-style:italic}
 
+
+/* 人与自然：图像缓慢推近，制造"时间在走"的感觉 */
+.kb{overflow:hidden}
+.s.is-on .kb img{animation:kb 18s ease-out forwards}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.10)}}
+
+/* 可交互系统图 */
+.sysmap{position:relative;flex:1;min-height:0;display:grid;place-items:center}
+.sysmap svg{width:100%;height:100%;max-height:100%}
+.sm__obj .sm__lid{fill:var(--line);stroke:var(--ink);stroke-width:2;transition:fill 500ms var(--ease)}
+.sysmap.is-sys .sm__obj .sm__lid{fill:var(--accent)}
+.sm__oi{font-size:26px;text-anchor:middle;fill:var(--accent-ink)}
+.sm__ol{font-size:14px;text-anchor:middle;fill:var(--muted)}
+.sm__f{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-dasharray:9 9;
+  stroke-dashoffset:var(--len,900);opacity:0;transition:opacity 300ms}
+.sysmap.is-sys .sm__f{opacity:1;animation:dash 22s linear infinite;stroke-dashoffset:0}
+@keyframes dash{to{stroke-dashoffset:-360}}
+/* 注意：CSS transform 会覆盖 SVG 的 transform 属性，
+   因此定位放在外层 .sm__pos，缩放动画只作用于内层 .sm__n */
+.sm__n{opacity:0;transform:scale(.9);transform-box:fill-box;transform-origin:center;
+  transition:opacity 460ms var(--ease),transform 460ms var(--ease);cursor:pointer}
+.sysmap.is-sys .sm__n{opacity:1;transform:none}
+.sysmap.is-sys .sm__pos:nth-child(1) .sm__n{transition-delay:80ms}
+.sysmap.is-sys .sm__pos:nth-child(2) .sm__n{transition-delay:200ms}
+.sysmap.is-sys .sm__pos:nth-child(3) .sm__n{transition-delay:320ms}
+.sysmap.is-sys .sm__pos:nth-child(4) .sm__n{transition-delay:440ms}
+.sm__n rect{fill:var(--white);stroke:var(--ink);stroke-width:1.6;transition:fill 200ms,stroke 200ms}
+.sm__n:hover rect,.sm__n.is-on rect{fill:var(--accent-wash);stroke:var(--accent)}
+.sm__n text{font-size:15px;font-weight:600;text-anchor:middle;fill:var(--text);pointer-events:none}
+.sm__ix{font-family:var(--f-mono);font-size:12px;font-weight:500;fill:var(--accent-ink)}
+.sm__card{position:absolute;right:8px;bottom:8px;width:min(330px,34%);
+  background:var(--white);border:1.5px solid var(--ink);border-radius:2px;padding:14px 16px;box-shadow:var(--shadow)}
+.sm__k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;color:var(--accent-ink)}
+.sm__t{font-family:var(--f-serif);font-size:clamp(17px,2.4vh,24px);font-weight:700;margin:4px 0 5px}
+.sm__d{font-size:var(--fs-small);line-height:1.65;color:var(--ink-2)}
+
 .opts{display:flex;flex-direction:column;gap:8px}
 .opt{display:flex;gap:11px;align-items:flex-start;padding:clamp(8px,1.35vh,14px) 14px;
   border:1px solid var(--border);border-radius:var(--r-md);background:var(--white);cursor:pointer;
@@ -444,6 +481,25 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .loopsvg .nd.is-on tspan.ix{fill:rgba(255,255,255,.8)}
 .loopsvg .dot{fill:var(--accent)}
 
+/* 案例互动条 */
+.lab__box{border:1.5px solid var(--ink);border-radius:2px;background:var(--white);
+  padding:clamp(11px,1.7vh,16px);display:flex;flex-direction:column;gap:clamp(7px,1.1vh,12px);margin-top:var(--gap)}
+.lab{display:flex;flex-direction:column;gap:3px}
+.lab__h{display:flex;justify-content:space-between;align-items:baseline;font-size:var(--fs-small)}
+.lab__h label{color:var(--muted)}
+.lab__h b{font-family:var(--f-mono);font-size:var(--fs-body);font-weight:600;color:var(--text);font-variant-numeric:tabular-nums}
+.lab__out{display:flex;align-items:center;gap:12px;padding-top:6px;border-top:1px solid var(--line)}
+.lab__score{display:flex;align-items:baseline;gap:2px;flex:0 0 auto}
+.lab__score b{font-family:var(--f-serif);font-size:clamp(26px,4.4vh,42px);line-height:1;font-weight:700;
+  color:var(--accent-ink);font-variant-numeric:tabular-nums}
+.lab__score span{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.lab__bar{flex:1;height:8px;border-radius:var(--r-pill);background:var(--wash);overflow:hidden}
+.lab__bar i{display:block;height:100%;width:0;background:var(--accent);
+  transition:width 420ms var(--ease),background 420ms}
+.lab__msg{flex:0 0 auto;font-size:var(--fs-small);font-weight:600;color:var(--accent-ink);min-width:7em;text-align:right}
+.lab__note{font-size:var(--fs-label);line-height:1.55;color:var(--muted)}
+.lab__note strong{color:var(--tan)}
+
 .poll__b{display:flex;gap:8px;margin-top:auto;padding-top:var(--gap)}
 .pbtn{flex:1;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--r-pill);
   font-size:var(--fs-small);font-weight:600;color:var(--muted);transition:all 160ms}
@@ -454,6 +510,41 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .pres{margin-top:6px;font-family:var(--f-mono);font-size:var(--fs-label);color:var(--muted);
   opacity:0;transition:opacity var(--dur)}
 .pres.is-on{opacity:1}
+
+
+/* 三大维度关系图 */
+.tri{width:100%;height:auto;max-height:100%;overflow:visible}
+.tri__ven circle{fill:none;stroke:var(--ink);stroke-width:1.5;stroke-dasharray:6 7;opacity:.55}
+.s.is-on .tri__ven circle{animation:venIn 1000ms var(--ease) backwards}
+.s.is-on .tri__ven circle:nth-child(1){animation-delay:200ms}
+.s.is-on .tri__ven circle:nth-child(2){animation-delay:340ms}
+.s.is-on .tri__ven circle:nth-child(3){animation-delay:480ms}
+@keyframes venIn{from{opacity:0;transform:scale(.82);transform-origin:center}to{opacity:.55;transform:none}}
+.tri__edge{fill:none;stroke:var(--ink);stroke-width:2;
+  stroke-dasharray:1600;stroke-dashoffset:1600}
+.s.is-on .tri__edge{animation:triDraw 1300ms var(--ease) 120ms forwards}
+@keyframes triDraw{to{stroke-dashoffset:0}}
+.tri__mid{font-family:var(--f-mono);font-size:15px;letter-spacing:.1em;text-anchor:middle;fill:var(--muted)}
+.tri__v{cursor:pointer}
+.tri__v rect{fill:var(--white);stroke:var(--ink);stroke-width:1.6;transition:fill 220ms,stroke 220ms}
+.tri__v:hover rect{fill:var(--accent-wash);stroke:var(--accent)}
+.tri__v.is-on rect{fill:var(--accent);stroke:var(--accent)}
+.tri__v text{font-size:16px;font-weight:600;text-anchor:middle;fill:var(--text);pointer-events:none;transition:fill 220ms}
+.tri__v.is-on text{fill:#fff}
+.tri__ix{font-family:var(--f-mono);font-size:12px;font-weight:500;fill:var(--accent-ink)}
+.tri__v.is-on .tri__ix{fill:rgba(255,255,255,.8)}
+.dim{border:1.5px solid var(--ink);border-radius:2px;background:var(--white);padding:clamp(15px,2.4vh,26px)}
+.dim__k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;color:var(--muted);
+  padding-bottom:9px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.dim__en{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.16em;color:var(--accent-ink)}
+.dim__t{font-family:var(--f-serif);font-size:clamp(24px,4vh,40px);font-weight:700;line-height:1.15;margin:5px 0 10px}
+.dim__d{font-size:var(--fs-body);line-height:1.7;color:var(--ink-2)}
+.dim__tags{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.dim__tags span{display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:2px;
+  padding:7px 11px;font-size:var(--fs-small)}
+.dim__tags span::before{content:"✓";color:var(--accent);font-weight:700}
+.dim__q{font-family:var(--f-serif);font-size:clamp(16px,2.3vh,22px);font-weight:700;
+  margin-top:16px;padding-top:13px;border-top:1px solid var(--line)}
 
 .quadsvg{width:100%;height:100%;overflow:visible;font-family:var(--f-sans);max-height:100%}
 .quadsvg .qc{fill:var(--white);stroke:var(--border);stroke-width:1.2;cursor:pointer;transition:fill var(--dur)}
@@ -558,7 +649,35 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
   background:linear-gradient(90deg,var(--green-deep) 0%,rgba(19,67,33,.55) 42%,transparent 100%)}
 @media (max-width:1000px){.dv{grid-template-columns:1fr}.dv__r{display:none}}
 
-/* 封面：生长动画画布 */
+/* 封面 */
+/* 封面网格底纹 */
+.cvGrid{position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:96px 96px;opacity:.5;
+  -webkit-mask-image:radial-gradient(120% 90% at 72% 45%,#000 30%,transparent 78%);
+  mask-image:radial-gradient(120% 90% at 72% 45%,#000 30%,transparent 78%)}
+.cover__d strong{color:var(--accent-ink);font-weight:600}
+/* 轨道图形 */
+.cv__r{position:relative;display:grid;place-items:center;min-height:0}
+.orb{width:min(100%,72vh);height:auto;overflow:visible}
+.orb__rings circle{fill:none;stroke:var(--line);stroke-width:1.4}
+.orb__r2{stroke-dasharray:5 9}
+.orb__r3{stroke:var(--accent);opacity:.5}
+.orb__core circle{fill:var(--white);stroke:var(--accent);stroke-width:2}
+.orb__ct{font-family:var(--f-sans);font-size:16px;font-weight:700;fill:var(--accent-ink);text-anchor:middle}
+.orb__sat rect{fill:var(--accent);stroke:var(--white);stroke-width:2}
+.orb__lb{position:absolute;font-family:var(--f-mono);font-size:clamp(9.5px,1.25vh,12px);
+  letter-spacing:.16em;color:var(--muted);background:var(--bg);
+  border:1px solid var(--line);border-radius:3px;padding:3px 9px;white-space:nowrap}
+.s.is-on .orb__rings circle{animation:ringIn 900ms var(--ease) backwards}
+.s.is-on .orb__r1{animation-delay:120ms} .s.is-on .orb__r2{animation-delay:240ms} .s.is-on .orb__r3{animation-delay:360ms}
+.s.is-on .orb__core{animation:pop 700ms var(--ease) 480ms backwards}
+.s.is-on .orb__lb{animation:pop 600ms var(--ease) backwards}
+.s.is-on .orb__lb:nth-of-type(1){animation-delay:700ms}
+.s.is-on .orb__lb:nth-of-type(2){animation-delay:820ms}
+.s.is-on .orb__lb:nth-of-type(3){animation-delay:940ms}
+@keyframes ringIn{from{opacity:0;transform:scale(.86);transform-origin:center}to{opacity:1;transform:none}}
+
 .cvBg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.9}
 .cover .cv,.cover .cv__strip{position:relative;z-index:1}
 .cover__t em{position:relative;display:inline-block}
@@ -633,21 +752,39 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
 
 <!-- ============ 1 封面 ============ -->
 <section class="s cover" data-sec="导入" data-title="封面">
-  <canvas class="cvBg" id="cvBg" aria-hidden="true"></canvas>
+  <div class="cvGrid" aria-hidden="true"></div>
   <div class="cv">
     <div class="cv__l">
       <div class="cover__meta" data-anim="up">
         <span>湖北工业大学 工业设计学院</span><span>主讲 · 张萌</span>
       </div>
       <h1 class="cover__t" data-anim="mask">面向未来的<br><em>可持续设计</em></h1>
-      <p class="cover__en" data-anim="up">Sustainable Design</p>
-      <p class="cover__d" data-anim="up">可持续设计源于可持续发展理念，是设计界对经济发展与环境、社会等要素之间关系的理论反思，并在此基础上不断寻求变革与转型的设计实践。</p>
+      <p class="cover__en" data-anim="up">Sustainable Design · 可持续发展概论</p>
+      <p class="cover__d" data-anim="up">设计不只是我们<strong>做出什么</strong>，<br>更是我们<strong>创造了什么条件</strong>。</p>
       <p class="cover__hint" data-anim="up"><kbd>→</kbd> 开始 · 共 <span id="totalHint">—</span> 页 · <kbd>O</kbd> 总览</p>
     </div>
     <div class="cv__r">
-      <div class="media" data-anim="scale"><img src="assets/china-landscape.jpg" alt="山水与城市共生的景观"></div>
-      <div class="media" data-anim="scale"><img src="assets/case-loop.jpg" alt="Loop 可重复包装容器"></div>
-      <div class="media" data-anim="scale"><img src="assets/earth.jpg" alt="从太空看到的地球"></div>
+      <svg class="orb" viewBox="0 0 460 460" role="img" aria-label="环境、社会、经济三者围绕可持续未来运行的示意图">
+        <g class="orb__rings">
+          <circle class="orb__r1" cx="230" cy="230" r="196"></circle>
+          <circle class="orb__r2" cx="230" cy="230" r="140"></circle>
+          <circle class="orb__r3" cx="230" cy="230" r="86"></circle>
+        </g>
+        <g class="orb__core">
+          <circle cx="230" cy="230" r="52"></circle>
+          <text x="230" y="224" class="orb__ct">可持续</text>
+          <text x="230" y="248" class="orb__ct">未来</text>
+        </g>
+        <g class="orb__sat" data-r="196" data-a="0">
+          <rect x="-9" y="-9" width="18" height="18" rx="3"></rect></g>
+        <g class="orb__sat" data-r="140" data-a="2.1">
+          <rect x="-8" y="-8" width="16" height="16" rx="3"></rect></g>
+        <g class="orb__sat" data-r="86" data-a="4.2">
+          <rect x="-7" y="-7" width="14" height="14" rx="3"></rect></g>
+      </svg>
+      <span class="orb__lb" style="top:6%;right:4%">PLANET · 环境</span>
+      <span class="orb__lb" style="top:47%;right:-1%">PEOPLE · 社会</span>
+      <span class="orb__lb" style="bottom:9%;left:2%">PROFIT · 经济</span>
     </div>
   </div>
   <div class="cv__strip">
@@ -672,7 +809,7 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
         <div class="vph" id="hookPh" hidden>
           <div class="vph__ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
           <p class="vph__t">视频位 · 殷玉珍与赛考斯的治沙故事</p>
-          <p class="vph__d">当前环境无法联网播放。可以改用本机视频文件，或换一个视频源。</p>
+          <p class="vph__d" id="hookHint">正在检测播放方式……</p>
         </div>
         <div class="vbar">
           <span class="vbar__k">视频源</span>
@@ -816,25 +953,51 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
 <section class="s s--tint" data-sec="一 · 何为可持续设计" data-title="两种视角的对照">
   <p class="s__eyebrow">02 / 本质思考</p>
   <h2 class="s__title">可持续设计首先是<em>一种问题识别方式</em></h2>
-  <p class="s__deck">同一个设计任务，换一种视角，问题的定义就完全不同。点击下方按钮切换，看两种视角各自关心什么。</p>
+  <p class="s__deck">同一件一次性外卖包装，换一种视角，问题的边界就完全不同。点击切换，看系统图如何展开。</p>
   <div class="s__main" style="gap:var(--gap)">
     <div class="sw" role="group" aria-label="切换设计视角">
-      <button type="button" aria-pressed="false">传统产品设计视角</button>
-      <button type="button" aria-pressed="true">可持续设计视角</button>
+      <button type="button" aria-pressed="true">传统产品视角</button>
+      <button type="button" aria-pressed="false">可持续系统视角</button>
     </div>
-    <div class="vs" id="vs">
-      <div class="vs__c" data-col="0">
-        <p class="vs__k">传统产品设计视角</p>
-        <ul class="vs__l"><li>关注造型与功能</li><li>解决单点需求</li><li>交付一个产品</li></ul>
-      </div>
-      <div class="vs__x">V.S.</div>
-      <div class="vs__c" data-col="1">
-        <p class="vs__k">可持续设计视角</p>
-        <ul class="vs__l"><li>关注生命周期与系统关系</li><li>识别长期影响和责任边界</li><li>设计产品、服务与行为条件</li></ul>
+    <div class="sysmap" id="sysmap">
+      <svg viewBox="0 0 1000 460" role="img" aria-label="传统产品视角与可持续系统视角的对照系统图">
+        <defs><pattern id="gp" width="50" height="50" patternUnits="userSpaceOnUse">
+          <path d="M50 0H0V50" fill="none" stroke="var(--line)" stroke-width="1"/></pattern></defs>
+        <rect x="0" y="0" width="1000" height="460" fill="url(#gp)" opacity=".55"/>
+        <g class="sm__flows">
+          <path class="sm__f" d="M180,250 C300,80 620,90 500,196"/>
+          <path class="sm__f" d="M500,196 C640,150 820,190 830,250"/>
+          <path class="sm__f" d="M830,250 C840,380 640,410 500,300"/>
+          <path class="sm__f" d="M500,300 C360,410 180,380 180,250"/>
+        </g>
+        <g class="sm__obj">
+          <path d="M462,180 L538,180 L522,330 L478,330 Z" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/>
+          <ellipse class="sm__lid" cx="500" cy="180" rx="38" ry="9"/>
+          <text x="500" y="262" class="sm__oi">♻</text>
+          <text x="500" y="360" class="sm__ol">一次性外卖包装</text>
+        </g>
+        <g class="sm__nodes">
+          <g class="sm__pos" transform="translate(180,250)"><g class="sm__n" data-i="0">
+            <rect x="-92" y="-21" width="184" height="42" rx="3"/>
+            <text x="0" y="6"><tspan class="sm__ix">01</tspan><tspan dx="9">用户 / 需求</tspan></text></g></g>
+          <g class="sm__pos" transform="translate(430,86)"><g class="sm__n" data-i="1">
+            <rect x="-92" y="-21" width="184" height="42" rx="3"/>
+            <text x="0" y="6"><tspan class="sm__ix">02</tspan><tspan dx="9">产品 / 材料</tspan></text></g></g>
+          <g class="sm__pos" transform="translate(560,398)"><g class="sm__n" data-i="2">
+            <rect x="-92" y="-21" width="184" height="42" rx="3"/>
+            <text x="0" y="6"><tspan class="sm__ix">03</tspan><tspan dx="9">服务 / 维护</tspan></text></g></g>
+          <g class="sm__pos" transform="translate(830,250)"><g class="sm__n" data-i="3">
+            <rect x="-96" y="-21" width="192" height="42" rx="3"/>
+            <text x="0" y="6"><tspan class="sm__ix">04</tspan><tspan dx="9">回收 / 再分配</tspan></text></g></g>
+        </g>
+      </svg>
+      <div class="sm__card" id="smCard">
+        <p class="sm__k" id="smK">VIEW_01</p>
+        <p class="sm__t" id="smT">一个物件</p>
+        <p class="sm__d" id="smD">只看造型与功能，解决单点需求，交付一个产品——责任在交付的那一刻结束。</p>
       </div>
     </div>
   </div>
-  <p class="s__foot">注意第三行的差别：交付“一个产品”，和设计“产品、服务与<strong>行为条件</strong>“——后者意味着设计师要为用户怎么用、用多久、用完以后去哪里负责。</p>
 </section>
 
 <section class="s" data-sec="一 · 何为可持续设计" data-title="什么是可持续设计">
@@ -1060,6 +1223,24 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
             <p class="pt__t">对应内容</p>
             <p class="pt__d">可持续发展、绿色设计与系统性设计。要看到：可持续设计不只是材料替换，<strong>而是消费链条的重新组织</strong>。</p></div></div>
         </div>
+        
+        <div class="lab__box" data-lab="loop">
+          <p class="card__k">IMPACT_CHECK · 课堂推演</p>
+            <div class="lab">
+              <div class="lab__h"><label for="loop-ret">归还率</label><b id="loop-ret-v">76%</b></div>
+              <input type="range" id="loop-ret" data-case="loop" data-k="ret" min="30" max="98" value="76">
+            </div>
+            <div class="lab">
+              <div class="lab__h"><label for="loop-dist">清洗距离</label><b id="loop-dist-v">28km</b></div>
+              <input type="range" id="loop-dist" data-case="loop" data-k="dist" min="2" max="120" value="28">
+            </div>
+          <div class="lab__out">
+            <div class="lab__score"><b id="loop-score">—</b><span>/100</span></div>
+            <div class="lab__bar"><i id="loop-fill"></i></div>
+            <p class="lab__msg" id="loop-msg"></p>
+          </div>
+          <p class="lab__note">押金、品牌、零售、清洗与物流共同承担循环责任。 这是课堂推演值，用于比较变量关系，<strong>而非真实项目评级</strong>。</p>
+        </div>
         <div class="card card--accent" style="margin-top:var(--gap)">
           <p class="card__k">课堂追问</p>
           <p class="card__t" style="font-family:var(--f-serif)">如果归还率低、清洗距离远，这个系统还可持续吗？</p>
@@ -1085,6 +1266,24 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
           <div class="pt"><span class="pt__i">课</span><div class="pt__b">
             <p class="pt__t">对应内容</p>
             <p class="pt__d"><strong>社会创新设计与可持续消费</strong>。设计对象从“物”变成了“信息流与行为流”。</p></div></div>
+        </div>
+        
+        <div class="lab__box" data-lab="tgtg">
+          <p class="card__k">IMPACT_CHECK · 课堂推演</p>
+            <div class="lab">
+              <div class="lab__h"><label for="tgtg-disc">临期折扣力度</label><b id="tgtg-disc-v">45%</b></div>
+              <input type="range" id="tgtg-disc" data-case="tgtg" data-k="disc" min="10" max="80" value="45">
+            </div>
+            <div class="lab">
+              <div class="lab__h"><label for="tgtg-win">取货时间窗</label><b id="tgtg-win-v">60分钟</b></div>
+              <input type="range" id="tgtg-win" data-case="tgtg" data-k="win" min="15" max="180" value="60">
+            </div>
+          <div class="lab__out">
+            <div class="lab__score"><b id="tgtg-score">—</b><span>/100</span></div>
+            <div class="lab__bar"><i id="tgtg-fill"></i></div>
+            <p class="lab__msg" id="tgtg-msg"></p>
+          </div>
+          <p class="lab__note">信息匹配、时间窗口、价格激励与到店行为共同决定成效。 这是课堂推演值，用于比较变量关系，<strong>而非真实项目评级</strong>。</p>
         </div>
         <div class="card card--accent" style="margin-top:var(--gap)">
           <p class="card__k">课堂追问</p>
@@ -1119,6 +1318,24 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
           <div class="pt"><span class="pt__i">课</span><div class="pt__b">
             <p class="pt__t">对应内容</p>
             <p class="pt__d">产品设计对<strong>资源消耗、社会公平和消费观念</strong>的影响。延长一年寿命，往往比更换一种“环保材料”影响更大。</p></div></div>
+        </div>
+        
+        <div class="lab__box" data-lab="fair">
+          <p class="card__k">IMPACT_CHECK · 课堂推演</p>
+            <div class="lab">
+              <div class="lab__h"><label for="fair-life">平均使用年限</label><b id="fair-life-v">6年</b></div>
+              <input type="range" id="fair-life" data-case="fair" data-k="life" min="2" max="10" value="6">
+            </div>
+            <div class="lab">
+              <div class="lab__h"><label for="fair-prem">零件溢价</label><b id="fair-prem-v">22%</b></div>
+              <input type="range" id="fair-prem" data-case="fair" data-k="prem" min="0" max="60" value="22">
+            </div>
+          <div class="lab__out">
+            <div class="lab__score"><b id="fair-score">—</b><span>/100</span></div>
+            <div class="lab__bar"><i id="fair-fill"></i></div>
+            <p class="lab__msg" id="fair-msg"></p>
+          </div>
+          <p class="lab__note">模块化结构与零件可得性共同决定"修不修得起"。 这是课堂推演值，用于比较变量关系，<strong>而非真实项目评级</strong>。</p>
         </div>
         <div class="card card--accent" style="margin-top:var(--gap)">
           <p class="card__k">课堂追问</p>
@@ -1524,19 +1741,28 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
   <p class="s__eyebrow">08 / SDGs</p>
   <h2 class="s__title">17 个目标，<em>一份共同的议程</em></h2>
   <div class="s__main">
-    <div class="col">
-      <div class="grid2--l grid2" style="flex:1 1 0;min-height:0">
-        <div class="media media--fit media--frame" data-anim="wipe"><img src="assets/sdgs-17.jpg" alt="联合国可持续发展目标 SDGs 的 17 个图标"></div>
-        <figure class="figure" style="min-height:0"><div class="media media--fit media--frame fill"><img src="assets/sdg-report.jpg" alt="联合国 2025 可持续发展目标报告封面"></div>
-          <figcaption class="cap">联合国 2025 可持续发展目标报告</figcaption></figure>
+    <div class="grid2--l grid2">
+      <div class="col">
+        <figure class="figure fill">
+          <div class="media media--fit media--frame fill" data-anim="wipe"><img src="assets/sdgs-17.jpg" alt="联合国可持续发展目标 SDGs 的 17 个图标"></div>
+          <figcaption class="cap">联合国可持续发展目标（UN Sustainable Development Goals）· sdgs.un.org/goals</figcaption>
+        </figure>
+        <div class="media media--fit media--frame" style="flex:0 0 30%;min-height:0" data-anim="wipe"><img src="assets/sdg-report.jpg" alt="联合国 2025 可持续发展目标报告封面"></div>
       </div>
-      <div class="grid3" style="flex:0 0 auto">
-        <div class="card card--flat"><p class="card__k">观点一</p><p class="card__t">激进环保主义</p>
-          <p class="card__d">将可持续发展等同于激进的环境保护，部分欧洲学者甚至提出<strong>“去发展”（degrowth）</strong>，以最大限度地停止人类活动对自然环境的影响。</p></div>
-        <div class="card card--flat"><p class="card__k">观点二</p><p class="card__t">社会公平视角</p>
-          <p class="card__d">强调可持续发展的社会性，关注低收入群体的基本生存和福祉，<strong>质疑不加“区别责任”的环保法规</strong>，以及不符合“公平”原则的经济发展。</p></div>
-        <div class="card card--flat"><p class="card__k">观点三</p><p class="card__t">中国视角</p>
-          <p class="card__d">东部沿海接近中等发达国家水平，消费主义对年轻一代有巨大吸引力；同时刚完成脱贫攻坚，<strong>仍有大量中低收入人群，城乡差距巨大</strong>；气候异常、生态危机迫在眉睫。</p></div>
+      <div class="col col--c">
+        <p class="s__eyebrow" style="margin-bottom:var(--gap)">可持续发展的多元观点</p>
+        <div class="pts">
+          <div class="pt" data-anim="left"><span class="pt__i">一</span><div class="pt__b">
+            <p class="pt__t">激进环保主义</p>
+            <p class="pt__d">将可持续发展等同于激进的环境保护，部分欧洲学者甚至提出<strong>"去发展"（degrowth）</strong>，以最大限度地停止人类活动对自然环境的影响。</p></div></div>
+          <div class="pt" data-anim="left"><span class="pt__i">二</span><div class="pt__b">
+            <p class="pt__t">社会公平视角</p>
+            <p class="pt__d">强调可持续发展的社会性，关注低收入群体的基本生存和福祉，<strong>质疑不加"区别责任"的环保法规</strong>，以及不符合"公平"原则的经济发展。</p></div></div>
+          <div class="pt" data-anim="left"><span class="pt__i">三</span><div class="pt__b">
+            <p class="pt__t">中国视角</p>
+            <p class="pt__d">东部沿海接近中等发达国家水平，消费主义对年轻一代有巨大吸引力；同时刚完成脱贫攻坚，<strong>仍有大量中低收入人群，城乡差距巨大</strong>；气候异常、生态危机、环境污染迫在眉睫。</p></div></div>
+        </div>
+        <p class="cap" style="margin-top:var(--gap)">可持续发展包括三个主要方面：以自然资源的高效利用和良好的生态环境为基础，以经济发展为前提，以谋求社会的全面进步为目标。</p>
       </div>
     </div>
   </div>
@@ -1549,7 +1775,7 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
   <div class="s__main">
     <div class="grid2--r grid2">
       <div class="col">
-        <div class="media media--fit media--frame fill" data-anim="wipe"><img src="assets/nat-megafauna.jpg" alt="早期人类与大型哺乳动物的线描插画"></div>
+        <div class="media media--fit media--frame fill kb" data-anim="wipe"><img src="assets/nat-megafauna.jpg" alt="早期人类与大型哺乳动物的线描插画"></div>
         <p class="cap">澳大利亚和美洲的生物大灭绝，其时间与智人到达的时间相吻合。</p>
       </div>
       <div class="col col--c">
@@ -1580,7 +1806,7 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
   <div class="s__main">
     <div class="grid2--r grid2">
       <div class="col">
-        <div class="media media--fit media--frame fill" data-anim="wipe"><img src="assets/nat-prehistory.jpg" alt="农业社会的自然景观线描"></div>
+        <div class="media media--fit media--frame fill kb" data-anim="wipe"><img src="assets/nat-prehistory.jpg" alt="农业社会的自然景观线描"></div>
       </div>
       <div class="col col--c">
         <div class="grid3" style="align-items:stretch">
@@ -1603,7 +1829,7 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
   <div class="s__main">
     <div class="grid2--r grid2">
       <div class="col">
-        <div class="media media--fit media--frame fill" data-anim="wipe"><img src="assets/nat-ships.jpg" alt="大航海时代的帆船线描插画"></div>
+        <div class="media media--fit media--frame fill kb" data-anim="wipe"><img src="assets/nat-ships.jpg" alt="大航海时代的帆船线描插画"></div>
         <p class="cap">1492 年哥伦布开始东方之旅，“大航海时代”拉开序幕。</p>
       </div>
       <div class="col col--c">
@@ -1632,7 +1858,7 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
   <div class="s__main">
     <div class="grid2">
       <div class="col">
-        <div class="media media--fit media--frame fill" data-anim="wipe"><img src="assets/nat-industrial.jpg" alt="工业革命时期林立的烟囱线描"></div>
+        <div class="media media--fit media--frame fill kb" data-anim="wipe"><img src="assets/nat-industrial.jpg" alt="工业革命时期林立的烟囱线描"></div>
         <div class="media media--frame" data-anim="wipe" style="flex:0 0 26%"><img src="assets/nat-smog.jpg" alt="1952 年伦敦烟雾事件中的街景"></div>
         <p class="cap">1952 年 12 月 5 日，一股厚厚的黄色云层降落在伦敦——煤炭燃烧产生的二氧化硫和二氧化氮与寒冷雾气反应，使烟雾变得有毒。</p>
       </div>
@@ -1676,7 +1902,7 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
         </table>
       </div>
       <div class="col">
-        <div class="media media--fit media--frame fill"><img src="assets/nat-ice.jpg" alt="极地冰川景观"></div>
+        <div class="media media--fit media--frame fill kb"><img src="assets/nat-ice.jpg" alt="极地冰川景观"></div>
         <div class="statrow" style="grid-template-columns:repeat(2,1fr);border-top:none;padding-top:0">
           <div class="stat"><b>0.6℃</b><span>20 世纪全世界平均温度的攀升幅度</span></div>
           <div class="stat"><b>95%</b><span>北极圈内多年冰面积在 35 年内的减少幅度</span></div>
@@ -1693,8 +1919,14 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
   <div class="s__main">
     <div class="grid2--r grid2">
       <div class="col">
-        <div class="media media--fit media--frame fill" data-anim="wipeL"><img src="assets/silent-spring.jpg" alt="《寂静的春天》封面与作者蕾切尔·卡逊"></div>
-        <p class="cap">美国海洋生物学家蕾切尔·卡逊。</p>
+        <figure class="figure fill">
+          <div class="media media--fit media--frame fill" data-anim="wipeL"><img src="assets/silent-spring.jpg" alt="《寂静的春天》封面与作者蕾切尔·卡逊"></div>
+          <figcaption class="cap"><strong>蕾切尔·卡逊</strong>（Rachel Carson），美国海洋生物学家。书名取自一个设想：如果杀虫剂继续这样使用，某个春天将再也听不到鸟鸣。</figcaption>
+        </figure>
+        <figure class="figure" style="flex:0 0 40%;min-height:0">
+          <div class="media media--fit media--frame fill" data-anim="wipeL"><img src="assets/limits-illus.jpg" alt="1970 年地球日游行集会的插画"></div>
+          <figcaption class="cap"><strong>1970 年 4 月 22 日，首个"地球日"</strong>。参议员纳尔逊发起，当天超过 2000 万美国人走上街头——环境议题第一次成为大众运动。</figcaption>
+        </figure>
       </div>
       <div class="col col--c">
         <div class="pts">
@@ -1722,8 +1954,14 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
   <div class="s__main">
     <div class="grid2">
       <div class="col">
-        <div class="media media--fit media--frame fill" data-anim="wipeL"><img src="assets/limits-illus.jpg" alt="指数增长与资源消耗的图解插画"></div>
-        <div class="media media--fit media--frame" data-anim="wipeL" style="flex:0 0 30%"><img src="assets/limits-book.jpg" alt="《增长的极限》书籍"></div>
+        <figure class="figure fill">
+          <div class="media media--fit media--frame fill" data-anim="wipeL"><img src="assets/limits-book.jpg" alt="《增长的极限》书籍封面"></div>
+          <figcaption class="cap"><strong>《增长的极限》（The Limits to Growth）</strong>，罗马俱乐部，1972 年。副标题为"资源枯竭与人口崩溃情景"，是第一本用计算机模型推演人类未来的著作。</figcaption>
+        </figure>
+        <div class="card card--flat" style="flex:0 0 auto">
+          <p class="card__k">模型说了什么</p>
+          <p class="card__d">模型把<strong>人口、工业产出、粮食、资源存量、污染</strong>五个变量放进同一个反馈系统。结论不是"某一年会耗尽"，而是：<strong>只要增长是指数的，而地球是有限的，崩溃就只是时间问题</strong>——除非主动改变增长方式。</p>
+        </div>
       </div>
       <div class="col col--c">
         <div class="pts">
@@ -1825,14 +2063,39 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
 <section class="s s--tint" data-sec="四 · 三大维度" data-title="环境、社会、经济">
   <p class="s__eyebrow">01 / 三大维度</p>
   <h2 class="s__title">兼顾三者，<em>否则只是政治口号</em></h2>
-  <p class="s__deck">直到种种危机出现，人类才慢慢领悟到：<strong>自然的限制也是一种保护，人与自然是一体的，保护自然就是保护人类自身</strong>。而希冀获得一个更美好的未来，必须兼顾环境、社会、经济的协调发展。</p>
+  <p class="s__deck">自然的限制也是一种保护，人与自然是一体的。点击三角形任一顶点，查看该维度关心什么、以及它与另外两者的张力。</p>
   <div class="s__main">
-    <div class="col">
-      <div class="media media--fit media--frame fill"><img src="assets/three-dims.jpg" alt="环境、社会、经济三大维度的关系图"></div>
-      <div class="grid3" style="flex:0 0 auto">
-        <div class="card card--flat"><p class="card__k">维度一</p><p class="card__t">环境</p><p class="card__d">以自然资源的<strong>高效利用</strong>和良好的生态环境为<strong>基础</strong>。输入端是资源危机，输出端是污染排放。</p></div>
-        <div class="card card--flat"><p class="card__k">维度二</p><p class="card__t">经济</p><p class="card__d">以经济发展为<strong>前提</strong>。没有发展，谈不上可持续；但发展有限度，不能危及后代。</p></div>
-        <div class="card card--flat"><p class="card__k">维度三</p><p class="card__t">社会</p><p class="card__d">以谋求社会的<strong>全面进步</strong>为目标。核心是“公平原则”：每个人都拥有获得生存与发展的空间与资源的权利。</p></div>
+    <div class="grid2--l grid2">
+      <div class="col" style="justify-content:center">
+        <svg class="tri" id="tri" viewBox="0 0 640 470" role="img" aria-label="环境、社会、经济三大维度的关系图">
+          <g class="tri__ven">
+            <circle cx="250" cy="250" r="128"></circle>
+            <circle cx="390" cy="250" r="128"></circle>
+            <circle cx="320" cy="150" r="128"></circle>
+          </g>
+          <path class="tri__edge" d="M320,46 L86,404 L554,404 Z"></path>
+          <text class="tri__mid" x="320" y="243">SUSTAINABLE</text>
+          <text class="tri__mid" x="320" y="266">FUTURE</text>
+          <g class="tri__v is-on" data-i="0" transform="translate(320,46)" tabindex="0" role="button" aria-label="环境维度">
+            <rect x="-84" y="-22" width="168" height="44" rx="3"></rect>
+            <text y="7"><tspan class="tri__ix">01</tspan><tspan dx="8">环境维度</tspan></text></g>
+          <g class="tri__v" data-i="1" transform="translate(86,404)" tabindex="0" role="button" aria-label="社会维度">
+            <rect x="-84" y="-22" width="168" height="44" rx="3"></rect>
+            <text y="7"><tspan class="tri__ix">02</tspan><tspan dx="8">社会维度</tspan></text></g>
+          <g class="tri__v" data-i="2" transform="translate(554,404)" tabindex="0" role="button" aria-label="经济维度">
+            <rect x="-84" y="-22" width="168" height="44" rx="3"></rect>
+            <text y="7"><tspan class="tri__ix">03</tspan><tspan dx="8">经济维度</tspan></text></g>
+        </svg>
+      </div>
+      <div class="col col--c">
+        <div class="dim">
+          <p class="dim__k" id="dimK">DIMENSION_01</p>
+          <p class="dim__en" id="dimEn">PLANET</p>
+          <h3 class="dim__t" id="dimT">环境维度</h3>
+          <p class="dim__d" id="dimD"></p>
+          <div class="dim__tags" id="dimTags"></div>
+          <p class="dim__q" id="dimQ"></p>
+        </div>
       </div>
     </div>
   </div>
@@ -2402,32 +2665,43 @@ document.addEventListener("keydown",function(e){
 });
 go(0);
 
-/* ================= 视频：B 站嵌入 / 本机文件 ================= */
+/* ================= 视频 ================= */
+/* 说明：player.bilibili.com 等平台会拒绝来自 file:// 的内嵌播放，
+   因此本地双击打开时直接走"本机视频文件"，用 http(s) 打开时才用在线嵌入。 */
 (function(){
   var frame=$("#hookFrame"), v=$("#hookVideo"), ph=$("#hookPh"),
-      pick=$("#hookPick"), file=$("#hookFile"), bar=$(".vbar");
+      pick=$("#hookPick"), file=$("#hookFile"), hint=$("#hookHint");
   if(!frame)return;
-  var KEY="sd-hook-src";
+  var KEY="sd-hook-src", isFile=(location.protocol==="file:");
 
   function showFrame(bv){
     frame.hidden=false; v.hidden=true; ph.hidden=true;
     frame.src="https://player.bilibili.com/player.html?bvid="+bv+"&autoplay=0&high_quality=1&danmaku=0";
     $$(".vbar__b[data-bv]").forEach(function(x){x.classList.toggle("is-on",x.dataset.bv===bv);});
+    if(pick)pick.classList.remove("is-on");
     try{store(KEY,JSON.stringify({t:"bv",v:bv}));}catch(e){}
   }
   function showBlob(blob){
-    frame.hidden=true; frame.src="about:blank"; ph.hidden=true;
+    frame.hidden=true; frame.removeAttribute("src"); ph.hidden=true;
     v.hidden=false; v.src=URL.createObjectURL(blob); v.load();
     $$(".vbar__b[data-bv]").forEach(function(x){x.classList.remove("is-on");});
     if(pick)pick.classList.add("is-on");
   }
-  function showPh(){ frame.hidden=true; v.hidden=true; ph.hidden=false; }
+  function showPh(msg){
+    frame.hidden=true; v.hidden=true; ph.hidden=false;
+    if(msg&&hint)hint.innerHTML=msg;
+  }
 
   $$(".vbar__b[data-bv]").forEach(function(btn){
-    btn.addEventListener("click",function(){ if(pick)pick.classList.remove("is-on"); showFrame(btn.dataset.bv); });
+    btn.addEventListener("click",function(){
+      if(isFile){
+        showPh("在线播放需要用 <code>http://</code> 打开本页。<br>把文件放进一个文件夹，在该文件夹执行 <code>python3 -m http.server</code>，<br>再用浏览器访问 <code>localhost:8000</code> 即可。<br>现在也可以直接点<b>「本机文件」</b>选一段视频播放。");
+        return;
+      }
+      showFrame(btn.dataset.bv);
+    });
   });
 
-  /* ---- 本机文件，存 IndexedDB，刷新后仍在 ---- */
   function db(cb){
     if(!window.indexedDB){cb(null);return;}
     var rq=indexedDB.open("sd-deck",1);
@@ -2451,105 +2725,45 @@ go(0);
     });
   }
 
-  /* ---- 恢复上次选择 ---- */
+  /* 恢复上次选择；file:// 下永远优先本机文件 */
   var saved=null; try{ saved=JSON.parse(store(KEY)||"null"); }catch(e){}
-  if(saved&&saved.t==="file"){ loadSaved(function(bl){ if(bl)showBlob(bl); }); }
-  else if(saved&&saved.t==="bv"){ showFrame(saved.v); }
+  loadSaved(function(bl){
+    if(bl){ showBlob(bl); return; }
+    if(isFile){
+      showPh("本页是用 <code>file://</code> 直接打开的，视频网站不允许这种方式内嵌播放。<br>点<b>「本机文件」</b>选一段视频即可播放（选过一次会被记住）；<br>或在文件所在目录执行 <code>python3 -m http.server</code>，用 <code>localhost:8000</code> 打开本页以启用在线播放。");
+    } else {
+      showFrame(saved&&saved.t==="bv" ? saved.v : "BV1A78t68E5c");
+      var ok=false;
+      frame.addEventListener("load",function(){ ok=true; });
+      setTimeout(function(){ if(!ok&&!frame.hidden) showPh("在线播放器未能加载，可能是网络受限。<br>点<b>「本机文件」</b>选一段本地视频播放。"); },7000);
+    }
+  });
 
-  /* ---- 离线时 iframe 无法加载，给出提示 ---- */
-  var loaded=false;
-  frame.addEventListener("load",function(){ loaded=true; });
-  setTimeout(function(){
-    if(!loaded && !frame.hidden && v.hidden) showPh();
-  },6000);
-
-  /* ---- 离开该页时停止播放 ---- */
   document.addEventListener("slide",function(e){
-    var mine=frame.closest(".s");
-    if(e.detail.el!==mine){
-      if(!v.paused)v.pause();
-      if(!frame.hidden){ var sc=frame.src; frame.src=sc; }
+    if(e.detail.el!==frame.closest(".s")){
+      if(v&&!v.paused)v.pause();
+      if(!frame.hidden&&frame.src){ var sc=frame.src; frame.src=sc; }
     }
   });
 })();
 
-
-/* ================= 封面：生长的枝干 ================= */
-/* 只在左下角空白区生长，越往上越淡，避免横穿标题与数据条 */
+/* ================= 封面：轨道运行 ================= */
 (function(){
-  var cv=$("#cvBg"); if(!cv)return;
-  var ctx=cv.getContext("2d"), W=0,H=0, dpr=Math.min(devicePixelRatio||1,2);
-  var seeds=[], t0=0, raf=null;
-  function size(){
-    var r=cv.getBoundingClientRect();
-    W=r.width; H=r.height;
-    cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-  }
-  function seed(){
-    seeds=[];
-    for(var i=0;i<4;i++){
-      seeds.push({
-        x:W*(0.04+i*0.13+Math.random()*0.04), y:H*1.02,
-        a:-Math.PI/2+(Math.random()-0.5)*0.30,
-        len:H*(0.30+Math.random()*0.22),
-        w:3.0+Math.random()*1.4, d:i*7
-      });
-    }
-  }
-  /* 顶部渐隐：越靠上越透明，保证文字区干净 */
-  function alphaAt(y){
-    var top=H*0.52;                       // 0.52H 以上完全隐去
-    if(y<=top) return 0;
-    return Math.min(1,(y-top)/(H*0.34));
-  }
-  function limb(b,p,base){
-    var steps=Math.floor(b.len*p/6), x=b.x, y=b.y, a=b.a;
-    for(var i=0;i<steps;i++){
-      a+=Math.sin((i+b.d)*0.11)*0.05;
-      var nx=x+Math.cos(a)*6, ny=y+Math.sin(a)*6;
-      var al=alphaAt(ny)*base;
-      if(al>0.004){
-        ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(nx,ny);
-        ctx.strokeStyle="rgba(61,155,53,"+al.toFixed(3)+")";
-        ctx.lineWidth=Math.max(0.7,b.w*(1-i/Math.max(steps,1)*0.62));
-        ctx.lineCap="round"; ctx.stroke();
-      }
-      x=nx; y=ny;
-    }
-    return {x:x,y:y,a:a};
-  }
-  function frame(t){
-    if(!t0)t0=t;
-    var p=Math.min((t-t0)/3200,1), e=1-Math.pow(1-p,2.2);
-    ctx.clearRect(0,0,W,H);
-    seeds.forEach(function(b,i){
-      var tip=limb(b,e,0.42);
-      if(e>0.40){
-        var sp=Math.min((e-0.40)/0.60,1);
-        [-1,1].forEach(function(dir,k){
-          limb({x:b.x+(tip.x-b.x)*0.52,y:b.y+(tip.y-b.y)*0.52,
-                a:b.a+dir*(0.46+0.08*k),len:b.len*0.44,w:b.w*0.55,d:i*5+k}, sp, 0.30);
-        });
-      }
-      if(e>0.86){
-        var la=alphaAt(tip.y)*0.75*((e-0.86)/0.14);
-        if(la>0){
-          ctx.beginPath(); ctx.arc(tip.x,tip.y,3,0,6.2832);
-          ctx.fillStyle="rgba(124,196,111,"+la.toFixed(3)+")"; ctx.fill();
-        }
-      }
+  var svg=$(".orb"); if(!svg)return;
+  var sats=$$(".orb__sat",svg), raf=null, t=0, live=false;
+  function place(){
+    sats.forEach(function(g,i){
+      var r=+g.dataset.r, a=+g.dataset.a + t*(0.16-i*0.038);
+      g.setAttribute("transform","translate("+(230+r*Math.cos(a))+","+(230+r*Math.sin(a))+")");
     });
-    if(p<1)raf=requestAnimationFrame(frame);
   }
-  function play(){
-    if(RM){size();return;}
-    cancelAnimationFrame(raf); size(); seed(); t0=0; raf=requestAnimationFrame(frame);
+  function loop(){
+    if(live){ t+=0.006; place(); }
+    raf=requestAnimationFrame(loop);
   }
-  var rt=null;
-  window.addEventListener("resize",function(){ clearTimeout(rt); rt=setTimeout(play,180); });
-  document.addEventListener("slide",function(e){ if(e.detail.el===cv.closest(".s")) play(); });
-  play();
+  place();
+  document.addEventListener("slide",function(e){ live=(e.detail.el===svg.closest(".s")); });
+  if(!RM){ live=true; raf=requestAnimationFrame(loop); }
 })();
 
 /* ================= 提问计时器 ================= */
@@ -2588,16 +2802,117 @@ $$(".hint").forEach(function(h){
   });
 });
 
-/* ================= 视角切换 ================= */
+/* ================= 视角切换 · 系统图 ================= */
 (function(){
-  var sw=$(".sw"); if(!sw)return;
-  var btns=$$("button",sw), cols=$$(".vs__c");
-  function set(i){
+  var map=$("#sysmap"); if(!map)return;
+  var sw=$(".sw"), btns=$$("button",sw), nodes=$$(".sm__n",map);
+  var VIEW=[
+    {k:"VIEW_01 · 传统产品视角",t:"一个物件",
+     d:"只看造型与功能，解决单点需求，交付一个产品——责任在交付的那一刻结束。系统里其他环节，不在视野内。"},
+    {k:"VIEW_02 · 可持续系统视角",t:"一组关系",
+     d:"识别材料、行为、物流、维护与责任边界。同一个杯子，现在连着四个环节，每一环都可能是设计的着力点。"}
+  ];
+  var NODE=[
+    {k:"环节 01 · 用户 / 需求",t:"这个需求必须由新产品满足吗？",d:"用户习惯、购买动机与使用频率，共同决定了整个系统的物质流规模。"},
+    {k:"环节 02 · 产品 / 材料",t:"它坏了以后，谁能修？",d:"材料选择、结构与生命周期在此确定。模块化、可拆解、单一材质，都是为了让产品在末端仍可被重新利用。"},
+    {k:"环节 03 · 服务 / 维护",t:"延长一年寿命，还是换环保材料？",d:"以成果和效益取代物质产品的消耗——让使用而非占有成为价值交付的方式。"},
+    {k:"环节 04 · 回收 / 再分配",t:"回收成本由谁承担？",d:"回收不是链条的终点，而是回到起点的通道。押金、逆向物流与二手流通决定闭环能否闭合。"}
+  ];
+  function card(o){ $("#smK").textContent=o.k; $("#smT").textContent=o.t; $("#smD").textContent=o.d; }
+  function setView(i){
     btns.forEach(function(b,j){b.setAttribute("aria-pressed",String(j===i));});
-    cols.forEach(function(c,j){c.dataset.act=String(j===i);c.dataset.dim=String(j!==i);});
+    map.classList.toggle("is-sys",i===1);
+    nodes.forEach(function(n){n.classList.remove("is-on");});
+    card(VIEW[i]);
   }
-  btns.forEach(function(b,i){b.addEventListener("click",function(){set(i);});});
-  set(1);
+  btns.forEach(function(b,i){b.addEventListener("click",function(){setView(i);});});
+  nodes.forEach(function(n,i){
+    n.addEventListener("click",function(){
+      if(!map.classList.contains("is-sys"))return;
+      nodes.forEach(function(x){x.classList.toggle("is-on",x===n);});
+      card(NODE[i]);
+    });
+  });
+  setView(0);
+  /* 每次进入本页从"传统视角"重新演示一遍 */
+  document.addEventListener("slide",function(e){ if(e.detail.el===map.closest(".s")) setView(0); });
+})();
+
+/* ================= 案例互动条 ================= */
+(function(){
+  var MODEL={
+    loop:{
+      calc:function(v){ return Math.round(Math.max(0,Math.min(100, v.ret*0.9 - (v.dist-2)*0.32 ))); },
+      fmt:{ret:"%",dist:"km"},
+      msg:function(sc){ return sc>=70?"系统条件较稳健":sc>=45?"临界，需强化归还":"循环难以成立"; }
+    },
+    tgtg:{
+      calc:function(v){ return Math.round(Math.max(0,Math.min(100, 34 + v.disc*0.62 + (180-v.win)*0.17 ))); },
+      fmt:{disc:"%",win:"分钟"},
+      msg:function(sc){ return sc>=70?"匹配效率高":sc>=45?"部分剩食仍会流失":"信息匹配失效"; }
+    },
+    fair:{
+      calc:function(v){ return Math.round(Math.max(0,Math.min(100, v.life*11 - v.prem*0.55 + 8 ))); },
+      fmt:{life:"年",prem:"%"},
+      msg:function(sc){ return sc>=70?"延寿收益显著":sc>=45?"取决于用户意愿":"成本压过了收益"; }
+    }
+  };
+  Object.keys(MODEL).forEach(function(key){
+    var box=$('[data-lab="'+key+'"]'); if(!box)return;
+    var inputs=$$('input[data-case="'+key+'"]',box), M=MODEL[key];
+    function run(){
+      var v={};
+      inputs.forEach(function(inp){
+        var k=inp.dataset.k, val=+inp.value; v[k]=val;
+        var out=$("#"+key+"-"+k+"-v"); if(out)out.textContent=val+(M.fmt[k]||"");
+      });
+      var sc=M.calc(v);
+      $("#"+key+"-score").textContent=sc;
+      var fill=$("#"+key+"-fill");
+      fill.style.width=sc+"%";
+      fill.style.background = sc>=70?"var(--accent)" : sc>=45?"var(--tan)" : "#B4553A";
+      $("#"+key+"-msg").textContent=M.msg(sc);
+    }
+    inputs.forEach(function(inp){ inp.addEventListener("input",run); });
+    run();
+    document.addEventListener("slide",function(e){ if(e.detail.el===box.closest(".s")) run(); });
+  });
+})();
+
+/* ================= 三大维度 ================= */
+(function(){
+  var tri=$("#tri"); if(!tri)return;
+  var vs=$$(".tri__v",tri);
+  var D=[
+    {en:"PLANET",t:"环境维度",
+     d:"以自然资源的高效利用和良好的生态环境为基础。输入端是资源危机，输出端是污染排放——两端都有极限。",
+     tags:["资源存量","污染排放","生物多样性","气候承载力"],
+     q:"我们还剩多少可用的额度？"},
+    {en:"PEOPLE",t:"社会维度",
+     d:"让每个人拥有获得生存、发展、健康与文化表达的平等机会。核心是公平原则：这颗星球上的每个人都拥有生存与发展的空间。",
+     tags:["代际公平","代内公平","基本权利","文化多样性"],
+     q:"谁获益？谁承担代价？"},
+    {en:"PROFIT",t:"经济维度",
+     d:"以经济发展为前提。没有发展谈不上可持续；但发展有限度，不能危及后代人的生存和发展。",
+     tags:["长期盈利","三重底线","不外部化成本","缩小差距"],
+     q:"这笔账，算到第几年？"}
+  ];
+  function sel(i){
+    vs.forEach(function(v,j){v.classList.toggle("is-on",j===i);});
+    var o=D[i];
+    $("#dimK").textContent="DIMENSION_0"+(i+1);
+    $("#dimEn").textContent=o.en;
+    $("#dimT").textContent=o.t;
+    $("#dimD").textContent=o.d;
+    $("#dimQ").textContent=o.q;
+    var box=$("#dimTags"); box.textContent="";
+    o.tags.forEach(function(t){ var e=document.createElement("span"); e.textContent=t; box.appendChild(e); });
+  }
+  vs.forEach(function(v,i){
+    v.addEventListener("click",function(){sel(i);});
+    v.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" "){e.preventDefault();sel(i);} });
+  });
+  sel(0);
 })();
 
 /* ================= 系统边界 ================= */
