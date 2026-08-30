@@ -4,8 +4,9 @@ const {
   AlignmentType, WidthType, HeadingLevel, BorderStyle, ShadingType,
 } = require('docx');
 
-const SRC = '/home/user/Ericzm214/docs/第2章-理论谱系-润色稿.md';
-const OUT = '/home/user/Ericzm214/docs/第2章-理论谱系-润色稿.docx';
+const SRC = process.argv[2];
+const OUT = process.argv[3];
+if (!SRC || !OUT) { console.error('usage: node build_docx.js <src.md> <out.docx>'); process.exit(1); }
 
 const CONTENT_W = 9026; // A4 (11906) - 2*1440 margins
 
@@ -16,14 +17,16 @@ const F_HEI  = { ascii: 'Times New Roman', hAnsi: 'Times New Roman', eastAsia: '
 function runs(text, base = {}) {
   const out = [];
   // split on [n] endnote refs and 【...】 markers
-  const re = /(\[\d{1,2}\])|(【[^】]*】)/g;
+  const re = /(\[\d{1,2}\])|(【[^】]*】)|\*\*([^*]+)\*\*/g;
   let last = 0, m;
   while ((m = re.exec(text)) !== null) {
     if (m.index > last) out.push(new TextRun({ text: text.slice(last, m.index), font: F_SONG, size: 24, ...base }));
     if (m[1]) {
       out.push(new TextRun({ text: m[1], font: F_SONG, size: 24, superScript: true, ...base }));
-    } else {
+    } else if (m[2]) {
       out.push(new TextRun({ text: m[2], font: F_SONG, size: 24, color: 'C00000', ...base }));
+    } else {
+      out.push(new TextRun({ text: m[3], font: F_SONG, size: 24, bold: true, ...base }));
     }
     last = m.index + m[0].length;
   }
@@ -104,14 +107,32 @@ function buildTable(rows) {
 
 // ---------- parse markdown ----------
 const raw = fs.readFileSync(SRC, 'utf8');
-const blocks = raw.split(/\n{2,}/).map(b => b.replace(/\s+$/, '')).filter(b => b.trim() !== '');
+const rawBlocks = raw.split(/\n{2,}/).map(b => b.replace(/\s+$/, '')).filter(b => b.trim() !== '');
+const blocks = [];
+for (const b of rawBlocks) {
+  const ls = b.split('\n');
+  let buf = [];
+  for (const l of ls) {
+    if (/^#{1,6}\s/.test(l.trim())) {
+      if (buf.length) { blocks.push(buf.join('\n')); buf = []; }
+      blocks.push(l.trim());
+    } else buf.push(l);
+  }
+  if (buf.length) blocks.push(buf.join('\n'));
+}
 
 const children = [];
+let blockIdx = 0;
 for (const blk of blocks) {
+  blockIdx++;
   const lines = blk.split('\n').map(l => l.trim()).filter(l => l !== '');
   const first = lines[0];
 
-  if (first.startsWith('>')) continue;                 // editorial note at top of md
+  if (first.startsWith('>')) {
+    if (blockIdx <= 2) continue;                       // editorial note at top of md
+    children.push(body(lines.map(l => l.replace(/^>\s?/, '')).join('')));
+    continue;
+  }
   if (/^-{3,}$/.test(first)) continue;                 // horizontal rules
 
   if (first.startsWith('# ')) { children.push(heading(first.slice(2).trim(), 1)); continue; }
@@ -121,7 +142,7 @@ for (const blk of blocks) {
   if (first.startsWith('|')) {
     const rows = lines
       .filter(l => !/^\|[\s\-:|]+\|$/.test(l))
-      .map(l => l.replace(/^\|/, '').replace(/\|$/, '').split('|').map(c => c.trim()));
+      .map(l => l.replace(/^\|/, '').replace(/\|$/, '').split('|').map(c => c.trim().replace(/\*\*/g, '')));
     children.push(buildTable(rows));
     children.push(spacer());
     continue;
@@ -129,7 +150,13 @@ for (const blk of blocks) {
 
   if (/^［此处插入/.test(first)) { children.push(placeholder(first)); continue; }
 
-  if (/^(表|图)2-\d/.test(first) && lines.length === 3) {
+  if (/^表\s*[A-Z]\s/.test(first) && lines.length === 1) {
+    children.push(spacer());
+    children.push(caption(first, false));
+    continue;
+  }
+
+  if (/^(表|图)\d+-\d/.test(first) && lines.length === 3) {
     if (first.startsWith('表')) {
       children.push(spacer());
       lines.forEach((l, i) => children.push(caption(l, i === 1)));
@@ -140,6 +167,19 @@ for (const blk of blocks) {
     continue;
   }
 
+  if (/^[-*]\s/.test(first)) {
+    for (const l of lines) {
+      const t = l.replace(/^[-*]\s+/, '');
+      children.push(new Paragraph({
+        children: runs(t),
+        alignment: AlignmentType.BOTH,
+        indent: { left: 480, hanging: 240 },
+        spacing: { line: 360, lineRule: 'auto', before: 0, after: 40 },
+        bullet: { level: 0 },
+      }));
+    }
+    continue;
+  }
   children.push(body(lines.join('')));
 }
 
