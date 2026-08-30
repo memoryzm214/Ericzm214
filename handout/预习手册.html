@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>可持续发展概论 · 课前预习手册</title>
+<style>
+:root{
+  --ink:#16231A; --ink2:#3A4A3F; --muted:#5D6E62;
+  --green:#3D9B35; --green-ink:#2C7A26; --deep:#1F5B2C;
+  --line:#D8E6D4; --wash:#F1F7EF; --tan:#A9812E; --tan-w:#FBF4E4;
+  --f-sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;
+  --f-serif:"Songti SC","Noto Serif SC",Georgia,serif;
+  --f-mono:"SF Mono","IBM Plex Mono",Menlo,monospace;
+}
+*{box-sizing:border-box}
+@page{size:A4;margin:17mm 15mm 15mm}
+html,body{margin:0;padding:0}
+body{font-family:var(--f-sans);font-size:10.4pt;line-height:1.75;color:var(--ink);background:#fff}
+h1,h2,h3,h4,p,ul,ol,figure{margin:0}
+ul,ol{padding-left:1.35em}
+li{margin:.28em 0}
+strong{color:var(--green-ink);font-weight:600}
+.pg{page-break-before:always}
+.pg:first-of-type{page-break-before:auto}
+.keep{break-inside:avoid;page-break-inside:avoid}
+
+/* 封面 */
+.cover{height:245mm;display:flex;flex-direction:column;justify-content:center;position:relative}
+.cover__bar{position:absolute;top:0;left:0;right:0;height:6mm;background:var(--green)}
+.cover__meta{font-family:var(--f-mono);font-size:8.4pt;letter-spacing:.18em;color:var(--muted);margin-bottom:9mm}
+.cover__t{font-family:var(--f-serif);font-size:32pt;line-height:1.18;font-weight:700;letter-spacing:-.01em}
+.cover__t em{font-style:normal;color:var(--green)}
+.cover__sub{font-family:var(--f-mono);font-size:9pt;letter-spacing:.3em;color:var(--muted);margin-top:6mm}
+.cover__lead{font-size:11.4pt;line-height:1.85;color:var(--ink2);margin-top:11mm;max-width:118mm;
+  border-left:3px solid var(--green);padding-left:6mm}
+.cover__note{margin-top:auto;border-top:1px solid var(--line);padding-top:5mm;font-size:9.4pt;color:var(--muted)}
+
+/* 通用版式 */
+.eyebrow{font-family:var(--f-mono);font-size:8.2pt;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--green-ink);display:flex;align-items:center;gap:3mm;margin-bottom:2.5mm}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--line)}
+h2.h{font-family:var(--f-serif);font-size:19pt;line-height:1.25;font-weight:700;margin-bottom:4mm}
+h3.h{font-family:var(--f-serif);font-size:13.5pt;line-height:1.35;font-weight:700;margin:7mm 0 3mm}
+.lead{font-size:10.8pt;line-height:1.8;color:var(--ink2);margin-bottom:5mm}
+.rule{height:1px;background:var(--line);margin:6mm 0}
+
+/* 卡片 */
+.box{border:1px solid var(--line);border-radius:2mm;padding:5mm 6mm;margin:4mm 0;background:#fff}
+.box--wash{background:var(--wash);border-color:#CDE3C7}
+.box--warn{background:var(--tan-w);border-color:#E8D9AE}
+.box__k{font-family:var(--f-mono);font-size:8pt;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--green-ink);margin-bottom:2mm}
+.box--warn .box__k{color:var(--tan)}
+.box__t{font-family:var(--f-serif);font-size:12pt;font-weight:700;margin-bottom:2mm}
+
+/* 讨论题 */
+.q{border:1.4px solid var(--ink);border-radius:2mm;overflow:hidden;margin:5mm 0 7mm}
+.q__h{background:var(--deep);color:#fff;padding:4mm 6mm}
+.q__n{font-family:var(--f-mono);font-size:8.2pt;letter-spacing:.16em;color:#9BDA8E}
+.q__t{font-family:var(--f-serif);font-size:15pt;line-height:1.4;font-weight:700;margin-top:1.5mm}
+.q__b{padding:5mm 6mm}
+.ang{border-left:2.5px solid var(--green);padding-left:4.5mm;margin:4mm 0}
+.ang__k{font-family:var(--f-mono);font-size:8pt;letter-spacing:.14em;color:var(--green-ink)}
+.ang__t{font-weight:700;font-size:10.8pt;margin:1mm 0 1.5mm}
+.ang__d{font-size:10pt;line-height:1.75;color:var(--ink2)}
+.prep{background:var(--wash);border-radius:2mm;padding:4mm 5mm;margin-top:4mm}
+.prep__k{font-family:var(--f-mono);font-size:8pt;letter-spacing:.14em;color:var(--green-ink);margin-bottom:1.5mm}
+
+/* 表格 */
+table{width:100%;border-collapse:collapse;font-size:9.8pt;margin:4mm 0}
+th,td{text-align:left;padding:2.6mm 3.5mm;border-bottom:1px solid var(--line);line-height:1.6;vertical-align:top}
+thead th{background:var(--green);color:#fff;font-family:var(--f-mono);font-size:8pt;
+  letter-spacing:.1em;font-weight:500}
+tbody tr:nth-child(even){background:var(--wash)}
+td:first-child{font-weight:600;white-space:nowrap}
+
+/* 时间线 */
+.tl{margin:4mm 0}
+.tl__i{display:flex;gap:4mm;padding-bottom:3mm;break-inside:avoid}
+.tl__y{font-family:var(--f-mono);font-size:8.6pt;color:var(--green-ink);flex:0 0 22mm;padding-top:.6mm;font-weight:600}
+.tl__d{font-size:10pt;line-height:1.7;color:var(--ink2)}
+/* 写字区 */
+.write{break-before:avoid;page-break-before:avoid;border:1px dashed #BFD4BA;border-radius:2mm;padding:4mm 5mm;margin-top:3mm;background:#FCFEFB}
+.write__k{font-family:var(--f-mono);font-size:8pt;letter-spacing:.14em;color:var(--muted);margin-bottom:2mm}
+.write__l{border-bottom:1px solid #DCE7D8;height:7.5mm}
+.foot{position:running(f)}
+.tag{display:inline-block;font-family:var(--f-mono);font-size:8pt;letter-spacing:.08em;
+  border:1px solid var(--line);border-radius:1mm;padding:.7mm 2.2mm;color:var(--muted);margin-right:1.5mm}
+</style>
+</head>
+<body>
+
+<!-- ============ 封面 ============ -->
+<section class="pg cover">
+  <div class="cover__bar"></div>
+  <p class="cover__meta">湖北工业大学 工业设计学院 · 主讲 张萌</p>
+  <h1 class="cover__t">面向未来的<br><em>可持续设计</em><br>课前预习手册</h1>
+  <p class="cover__sub">SUSTAINABLE DESIGN · 可持续发展概论</p>
+  <p class="cover__lead">这门课不会告诉你"什么是环保的"。<br>它想让你学会一件更难的事：<strong>看清一个问题的边界在哪里</strong>——谁在承担代价，时间尺度有多长，以及你作为设计师能改动哪一处。</p>
+  <div class="cover__note">
+    <p><strong>怎么用这份材料</strong>：课上会有三次分组讨论，每次都有计时。这份手册把三道讨论题连同思考角度提前给你——<strong>请在课前至少想过一遍</strong>，课上才来得及说出理由。手册里留了书写区，可以直接写在上面带来。</p>
+  </div>
+</section>
+
+<!-- ============ 课程地图 ============ -->
+<section class="pg">
+  <p class="eyebrow">课程地图</p>
+  <h2 class="h">这堂课要回答的五个问题</h2>
+  <p class="lead">45 分钟，五个板块。中间穿插三次讨论——那是这堂课真正发生学习的地方。</p>
+
+  <table>
+    <thead><tr><th>板块</th><th>核心问题</th><th>你会看到什么</th></tr></thead>
+    <tbody>
+      <tr><td>一 · 何为可持续设计</td><td>它到底是什么？</td><td>外卖包装的系统边界实测；Loop、Too Good To Go、Fairphone 三个真实案例</td></tr>
+      <tr><td>二 · 设计与自然</td><td>我们凭什么能设计系统？</td><td>杯子的哲学思考、道法自然、盖亚假说、雏菊世界模型、混沌与蝴蝶效应</td></tr>
+      <tr><td>三 · 可持续发展概论</td><td>这个概念从哪来？</td><td>人与自然关系的五个阶段、环保运动兴起、布伦特兰报告、中国的四阶段探索</td></tr>
+      <tr><td>四 · 三大维度</td><td>环境、社会、经济怎么协调？</td><td>三维关系图、人类发展指数与生态足迹的四象限</td></tr>
+      <tr><td>五 · 设计的觉醒</td><td>设计师的责任从哪来？</td><td>工艺美术运动、包豪斯、商业设计的反思、帕帕奈克的设计伦理</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box box--wash keep">
+    <p class="box__k">一句话概括这门课的立场</p>
+    <p>可持续发展<strong>不是单纯的环保</strong>，而是生态、经济与社会三者之间的长期协调。<br>
+    设计既可能<strong>加速</strong>消费和资源消耗，也能通过产品、服务与系统<strong>改变</strong>消费方式。</p>
+  </div>
+
+</section>
+
+<!-- ============ 开场故事 ============ -->
+<section class="pg">
+  <p class="eyebrow">开场 · 视频</p>
+  <h2 class="h">一个人，一片沙漠，<br>和一棵跨越太平洋的树</h2>
+  <p class="lead">课程从一段约一分钟的视频开始。它同时关于三件事：种树、可持续，以及国际友谊。看之前先了解背景——课上会直接问你问题。</p>
+  <h3 class="h" style="margin-top:2mm">四十年，从 600 棵到 30 万棵</h3>
+  <div class="tl">
+    <div class="tl__i"><span class="tl__y">1985</span><span class="tl__d">陕北姑娘<strong>殷玉珍</strong>嫁到内蒙古乌审旗井背塘，毛乌素沙漠腹地。风沙一刮就是几十天，方圆几十里只有她一户人家。</span></div>
+    <div class="tl__i"><span class="tl__y">1986 春</span><span class="tl__d">卖掉家里一只羊，换回 600 棵树苗。经风、经霜、经旱，最后活下来的<strong>不到 10 棵</strong>。</span></div>
+    <div class="tl__i"><span class="tl__y">她说</span><span class="tl__d">"10 棵能活，100 棵、1000 棵就能活。种！接着种！"——宁肯种树累死，也不叫沙欺负死。</span></div>
+    <div class="tl__i"><span class="tl__y">1999.10</span><span class="tl__d">在洛阳教英语的美国外教<strong>赛考斯</strong>（Ronald Sacorski）从电视新闻里看到她的故事，通过波士顿一家机构为她筹到 5000 美元。</span></div>
+    <div class="tl__i"><span class="tl__y">2026.08.23</span><span class="tl__d">分别 26 年后，两人在鄂尔多斯机场重逢拥抱，一起种下<strong>"中美民间友谊树"</strong>。</span></div>
+    <div class="tl__i"><span class="tl__y">至今</span><span class="tl__d">30 多万棵树，<strong>7 万亩流沙披上绿衣</strong>。她被授予"全国治沙造林英雄"称号。</span></div>
+  </div>
+  <div class="box box--warn keep">
+    <p class="box__k">课上会问你</p>
+    <p>她做的是"环保"，还是"设计"？如果把这 40 年看成一个<strong>系统</strong>——树苗、水、资金、人、政策、国际关注——那么哪一个环节最脆弱？</p>
+  </div>
+</section>
+
+<!-- ============ 讨论一 ============ -->
+<section class="pg">
+  <p class="eyebrow">课堂讨论 · 第一次 · 约 3 分钟</p>
+  <h2 class="h">讨论一：责任边界画到哪里</h2>
+  <p class="lead">在讨论之前，课上会做一次"系统边界实测"：同一件外卖包装，把不同环节纳入计算，"哪个方案更环保"这个结论<strong>会当场翻转</strong>。这道讨论题就是那次实测的延伸。</p>
+
+  <div class="box keep">
+    <p class="box__k">背景 · 你需要先知道的</p>
+    <p>外卖包装让消费更便利，但也把大量一次性塑料、纸、餐具和配送袋推入城市废弃物流。问题不只在材料，还在<strong>平台效率、用户习惯、清洗回收成本和城市管理</strong>。</p>
+    <p style="margin-top:2.5mm">课上会把系统拆成五个环节让你勾选：<span class="tag">包装材料本身</span><span class="tag">配送与物流</span><span class="tag">清洗与再处理</span><span class="tag">用户行为与归还率</span><span class="tag">末端废弃物处理</span></p>
+    <p style="margin-top:2.5mm">只算第一项时，可重复餐盒压倒性获胜；把清洗和归还率也算进去，<strong>一次性方案反而可能更优</strong>。</p>
+  </div>
+
+  <div class="box box--warn keep">
+    <p class="box__k">提醒 · 这道题怎么算答得好</p>
+    <p>这道题<strong>没有标准答案</strong>。评价标准只有一条：<strong>你能不能把自己的边界假设说清楚</strong>——你把什么算进来了，把什么排除了，为什么。</p>
+    <p style="margin-top:2.5mm">课上会请两三位同学发言。<strong>说清一条理由，比列举五个现象更有价值。</strong></p>
+  </div>
+
+  <div class="q keep">
+    <div class="q__h">
+      <p class="q__n">QUESTION 01</p>
+      <p class="q__t">你昨天点的那一次外卖，<br>责任边界应该画到哪里？</p>
+    </div>
+    <div class="q__b">
+      <div class="ang">
+        <p class="ang__k">思考角度 A · 外部性</p>
+        <p class="ang__t">谁在承担成本？</p>
+        <p class="ang__d">商家省下了洗碗的人工，平台赚了佣金，你付了餐费。那么清运、填埋、焚烧这部分成本，最终是谁在付？如果这笔钱由城市财政承担，它算不算这次消费的一部分？</p>
+      </div>
+      <div class="ang">
+        <p class="ang__k">思考角度 B · 生命周期</p>
+        <p class="ang__t">时间尺度拉多长？</p>
+        <p class="ang__d">这个餐盒的使用时长大约 30 分钟，但它在自然环境中的存在时长以百年计。设计一件用 30 分钟的东西时，我们通常按哪个尺度来考虑？</p>
+      </div>
+      <div class="ang">
+        <p class="ang__k">思考角度 C · 系统关系</p>
+        <p class="ang__t">如果所有人都这样？</p>
+        <p class="ang__d">一个人一次外卖的影响可以忽略不计。但把它乘以每天数千万单，系统会不会出现某个临界点？这正是从"单点需求"转向"系统关系"的意义。</p>
+      </div>
+      <div class="ang">
+        <p class="ang__k">思考角度 D · 行动杠杆</p>
+        <p class="ang__t">作为设计师，你能改什么？</p>
+        <p class="ang__d">你未必能改变平台的商业模式。但在餐盒结构、标识系统、归还流程、押金界面、骑手动线上，哪一处的微小改动，可能带来最大的系统效果？</p>
+      </div>
+      <div class="prep">
+        <p class="prep__k">课前准备</p>
+        <p>回想你最近一次点外卖，把那一单产生的所有废弃物列出来（包括你没注意的：封口贴、湿巾、赠品）。带着这份清单来上课。</p>
+      </div>
+      <div class="write">
+        <p class="write__k">我的答案 · 边界画在哪里，为什么</p>
+        <div class="write__l"></div><div class="write__l"></div><div class="write__l"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 三个案例 + 三个追问 ============ -->
+<section class="pg">
+  <p class="eyebrow">案例研究 · 现场投票</p>
+  <h2 class="h">三个已经在运行的系统</h2>
+  <p class="lead">它们的共同点是：设计的对象不是造型，而是<strong>消费链条的重新组织</strong>。每个案例后面都跟着一个追问——课上会现场投票，然后请人说理由。<strong>三个追问的结构是一样的：这个方案确实解决了 A，但代价被移到了 B。</strong></p>
+
+  <div class="q keep">
+    <div class="q__h"><p class="q__n">CASE 01 · 可重复包装系统</p><p class="q__t">Loop</p></div>
+    <div class="q__b">
+      <p><strong>案例背景</strong>　TerraCycle / Loop 把包装从一次性消费品重新设计为<strong>可归还资产</strong>。消费者购买商品后归还容器，系统负责收集、清洗、再灌装和再次投放。</p>
+      <p style="margin-top:2.5mm"><strong>运行机制</strong>　押金或账户机制降低容器流失；品牌、零售、清洗和物流共同承担循环责任——没有任何一方能单独完成这个闭环。</p>
+      <div class="ang" style="margin-top:4mm">
+        <p class="ang__k">课堂追问</p>
+        <p class="ang__t">如果归还率低、清洗距离远，这个系统还可持续吗？</p>
+        <p class="ang__d">课上会用滑块现场演算：归还率 76%、清洗距离 28km 时系统得分约 60（临界）；把清洗距离拉到 110km，得分掉到 34（循环难以成立）。<strong>想一想：押金定多高才够？定太高会不会没人买？</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q keep">
+    <div class="q__h"><p class="q__n">CASE 02 · 剩食平台</p><p class="q__t">Too Good To Go</p></div>
+    <div class="q__b">
+      <p><strong>案例背景</strong>　平台把商家临近售罄或过剩的食品打包为 Surprise Bags，用户低价购买并到店取走，让原本可能被丢弃的食品重新进入消费。</p>
+      <p style="margin-top:2.5mm"><strong>运行机制</strong>　设计重点不是产品造型，而是<strong>信息匹配、时间窗口、价格激励和到店行为</strong>。剩食浪费在"卖不出去的最后一小时"被重新设计。</p>
+      <div class="ang" style="margin-top:4mm">
+        <p class="ang__k">课堂追问</p>
+        <p class="ang__t">它解决了食物浪费，还是把库存不确定性转移给了消费者？</p>
+        <p class="ang__d">用户拿到的是"盲盒"——不知道内容、不能挑选、要在指定时段跑一趟。<strong>想一想：如果商家因为"反正卖得掉"而备货更多，这个平台是在减少浪费，还是在制造浪费？</strong></p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============ 案例三 + 投票 ============ -->
+<section class="pg">
+  <p class="eyebrow">案例研究 · 续</p>
+  <h2 class="h">第三个案例，以及你的判断</h2>
+  <div class="q keep">
+    <div class="q__h"><p class="q__n">CASE 03 · 可维修硬件</p><p class="q__t">Fairphone</p></div>
+    <div class="q__b">
+      <p><strong>案例背景</strong>　Fairphone 将维修、替换零件、长期支持和供应链伦理作为手机产品价值的一部分，挑战电子产品频繁换新的默认逻辑。</p>
+      <p style="margin-top:2.5mm"><strong>运行机制</strong>　模块化结构让电池、屏幕、摄像头等高故障部件可替换；通过零件销售和维修教程降低用户修理门槛。</p>
+      <div class="ang" style="margin-top:4mm">
+        <p class="ang__k">课堂追问</p>
+        <p class="ang__t">当可维修性提高成本和厚度时，用户是否愿意为可持续价值买单？</p>
+        <p class="ang__d">更厚、更贵、性能不占优——但可以用更久。<strong>想一想：如果延长一年寿命的环境收益，大于换一种"环保材料"，为什么市场还是奖励后者？</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="write keep">
+    <p class="write__k">三个追问，我各站哪一边（先写下来，课上直接投票）</p>
+    <div class="write__l"></div><div class="write__l"></div><div class="write__l"></div>
+  </div>
+</section>
+
+<!-- ============ 讨论二 ============ -->
+<section class="pg">
+  <p class="eyebrow">课堂讨论 · 第二次 · 约 3 分钟</p>
+  <h2 class="h">讨论二：设计师的责任边界</h2>
+  <p class="lead">这道题出现在"设计的觉醒"一章之后。在那之前你会听到一段历史：设计如何从工艺美术运动的理想，走到商业设计的黄金年代，再被批评为"制造问题的一分子"。</p>
+
+  <div class="box keep">
+    <p class="box__k">背景 · 你需要先知道的</p>
+    <p><strong>1948</strong>　MOMA 的埃德加·考夫曼批评当时的设计行业，是把教科书中的"形式追随功能"篡改为<strong>"风格追随销量"</strong>。</p>
+    <p style="margin-top:2mm"><strong>1970</strong>　维克多·帕帕奈克出版《为真实的世界设计》，提出<strong>"设计伦理"</strong>，主张工业设计应当自我限制，把环境与自然资源的保护纳入设计师的职责。这本书曾被 <strong>12 家出版社拒绝</strong>。</p>
+    <p style="margin-top:2mm">加州大学的内森·谢卓夫在《设计反思》中写道：本应以解决问题为职能的"设计"，现如今反而成为<strong>制造问题或麻烦的一分子</strong>。</p>
+  </div>
+
+  <div class="q keep">
+    <div class="q__h">
+      <p class="q__n">QUESTION 02</p>
+      <p class="q__t">设计师有没有权利<br>拒绝一个"卖得好但不可持续"的项目？</p>
+    </div>
+    <div class="q__b">
+      <div class="ang">
+        <p class="ang__k">思考角度 A · 代价</p>
+        <p class="ang__t">帕帕奈克的答案</p>
+        <p class="ang__d">他主张"工业设计应该自我限制"。但他因此被行业孤立多年，书稿被 12 家出版社退回，第一版只能先在瑞典出版。理想主义的代价，由谁承担？</p>
+      </div>
+      <div class="ang">
+        <p class="ang__k">思考角度 B · 制度</p>
+        <p class="ang__t">"手段"还是"主体"</p>
+        <p class="ang__d">如果设计始终是"企业赢利的工具"，那么拒绝就等于失业。要让拒绝成为可能，行业需要什么样的制度条件——行业规范、认证标准、还是政府采购要求？</p>
+      </div>
+      <div class="ang">
+        <p class="ang__k">思考角度 C · 第三条路</p>
+        <p class="ang__t">拒绝之外还有什么</p>
+        <p class="ang__d">除了"做"和"不做"，还有"改着做"。在不推翻商业目标的前提下，你能改动的最小单元是什么？这往往比拒绝更有效，也更难。</p>
+      </div>
+      <div class="ang">
+        <p class="ang__k">思考角度 D · 回到开头</p>
+        <p class="ang__t">回到殷玉珍</p>
+        <p class="ang__d">她没有权力、没有资金、没有技术支持，只有一只羊换来的 600 棵树苗。约束条件极端不利时，她改变了什么？这对你有什么启发？</p>
+      </div>
+      <div class="prep">
+        <p class="prep__k">课前准备</p>
+        <p>找一个你认为"设计得很好但并不可持续"的产品（可以是你自己用过的）。想清楚：如果你是它的设计师，<strong>在不改变它的商业目标的前提下</strong>，你会改哪一处？</p>
+      </div>
+      <div class="write">
+        <p class="write__k">我的答案</p>
+        <div class="write__l"></div><div class="write__l"></div><div class="write__l"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 讨论三 ============ -->
+<section class="pg">
+  <p class="eyebrow">课堂讨论 · 第三次 · 约 5 分钟</p>
+  <h2 class="h">讨论三：如果系统会自我调节</h2>
+  <p class="lead">这是最抽象、也最重要的一道题。它出现在"设计与自然"一章之后——那一章会用一个计算机模型，动摇你对"设计师是控制者"这个假设的信心。</p>
+
+  <div class="box keep">
+    <p class="box__k">背景 · 雏菊世界模型（Daisyworld）</p>
+    <p>1983 年洛夫洛克与沃森提出的计算机模拟，用来验证<strong>盖亚假说</strong>：地球是一个自我调节的有机整体。</p>
+    <p style="margin-top:2.5mm">模型里只有一颗行星和两种雏菊：<strong>黑雏菊吸热、白雏菊反光</strong>。规则很简单——</p>
+    <ul style="margin-top:1.5mm">
+      <li>外部增温 → 白雏菊更适宜生长 → 扩张 → 反射更多阳光 → <strong>行星降温</strong></li>
+      <li>外部降温 → 黑雏菊更适宜生长 → 扩张 → 吸收更多热量 → <strong>行星升温</strong></li>
+    </ul>
+    <p style="margin-top:2.5mm">课上会现场演示这个仿真。你会看到：太阳光度不断增强时，<strong>没有生命的行星温度一路直线上升</strong>，而有雏菊的行星温度<strong>被稳定在 20℃ 附近很长一段</strong>。</p>
+    <p style="margin-top:2.5mm"><strong>关键在于：雏菊并不知道自己在调节气候。</strong>它们没有意图、没有环保意识，只是各自生长。稳态来自反馈机制，不来自谁的意愿。</p>
+    <p style="margin-top:2.5mm">但演示还会展示另一面：当光度超过某个值，<strong>调节机制彻底失效，雏菊全部死亡，温度垂直上升</strong>。自我调节是有边界的。</p>
+  </div>
+
+  <div class="q keep">
+    <div class="q__h">
+      <p class="q__n">QUESTION 03</p>
+      <p class="q__t">如果地球是一个会自我调节的系统，<br>设计师还需要做什么？</p>
+    </div>
+    <div class="q__b">
+      <div class="ang">
+        <p class="ang__k">思考角度 A · 边界</p>
+        <p class="ang__t">调节是有范围的</p>
+        <p class="ang__d">回看雏菊世界：光度超过某个值后，调节机制就彻底失效，温度垂直上升。地球的调节能力同样有边界——设计能做的，也许是"不要把系统推出那个范围"。</p>
+      </div>
+      <div class="ang">
+        <p class="ang__k">思考角度 B · 机制</p>
+        <p class="ang__t">自组织能否被设计</p>
+        <p class="ang__d">雏菊没有意图，却维持了稳态。Loop 的押金、Too Good To Go 的价格激励，本质上也是在设计一种"<strong>让个体自利行为汇成系统稳态</strong>"的机制。这算不算设计自组织？</p>
+      </div>
+      <div class="ang">
+        <p class="ang__k">思考角度 C · 两面性</p>
+        <p class="ang__t">蝴蝶效应的另一面</p>
+        <p class="ang__d">微小的因能产生无尽的复杂——这既意味着风险不可控，也意味着<strong>一个很小的设计改动可能撬动很大的系统变化</strong>。哪一面更值得押注？</p>
+      </div>
+      <div class="ang">
+        <p class="ang__k">思考角度 D · 回到开头</p>
+        <p class="ang__t">回到那片沙漠</p>
+        <p class="ang__d">殷玉珍种下的第一批 600 棵树只活了不到 10 棵。四十年后是 7 万亩绿洲，还有一棵跨越太平洋的友谊树。这是自我调节，还是人的坚持？或者两者本就分不开？</p>
+      </div>
+      <div class="prep">
+        <p class="prep__k">课前准备</p>
+        <p>想一个你身边的例子：<strong>有没有哪种设计，是靠"改变条件"而不是"劝说人"来达成好结果的？</strong>（提示：共享单车的停车区、超市的自带袋优惠、垃圾分类的投放时间。）</p>
+      </div>
+      <div class="write">
+        <p class="write__k">我的答案</p>
+        <div class="write__l"></div><div class="write__l"></div><div class="write__l"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 关键概念 + 作业 ============ -->
+<section class="pg">
+  <p class="eyebrow">预习清单</p>
+  <h2 class="h">课前值得先认识的概念</h2>
+  <p class="lead">不需要背，但课上出现时你应该有印象。</p>
+
+  <table>
+    <thead><tr><th>概念</th><th>一句话理解</th><th>出处</th></tr></thead>
+    <tbody>
+      <tr><td>可持续发展</td><td>既能满足当代人的需要，又不对后代人满足其需要的能力构成危害的发展</td><td>《我们共同的未来》布伦特兰报告，1987</td></tr>
+      <tr><td>三重底线</td><td>企业要同时守住经济、环境、社会三条底线</td><td>John Elkington</td></tr>
+      <tr><td>代际公平 / 代内公平</td><td>不能损害后代；也不能让当代一部分人的发展损害另一部分人</td><td>联合国可持续发展定义</td></tr>
+      <tr><td>生态足迹</td><td>维持一个人／一个国家的生活方式所需的自然资源面积</td><td>澳大利亚 5.37×、美国 4.75×、加拿大 4.72×</td></tr>
+      <tr><td>人类发展指数 HDI</td><td>用预期寿命、教育水平、人均 GDP 修正"只看 GDP"的评价方式</td><td>联合国《1990 年人类发展报告》</td></tr>
+      <tr><td>设计伦理</td><td>设计师应对社会与生态变化负责，工业设计应当自我限制</td><td>帕帕奈克《为真实的世界设计》，1970</td></tr>
+      <tr><td>产品服务系统</td><td>以"成果"和"效益"取代物质产品的消耗</td><td>Ezio Manzini，米兰理工大学</td></tr>
+      <tr><td>盖亚假说</td><td>地球是一个自我调节的有机整体</td><td>詹姆斯·洛夫洛克</td></tr>
+      <tr><td>混沌 / 蝴蝶效应</td><td>确定性系统对初始条件极度敏感，微小的因产生巨大的果</td><td>E.N. 洛伦兹，1972</td></tr>
+      <tr><td>道法自然</td><td>顺应万物的自然本性，不强行干预</td><td>老子</td></tr>
+    </tbody>
+  </table>
+
+  <div class="rule"></div>
+
+  <p class="eyebrow">课后作业</p>
+  <h2 class="h">生活中有哪些"不可持续"的产品或现象？</h2>
+  <div class="box keep">
+    <p class="box__k">具体要求</p>
+    <p><strong>1.</strong>　寻找 <strong>3—5 种</strong>"不可持续"的产品或现象；<br>
+       <strong>2.</strong>　解释"不可持续"<strong>表现在哪里</strong>。</p>
+  </div>
+  <div class="box box--wash keep">
+    <p class="box__k">可以从这些角度切入</p>
+    <p><strong>材料</strong>（是否可回收、是否混合材质）· <strong>生命周期</strong>（使用时长 vs 存在时长）· <strong>系统关系</strong>（谁在为它的末端付费）· <strong>责任边界</strong>（生产者、平台、用户、城市）· <strong>用户行为</strong>（设计是否鼓励了浪费）</p>
+  </div>
+  <div class="box box--warn keep">
+    <p class="box__k">避免这样写</p>
+    <p>"塑料袋不环保，因为塑料不可降解"——这<strong>只说了材料</strong>。请至少说清一条<strong>系统关系</strong>：它为什么被大量使用？谁从中获益？改变它需要哪些环节同时配合？</p>
+  </div>
+
+  <div class="write keep">
+    <p class="write__k">我想到的不可持续现象（先列 3 个）</p>
+    <div class="write__l"></div><div class="write__l"></div><div class="write__l"></div><div class="write__l"></div>
+  </div>
+
+  <p style="margin-top:8mm;font-size:9pt;color:var(--muted);border-top:1px solid var(--line);padding-top:4mm">
+    可持续发展概论 · 课前预习手册　|　湖北工业大学 工业设计学院　|　主讲 张萌
+  </p>
+</section>
+
+</body>
+</html>

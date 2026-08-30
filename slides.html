@@ -725,6 +725,29 @@ input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;bac
 .s.is-on .ask__q em{animation:underline 900ms var(--ease) 420ms forwards}
 @keyframes underline{to{background-size:100% 4px}}
 
+
+/* ============================================================
+   打印 / 导出 PDF：隐藏操作界面，展开所有折叠内容
+   ============================================================ */
+@media print{
+  @page{margin:0}
+  html,body{overflow:visible!important;background:#fff!important}
+  .rail,.pager,.tag,.bar,.ov,.nav__theme{display:none!important}
+  .app{display:block!important;height:auto!important}
+  .stage{width:100%!important;height:100vh!important;overflow:visible!important}
+  /* 折叠的讨论提示全部展开 */
+  .hint__d{max-height:none!important;margin-top:7px!important}
+  .hint{break-inside:avoid}
+  .hint__k svg{display:none}
+  /* 入场动效在静态导出中直接呈现终态 */
+  [data-anim]{opacity:1!important;transform:none!important;clip-path:none!important}
+  .case__more{max-height:none!important}
+  /* 系统图与循环流在导出时呈现完整状态 */
+  .sysmap .sm__n{opacity:1!important;transform:none!important}
+  .sysmap .sm__f{opacity:1!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
   [data-anim]{opacity:1!important;transform:none!important;clip-path:none!important}
