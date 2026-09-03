@@ -51,6 +51,38 @@ REFS = {
 'Thaler': 'THALER R H, SUNSTEIN C R. Nudge: improving decisions about health, wealth, and happiness[M]. New Haven: Yale University Press, 2008.',
 }
 
+REFS.update({
+'PRISMA':'PAGE M J, MCKENZIE J E, BOSSUYT P M, et al. The PRISMA 2020 statement: an updated guideline for reporting systematic reviews[J]. BMJ, 2021, 372: n71.',
+'Moher':'MOHER D, LIBERATI A, TETZLAFF J, et al. Preferred reporting items for systematic reviews and meta-analyses: the PRISMA statement[J]. BMJ, 2009, 339: b2535.',
+'Karndacharuk':'KARNDACHARUK A, WILSON D J, DUNN R. A review of the evolution of shared (street) space concepts in urban environments[J]. Transport Reviews, 2014, 34(2): 190-220.',
+'Moody':'MOODY S, MELIA S. Shared space: research, policy and problems[J]. Proceedings of the Institution of Civil Engineers - Transport, 2014, 167(6): 384-392.',
+'Allen':'ALLEN B L, SHIN B T, COOPER P J. Analysis of traffic conflicts and collisions[J]. Transportation Research Record, 1978, 667: 67-74.',
+'Laureshyn':'LAURESHYN A, SVENSSON A, HYDEN C. Evaluation of traffic safety, based on micro-level behavioural data: theoretical framework and first implementation[J]. Accident Analysis & Prevention, 2010, 42(6): 1637-1646.',
+'Johnsson':'JOHNSSON C, LAURESHYN A, DE CEUNYNCK T. In search of surrogate safety indicators for vulnerable road users: a review of surrogate safety indicators[J]. Transport Reviews, 2018, 38(6): 765-785.',
+'Zheng':'ZHENG L, ISMAIL K, MENG X. Traffic conflict techniques for road safety analysis: open questions and some insights[J]. Canadian Journal of Civil Engineering, 2014, 41(7): 633-641.',
+'Cervero':'CERVERO R, KOCKELMAN K. Travel demand and the 3Ds: density, diversity, and design[J]. Transportation Research Part D: Transport and Environment, 1997, 2(3): 199-219.',
+'Ewing':'EWING R, HANDY S. Measuring the unmeasurable: urban design qualities related to walkability[J]. Journal of Urban Design, 2009, 14(1): 65-84.',
+'Frank':'FRANK L D, SALLIS J F, SAELENS B E, et al. The development of a walkability index: application to the Neighborhood Quality of Life Study[J]. British Journal of Sports Medicine, 2010, 44(13): 924-933.',
+'Sorton':'SORTON A, WALSH T. Bicycle stress level as a tool to evaluate urban and suburban bicycle compatibility[J]. Transportation Research Record, 1994, 1438: 17-24.',
+'Mekuria':'MEKURIA M C, FURTH P G, NIXON H. Low-stress bicycling and network connectivity[R]. San Jose: Mineta Transportation Institute, Report 11-19, 2012.',
+'Bandura':'BANDURA A. Self-efficacy: toward a unifying theory of behavioral change[J]. Psychological Review, 1977, 84(2): 191-215.',
+'Parker':'PARKER D, MANSTEAD A S R, STRADLING S G, et al. Intention to commit driving violations: an application of the theory of planned behavior[J]. Journal of Applied Psychology, 1992, 77(1): 94-101.',
+'Reason':'REASON J, MANSTEAD A, STRADLING S, et al. Errors and violations on the roads: a real distinction?[J]. Ergonomics, 1990, 33(10-11): 1315-1332.',
+'Rosenstock':'ROSENSTOCK I M. Historical origins of the health belief model[J]. Health Education Monographs, 1974, 2(4): 328-335.',
+'Rogers':'ROGERS R W. A protection motivation theory of fear appeals and attitude change[J]. Journal of Psychology, 1975, 91(1): 93-114.',
+'Venkatesh03':'VENKATESH V, MORRIS M G, DAVIS G B, et al. User acceptance of information technology: toward a unified view[J]. MIS Quarterly, 2003, 27(3): 425-478.',
+'Passini':'PASSINI R. Wayfinding in architecture[M]. New York: Van Nostrand Reinhold, 1984.',
+'Arthur':'ARTHUR P, PASSINI R. Wayfinding: people, signs, and architecture[M]. New York: McGraw-Hill, 1992.',
+'Miller':'MILLER G A. The magical number seven, plus or minus two: some limits on our capacity for processing information[J]. Psychological Review, 1956, 63(2): 81-97.',
+'Ware':'WARE C. Information visualization: perception for design[M]. 3rd ed. Waltham: Morgan Kaufmann, 2013.',
+'Elliot':'ELLIOT A J, MAIER M A. Color psychology: effects of perceiving color on psychological functioning in humans[J]. Annual Review of Psychology, 2014, 65: 95-120.',
+'Jeffery':'JEFFERY C R. Crime prevention through environmental design[M]. Beverly Hills: Sage, 1971.',
+'Newman':'NEWMAN O. Defensible space: crime prevention through urban design[M]. New York: Macmillan, 1972.',
+'NormanD':'NORMAN D A, DRAPER S W. User centered system design: new perspectives on human-computer interaction[M]. Hillsdale, NJ: Lawrence Erlbaum, 1986.',
+'Sanders':'SANDERS E B N, STAPPERS P J. Co-creation and the new landscapes of design[J]. CoDesign, 2008, 4(1): 5-18.',
+'Nielsen':'NIELSEN J. Usability engineering[M]. San Francisco: Morgan Kaufmann, 1993.',
+})
+
 # (锚点字符串, [文献键]) —— 引注插在锚点之后；按正文出现顺序自动编号
 CITES = [
  ('《教育强国建设规划纲要（2024-2035年）》将校园安全作为实现新时代教育现代化的重要目标之一', ['纲要']),
