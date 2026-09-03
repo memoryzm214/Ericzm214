@@ -81,6 +81,8 @@ REFS.update({
 'NormanD':'NORMAN D A, DRAPER S W. User centered system design: new perspectives on human-computer interaction[M]. Hillsdale, NJ: Lawrence Erlbaum, 1986.',
 'Sanders':'SANDERS E B N, STAPPERS P J. Co-creation and the new landscapes of design[J]. CoDesign, 2008, 4(1): 5-18.',
 'Nielsen':'NIELSEN J. Usability engineering[M]. San Francisco: Morgan Kaufmann, 1993.',
+'道交法':'全国人民代表大会常务委员会. 中华人民共和国道路交通安全法[Z]. 北京, 2021年修正.',
+'GB17761':'国家市场监督管理总局, 国家标准化管理委员会. 电动自行车安全技术规范: GB 17761—2018[S]. 北京: 中国标准出版社, 2018.',
 })
 
 # (锚点字符串, [文献键]) —— 引注插在锚点之后；按正文出现顺序自动编号
