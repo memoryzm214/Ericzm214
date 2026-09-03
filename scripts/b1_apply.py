@@ -63,6 +63,17 @@ TOC_FIELD = ('<w:p><w:pPr><w:pStyle w:val="4"/><w:jc w:val="both"/></w:pPr>'
              '<w:r><w:t>目录内容将在打开文档时自动生成；若未显示，请全选后按F9更新域。</w:t></w:r>'
              '<w:r><w:fldChar w:fldCharType="end"/></w:r></w:p>')
 
+def caption_lines(xml):
+    """按段落边界切分原始XML后取纯文本；可覆盖与图片同处一段的题注。
+    须先剔除图形块——<w:drawing>等元素内含 posOffset 一类数值文本，
+    剥标签后会混入题注之前。"""
+    x = xml
+    for tag in ('w:drawing', 'w:pict', 'mc:AlternateContent', 'w:object'):
+        x = re.sub(r'<' + tag + r'\b.*?</' + tag + r'>', '', x, flags=re.S)
+    x = x.replace('</w:p>', '\x00')
+    x = re.sub(r'<[^>]+>', '', x)
+    return [seg.strip() for seg in x.split('\x00') if seg.strip()]
+
 def render(blocks):
     out = []
     for b in blocks:
@@ -79,6 +90,15 @@ def render(blocks):
             out.append(flat_para(b[1]))
         elif kind == 'toc':
             out.append(TOC_FIELD)
+        elif kind in ('autofig', 'autotbl'):
+            pre = '图' if kind == 'autofig' else '表'
+            rx = re.compile(r'^' + pre + r'(\d+)(?=[\s\u3000])')
+            seen = set()
+            for t in caption_lines(d):          # 按段落边界切原始XML，可覆盖图形内嵌段落
+                m = rx.match(t)
+                if m and m.group(1) not in seen and '（续）' not in t:
+                    seen.add(m.group(1))
+                    out.append(flat_para(re.sub(r'^(' + pre + r'\d+)[\s\u3000]+', r'\1  ', t)))
         elif kind == 'table':
             _, cap, header, rows, widths, aligns = b
             if cap: out.append(caption_para(cap))
@@ -110,7 +130,21 @@ i = find('1课题研究背景及意义')
 front_xml = render(FRONT2)
 d = d[:ps[i]['s']] + front_xml + d[ps[i]['s']:]
 
-back_xml = render(REFBLOCKS) + render(BACK)
+def resolve_tblrefs(xml):
+    caps = {}
+    for q in lib.paras(d):
+        t = q['text'].strip()
+        m = re.match(r'^表(\d+)[\s\u3000]+(.+)$', t)
+        if m and '（续）' not in t:
+            caps.setdefault(m.group(2).strip(), m.group(1))
+    def rep(m):
+        title = m.group(1)
+        if title not in caps:
+            raise RuntimeError('附录引用了不存在的表题: ' + title)
+        return '表' + caps[title]
+    return re.sub(r'表\{\{([^}]+)\}\}', rep, xml)
+
+back_xml = resolve_tblrefs(render(REFBLOCKS) + render(BACK))
 bodyend = d.rindex('</w:body>')
 pos = d.rindex('<w:sectPr', 0, bodyend)      # 取正文末尾的 sectPr，而非文中分节符
 d = d[:pos] + back_xml + d[pos:]
