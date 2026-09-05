@@ -278,11 +278,67 @@ def kano(deck):
          '需求项与系数取自表34《基于KANO模型的需求分类统计表》')
 
 
+
+
+# ═══════════════════ 图8（简版） ═══════════════════
+def kano_simple(deck):
+    W, H = F8.KW2, F8.KH2
+    BX, BW, BH, BGAP = F8.BX, F8.BW, F8.BH, F8.BGAP
+    CX0, CW, CGAP = F8.CX0, F8.CW, F8.CGAP
+    p = deck.page(W, H)
+    p.rect(0, 0, W, H, PAPER)
+    title_bar(p, W, '图8', '高校共享道路安全引导系统需求清单',
+              '共 14 项需求，依 Kano 模型分为基本／期望／兴奋三类；'
+              '需求项与分类取自表34，实施遵循“先基础后提升”')
+
+    ys = [180 + i * (BH + BGAP) for i in range(3)]
+    for i, (name, en, pr, col, band, edge, defi) in enumerate(reversed(F8.KCLS)):
+        y = ys[i]
+        items = [it[0] for it in F8.KANO[2 - i][6]]
+        p.rect(BX, y, BW, BH, band, 12, .45, name=f'需求带-{name}')
+        p.rect(BX, y, 400, BH, col, 12)
+        p.rect(BX + 280, y, 186, BH, col)
+        p.txt(BX + 28, y + 58, name, 26, 600, WHITE)
+        p.txt(BX + 28 + len(name) * 27 + 12, y + 56, en, 14, 400, WHITE, op=.78)
+        p.label(p.rect(BX + 28, y + 78, 104, 30, WHITE, 15, .24),
+                [f'{pr}   {len(items)} 项'], 14.5, 700, WHITE)
+        for k, ln in enumerate(defi):
+            p.txt(BX + 28, y + 146 + k * 24, ln, 13.5, 400, WHITE, op=.88)
+        pris = dict((it[0], it[3]) for it in F8.KANO[2 - i][6])
+        for k, nm in enumerate(items):
+            cx = CX0 + 2 + k * (CW + CGAP)
+            cy = y + (BH - 104) / 2
+            p.rect(cx, cy, CW, 104, CARD, 10, 1, edge, 1.4, name=f'需求-{nm}')
+            p.txt(cx + CW / 2, cy + 46, nm, 20, 600, INK, 'middle')
+            p.label(p.rect(cx + CW / 2 - 24, cy + 60, 48, 24, band, 12),
+                    [pris[nm]], 13, 700, col)
+
+    top, bot = ys[0] - 4, ys[2] + BH
+    p.poly([(1850, bot), (1900, bot), (1900, top + 60), (1918, top + 60),
+            (1875, top), (1832, top + 60), (1850, top + 60)], S2)
+    mid = (top + 60 + bot) / 2
+    tblock(p, 1875, mid + 34, 44, 6 * 34, list('先基础后提升'), 22, 600, FOREST_D)
+    tblock(p, 1875, bot - 96 + 1.5 * 26, 34, 4 * 26, list('实施顺序'), 14, 500, INK2)
+
+    ny = 936
+    p.rect(66, ny, W - 132, 112, S0, 10)
+    p.txt(94, ny + 36, '说明', 16, 700, FOREST_D)
+    p.txt(160, ny + 36, '三类需求呈层级关系：基本需求是其余两类的实现前提——'
+                        '盲区提示与安全路径指引须以清晰的路权划分为基础，'
+                        '社会规范可视化与情感化设计亦以基本需求的满足为条件。', 14, 400, INK2)
+    p.txt(94, ny + 76, '故系统实施遵循“先基础后提升”的顺序：基本需求首轮全部落地，'
+                       '期望需求次轮实现，兴奋需求作为增值项择机部署。'
+                       '各需求的满意度系数与不满意度系数见表34。', 14, 400, INK2)
+    foot(p, W, H, '图8  高校共享道路安全引导系统需求清单',
+         '需求项与分类取自表34《基于KANO模型的需求分类统计表》')
+
+
 if __name__ == '__main__':
     d = Deck()
     fig1(d)
     model(d, 'ped')
     model(d, 'cyc')
+    kano_simple(d)
     kano(d)
     out = os.path.join(os.path.dirname(__file__), 'pptx', '配图_图1图5图6图8_可编辑.pptx')
     os.makedirs(os.path.dirname(out), exist_ok=True)

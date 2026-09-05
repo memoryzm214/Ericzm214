@@ -243,7 +243,84 @@ def kano():
     w('fig8', page(KW, KH, ''.join(o), ''.join(d)))
 
 
+
+
+# ══════════════════════ 图8（简版）  只列需求，不列系数 ══════════════════════
+
+KW2, KH2 = 1980, 1120
+# 类别定义照录 4.4 节正文表述
+KCLS = [
+    ('基本需求', 'Must-be', 'P0', TERRA, TERRA_P, TERRA_L,
+     ['不满足即引发不满，', '满足亦不显著提升满意度']),
+    ('期望需求', 'One-dimensional', 'P1', OLIVE_D, S1, OLIVE,
+     ['呈线性效应，实现程度越高，', '满意度提升越明显']),
+    ('兴奋需求', 'Attractive', 'P2', STEEL_D, STEEL_L, STEEL_D,
+     ['超出使用者基本预期，缺失不引发不满，', '具备则显著提升体验']),
+]
+BX, BW, BH, BGAP = 66, 1748, 220, 26
+CX0, CXW, CW, CGAP = 500, 1290, 238, 24
+
+
+def kano_simple():
+    d = []
+    o = [rect(0, 0, KW2, KH2, PAPER)]
+    o.append(title_bar(KW2, '图8', '高校共享道路安全引导系统需求清单',
+                       '共 14 项需求，依 Kano 模型分为基本／期望／兴奋三类；'
+                       '需求项与分类取自表34，实施遵循“先基础后提升”', 56))
+
+    ys = [180 + i * (BH + BGAP) for i in range(3)]          # 自上而下
+    for i, (name, en, pr, col, band, edge, defi) in enumerate(reversed(KCLS)):
+        y = ys[i]
+        items = [it[0] for it in KANO[2 - i][6]]
+        o.append(rect(BX, y, BW, BH, band, 12, .45))
+        o.append(rect(BX, y, 400, BH, col, 12))
+        o.append(rect(BX + 280, y, 186, BH, col))
+        o.append(T(BX + 28, y + 58, name, 26, 600, WHITE))
+        o.append(T(BX + 28 + len(name) * 27 + 12, y + 56, en, 14, 400, WHITE, op=.78))
+        o.append(rect(BX + 28, y + 78, 104, 30, WHITE, 15, .24))
+        o.append(T(BX + 80, y + 99, f'{pr}   {len(items)} 项', 14.5, 700, WHITE, 'middle'))
+        for k, ln in enumerate(defi):
+            o.append(T(BX + 28, y + 146 + k * 24, ln, 13.5, 400, WHITE, op=.88))
+
+        pris = dict((it[0], it[3]) for it in KANO[2 - i][6])
+        for k, nm in enumerate(items):
+            cx = CX0 + 2 + k * (CW + CGAP)
+            cy = y + (BH - 104) / 2
+            o.append(rect(cx + 2, cy + 3, CW, 104, '#3A3C34', 10, .05))
+            o.append(rect(cx, cy, CW, 104, CARD, 10, 1, edge, 1.4))
+            o.append(T(cx + CW / 2, cy + 46, nm, 20, 600, INK, 'middle'))
+            o.append(rect(cx + CW / 2 - 24, cy + 60, 48, 24, band, 12))
+            o.append(T(cx + CW / 2, cy + 77, pris[nm], 13, 700, col, 'middle'))
+
+    # ── 右侧实施顺序箭头 ──
+    top, bot = ys[0] - 4, ys[2] + BH
+    o.append(poly([(1850, bot), (1900, bot), (1900, top + 60), (1918, top + 60),
+                   (1875, top), (1832, top + 60), (1850, top + 60)], S2))
+    mid = (top + 60 + bot) / 2
+    for k, ch in enumerate('先基础后提升'):
+        o.append(T(1875, mid - 85 + k * 34, ch, 22, 600, FOREST_D, 'middle'))
+    for k, ch in enumerate('实施顺序'):
+        o.append(T(1875, bot - 96 + k * 26, ch, 14, 500, INK2, 'middle'))
+
+    # ── 说明 ──
+    ny = 936
+    o.append(rect(66, ny, KW2 - 132, 112, S0, 10))
+    o.append(T(94, ny + 36, '说明', 16, 700, FOREST_D))
+    o.append(T(160, ny + 36, '三类需求呈层级关系：基本需求是其余两类的实现前提——'
+                             '盲区提示与安全路径指引须以清晰的路权划分为基础，'
+                             '社会规范可视化与情感化设计亦以基本需求的满足为条件。',
+               14, 400, INK2))
+    o.append(T(94, ny + 76, '故系统实施遵循“先基础后提升”的顺序：基本需求首轮全部落地，'
+                            '期望需求次轮实现，兴奋需求作为增值项择机部署。'
+                            '各需求的满意度系数与不满意度系数见表34。', 14, 400, INK2))
+
+    o.append(foot(KW2, KH2, '图8  高校共享道路安全引导系统需求清单',
+                  '需求项与分类取自表34《基于KANO模型的需求分类统计表》'))
+    w('fig8b', page(KW2, KH2, ''.join(o), ''.join(d)))
+
+
 if __name__ == '__main__':
     model('ped')
     model('cyc')
     kano()
+    kano_simple()
