@@ -60,10 +60,10 @@ rule()
 
 # ================= 填写说明 =================
 H('填写说明', size=12, before=4)
-P('一、本文件依据《高校共享道路慢行主体的安全认知偏差与行为引导研究》研究报告定稿版拟写，各项文字可直接复制粘贴至申报系统对应文本框。')
+P('一、本文件依据《高校共享道路慢行主体的安全认知偏差与行为引导研究》研究报告第二轮校订定稿版（103,103字符，图11幅、表41张、参考文献87条）拟写，各项文字可直接复制粘贴至申报系统对应文本框。')
 P('二、系统路径为“一般项目管理→项目申报”，且须填报经费预算，故判断本次为立项申报而非成果奖申报。因此“项目内容简介”按项目申报的规范文体撰写，即以拟开展的研究为主线，已完成的工作作为前期基础呈现。若贵方实际情形为成果类申报，需将时态改为已完成式，请告知。')
 P('三、经费方案为按课题实际研究活动测算的建议值，合计 20000.00 元。湖北省社会科学基金对各科目的比例限制（尤其是间接费用、劳务费与专家咨询费的上限）以当年度申报公告及经费管理办法为准，提交前请对照核定。')
-P('四、字数按系统提示控制：项目选题约 1500 字，内容简介约 2500 字，参考文献 20 项。文中数据均取自研究报告，与报告正文严格一致。')
+P('四、字数按系统提示控制：项目选题约 1500 字，内容简介约 2500 字，参考文献 20 项。文中数据均取自研究报告，与报告正文严格一致。第五节另附可供申报材料使用的图表清单，系统文本框不支持插图，该节供制作申报书附件时取用。')
 
 # ================= 一、基本信息 =================
 H('一、项目名称与关键词')
@@ -127,6 +127,7 @@ REFS = [
 '刘孟歆, 秦华, 岳晨, 等. 右转车辆与过街行人交互过程的影响因素研究[J]. 包装工程, 2023, 44(12): 118-125.',
 '裴玉龙, 龙钰, 马丹. 交通安全意识对非机动车骑行者危险骑行行为的影响研究[J]. 交通信息与安全, 2024, 42(1): 49-58+66.',
 '张乐, 汤晓敏. 可供性视角下大学老校区公共空间评价与更新设计指引——以上海交通大学徐汇校区为例[J]. 中国园林, 2025, 41(5): 115-122.',
+'陈雅楠, 赵晓华, 李佳, 等. 基于科学知识图谱的道路交叉口安全设施设计综述及范式研究[J]. 北京工业大学学报, 2024, 50(12): 1501-1520.',
 'ZHANG Z, FISHER T, WANG H. Walk Score, environmental quality and walking in a campus setting[J]. Land, 2023, 12(4): 732.',
 'CHEN H, GUO Y, LI L. Promoting sustainable mobility on campus: uncovering the behavioral mechanisms behind non-compliant e-bike use among university students[J]. Sustainability, 2025, 17(15): 7147.',
 'MIAO L, LIU F, DENG Y. Analysis of traffic conflicts on slow-moving shared paths in Shenzhen, China[J]. Sustainability, 2025, 17(9): 4095.',
@@ -134,7 +135,6 @@ REFS = [
 'VON STÜLPNAGEL R, RINTELEN H. A matter of space and perspective: cyclists\', car drivers\' and pedestrians\' assumptions about subjective safety in shared traffic situations[J]. Transportation Research Part A: Policy and Practice, 2024, 179: 103941.',
 'HAMILTON-BAILLIE B. Shared space: reconciling people, places and traffic[J]. Built Environment, 2008, 34(2): 161-181.',
 'KARNDACHARUK A, WILSON D J, DUNN R. A review of the evolution of shared (street) space concepts in urban environments[J]. Transport Reviews, 2014, 34(2): 190-220.',
-'MOODY S, MELIA S. Shared space: research, policy and problems[J]. Proceedings of the Institution of Civil Engineers - Transport, 2014, 167(6): 384-392.',
 'JOHNSSON C, LAURESHYN A, DE CEUNYNCK T. In search of surrogate safety indicators for vulnerable road users: a review of surrogate safety indicators[J]. Transport Reviews, 2018, 38(6): 765-785.',
 'HAYWARD J C. Near-miss determination through use of a scale of danger[J]. Highway Research Record, 1972, 384: 24-34.',
 'AJZEN I. The theory of planned behavior[J]. Organizational Behavior and Human Decision Processes, 1991, 50(2): 179-211.',
@@ -148,8 +148,82 @@ for i, r in enumerate(REFS, 1):
     p.paragraph_format.left_indent = Pt(22)
     p.paragraph_format.first_line_indent = Pt(-22)
 
-# ================= 五、经费 =================
-H('五、6. 经费信息')
+
+doc.add_page_break()
+
+# ================= 五、可供申报使用的图表 =================
+H('五、可供申报使用的图表', before=0)
+P('系统的四个文本框仅接受纯文字，下列图表供制作申报书正文与附件时取用，均出自研究报告，编号与报告一致。', size=9.5, first=False, after=8, color=RGBColor(0x88,0x88,0x88))
+
+H2('（一）建议优先选用的图')
+FIGS = [
+ ('图1', '本课题技术路线图', '置于“研究思路与方法”，一图说明四项子任务的逐级供给关系'),
+ ('图2', '校园共享道路12个观测点', '置于“研究基础”，说明实证对象与观测点覆盖面'),
+ ('图5、图6', '行人／骑行者行为决策模型', '置于“主要观点”，直观呈现两类主体的路径差异'),
+ ('图9', '安全引导系统设计原型（地面标识系统）', '置于“预期成果”，展示设计落点'),
+ ('图10', '交叉口部署预警标志设计原型', '与图9配合，说明冲突点的针对性处理'),
+ ('图11', '立面动态提示装置设计原型', '说明“静态与动态”互补的系统构成'),
+]
+t1 = doc.add_table(rows=1, cols=3)
+t1.style = 'Table Grid'; t1.alignment = WD_TABLE_ALIGNMENT.CENTER
+for j, h in enumerate(['图号', '图名', '建议用途']):
+    c = t1.rows[0].cells[j]; c.width = [Cm(2.0), Cm(6.4), Cm(7.4)][j]; c.text = ''
+    r = c.paragraphs[0].add_run(h); setfont(r, cn='黑体', size=10)
+    c.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+for a, b, cc in FIGS:
+    row = t1.add_row()
+    for j, v in enumerate([a, b, cc]):
+        c = row.cells[j]; c.width = [Cm(2.0), Cm(6.4), Cm(7.4)][j]; c.text = ''
+        pp = c.paragraphs[0]; pp.paragraph_format.space_before = Pt(2); pp.paragraph_format.space_after = Pt(2)
+        setfont(pp.add_run(v), size=9.5)
+        if j == 0: pp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+H2('（二）建议优先选用的表')
+TBLS = [
+ ('表7', '校园共享道路观测点', '说明观测点位的空间类型覆盖'),
+ ('表11、表12', '冲突事件空间分布统计、冲突行为模式统计', '支撑“冲突集聚”与“人为因素主导”两项判断'),
+ ('表13', '交通环境与冲突行为的相关性统计', '给出道路宽度、标识完整度、视距条件的相关系数'),
+ ('表23', '多群组分析路径系数比较', '支撑“两类主体机理不同”这一核心观点'),
+ ('表30、表31', '不同场景类型的认知偏差统计、客观因素回归分析', '支撑“弯道低估、出入口高估、视距被忽略”'),
+ ('表38', '安全引导系统设计参数规范', '体现成果的可施工性与可复现性'),
+ ('表41', '设计方案实施前后的量化评估对比', '给出BLOS、PUCE等指标的改善幅度'),
+]
+t2 = doc.add_table(rows=1, cols=3)
+t2.style = 'Table Grid'; t2.alignment = WD_TABLE_ALIGNMENT.CENTER
+for j, h in enumerate(['表号', '表名', '建议用途']):
+    c = t2.rows[0].cells[j]; c.width = [Cm(2.0), Cm(6.4), Cm(7.4)][j]; c.text = ''
+    r = c.paragraphs[0].add_run(h); setfont(r, cn='黑体', size=10)
+    c.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+for a, b, cc in TBLS:
+    row = t2.add_row()
+    for j, v in enumerate([a, b, cc]):
+        c = row.cells[j]; c.width = [Cm(2.0), Cm(6.4), Cm(7.4)][j]; c.text = ''
+        pp = c.paragraphs[0]; pp.paragraph_format.space_before = Pt(2); pp.paragraph_format.space_after = Pt(2)
+        setfont(pp.add_run(v), size=9.5)
+        if j == 0: pp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+H2('（三）图例：观测点分布与设计原型')
+import os as _os
+def figure(pathname, caption, width_cm=15.2):
+    if not _os.path.exists(pathname):
+        return
+    pp = doc.add_paragraph(); pp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    pp.paragraph_format.space_before = Pt(6); pp.paragraph_format.space_after = Pt(2)
+    pp.add_run().add_picture(pathname, width=Cm(width_cm))
+    cp = doc.add_paragraph(); cp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    cp.paragraph_format.space_after = Pt(10)
+    setfont(cp.add_run(caption), size=9.5, color=RGBColor(0x55,0x55,0x55))
+
+figure('/home/user/Ericzm214/配图备选/图2_校园观测点_淡绿色版.png', '图2  校园共享道路12个观测点（淡绿色系重绘版）')
+figure('/home/user/Ericzm214/配图备选/图9/图9-C.png', '图9  安全引导系统设计原型（要素标注版，备选方案9-C）')
+figure('/home/user/Ericzm214/配图备选/图11/图11-D.png', '图11  立面动态提示装置屏幕界面（主信息区70%／侧栏30%，备选方案11-D）')
+P('上列三幅为本次重绘的备选版本，另有图9、图10、图11 各6张备选存于《配图备选》目录，可按版面需要替换。', size=9.5, first=False, color=RGBColor(0x88,0x88,0x88))
+
+
+doc.add_page_break()
+
+# ================= 六、经费 =================
+H('六、6. 经费信息', before=0)
 P('单位：元（填写数字，保留两位小数）。合计 20000.00 元。', size=9.5, first=False,
   after=8, color=RGBColor(0x88,0x88,0x88))
 
@@ -189,13 +263,16 @@ P('', after=4, first=False)
 P('说明：上表“测算依据”一列供填报时参考，系统仅需填入金额。各科目比例限制以当年度申报公告及湖北省社会科学基金经费管理办法为准，提交前请对照核定；若公告对间接费用或劳务费设有上限而本方案超出，可在保持合计不变的前提下于科目之间调整。', size=9.5)
 
 # ================= 六、待确认 =================
-H('六、提交前需确认的事项')
+H('七、提交前需确认的事项')
 for t in [
- '1. 经费各科目的比例限制，以当年度申报公告与经费管理办法为准核定。',
- '2. 研究报告封面首行的课题批次标注与日期，需按本次申报材料的用途填写。',
+ '1. 经费各科目的比例限制，以当年度申报公告与湖北省社会科学基金经费管理办法为准核定；若公告对间接费用或劳务费设有上限而本方案超出，可在保持合计 20000.00 元不变的前提下于科目之间调整。',
+ '2. 研究报告封面首行的课题批次标注与日期仍为空，需按本次申报材料的用途填写；封面“课题负责人”“申报单位”两栏亦待填。',
  '3. 报告中涉及湖北省高校规模的表述目前为定性描述，如在申报材料中引用，建议补入《湖北省教育事业发展统计公报》的具体数据与年份。',
  '4. 报告第1章提及的湖北省教育强省与平安校园建设相关文件，需补入准确名称与发文年份。',
- '5. 本文件参考文献 20 项自研究报告 79 条中选取，覆盖共享空间理论、冲突识别方法、主观安全评价、行为机理与行为引导五个方面；提交前请对照原文复核卷、期、页码。',
+ '5. 本文件参考文献 20 项自研究报告 87 条中选取，含中文文献 6 条，覆盖共享空间理论、冲突识别方法、主观安全评价、行为机理与行为引导五个方面；提交前请对照原文复核卷、期、页码。省社科基金评审通常期待更充分的中文文献覆盖，建议在知网另行补充后同步更新本清单。',
+ '6. 你在最新一版报告中删除了正文中“图4  校园共享道路5个热点区域的具体交通状况”的图注，但图目录中该条仍在，正文4.1.2节亦写有“如图3、图4所示”。若属误删请补回，若确需删除则需同步修改图目录与正文表述。',
+ '7. 附录F已按你的修改去掉“职称层次”一列，正文对应的专家构成表述已随之调整为仅列专业领域。',
+ '8. 图9、图10、图11 与图2 的重绘版本各有备选，尚未替换进研究报告正文；确定选用哪一版后可一并替换并更新图目录。',
 ]:
     P(t, first=False, after=4)
 
