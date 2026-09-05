@@ -1,0 +1,244 @@
+# -*- coding: utf-8 -*-
+"""图5／图6 行为决策模型，图8 需求清单 —— 参考配色重绘。
+路径系数取自表23（多群组分析），R² 取自 4.2.4 节；需求项与系数取自表34。"""
+import os, sys, math
+sys.path.insert(0, os.path.dirname(__file__))
+from pal import *
+
+OUT = os.path.join(os.path.dirname(__file__), 'html')
+os.makedirs(OUT, exist_ok=True)
+
+
+def w(name, html):
+    open(os.path.join(OUT, name + '.html'), 'w', encoding='utf-8').write(html)
+    print('·', name)
+
+
+# ══════════════════════ 图5 / 图6  行为决策模型 ══════════════════════
+
+MW, MH = 1980, 1400
+RX, RY = 124, 58
+
+NODES = {   # code: (x, y, 中文名)
+    'SN':  (1150, 270,  '主观规范'),
+    'PCE': (245,  500,  '过往冲突经历'),
+    'RP':  (700,  500,  '风险感知'),
+    'AT':  (1150, 500,  '安全态度'),
+    'BI':  (1660, 700,  '行为意图'),
+    'PEU': (245,  900,  '感知易用性'),
+    'PBC': (700,  970,  '知觉行为控制'),
+    'PU':  (1660, 1130, '感知有用性'),
+}
+
+DEFS = [('PCE', '过往冲突经历', '曾经历或目击的交通冲突事件'),
+        ('RP',  '风险感知',     '对共享交通环境风险的认知与评估'),
+        ('AT',  '安全态度',     '对交通安全重要性的认知与重视'),
+        ('SN',  '主观规范',     '他人期望所形成的社会压力'),
+        ('PEU', '感知易用性',   '对交通设施易用程度的评估'),
+        ('PBC', '知觉行为控制', '对自身通行能力的评估'),
+        ('PU',  '感知有用性',   '对合规通行有用程度的评估'),
+        ('BI',  '行为意图',     '在校园共享道路上的通行行为倾向')]
+
+# (起, 止, 行人β, 骑行者β, 行人显著, 骑行者显著, 标签点 t, 标签偏移)
+PATHS = [
+    ('PCE', 'RP',  '0.487', '0.538', 3, 3, .50, (0, -46)),
+    ('RP',  'AT',  '0.516', '0.342', 3, 3, .50, (0, -46)),
+    ('AT',  'BI',  '0.378', '0.196', 3, 3, .50, (34, -26)),
+    ('SN',  'BI',  '0.167', '0.145', 2, 2, .50, (44, -26)),
+    ('PEU', 'PBC', '0.287', '0.456', 3, 3, .50, (0, -48)),
+    ('PBC', 'BI',  '0.158', '0.324', 2, 3, .50, (-12, -38)),
+    ('PU',  'BI',  '0.134', '0.149', 1, 2, .50, (80, 4)),
+    ('RP',  'BI',  '0.094', '0.081', 0, 0, .28, (0, 0)),
+    ('PEU', 'BI',  '0.072', '0.065', 0, 0, .30, (0, -6)),
+]
+STAR = {3: '***', 2: '**', 1: '*', 0: ' n.s.'}
+CORE = {'ped': ['PCE', 'RP', 'AT', 'BI'], 'cyc': ['PEU', 'PBC', 'BI']}
+RIBBON = {'ped': ['PCE', 'RP', 'AT', 'BI'], 'cyc': ['PEU', 'PBC', 'BI']}
+R2 = {'ped': {'BI': '52.3%', 'AT': '26.6%', 'PBC': '8.2%'},
+      'cyc': {'BI': '44.8%', 'AT': '11.7%', 'PBC': '20.8%'}}
+BADGE = {'AT': (1244, 438), 'PBC': (606, 908), 'BI': (1754, 638)}
+
+
+def edge_pt(a, b, m1=2, m2=15):
+    """a、b 两椭圆之间的连线端点（各留出边距）。"""
+    ax, ay, _ = NODES[a]
+    bx, by, _ = NODES[b]
+    dx, dy = bx - ax, by - ay
+    s1 = 1.0 / math.hypot(dx / (RX + m1), dy / (RY + m1))
+    s2 = 1.0 / math.hypot(dx / (RX + m2), dy / (RY + m2))
+    return ax + dx * s1, ay + dy * s1, bx - dx * s2, by - dy * s2
+
+
+def model(kind):
+    who = '行人' if kind == 'ped' else '骑行者'
+    num = '图5' if kind == 'ped' else '图6'
+    core_n = set(CORE[kind])
+    core_e = set(zip(RIBBON[kind][:-1], RIBBON[kind][1:]))
+    d = [marker('ah', OLIVE_D, 7), marker('ahC', TERRA_D, 7), marker('ahN', LINE_D, 7)]
+    o = [rect(0, 0, MW, MH, PAPER)]
+    o.append(title_bar(MW, num, f'{who}行为决策模型',
+                       f'多群组结构方程分析（{who}组）；系数为标准化路径系数 β，取自表23；'
+                       f'R² 为该内生变量被解释的方差比例', 56))
+
+    # ── 顶部图例 ──
+    ly = 150
+    o.append(line(60, ly, 106, ly, TERRA, 5, cap='round'))
+    o.append(T(118, ly + 5, '核心传导链', 14, 600, INK2))
+    o.append(line(228, ly, 274, ly, OLIVE_D, 2.4, cap='round'))
+    o.append(T(286, ly + 5, '显著路径', 14, 500, INK2))
+    o.append(line(392, ly, 438, ly, LINE_D, 1.7, dash='8 6'))
+    o.append(T(450, ly + 5, '不显著路径', 14, 500, INK2))
+    o.append(rect(574, ly - 13, 78, 26, S1, 13))
+    o.append(T(613, ly + 5, 'R²  解释力', 13, 600, FOREST_D, 'middle'))
+    o.append(T(676, ly + 5, '*** p<0.001    ** p<0.01    * p<0.05    n.s. 不显著', 13.5, 400, INK3))
+
+    # ── 核心链底衬 ──
+    pts = 'M' + ' L'.join(f'{NODES[c][0]},{NODES[c][1]}' for c in RIBBON[kind])
+    o.append(path(pts, 'none', TERRA_P, 48, .85, cap='round', join='round'))
+
+    # ── 路径 ──
+    for a, b, pb, cb, ps_, cs_, t, (ox, oy) in PATHS:
+        beta = pb if kind == 'ped' else cb
+        sig = ps_ if kind == 'ped' else cs_
+        x1, y1, x2, y2 = edge_pt(a, b)
+        if sig == 0:
+            o.append(arrow(x1, y1, x2, y2, LINE_D, 1.7, 'ahN', '8 6'))
+            col, fs, wt = INK3, 14.5, 500
+        elif (a, b) in core_e:
+            o.append(arrow(x1, y1, x2, y2, TERRA, 3.4, 'ahC'))
+            col, fs, wt = TERRA_D, 20, 700
+        else:
+            o.append(arrow(x1, y1, x2, y2, OLIVE_D, 2.4, 'ah'))
+            col, fs, wt = FOREST_D, 16, 600
+        px = x1 + (x2 - x1) * t + ox
+        py = y1 + (y2 - y1) * t + oy
+        lab = beta + STAR[sig]
+        bw_ = len(lab) * fs * 0.58 + 16
+        o.append(rect(px - bw_ / 2, py - fs * .95, bw_, fs * 1.82, PAPER, 5, .94))
+        o.append(T(px, py + fs * .34, lab, fs, wt, col, 'middle'))
+
+    # ── 节点 ──
+    for code, (x, y, cn) in NODES.items():
+        is_core = code in core_n
+        fill = TERRA if is_core else CARD
+        stroke = TERRA_D if is_core else OLIVE
+        tc = WHITE if is_core else INK
+        o.append(f'<ellipse cx="{x+2}" cy="{y+3}" rx="{RX}" ry="{RY}" fill="#3A3C34" opacity=".07"/>')
+        o.append(f'<ellipse cx="{x}" cy="{y}" rx="{RX}" ry="{RY}" fill="{fill}" '
+                 f'stroke="{stroke}" stroke-width="2"/>')
+        o.append(T(x, y - 3, cn, 21, 600, tc, 'middle'))
+        o.append(T(x, y + 27, code, 17, 700, tc if is_core else OLIVE_D, 'middle', op=.92 if is_core else 1))
+        if code in R2[kind]:
+            bx, by = BADGE[code]
+            o.append(rect(bx - 38, by - 15, 84, 27, S1, 13, 1, OLIVE, 1))
+            o.append(T(bx + 4, by + 4, 'R² ' + R2[kind][code], 13.5, 700, FOREST_D, 'middle'))
+
+    # ── 构念释义 ──
+    PX, PY, PW, PH = 60, 1050, 1420, 230
+    o.append(rect(PX, PY, PW, PH, S0, 10, .8))
+    o.append(T(PX + 26, PY + 32, '构念释义', 16, 700, FOREST_D))
+    o.append(line(PX + 108, PY + 26, PX + PW - 26, PY + 26, LINE, 1))
+    for i, (cd, cn, df) in enumerate(DEFS):
+        cx = PX + 26 + (i % 3) * 470
+        cy = PY + 70 + (i // 3) * 60
+        o.append(T(cx, cy, cd, 14.5, 700, TERRA_D))
+        o.append(T(cx + 54, cy, cn, 15, 600, INK))
+        o.append(T(cx, cy + 24, df, 13, 400, INK3))
+
+    concl = ('行人以“过往冲突经历→风险感知→安全态度→行为意图”为主导传导链，'
+             '安全态度对行为意图的路径系数达 0.378（p<0.001），模型对行为意图的解释力为 52.3%。'
+             if kind == 'ped' else
+             '骑行者以“感知易用性→知觉行为控制→行为意图”为主导传导链，'
+             '知觉行为控制对行为意图的路径系数达 0.324（p<0.001），模型对行为意图的解释力为 44.8%。')
+    o.append(T(60, 1320, concl, 15, 500, TERRA_D))
+    o.append(foot(MW, MH, f'{num}  {who}行为决策模型',
+                 '两组路径系数的组间差异经 z 检验，核心路径均达显著（见表23）'))
+    w('fig' + ('5' if kind == 'ped' else '6'), page(MW, MH, ''.join(o), ''.join(d)))
+
+
+# ══════════════════════ 图8  需求清单 ══════════════════════
+
+KANO = [
+    ('基本需求', 'Must-be', 'P0', TERRA, TERRA_P, '不满足即引发不满，满足亦不显著提升满意度',
+     [('清晰的路权划分', 0.32, 0.89, 'P0'), ('交叉口冲突标注', 0.28, 0.85, 'P0'),
+      ('夜间可见性保障', 0.35, 0.82, 'P0'), ('标识适配性', 0.31, 0.80, 'P0')]),
+    ('期望需求', 'One-dimensional', 'P1', OLIVE_D, S1, '满足度与满意度近似线性相关',
+     [('安全路径指引', 0.85, 0.73, 'P1'), ('速度警示', 0.82, 0.71, 'P1'),
+      ('推荐速度提示', 0.78, 0.65, 'P1'), ('盲区提示', 0.76, 0.68, 'P1'),
+      ('分层信息呈现', 0.75, 0.62, 'P1')]),
+    ('兴奋需求', 'Attractive', 'P2', STEEL_D, STEEL_L, '不满足不引发不满，满足则显著提升满意度',
+     [('动态流量显示', 0.74, 0.15, 'P2'), ('社会规范可视化', 0.68, 0.12, 'P2'),
+      ('情感化设计元素', 0.65, 0.14, 'P2'), ('听觉辅助提示', 0.62, 0.18, 'P2'),
+      ('景观融合设计', 0.61, 0.11, 'P3')]),
+]
+KW, KH = 1980, 1240
+NOTE0 = ('基本需求为其余两类需求的实现前提，', '须在系统首轮部署中全部落地。')
+
+
+def kano():
+    d = [marker('ah', INK3, 7)]
+    o = [rect(0, 0, KW, KH, PAPER)]
+    o.append(title_bar(KW, '图8', '高校共享道路安全引导系统需求清单',
+                       '共 14 项需求，依 Kano 模型分为三类；条形为表34 的满意度系数与不满意度系数', 56))
+
+    CW, GAP, X0, Y0 = 590, 32, 66, 176
+    NMAX = max(len(k[6]) for k in KANO)
+    CH = 100 + NMAX * 148 + 34
+    for ci, (name, en, pr, col, band, defi, items) in enumerate(KANO):
+        x = X0 + ci * (CW + GAP)
+        o.append(rect(x + 3, Y0 + 4, CW, CH, '#3A3C34', 10, .05))
+        o.append(rect(x, Y0, CW, CH, CARD, 10, 1, LINE_D, 1.2))
+        o.append(path(f'M{x},{Y0+10} a10,10 0 0 1 10,-10 L{x+CW-10},{Y0} '
+                      f'a10,10 0 0 1 10,10 L{x+CW},{Y0+78} L{x},{Y0+78} Z', col))
+        o.append(T(x + 24, Y0 + 36, name, 22, 600, WHITE))
+        o.append(T(x + 24 + len(name) * 23 + 12, Y0 + 35, en, 13.5, 400, WHITE, op=.78))
+        o.append(rect(x + CW - 118, Y0 + 16, 46, 26, WHITE, 13, .22))
+        o.append(T(x + CW - 95, Y0 + 35, pr, 15, 700, WHITE, 'middle'))
+        o.append(T(x + CW - 58, Y0 + 35, f'{len(items)}项', 14, 500, WHITE, 'middle', op=.9))
+        o.append(T(x + 24, Y0 + 64, defi, 13, 400, WHITE, op=.82))
+
+        for k, (nm, sat, dis, p) in enumerate(items):
+            yy = Y0 + 100 + k * 148
+            o.append(rect(x + 18, yy, CW - 36, 128, band, 8, .5))
+            o.append(T(x + 40, yy + 34, nm, 19, 600, INK))
+            o.append(rect(x + CW - 74, yy + 16, 36, 22, WHITE, 11, .85))
+            o.append(T(x + CW - 56, yy + 32, p, 13, 700, col, 'middle'))
+            cx = x + CW / 2 - 6
+            base, span = yy + 82, 210
+            o.append(line(x + 40, base + 14, x + CW - 40, base + 14, LINE, 1))
+            o.append(rect(cx - dis * span, base, dis * span, 15, TERRA, 3, .85))
+            o.append(rect(cx, base, sat * span, 15, OLIVE, 3, .9))
+            o.append(line(cx, base - 7, cx, base + 22, INK3, 1.4))
+            o.append(T(cx - dis * span - 10, base + 12, f'−{dis:.2f}', 13, 600, TERRA_D, 'end'))
+            o.append(T(cx + sat * span + 10, base + 12, f'{sat:.2f}', 13, 600, FOREST_D))
+        # 空位补白（第一列仅 4 项）
+        if len(items) < NMAX:
+            yy = Y0 + 100 + len(items) * 148
+            o.append(rect(x + 18, yy, CW - 36, 128, PAPER, 8, .75, LINE, 1.1))
+            o.append(T(x + CW / 2, yy + 56, '——  该类需求共 4 项  ——', 14, 600, INK3, 'middle'))
+            o.append(T(x + CW / 2, yy + 84, NOTE0[0], 13, 400, INK3, 'middle'))
+            o.append(T(x + CW / 2, yy + 106, NOTE0[1], 13, 400, INK3, 'middle'))
+        o.append(T(x + CW / 2, Y0 + CH - 12,
+                   '实施顺序：' + ('先行' if ci == 0 else ('次之' if ci == 1 else '增值')),
+                   13.5, 500, INK3, 'middle'))
+
+    by = Y0 + CH + 40
+    o.append(rect(66, by, KW - 132, 96, S0, 10))
+    o.append(T(94, by + 34, '读图说明', 16, 700, FOREST_D))
+    o.append(rect(212, by + 18, 30, 15, TERRA, 3, .85))
+    o.append(T(250, by + 32, '不满意度系数（缺失该项时的不满程度）', 13.5, 400, INK2))
+    o.append(rect(660, by + 18, 30, 15, OLIVE, 3, .9))
+    o.append(T(698, by + 32, '满意度系数（具备该项时的满意提升）', 13.5, 400, INK2))
+    o.append(T(94, by + 66, '需求间存在层级依赖：盲区提示与安全路径指引须以清晰的路权划分为前提，'
+                            '社会规范可视化与情感化设计亦以基本需求的满足为条件，'
+                            '故实施遵循“先基础后提升”的顺序。', 13.5, 400, INK2))
+
+    o.append(foot(KW, KH, '图8  高校共享道路安全引导系统需求清单',
+                 '需求项与系数取自表34《基于KANO模型的需求分类统计表》'))
+    w('fig8', page(KW, KH, ''.join(o), ''.join(d)))
+
+
+if __name__ == '__main__':
+    model('ped')
+    model('cyc')
+    kano()
