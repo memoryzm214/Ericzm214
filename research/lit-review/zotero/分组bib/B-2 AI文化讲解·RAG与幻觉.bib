@@ -1,0 +1,91 @@
+% B-2 AI文化讲解·RAG与幻觉
+% 长江文化文献库 v1.0 —— 导入 Zotero 后会自动建一个同名分类
+% 每条的入选理由见《文献分类与理由.docx》,按编号查
+
+@inproceedings{acp_rag_poetry_2025,
+  title     = {Large-Scale Corpus Construction and Retrieval-Augmented Generation for Ancient Chinese Poetry: New Method and Data Insights},
+  booktitle = {Findings of NAACL 2025},
+  year      = {2025},
+  url       = {https://aclanthology.org/2025.findings-naacl.46/},
+  note      = {开放获取。领域语料+专用检索,基准准确率 49.2%→89.0%。H6 的核心技术依据。务必保留"不能直接推断博物馆场景同幅度改善"的自我限制。[WAIT-VERIFY: 作者]},
+  keywords  = {B2, RAG, H6, 必读}
+}
+
+@inproceedings{llm_heritage_completeness_2025,
+  title     = {LLM-Driven Completeness and Consistency Evaluation for Cultural Heritage Data Augmentation in Cross-Modal Retrieval},
+  booktitle = {Proceedings of EMNLP 2025 (Main)},
+  year      = {2025},
+  url       = {https://aclanthology.org/2025.emnlp-main.980/},
+  note      = {开放获取。LLM 生成文化遗产描述存在幻觉与视觉事实遗漏。"不能只用LLM评价LLM"原则的依据。[WAIT-VERIFY: 作者]},
+  keywords  = {B2, 幻觉, 评价方法, 必读}
+}
+
+@article{llm_chatbot_cultural_exhibits_2025,
+  title   = {An Evaluation of LLM-based Chatbots for Enhancing the Visitor's User Experience at Cultural Exhibits},
+  journal = {Journal on Computing and Cultural Heritage},
+  year    = {2025},
+  doi     = {10.1145/3775062},
+  url     = {https://dl.acm.org/doi/10.1145/3775062},
+  note    = {需订阅。观察到 LLM 缺乏情境感知 + 对训练数据外文物产生幻觉;提出用 RAG 限定运行时信息范围。最贴近三组NPC实验场景的一篇。[WAIT-VERIFY: 作者]},
+  keywords= {B2, 博物馆, 幻觉, RAG, 必读}
+}
+
+@article{muserag_2025,
+  title   = {MuseRAG++: a deep retrieval-augmented generation framework for semantic interaction and multi-modal reasoning in virtual museums},
+  year    = {2025},
+  url     = {https://pmc.ncbi.nlm.nih.gov/articles/PMC13470485/},
+  note    = {开放获取。显式来源建模(provenance)对可信可解释的文化遗产回答至关重要 —— 既提升信任又符合AI标识合规。[WAIT-VERIFY: 期刊与作者]},
+  keywords= {B2, RAG, 虚拟博物馆, 架构参照}
+}
+
+@article{jino_multimodal_rag_2026,
+  title   = {Multimodal RAG for cultural heritage: a technical exploration based on Jino traditional knowledge},
+  journal = {Digital Scholarship in the Humanities},
+  volume  = {41},
+  number  = {2},
+  pages   = {1138--},
+  year    = {2026},
+  url     = {https://academic.oup.com/dsh/article-abstract/41/2/1138/8643957},
+  note    = {需订阅。中国少数民族口传知识的多模态RAG —— 与"地方志+口述史进RAG"思路最接近的中国案例。[WAIT-VERIFY: 作者]},
+  keywords= {B2, RAG, 中国案例, 地方志}
+}
+
+@article{ich_graph_retrieval_2026,
+  title   = {Visual information identification and Q\&A of intangible cultural heritage inheritors by using enhanced Graph-Retrieval framework},
+  journal = {npj Heritage Science},
+  year    = {2026},
+  doi     = {10.1038/s40494-026-02384-z},
+  url     = {https://www.nature.com/articles/s40494-026-02384-z},
+  note    = {开放获取。Graph-RAG 缓解幻觉。做实体关系型知识库(人物—事件—器物—地点)的路线参照。[WAIT-VERIFY: 作者]},
+  keywords= {B2, GraphRAG, 知识图谱}
+}
+
+@misc{cultural_knowledge_benchmark_rag_2025,
+  title        = {Evaluating Cultural Knowledge Processing in Large Language Models: A Cognitive Benchmarking Framework Integrating Retrieval-Augmented Generation},
+  year         = {2025},
+  eprint       = {2511.01649},
+  archivePrefix= {arXiv},
+  url          = {https://arxiv.org/pdf/2511.01649},
+  note         = {开放获取。文化知识评测基准的构建方法 —— 测"AI NPC 事实错误率"需要的题库框架。[WAIT-VERIFY: 作者]},
+  keywords     = {B2, 评测基准, RAG}
+}
+
+@inproceedings{llm_pedagogical_agents_vr_history_2025,
+  title     = {Exploring LLM-Powered Role and Action-Switching Pedagogical Agents for History Education in Virtual Reality},
+  booktitle = {Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems},
+  year      = {2025},
+  doi       = {10.1145/3706598.3713109},
+  url       = {https://dl.acm.org/doi/10.1145/3706598.3713109},
+  note      = {需订阅。2x2 被试间,84人,滕王阁历史学习;自适应角色切换提升可信度与专业性感知,但学习体验不一致。B组方法学金标准,AI个性化叙事实验可照搬其设计。[WAIT-VERIFY: 作者]},
+  keywords  = {B2, 实验范式, CHI, 必读}
+}
+
+@inproceedings{ask_sir_oliver_2025,
+  title     = {"Ask Sir Oliver Ingham": LLM-based Social Simulations for History Education},
+  booktitle = {Extended Abstracts of the CHI Conference on Human Factors in Computing Systems},
+  year      = {2025},
+  doi       = {10.1145/3706599.3719728},
+  url       = {https://dl.acm.org/doi/10.1145/3706599.3719728},
+  note      = {需订阅。历史人物 AI 角色的直接先例 —— 做"张之洞 AI"时必须处理的同类工作。[WAIT-VERIFY: 作者]},
+  keywords  = {B2, 历史人物AI, 张之洞对标}
+}

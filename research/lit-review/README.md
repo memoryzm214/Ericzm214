@@ -15,7 +15,11 @@
 | `文献分类与理由.pdf` | 同上的 PDF 版，带书签导航，只读不可编辑 |
 | `文献分类与理由.md` | 同上的 Markdown 源文件（改内容改这个） |
 | **`文献获取清单.xlsx`** | **106 条的获取状态跟踪表。** 按四类获取方式分好，`K` 列（黄色）填「已下载」，「统计」表自动更新进度。 |
-| `refs.bib` | BibTeX，可直接导入 Zotero / EndNote / NoteExpress |
+| **`zotero/长江文化文献库.rdf`** | **带分类树的 Zotero 导入文件。** 一次导入自动建好 15 个分类夹（含 ★必读、量表与方法两个跨组精选）。**优先用这个，不要用 refs.bib** |
+| `zotero/分组bib/` | 备用方案：10 个按组拆分的 .bib，逐个导入各建一个分类 |
+| `zotero/DOI清单.txt` | 59 个 DOI，用 Zotero 魔棒批量补全作者等元数据 |
+| `zotero/使用说明.txt` | Zotero 导入步骤 |
+| `refs.bib` | 全部 106 条的平铺 BibTeX（无分类）。给 EndNote / NoteExpress 用 |
 | `download_oa_pdfs.sh` | 批量下载 ① 类的 50 篇 OA 全文到 `pdfs/`，并生成 `下载结果.csv` |
 | `md2docx.js` | 由 `.md` 重新生成 Word 版的脚本（改完 md 后重跑即可） |
 | `pdfs/` | PDF 存放目录（初始为空） |

@@ -1,0 +1,2368 @@
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:z="http://www.zotero.org/namespaces/export#"
+ xmlns:dcterms="http://purl.org/dc/terms/"
+ xmlns:bib="http://purl.org/net/biblio#"
+ xmlns:foaf="http://xmlns.com/foaf/0.1/"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:link="http://purl.org/rss/1.0/modules/link/"
+ xmlns:prism="http://prismstandard.org/namespaces/1.2/basic/">
+
+    <z:Collection rdf:about="#collection_1">
+      <dc:title>A-1 直接前序·近三年实证</dc:title>
+      <dcterms:hasPart rdf:resource="#item_1"/>
+      <dcterms:hasPart rdf:resource="#item_2"/>
+      <dcterms:hasPart rdf:resource="#item_3"/>
+      <dcterms:hasPart rdf:resource="#item_4"/>
+      <dcterms:hasPart rdf:resource="#item_5"/>
+      <dcterms:hasPart rdf:resource="#item_6"/>
+      <dcterms:hasPart rdf:resource="#item_7"/>
+      <dcterms:hasPart rdf:resource="#item_8"/>
+      <dcterms:hasPart rdf:resource="#item_9"/>
+      <dcterms:hasPart rdf:resource="#item_10"/>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_2">
+      <dc:title>A-2 元分析与效应量基准</dc:title>
+      <dcterms:hasPart rdf:resource="#item_11"/>
+      <dcterms:hasPart rdf:resource="#item_12"/>
+      <dcterms:hasPart rdf:resource="#item_13"/>
+      <dcterms:hasPart rdf:resource="#item_14"/>
+      <dcterms:hasPart rdf:resource="#item_15"/>
+      <dcterms:hasPart rdf:resource="#item_16"/>
+      <dcterms:hasPart rdf:resource="#item_17"/>
+      <dcterms:hasPart rdf:resource="#item_18"/>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_3">
+      <dc:title>A-3 理论与量表基座·经典</dc:title>
+      <dcterms:hasPart rdf:resource="#item_19"/>
+      <dcterms:hasPart rdf:resource="#item_20"/>
+      <dcterms:hasPart rdf:resource="#item_21"/>
+      <dcterms:hasPart rdf:resource="#item_22"/>
+      <dcterms:hasPart rdf:resource="#item_23"/>
+      <dcterms:hasPart rdf:resource="#item_24"/>
+      <dcterms:hasPart rdf:resource="#item_25"/>
+      <dcterms:hasPart rdf:resource="#item_26"/>
+      <dcterms:hasPart rdf:resource="#item_27"/>
+      <dcterms:hasPart rdf:resource="#item_28"/>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_4">
+      <dc:title>A-4 场景对照·VR AR 位置型游戏</dc:title>
+      <dcterms:hasPart rdf:resource="#item_29"/>
+      <dcterms:hasPart rdf:resource="#item_30"/>
+      <dcterms:hasPart rdf:resource="#item_31"/>
+      <dcterms:hasPart rdf:resource="#item_32"/>
+      <dcterms:hasPart rdf:resource="#item_33"/>
+      <dcterms:hasPart rdf:resource="#item_34"/>
+      <dcterms:hasPart rdf:resource="#item_35"/>
+      <dcterms:hasPart rdf:resource="#item_36"/>
+      <dcterms:hasPart rdf:resource="#item_37"/>
+      <dcterms:hasPart rdf:resource="#item_38"/>
+      <dcterms:hasPart rdf:resource="#item_39"/>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_5">
+      <dc:title>B-1 LLM NPC 与 AI 角色</dc:title>
+      <dcterms:hasPart rdf:resource="#item_40"/>
+      <dcterms:hasPart rdf:resource="#item_41"/>
+      <dcterms:hasPart rdf:resource="#item_42"/>
+      <dcterms:hasPart rdf:resource="#item_43"/>
+      <dcterms:hasPart rdf:resource="#item_44"/>
+      <dcterms:hasPart rdf:resource="#item_45"/>
+      <dcterms:hasPart rdf:resource="#item_46"/>
+      <dcterms:hasPart rdf:resource="#item_47"/>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_6">
+      <dc:title>B-2 AI文化讲解·RAG与幻觉</dc:title>
+      <dcterms:hasPart rdf:resource="#item_48"/>
+      <dcterms:hasPart rdf:resource="#item_49"/>
+      <dcterms:hasPart rdf:resource="#item_50"/>
+      <dcterms:hasPart rdf:resource="#item_51"/>
+      <dcterms:hasPart rdf:resource="#item_52"/>
+      <dcterms:hasPart rdf:resource="#item_53"/>
+      <dcterms:hasPart rdf:resource="#item_54"/>
+      <dcterms:hasPart rdf:resource="#item_55"/>
+      <dcterms:hasPart rdf:resource="#item_56"/>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_7">
+      <dc:title>B-3 角色依恋·拟社会互动</dc:title>
+      <dcterms:hasPart rdf:resource="#item_57"/>
+      <dcterms:hasPart rdf:resource="#item_58"/>
+      <dcterms:hasPart rdf:resource="#item_59"/>
+      <dcterms:hasPart rdf:resource="#item_60"/>
+      <dcterms:hasPart rdf:resource="#item_61"/>
+      <dcterms:hasPart rdf:resource="#item_62"/>
+      <dcterms:hasPart rdf:resource="#item_63"/>
+      <dcterms:hasPart rdf:resource="#item_64"/>
+      <dcterms:hasPart rdf:resource="#item_65"/>
+      <dcterms:hasPart rdf:resource="#item_66"/>
+      <dcterms:hasPart rdf:resource="#item_67"/>
+      <dcterms:hasPart rdf:resource="#item_68"/>
+      <dcterms:hasPart rdf:resource="#item_69"/>
+      <dcterms:hasPart rdf:resource="#item_70"/>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_8">
+      <dc:title>B-4 数字人·真实性与AI合规</dc:title>
+      <dcterms:hasPart rdf:resource="#item_71"/>
+      <dcterms:hasPart rdf:resource="#item_72"/>
+      <dcterms:hasPart rdf:resource="#item_73"/>
+      <dcterms:hasPart rdf:resource="#item_74"/>
+      <dcterms:hasPart rdf:resource="#item_75"/>
+      <dcterms:hasPart rdf:resource="#item_76"/>
+      <dcterms:hasPart rdf:resource="#item_77"/>
+      <dcterms:hasPart rdf:resource="#item_78"/>
+      <dcterms:hasPart rdf:resource="#item_79"/>
+      <dcterms:hasPart rdf:resource="#item_80"/>
+      <dcterms:hasPart rdf:resource="#item_81"/>
+      <dcterms:hasPart rdf:resource="#item_82"/>
+      <dcterms:hasPart rdf:resource="#item_83"/>
+      <dcterms:hasPart rdf:resource="#item_84"/>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_9">
+      <dc:title>A 文化游戏化转译与文化学习</dc:title>
+      <dcterms:hasPart rdf:resource="#collection_1"/>
+      <dcterms:hasPart rdf:resource="#collection_2"/>
+      <dcterms:hasPart rdf:resource="#collection_3"/>
+      <dcterms:hasPart rdf:resource="#collection_4"/>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_10">
+      <dc:title>B AI文化角色与智能化传播</dc:title>
+      <dcterms:hasPart rdf:resource="#collection_5"/>
+      <dcterms:hasPart rdf:resource="#collection_6"/>
+      <dcterms:hasPart rdf:resource="#collection_7"/>
+      <dcterms:hasPart rdf:resource="#collection_8"/>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_11">
+      <dc:title>C 跨媒介文化IP与虚实外溢</dc:title>
+      <dcterms:hasPart rdf:resource="#item_85"/>
+      <dcterms:hasPart rdf:resource="#item_86"/>
+      <dcterms:hasPart rdf:resource="#item_87"/>
+      <dcterms:hasPart rdf:resource="#item_88"/>
+      <dcterms:hasPart rdf:resource="#item_89"/>
+      <dcterms:hasPart rdf:resource="#item_90"/>
+      <dcterms:hasPart rdf:resource="#item_91"/>
+      <dcterms:hasPart rdf:resource="#item_92"/>
+      <dcterms:hasPart rdf:resource="#item_93"/>
+      <dcterms:hasPart rdf:resource="#item_94"/>
+      <dcterms:hasPart rdf:resource="#item_95"/>
+      <dcterms:hasPart rdf:resource="#item_96"/>
+      <dcterms:hasPart rdf:resource="#item_97"/>
+      <dcterms:hasPart rdf:resource="#item_98"/>
+      <dcterms:hasPart rdf:resource="#item_99"/>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_12">
+      <dc:title>D 武汉—长江本地与政策</dc:title>
+      <dcterms:hasPart rdf:resource="#item_100"/>
+      <dcterms:hasPart rdf:resource="#item_101"/>
+      <dcterms:hasPart rdf:resource="#item_102"/>
+      <dcterms:hasPart rdf:resource="#item_103"/>
+      <dcterms:hasPart rdf:resource="#item_104"/>
+      <dcterms:hasPart rdf:resource="#item_105"/>
+      <dcterms:hasPart rdf:resource="#item_106"/>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_13">
+      <dc:title>★ 必读（22 篇）</dc:title>
+      <dcterms:hasPart rdf:resource="#item_1"/>
+      <dcterms:hasPart rdf:resource="#item_2"/>
+      <dcterms:hasPart rdf:resource="#item_3"/>
+      <dcterms:hasPart rdf:resource="#item_11"/>
+      <dcterms:hasPart rdf:resource="#item_19"/>
+      <dcterms:hasPart rdf:resource="#item_20"/>
+      <dcterms:hasPart rdf:resource="#item_22"/>
+      <dcterms:hasPart rdf:resource="#item_40"/>
+      <dcterms:hasPart rdf:resource="#item_42"/>
+      <dcterms:hasPart rdf:resource="#item_48"/>
+      <dcterms:hasPart rdf:resource="#item_49"/>
+      <dcterms:hasPart rdf:resource="#item_55"/>
+      <dcterms:hasPart rdf:resource="#item_57"/>
+      <dcterms:hasPart rdf:resource="#item_64"/>
+      <dcterms:hasPart rdf:resource="#item_71"/>
+      <dcterms:hasPart rdf:resource="#item_76"/>
+      <dcterms:hasPart rdf:resource="#item_81"/>
+      <dcterms:hasPart rdf:resource="#item_85"/>
+      <dcterms:hasPart rdf:resource="#item_87"/>
+      <dcterms:hasPart rdf:resource="#item_88"/>
+      <dcterms:hasPart rdf:resource="#item_95"/>
+      <dcterms:hasPart rdf:resource="#item_96"/>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_14">
+      <dc:title>量表与方法（30 篇·可直接复用）</dc:title>
+      <dcterms:hasPart rdf:resource="#item_2"/>
+      <dcterms:hasPart rdf:resource="#item_3"/>
+      <dcterms:hasPart rdf:resource="#item_4"/>
+      <dcterms:hasPart rdf:resource="#item_11"/>
+      <dcterms:hasPart rdf:resource="#item_12"/>
+      <dcterms:hasPart rdf:resource="#item_13"/>
+      <dcterms:hasPart rdf:resource="#item_14"/>
+      <dcterms:hasPart rdf:resource="#item_19"/>
+      <dcterms:hasPart rdf:resource="#item_20"/>
+      <dcterms:hasPart rdf:resource="#item_21"/>
+      <dcterms:hasPart rdf:resource="#item_22"/>
+      <dcterms:hasPart rdf:resource="#item_23"/>
+      <dcterms:hasPart rdf:resource="#item_24"/>
+      <dcterms:hasPart rdf:resource="#item_25"/>
+      <dcterms:hasPart rdf:resource="#item_26"/>
+      <dcterms:hasPart rdf:resource="#item_27"/>
+      <dcterms:hasPart rdf:resource="#item_29"/>
+      <dcterms:hasPart rdf:resource="#item_39"/>
+      <dcterms:hasPart rdf:resource="#item_42"/>
+      <dcterms:hasPart rdf:resource="#item_55"/>
+      <dcterms:hasPart rdf:resource="#item_57"/>
+      <dcterms:hasPart rdf:resource="#item_58"/>
+      <dcterms:hasPart rdf:resource="#item_61"/>
+      <dcterms:hasPart rdf:resource="#item_63"/>
+      <dcterms:hasPart rdf:resource="#item_71"/>
+      <dcterms:hasPart rdf:resource="#item_76"/>
+      <dcterms:hasPart rdf:resource="#item_88"/>
+      <dcterms:hasPart rdf:resource="#item_95"/>
+      <dcterms:hasPart rdf:resource="#item_96"/>
+      <dcterms:hasPart rdf:resource="#item_97"/>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_15">
+      <dc:title>长江文化文献库 v1.0</dc:title>
+      <dcterms:hasPart rdf:resource="#collection_9"/>
+      <dcterms:hasPart rdf:resource="#collection_10"/>
+      <dcterms:hasPart rdf:resource="#collection_11"/>
+      <dcterms:hasPart rdf:resource="#collection_12"/>
+      <dcterms:hasPart rdf:resource="#collection_13"/>
+      <dcterms:hasPart rdf:resource="#collection_14"/>
+    </z:Collection>
+
+    <bib:Article rdf:about="#item_1">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Frontiers in Psychology</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Beyond entertainment: how intangible cultural heritage in video games shapes youth cultural identity</dc:title>
+      <dc:date>2026</dc:date>
+      <dc:identifier>DOI 10.3389/fpsyg.2026.1855866</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2026.1855866/full</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A1-1</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>A1</dc:subject>
+      <dc:subject>锚点</dc:subject>
+      <dc:subject>文化认同</dc:subject>
+      <dc:subject>非遗</dc:subject>
+      <dc:subject>横断面</dc:subject>
+      <dc:description>编号 A1-1  |  ① 脚本自动下载  |  理由：这是你整个课题的锚点文献。它建立了你要的因果方向，但用横断面设计，作者自己承认无法建立长期因果——这就是你 H1/H2 的立论起点。你的实验（三组 × T0–T3 延迟测试）正好补上它的缺口。写基金本子时，这一篇是"国内外研究现状"段落的第一句。  |  开放获取。513名中国青年问卷;非遗嵌入度→文化认同态度→文化认同行为。本课题锚点文献。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_2">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Information Technology \&amp; People</dc:title>
+          <prism:volume>39</prism:volume>
+          <prism:number>1</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Jiang</foaf:surname><foaf:givenName>Q.</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Qian</foaf:surname><foaf:givenName>J.</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Zang</foaf:surname><foaf:givenName>Y.</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>Integrating intangible cultural heritage elements into mobile games: an exploration of player cultural identity</dc:title>
+      <dc:date>2026</dc:date>
+      <bib:pages>482--</bib:pages>
+      <dc:identifier>DOI 10.1108/ITP-01-2024-0088</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.emerald.com/insight/content/doi/10.1108/itp-01-2024-0088/full/html</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A1-2</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>A1</dc:subject>
+      <dc:subject>量表开发</dc:subject>
+      <dc:subject>SEM</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 A1-2  |  ③ 需订阅·走图书馆  |  理由：这是唯一一篇已经做了量表开发的同题文献，对你的 CIDI（文化整合深度指数） 是最直接的竞争与参照。你必须先读懂它的四维结构，才能说清 CIDI 的增量在哪——我的判断是：它测的是玩家感知的文化体验（主观），而 CIDI 测的是作品客观的整合深度（专家编码）。这个"主观 vs 客观"的区分，就是你 CIDI 最好的立论。  |  需订阅。《王者荣耀》;访谈+因子分析+SEM;开发文化体验量表(四维)。CIDI 的主要参照与竞争对象。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_3">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Frontiers in Psychology</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Enhancing handicraft intangible cultural heritage learning through immersive VR serious games: a multimodal study on natural interaction effectiveness</dc:title>
+      <dc:date>2026</dc:date>
+      <dc:identifier>DOI 10.3389/fpsyg.2026.1880795</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2026.1880795/full</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A1-3</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>A1</dc:subject>
+      <dc:subject>多模态</dc:subject>
+      <dc:subject>SDT</dc:subject>
+      <dc:subject>知识保持</dc:subject>
+      <dc:description>编号 A1-3  |  ① 脚本自动下载  |  理由：证明文化遗产游戏研究已经从满意度问卷进入多模态实验阶段——这是你方法论章节的"学科趋势"论据。同时它把 SDT 作为设计指导而非事后解释，正是你 RQ-B（自主性感知）的做法模板。  |  开放获取。SDT指导设计;问卷+眼动+皮电多模态;沉浸式VR组知识保持与生理唤醒高于PC组。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_4">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Frontiers in Psychology</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>The art and science of serious game design: a quasi-experimental study based on self-determination theory in traditional Chinese culture education</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.3389/fpsyg.2025.1536513</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2025.1536513/full</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A1-4</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>A1</dc:subject>
+      <dc:subject>准实验</dc:subject>
+      <dc:subject>SDT</dc:subject>
+      <dc:subject>方法模板</dc:subject>
+      <dc:description>编号 A1-4  |  ① 脚本自动下载  |  理由：A 组里少数用实验（非问卷）做中国传统文化游戏的研究。你的三组实验设计可以直接借它的对照组设置和操纵检查写法。审稿人问"为什么是准实验不是问卷"时，这是护身符。  |  开放获取。准实验设计。三组实验的对照组设置与操纵检查写法可直接借鉴。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_5">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Frontiers in Virtual Reality</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Understanding the key factors influencing continued use intention toward intangible cultural heritage (ICH)-themed virtual reality games</dc:title>
+      <dc:date>2026</dc:date>
+      <dc:identifier>DOI 10.3389/frvir.2026.1833878</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.frontiersin.org/journals/virtual-reality/articles/10.3389/frvir.2026.1833878/full</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A1-5</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>A1</dc:subject>
+      <dc:subject>行为意向</dc:subject>
+      <dc:description>编号 A1-5  |  ① 脚本自动下载  |  理由：补齐"持续使用意向"这一行为变量。你的 H10（虚实外溢）需要行为指标，这篇提供了意向层的测量参照。优先级低于前四篇。  |  开放获取。持续使用意向。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_6">
+      <z:itemType>journalArticle</z:itemType>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Lin</foaf:surname><foaf:givenName>Yinan</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Zhou</foaf:surname><foaf:givenName>Tianyi</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Guan</foaf:surname><foaf:givenName>Jinjin</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>The Model and Application of the Serious Game for Cultural Heritage Education: A Case Study of Kuliang, China</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1177/01678329251323449</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://journals.sagepub.com/doi/abs/10.1177/01678329251323449</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A1-6</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>A1</dc:subject>
+      <dc:subject>中国案例</dc:subject>
+      <dc:subject>模板</dc:subject>
+      <dc:description>编号 A1-6  |  ③ 需订阅·走图书馆  |  理由：中国地方文化遗产严肃游戏的模型+应用双层写法，和你"武汉场景验证"的产出形态最接近。可作为你写案例章节的结构模板。  |  需订阅。中国地方文化遗产严肃游戏的"模型+应用"双层写法,案例章节结构模板。[WAIT-VERIFY: 期刊名]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_7">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Games and Culture</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Cao</foaf:surname><foaf:givenName>Tianming</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Zhou</foaf:surname><foaf:givenName>Hongya</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Feng</foaf:surname><foaf:givenName>Anqi</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>Becoming a Xia: Constructing Cultural Identity in the History of Wuxia Games in China</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1177/15554120231208735</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://journals.sagepub.com/doi/10.1177/15554120231208735</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A1-7</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>A1</dc:subject>
+      <dc:subject>质性</dc:subject>
+      <dc:subject>文化认同</dc:subject>
+      <dc:description>编号 A1-7  |  ③ 需订阅·走图书馆  |  理由：质性/文化史路径的文化认同建构研究。你的研究以量化为主，但基金评审和设计学期刊常要求人文深度——这一篇是你"文化认同不只是心理变量，也是历史建构"这一段的引用来源。  |  需订阅。质性/文化史路径的文化认同建构。补充人文深度。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_8">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Games and Culture</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Yu</foaf:surname><foaf:givenName>Mengli</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Guo</foaf:surname><foaf:givenName>Yichen</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Shen</foaf:surname><foaf:givenName>Wenhan</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Chen</foaf:surname><foaf:givenName>Rong</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>Cultural Affordance and Reception: A Theoretical Framework for Interactive Cross-Cultural Sense-Making in Video Game Environments</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1177/15554120251336564</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://journals.sagepub.com/doi/10.1177/15554120251336564</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A1-8</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>A1</dc:subject>
+      <dc:subject>理论框架</dc:subject>
+      <dc:subject>CGT对照</dc:subject>
+      <dc:description>编号 A1-8  |  ③ 需订阅·走图书馆  |  理由："文化可供性"框架，是你 CGT（文化游戏化转译）五层模型最接近的理论邻居。写 CGT 时必须处理它，否则会被问"你和 cultural affordance 有什么区别"。我的判断：可供性讲的是玩家能从文化中读出什么，CGT 讲的是设计者把文化放进了哪一层——一个是接收端，一个是生产端，可以互补而非竞争。  |  需订阅。"文化可供性"框架 —— CGT 五层模型最近的理论邻居,写 CGT 时必须处理。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_9">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>International Journal of Human--Computer Interaction</dc:title>
+          <prism:volume>42</prism:volume>
+          <prism:number>1</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Enhancing Young Generation's Heritage Identity Through Emotional Responses to Virtual Cultural Heritage Experience: A Design Case with Azheke Community and Visitors at Hani Rice Terraces in China</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1080/10447318.2025.2505159</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.tandfonline.com/doi/full/10.1080/10447318.2025.2505159</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A1-9</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>A1</dc:subject>
+      <dc:subject>情感</dc:subject>
+      <dc:subject>遗产认同</dc:subject>
+      <dc:subject>中国场景</dc:subject>
+      <dc:description>编号 A1-9  |  ③ 需订阅·走图书馆  |  理由："情感反应 → 遗产认同"的设计案例，正是你 CGEL 链条中 情感连接 → 文化认同 那一段。而且是中国本土社区场景，与盘龙城/楚文化可类比。  |  需订阅。情感反应→遗产认同,对应 CGEL "情感连接→文化认同"段。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_10">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>npj Heritage Science</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Evaluating knowledge transfer mechanisms and outcomes of VR/AR for cultural-heritage serious games</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1038/s40494-025-02247-z</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.nature.com/articles/s40494-025-02247-z</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A1-10</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>A1</dc:subject>
+      <dc:subject>知识迁移</dc:subject>
+      <dc:subject>目标期刊</dc:subject>
+      <dc:description>编号 A1-10  |  ① 脚本自动下载  |  理由：直接研究知识迁移机制而非满意度，和你 RQ-A（知识获得、理解、迁移）高度对齐。npj Heritage Science 是这个方向近两年最值得投的期刊之一，读它也是在摸目标期刊的口味。  |  开放获取。研究知识迁移机制而非满意度,对应 RQ-A。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_11">
+      <z:itemType>journalArticle</z:itemType>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Xu</foaf:surname><foaf:givenName>Wei</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Dai</foaf:surname><foaf:givenName>Wei-Ang</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>Exploring the Efficacy of Game-Based Pedagogy: A Three-Level Meta-Analysis of Game-Based Learning and Gamification</dc:title>
+      <dc:date>2026</dc:date>
+      <dc:identifier>DOI 10.1177/14697874261424519</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://journals.sagepub.com/doi/10.1177/14697874261424519</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A2-1</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>A2</dc:subject>
+      <dc:subject>元分析</dc:subject>
+      <dc:subject>效应量</dc:subject>
+      <dc:subject>功效分析</dc:subject>
+      <dc:description>编号 A2-1  |  ③ 需订阅·走图书馆  |  理由：最新的三层元分析，给你游戏化学习的当前效应量基准。你的 PDF 里按 f = .25 估样本量（约 157 人完成），这个 f 值必须有来源——这篇就是来源。不引元分析而自己拍 f 值，是基金评审最常挑的毛病。  |  需订阅。最新三层元分析 —— 样本量估算中 f 值的来源依据。[WAIT-VERIFY: 期刊名]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_12">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>TechTrends</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Effectiveness of Augmented Reality and Virtual Reality Interventions on Learning Outcomes: A Meta-Analysis in Higher Education</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1007/s11528-025-01106-9</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://link.springer.com/article/10.1007/s11528-025-01106-9</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A2-2</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>A2</dc:subject>
+      <dc:subject>元分析</dc:subject>
+      <dc:subject>VR</dc:subject>
+      <dc:subject>效应量</dc:subject>
+      <dc:description>编号 A2-2  |  ③ 需订阅·走图书馆  |  理由：如果你做 VR 组，这是效应量预期的依据。但注意 d ≈ 1.0 偏高（AR/VR 研究普遍存在新奇效应和发表偏倚），你在预注册里应按更保守的 f = .20–.25 估样本，并把这一点写进局限——这反而会让评审觉得你懂行。  |  需订阅。21研究/41干预,合并 d=0.98。注意新奇效应与发表偏倚,预注册宜用更保守的 f。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_13">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Journal of Educational Psychology</dc:title>
+          <prism:volume>105</prism:volume>
+          <prism:number>2</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Wouters</foaf:surname><foaf:givenName>Pieter</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>van Nimwegen</foaf:surname><foaf:givenName>Christof</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>van Oostendorp</foaf:surname><foaf:givenName>Herre</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>van der Spek</foaf:surname><foaf:givenName>Erik D.</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>A meta-analysis of the cognitive and motivational effects of serious games</dc:title>
+      <dc:date>2013</dc:date>
+      <bib:pages>249--265</bib:pages>
+      <dc:subject>A2-3</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>A2</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>元分析</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 A2-3  |  ③ 需订阅·走图书馆  |  理由：严肃游戏领域被引最多的元分析之一，经典。核心结论：严肃游戏在知识与认知上优于传统教学，但动机优势并不稳定；分组学习效果更好。你的 RQ-C（"玩得开心 ≠ 学到了"）的最强靠山就是它。  |  经典高被引。严肃游戏在知识与认知上优于传统教学,但动机优势不稳定。RQ-C("玩得开心≠学到了")的核心依据。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_14">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Computers \&amp; Education</dc:title>
+          <prism:volume>60</prism:volume>
+          <prism:number>1</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Wouters</foaf:surname><foaf:givenName>Pieter</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>van Oostendorp</foaf:surname><foaf:givenName>Herre</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>A meta-analytic review of the role of instructional support in game-based learning</dc:title>
+      <dc:date>2013</dc:date>
+      <bib:pages>412--425</bib:pages>
+      <dc:identifier><dcterms:URI><rdf:value>https://cddoc.uc.cl/wp-content/uploads/2020/03/Metaanalytic_review_rol_instructio.pdf</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A2-4</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>A2</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>元分析</dc:subject>
+      <dc:subject>效应量</dc:subject>
+      <dc:description>编号 A2-4  |  ① 脚本自动下载  |  理由：给你分维度的效应量。你的实验测"知识/理解/迁移"三类题，正好可以对应它的知识维度做功效分析。  |  免费PDF。知识 d=.33 / 技能 d=.62 / 游戏内表现 d=.19 —— 分维度效应量基准。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_15">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>International Journal of STEM Education</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Effectiveness of digital educational game and game design in STEM learning: a meta-analytic review</dc:title>
+      <dc:date>2023</dc:date>
+      <dc:identifier>DOI 10.1186/s40594-023-00424-9</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://link.springer.com/article/10.1186/s40594-023-00424-9</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A2-5</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>A2</dc:subject>
+      <dc:subject>元分析</dc:subject>
+      <dc:subject>对照基准</dc:subject>
+      <dc:description>编号 A2-5  |  ① 脚本自动下载  |  开放获取。跨领域效应量对照基准。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_16">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>International Journal of STEM Education</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Effects of digital game-based STEM education on students' learning achievement: a meta-analysis</dc:title>
+      <dc:date>2022</dc:date>
+      <dc:identifier>DOI 10.1186/s40594-022-00344-0</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://link.springer.com/article/10.1186/s40594-022-00344-0</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A2-6</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>A2</dc:subject>
+      <dc:subject>元分析</dc:subject>
+      <dc:subject>对照基准</dc:subject>
+      <dc:description>编号 A2-6  |  ① 脚本自动下载  |  理由：这两篇是跨领域对照基准。文化领域的效应量若明显高于 STEM，多半是测量问题（自陈 vs 客观测验）——你在讨论部分需要这个参照来自我校准。  |  开放获取。跨领域效应量对照基准。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_17">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Educational Technology Research and Development</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Gamification enhances student intrinsic motivation, perceptions of autonomy and relatedness, but minimal impact on competency: a meta-analysis and systematic review</dc:title>
+      <dc:date>2024</dc:date>
+      <dc:identifier>DOI 10.1007/s11423-023-10337-7</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://link.springer.com/article/10.1007/s11423-023-10337-7</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A2-7</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>A2</dc:subject>
+      <dc:subject>元分析</dc:subject>
+      <dc:subject>SDT</dc:subject>
+      <dc:subject>RQ-B</dc:subject>
+      <dc:description>编号 A2-7  |  ③ 需订阅·走图书馆  |  理由：直接对应 RQ-B 的自主性/胜任感。结论"胜任感影响极小"是个反直觉但有用的发现，可以让你的假设更精细：不要笼统预测"游戏化提升所有 SDT 维度"。  |  需订阅。对应 RQ-B。"胜任感影响极小"是反直觉但有用的发现,可细化假设。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Document rdf:about="#item_18">
+      <z:itemType>webpage</z:itemType>
+      <dc:title>Gamification design in cultural heritage education: A systematic literature review</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.researchgate.net/publication/399556970_Gamification_design_in_cultural_heritage_education_A_systematic_literature_review</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A2-8</dc:subject>
+      <dc:subject>② 免费·浏览器另存</dc:subject>
+      <dc:subject>A2</dc:subject>
+      <dc:subject>综述</dc:subject>
+      <dc:subject>待核验</dc:subject>
+      <dc:description>编号 A2-8  |  ② 免费·浏览器另存  |  理由：范围最贴近你的综述，直接给你"文化遗产教育游戏化"的研究图谱。⚠️ 我只在 ResearchGate 上确认到这一条，正式出处需你核对后再引。  |  范围覆盖 2019--2024。[WAIT-VERIFY: 正式出处与作者 —— 仅在 ResearchGate 确认,引用前务必核对]</dc:description>
+    </bib:Document>
+    <bib:Article rdf:about="#item_19">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>International Journal of Human-Computer Studies</dc:title>
+          <prism:volume>66</prism:volume>
+          <prism:number>9</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Jennett</foaf:surname><foaf:givenName>Charlene</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Cox</foaf:surname><foaf:givenName>Anna L.</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Cairns</foaf:surname><foaf:givenName>Paul</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Dhoparee</foaf:surname><foaf:givenName>Samira</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Epps</foaf:surname><foaf:givenName>Andrew</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Tijs</foaf:surname><foaf:givenName>Tim</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Walton</foaf:surname><foaf:givenName>Alison</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>Measuring and defining the experience of immersion in games</dc:title>
+      <dc:date>2008</dc:date>
+      <bib:pages>641--661</bib:pages>
+      <dc:identifier><dcterms:URI><rdf:value>https://www-users.york.ac.uk/paul.cairns/pubs/JennettIJHCS08.pdf</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A3-1</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>A3</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>量表</dc:subject>
+      <dc:subject>沉浸</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 A3-1  |  ① 脚本自动下载  |  理由：你所有游戏实验的沉浸变量都用它，不要自编。它同时给了你"主观+客观"双轨测量的正当性——这正是 A1-3 那类多模态研究的源头。分级结构还能让你的 H3（沉浸中介）做得更细：是哪一级沉浸在中介？  |  经典,被引 1800+。作者免费PDF。沉浸的主观+客观双轨测量;分级结构(engagement/engrossment/total immersion)。所有游戏实验的沉浸变量用它。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_20">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Journal of Personality and Social Psychology</dc:title>
+          <prism:volume>79</prism:volume>
+          <prism:number>5</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Green</foaf:surname><foaf:givenName>Melanie C.</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Brock</foaf:surname><foaf:givenName>Timothy C.</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>The role of transportation in the persuasiveness of public narratives</dc:title>
+      <dc:date>2000</dc:date>
+      <bib:pages>701--721</bib:pages>
+      <dc:identifier><dcterms:URI><rdf:value>http://www.communicationcache.com/uploads/1/0/8/8/10887248/the_role_of_transportation_in_the_persuasiveness_of_public_narratives.pdf</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A3-2</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>A3</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>量表</dc:subject>
+      <dc:subject>叙事运输</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 A3-2  |  ① 脚本自动下载  |  理由：你 CGT 的 L2 叙事型文化层，心理机制就是叙事运输。H3（叙事运输中介）的量表和理论都来自这里。  |  经典。叙事运输量表来源。对应 CGT 的 L2 叙事型文化层与 H3。免费PDF。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_21">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Journal of Consumer Research</dc:title>
+          <prism:volume>40</prism:volume>
+          <prism:number>5</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>van Laer</foaf:surname><foaf:givenName>Tom</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>de Ruyter</foaf:surname><foaf:givenName>Ko</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Visconti</foaf:surname><foaf:givenName>Luca M.</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Wetzels</foaf:surname><foaf:givenName>Martin</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>The Extended Transportation-Imagery Model: A Meta-Analysis of the Antecedents and Consequences of Consumers' Narrative Transportation</dc:title>
+      <dc:date>2014</dc:date>
+      <bib:pages>797--817</bib:pages>
+      <dc:identifier><dcterms:URI><rdf:value>https://openaccess.city.ac.uk/id/eprint/18870/1/Extended%20Transportation-Imagery%20Model%20CRO.pdf</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A3-3</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>A3</dc:subject>
+      <dc:subject>元分析</dc:subject>
+      <dc:subject>叙事运输</dc:subject>
+      <dc:subject>操纵检查</dc:subject>
+      <dc:description>编号 A3-3  |  ① 脚本自动下载  |  理由：比 Green &amp; Brock 原文更实用——它告诉你叙事运输的前因有哪些（故事质量、角色相似性、可想象性……），这些正是你设计实验刺激物时要控制的变量。做操纵检查时必读。  |  开放获取副本。76篇/132个效应量。给出叙事运输的前因清单 —— 设计实验刺激物与操纵检查时必读。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_22">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Motivation and Emotion</dc:title>
+          <prism:volume>30</prism:volume>
+          <prism:number>4</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Ryan</foaf:surname><foaf:givenName>Richard M.</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Rigby</foaf:surname><foaf:givenName>C. Scott</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Przybylski</foaf:surname><foaf:givenName>Andrew</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>The motivational pull of video games: A self-determination theory approach</dc:title>
+      <dc:date>2006</dc:date>
+      <dc:identifier>DOI 10.1007/s11031-006-9051-8</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://selfdeterminationtheory.org/SDT/documents/2006_RyanRigbyPrzybylski_MandE.pdf</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A3-4</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>A3</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>量表</dc:subject>
+      <dc:subject>SDT</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 A3-4  |  ① 脚本自动下载  |  理由：RQ-B 里的"自主性感知"就用 PENS。而且你的 H7（AI 个性化提高自主感）测的是同一个构念——A 组和 B 组共用一把尺子，这是把三条主线咬合起来的关键。  |  经典。PENS 量表来源(自主/胜任/归属)。A组与B组共用同一把尺子,是三条主线咬合的关键。免费PDF。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_23">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Review of General Psychology</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Przybylski</foaf:surname><foaf:givenName>Andrew K.</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Rigby</foaf:surname><foaf:givenName>C. Scott</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Ryan</foaf:surname><foaf:givenName>Richard M.</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>A motivational model of video game engagement</dc:title>
+      <dc:date>2010</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://selfdeterminationtheory.org/SDT/documents/2010_PrzybylskiRigbyRyan_ROGP.pdf</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A3-5</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>A3</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>SDT</dc:subject>
+      <dc:description>编号 A3-5  |  ① 脚本自动下载  |  理由：A3-4 的理论整合版，写理论框架时比原文好引。  |  上条的理论整合版,写理论框架时比原文好引。免费PDF。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_24">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Computers in Entertainment</dc:title>
+          <prism:volume>3</prism:volume>
+          <prism:number>3</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Sweetser</foaf:surname><foaf:givenName>Penelope</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Wyeth</foaf:surname><foaf:givenName>Peta</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>GameFlow: A model for evaluating player enjoyment in games</dc:title>
+      <dc:date>2005</dc:date>
+      <dc:identifier>DOI 10.1145/1077246.1077253</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://dl.acm.org/doi/pdf/10.1145/1077246.1077253</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A3-6</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>A3</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>心流</dc:subject>
+      <dc:subject>专家评估</dc:subject>
+      <dc:description>编号 A3-6  |  ① 脚本自动下载  |  理由：RQ-B 提到"心流"。⚠️ 但请注意一个陷阱：GameFlow 本质是启发式评估工具（设计师用），不是被试自陈量表。如果你要测玩家心流，用 Flow Short Scale 或 EGameFlow 一类的自陈量表，GameFlow 用来做设计侧的专家评估——这正好和 CIDI 的专家编码路子一致，可以并入你的编码手册。  |  经典。心流八要素。注意:这是设计侧的启发式评估工具,不是被试自陈量表 —— 测玩家心流请另用自陈量表。修订版: https://eprints.qut.edu.au/58216/15/JournCT-GameFlow.pdf</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_25">
+      <z:itemType>conferencePaper</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Proceedings of the 47th Hawaii International Conference on System Sciences (HICSS)</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Hamari</foaf:surname><foaf:givenName>Juho</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Koivisto</foaf:surname><foaf:givenName>Jonna</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Sarsa</foaf:surname><foaf:givenName>Harri</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>Does gamification work? --- A literature review of empirical studies on gamification</dc:title>
+      <dc:date>2014</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>http://creativegames.org.uk/modules/Gamification/Hamari_etal_Does_gamification_work-2014.pdf</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A3-7</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>A3</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>游戏化</dc:subject>
+      <dc:subject>综述</dc:subject>
+      <dc:description>编号 A3-7  |  ① 脚本自动下载  |  经典高被引。免费PDF。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_26">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>International Journal of Information Management</dc:title>
+          <prism:volume>45</prism:volume>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Koivisto</foaf:surname><foaf:givenName>Jonna</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Hamari</foaf:surname><foaf:givenName>Juho</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>The rise of motivational information systems: A review of gamification research</dc:title>
+      <dc:date>2019</dc:date>
+      <bib:pages>191--210</bib:pages>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.sciencedirect.com/science/article/pii/S0268401217305169</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A3-8</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>A3</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>游戏化</dc:subject>
+      <dc:subject>方法论辩护</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 A3-8  |  ③ 需订阅·走图书馆  |  理由：游戏化领域被引最高的两篇综述。关键论点：Koivisto &amp; Hamari 指出越严格的实验设计，游戏化效应越小——这句话你必须引，因为它直接支持你"用随机实验而非问卷"的方法论选择，也提前化解了"效应量为什么不如别人大"的质疑。  |  经典高被引(N=819 研究)。关键论点:越严格的实验设计,游戏化效应越小 —— 支持"用随机实验而非问卷"的方法论选择。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_27">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Science Education</dc:title>
+          <prism:volume>89</prism:volume>
+          <prism:number>5</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Falk</foaf:surname><foaf:givenName>John H.</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Storksdieck</foaf:surname><foaf:givenName>Martin</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>Using the contextual model of learning to understand visitor learning from a science center exhibition</dc:title>
+      <dc:date>2005</dc:date>
+      <dc:identifier>DOI 10.1002/sce.20078</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://onlinelibrary.wiley.com/doi/10.1002/sce.20078</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A3-9</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>A3</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>博物馆学习</dc:subject>
+      <dc:subject>现场实验</dc:subject>
+      <dc:description>编号 A3-9  |  ③ 需订阅·走图书馆  |  博物馆学习标准框架(个人/社会文化/物理三情境)。做博物馆现场实验时的协变量设计依据。</dc:description>
+    </bib:Article>
+    <bib:Book rdf:about="#item_28">
+      <z:itemType>book</z:itemType>
+      <dc:publisher><foaf:Organization><foaf:name>AltaMira Press</foaf:name></foaf:Organization></dc:publisher>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Falk</foaf:surname><foaf:givenName>John H.</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Dierking</foaf:surname><foaf:givenName>Lynn D.</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>Learning from Museums: Visitor Experiences and the Making of Meaning</dc:title>
+      <dc:subject>A3-10</dc:subject>
+      <dc:subject>④ 专著·借阅或购买</dc:subject>
+      <dc:subject>A3</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>专著</dc:subject>
+      <dc:subject>博物馆学习</dc:subject>
+      <dc:description>编号 A3-10  |  ④ 专著·借阅或购买  |  理由：博物馆学习的标准理论框架（个人情境 / 社会文化情境 / 物理情境）。你做博物馆现场实验（2029 年那一步）时，先验知识、动机、选择与控制这些协变量必须按它来设，否则现场研究会被批"没有控制情境变量"。这也是你"参观前—参观中—参观后服务系统"设计的理论出处。  |  专著。"参观前—参观中—参观后"服务系统设计的理论出处。[WAIT-VERIFY: 版本与年份,有多个版本]</dc:description>
+    </bib:Book>
+    <bib:Article rdf:about="#item_29">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Informatics</dc:title>
+          <prism:volume>13</prism:volume>
+          <prism:number>1</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Can Location-Based Augmented Reality Support Cultural-Heritage Experience in Real-World Settings? Age-Related Engagement Patterns and a Field-Based Evaluation</dc:title>
+      <dc:date>2026</dc:date>
+      <dc:identifier>DOI 10.3390/informatics13010012</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://doi.org/10.3390/informatics13010012</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A4-1</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>A4</dc:subject>
+      <dc:subject>现场实验</dc:subject>
+      <dc:subject>AR</dc:subject>
+      <dc:subject>效应量</dc:subject>
+      <dc:description>编号 A4-1  |  ① 脚本自动下载  |  理由：你 2030 年"武汉城市史位置型游戏"那条线的方法与效应量双重参照。现场实验怎么控制、怎么报效应量，照着写。  |  开放获取。现场评估,知识增益均值 +7.74 分(大效应量)。位置型游戏线的方法与效应量双重参照。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_30">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Applied Sciences</dc:title>
+          <prism:volume>14</prism:volume>
+          <prism:number>15</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>How Do Location-Based AR Games Enhance Value Co-Creation Experiences at Cultural Heritage Sites? A Process Perspective Analysis</dc:title>
+      <dc:date>2024</dc:date>
+      <dc:identifier>DOI 10.3390/app14156812</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.mdpi.com/2076-3417/14/15/6812</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A4-2</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>A4</dc:subject>
+      <dc:subject>AR</dc:subject>
+      <dc:subject>价值共创</dc:subject>
+      <dc:description>编号 A4-2  |  ① 脚本自动下载  |  开放获取。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_31">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Journal on Computing and Cultural Heritage</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>HeritageSite AR: Design and Evaluation of a Mobile Augmented Reality Exploration Game for a Chinese Heritage Site</dc:title>
+      <dc:date>2024</dc:date>
+      <dc:identifier>DOI 10.1145/3700881</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://dl.acm.org/doi/10.1145/3700881</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A4-3</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>A4</dc:subject>
+      <dc:subject>AR</dc:subject>
+      <dc:subject>中国案例</dc:subject>
+      <dc:subject>盘龙城对标</dc:subject>
+      <dc:description>编号 A4-3  |  ③ 需订阅·走图书馆  |  理由：中国遗产地 AR 游戏的设计+评估完整案例，盘龙城原型可直接对标。  |  需订阅。中国遗产地 AR 游戏设计+评估完整案例,盘龙城原型可对标。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_32">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>npj Heritage Science</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Design of a virtual reality serious game for experiencing the colors of Dunhuang frescoes</dc:title>
+      <dc:date>2024</dc:date>
+      <dc:identifier>DOI 10.1038/s40494-024-01477-x</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.nature.com/articles/s40494-024-01477-x</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A4-4</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>A4</dc:subject>
+      <dc:subject>VR</dc:subject>
+      <dc:subject>CGT实践</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 A4-4  |  ① 脚本自动下载  |  理由：敦煌色彩 VR——把一个高度专门化的文化要素（色彩）做成游戏核心，这正是 CGT 的 L3/L4 实践。你做曾侯乙编钟（音律→解谜规则）时，这是最接近的先例，也是最该引的"同类工作"。  |  开放获取。把高度专门化的文化要素(色彩)做成游戏核心 —— CGT 的 L3/L4 实践先例。做编钟音律解谜时最该引的同类工作。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_33">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Virtual Reality</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Collaboration in an immersive VR Edu-Metaverse improves knowledge gain and retention of concise cultural heritage content</dc:title>
+      <dc:date>2026</dc:date>
+      <dc:identifier>DOI 10.1007/s10055-026-01436-w</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://link.springer.com/article/10.1007/s10055-026-01436-w</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A4-5</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>A4</dc:subject>
+      <dc:subject>VR</dc:subject>
+      <dc:subject>知识保持</dc:subject>
+      <dc:subject>H2</dc:subject>
+      <dc:description>编号 A4-5  |  ③ 需订阅·走图书馆  |  理由：少见地同时测了知识获得与保持。你的 H2（7天/30天延迟记忆）需要先例，这是目前最接近的。  |  需订阅。同时测知识获得与保持 —— H2(延迟记忆)的先例。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_34">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Virtual Reality</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Metaverse and XR for cultural heritage education: applications, standards, architecture, and technological insights for enhanced immersive experience</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1007/s10055-025-01126-z</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://link.springer.com/article/10.1007/s10055-025-01126-z</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A4-6</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>A4</dc:subject>
+      <dc:subject>综述</dc:subject>
+      <dc:subject>XR</dc:subject>
+      <dc:description>编号 A4-6  |  ③ 需订阅·走图书馆  |  需订阅。综述层背景库。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_35">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Heritage</dc:title>
+          <prism:volume>8</prism:volume>
+          <prism:number>10</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Augmented Reality in Cultural Heritage: A Narrative Review of Design, Development and Evaluation Approaches</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.3390/heritage8100421</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.mdpi.com/2571-9408/8/10/421</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A4-7</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>A4</dc:subject>
+      <dc:subject>综述</dc:subject>
+      <dc:subject>AR</dc:subject>
+      <dc:description>编号 A4-7  |  ① 脚本自动下载  |  开放获取。综述层背景库。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_36">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Education Sciences</dc:title>
+          <prism:volume>13</prism:volume>
+          <prism:number>1</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Serious Games in Cultural Heritage: A Review of Practices and Considerations in the Design of Location-Based Games</dc:title>
+      <dc:date>2023</dc:date>
+      <dc:identifier>DOI 10.3390/educsci13010047</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.mdpi.com/2227-7102/13/1/47</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A4-8</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>A4</dc:subject>
+      <dc:subject>综述</dc:subject>
+      <dc:subject>位置型游戏</dc:subject>
+      <dc:description>编号 A4-8  |  ① 脚本自动下载  |  开放获取。综述层背景库。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_37">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Applied Sciences</dc:title>
+          <prism:volume>12</prism:volume>
+          <prism:number>17</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>VR Games in Cultural Heritage: A Systematic Review of the Emerging Fields of Virtual Reality and Culture Games</dc:title>
+      <dc:date>2022</dc:date>
+      <dc:identifier>DOI 10.3390/app12178476</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.mdpi.com/2076-3417/12/17/8476</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A4-9</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>A4</dc:subject>
+      <dc:subject>综述</dc:subject>
+      <dc:subject>VR</dc:subject>
+      <dc:description>编号 A4-9  |  ① 脚本自动下载  |  开放获取。综述层背景库。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_38">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>npj Heritage Science</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Digital preservation and development of architectural heritage from a virtual perspective: a systematic review</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1038/s40494-025-02162-3</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.nature.com/articles/s40494-025-02162-3</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A4-10</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>A4</dc:subject>
+      <dc:subject>综述</dc:subject>
+      <dc:subject>建筑遗产</dc:subject>
+      <dc:description>编号 A4-10  |  ① 脚本自动下载  |  理由：这五篇是综述层的背景库，不必精读。作用是：写文献综述时快速找到"某类技术已有哪些工作"，以及确认你的选题没被做过。  |  开放获取。综述层背景库。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_39">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Games and Culture</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Burgess</foaf:surname><foaf:givenName>Jacqueline</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Jones</foaf:surname><foaf:givenName>Christian</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>Exploring Player Understandings of Historical Accuracy and Historical Authenticity in Video Games</dc:title>
+      <dc:date>2022</dc:date>
+      <dc:identifier>DOI 10.1177/15554120211061853</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://journals.sagepub.com/doi/abs/10.1177/15554120211061853</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>A4-11</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>A4</dc:subject>
+      <dc:subject>真实性</dc:subject>
+      <dc:subject>H5</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 A4-11  |  ③ 需订阅·走图书馆  |  理由：这是你 H5（文化真实性效应）最重要的一篇。 它告诉你一个关键的测量问题：玩家心中"真实性"是个混淆概念。所以你的"感知真实性"量表必须分开测历史准确性 / 物质真实性 / 叙事可信度 / 文化一致性——你的 PDF 里已经这么设计了，这篇就是依据。  |  需订阅。959条论坛评论+88份问卷;58%玩家要求少改史实;43%分不清"准确"与"真实"。H5 最重要的一篇 —— 感知真实性必须分维度测。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_40">
+      <z:itemType>preprint</z:itemType>
+      <dc:publisher><foaf:Organization><foaf:name>arXiv</foaf:name></foaf:Organization></dc:publisher>
+      <dc:title>The Double-Edged Sword of Open-Ended Interaction: How LLM-Driven NPCs Affect Players' Cognitive Load and Gaming Experience</dc:title>
+      <dc:date>2026</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://arxiv.org/pdf/2604.10107</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B1-1</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>B1</dc:subject>
+      <dc:subject>LLM-NPC</dc:subject>
+      <dc:subject>H7</dc:subject>
+      <dc:subject>混淆变量</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 B1-1  |  ① 脚本自动下载  |  理由：你 H7（AI个性化双刃剑）的同名先例。 但注意：它的双刃剑讲的是"沉浸 vs 认知负荷"，你的讲的是"沉浸 vs 文化真实性"——方向不同，这就是你的增量。而且它提示你：AI NPC 实验必须加认知负荷作为协变量，否则文化学习效果的下降可能是负荷而非真实性造成的。这是个很容易被审稿人抓的混淆变量。  |  开放获取。LLM-NPC 通过提高表达成本显著增加认知负荷。H7 的同名先例,但方向不同(它是沉浸vs负荷,你是沉浸vs真实性)。提示:AI NPC 实验须把认知负荷作为协变量。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_41">
+      <z:itemType>conferencePaper</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Extended Abstracts of the 2026 CHI Conference on Human Factors in Computing Systems</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Empower My Digital Neighbors: How LLM-Driven NPCs Shape Player Interaction in Single-Player and Multiplayer Contexts</dc:title>
+      <dc:date>2026</dc:date>
+      <dc:identifier>DOI 10.1145/3772363.3798665</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://dl.acm.org/doi/10.1145/3772363.3798665</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B1-2</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>B1</dc:subject>
+      <dc:subject>LLM-NPC</dc:subject>
+      <dc:subject>缺口论证</dc:subject>
+      <dc:description>编号 B1-2  |  ③ 需订阅·走图书馆  |  理由：明确指出现有工作多关注技术能力，缺乏对真实玩家交互的实证研究——这句话是你 RQ-F 缺口论证的直接引文。  |  需订阅。明确指出现有工作多关注技术能力、缺乏真实玩家交互实证 —— RQ-F 缺口论证的直接引文。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_42">
+      <z:itemType>conferencePaper</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Proceedings of the 36th Annual ACM Symposium on User Interface Software and Technology (UIST '23)</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Park</foaf:surname><foaf:givenName>Joon Sung</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>O'Brien</foaf:surname><foaf:givenName>Joseph C.</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Cai</foaf:surname><foaf:givenName>Carrie J.</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Morris</foaf:surname><foaf:givenName>Meredith Ringel</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Liang</foaf:surname><foaf:givenName>Percy</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Bernstein</foaf:surname><foaf:givenName>Michael S.</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>Generative Agents: Interactive Simulacra of Human Behavior</dc:title>
+      <dc:date>2023</dc:date>
+      <dc:identifier>DOI 10.1145/3586183.3606763</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://arxiv.org/pdf/2304.03442</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B1-3</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>B1</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>生成式智能体</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 B1-3  |  ① 脚本自动下载  |  理由：AI 角色领域近三年被引最高的论文，已经是准经典。 你做长江文化 RAG NPC 的架构时，它的记忆流 + 反思机制是标准起点；写技术路线时不引这篇会显得没跟上。  |  准经典,AI角色领域近三年被引最高。观察—规划—反思架构;25个智能体沙盒。长江文化 RAG NPC 架构的标准起点。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_43">
+      <z:itemType>conferencePaper</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Proceedings of NAACL 2025</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Evaluating the Role-Playing Capabilities of LLMs in Text-based Games</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://aclanthology.org/2025.naacl-long.323.pdf</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B1-4</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>B1</dc:subject>
+      <dc:subject>角色扮演</dc:subject>
+      <dc:subject>评测</dc:subject>
+      <dc:description>编号 B1-4  |  ① 脚本自动下载  |  开放获取。角色一致性的评测指标来源。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_44">
+      <z:itemType>preprint</z:itemType>
+      <dc:publisher><foaf:Organization><foaf:name>arXiv</foaf:name></foaf:Organization></dc:publisher>
+      <dc:title>Character-LLM: A Trainable Agent for Role-Playing</dc:title>
+      <dc:date>2023</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://arxiv.org/pdf/2310.10158</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B1-5</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>B1</dc:subject>
+      <dc:subject>角色扮演</dc:subject>
+      <dc:subject>技术路线</dc:subject>
+      <dc:description>编号 B1-5  |  ① 脚本自动下载  |  开放获取。"经验上传"(Experience Upload)人物构建方法 —— 做"张之洞 AI"时的技术路线。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_45">
+      <z:itemType>preprint</z:itemType>
+      <dc:publisher><foaf:Organization><foaf:name>arXiv</foaf:name></foaf:Organization></dc:publisher>
+      <dc:title>Role-Playing Agents Driven by Large Language Models: Current Status, Challenges, and Future Trends</dc:title>
+      <dc:date>2026</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://arxiv.org/html/2601.10122v1</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B1-6</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>B1</dc:subject>
+      <dc:subject>综述</dc:subject>
+      <dc:description>编号 B1-6  |  ① 脚本自动下载  |  理由：角色扮演智能体的技术侧三件套：评测方法、训练方法、综述。你做"张之洞 AI 角色"时，"角色一致性怎么评"这个问题必须有技术依据——B1-4 给评测指标，B1-5 给"经验上传"（Experience Upload）的人物构建方法。  |  开放获取。综述。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_46">
+      <z:itemType>conferencePaper</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>CESCG 2025</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>A Quest for Information: Enhancing Game-Based Learning with LLM-Driven NPCs</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://cescg.org/wp-content/uploads/2025/04/A-Quest-for-Information-Enhancing-Game-Based-Learning-with-LLM-Driven-NPCs-2.pdf</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B1-7</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>B1</dc:subject>
+      <dc:subject>LLM-NPC</dc:subject>
+      <dc:subject>学习场景</dc:subject>
+      <dc:description>编号 B1-7  |  ① 脚本自动下载  |  开放获取。LLM NPC 在学习场景中的应用样例。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_47">
+      <z:itemType>preprint</z:itemType>
+      <dc:publisher><foaf:Organization><foaf:name>arXiv</foaf:name></foaf:Organization></dc:publisher>
+      <dc:title>Leveraging Large Language Models for Active Merchant Non-player Characters</dc:title>
+      <dc:date>2024</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://arxiv.org/pdf/2412.11189</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B1-8</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>B1</dc:subject>
+      <dc:subject>LLM-NPC</dc:subject>
+      <dc:description>编号 B1-8  |  ① 脚本自动下载  |  理由：LLM NPC 在学习场景中的应用样例，比纯技术论文更贴近你的实验设计。  |  开放获取。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_48">
+      <z:itemType>conferencePaper</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Findings of NAACL 2025</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Large-Scale Corpus Construction and Retrieval-Augmented Generation for Ancient Chinese Poetry: New Method and Data Insights</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://aclanthology.org/2025.findings-naacl.46/</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B2-1</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>B2</dc:subject>
+      <dc:subject>RAG</dc:subject>
+      <dc:subject>H6</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 B2-1  |  ① 脚本自动下载  |  理由：你 H6（RAG效应）唯一的强技术依据，你的 PDF 里已经引了。但请保留你自己写的那句限定："这只能说明领域 RAG 有潜力，不能推断博物馆环境也有同样幅度改善"——这句自我限制会让评审觉得你诚实且懂方法，不要删。  |  开放获取。领域语料+专用检索,基准准确率 49.2%→89.0%。H6 的核心技术依据。务必保留"不能直接推断博物馆场景同幅度改善"的自我限制。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_49">
+      <z:itemType>conferencePaper</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Proceedings of EMNLP 2025 (Main)</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>LLM-Driven Completeness and Consistency Evaluation for Cultural Heritage Data Augmentation in Cross-Modal Retrieval</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://aclanthology.org/2025.emnlp-main.980/</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B2-2</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>B2</dc:subject>
+      <dc:subject>幻觉</dc:subject>
+      <dc:subject>评价方法</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 B2-2  |  ① 脚本自动下载  |  理由：你 AI NPC 实验里"不能只用另一个 LLM 评价 LLM"这条原则的依据。它也给了你自动事实核查的可操作框架，配合文化专家盲评构成双评价体系。  |  开放获取。LLM 生成文化遗产描述存在幻觉与视觉事实遗漏。"不能只用LLM评价LLM"原则的依据。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_50">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Journal on Computing and Cultural Heritage</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>An Evaluation of LLM-based Chatbots for Enhancing the Visitor's User Experience at Cultural Exhibits</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1145/3775062</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://dl.acm.org/doi/10.1145/3775062</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B2-3</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>B2</dc:subject>
+      <dc:subject>博物馆</dc:subject>
+      <dc:subject>幻觉</dc:subject>
+      <dc:subject>RAG</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 B2-3  |  ③ 需订阅·走图书馆  |  理由：这是最贴近你实验场景的一篇（博物馆 + LLM + 幻觉 + RAG）。你的三组对照（固定脚本 / 通用LLM / 文化RAG）几乎就是它的问题的实验化。必读。  |  需订阅。观察到 LLM 缺乏情境感知 + 对训练数据外文物产生幻觉;提出用 RAG 限定运行时信息范围。最贴近三组NPC实验场景的一篇。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_51">
+      <z:itemType>journalArticle</z:itemType>
+      <dc:title>MuseRAG++: a deep retrieval-augmented generation framework for semantic interaction and multi-modal reasoning in virtual museums</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://pmc.ncbi.nlm.nih.gov/articles/PMC13470485/</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B2-4</dc:subject>
+      <dc:subject>② 免费·浏览器另存</dc:subject>
+      <dc:subject>B2</dc:subject>
+      <dc:subject>RAG</dc:subject>
+      <dc:subject>虚拟博物馆</dc:subject>
+      <dc:subject>架构参照</dc:subject>
+      <dc:description>编号 B2-4  |  ② 免费·浏览器另存  |  理由：给你长江文化 RAG 知识库的架构参照。"显式标注来源"这一点尤其重要——它既提升信任（你的实验因变量），又符合 AI 标识合规（B-4），一举两得，值得写进你的设计原则。  |  开放获取。显式来源建模(provenance)对可信可解释的文化遗产回答至关重要 —— 既提升信任又符合AI标识合规。[WAIT-VERIFY: 期刊与作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_52">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Digital Scholarship in the Humanities</dc:title>
+          <prism:volume>41</prism:volume>
+          <prism:number>2</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Multimodal RAG for cultural heritage: a technical exploration based on Jino traditional knowledge</dc:title>
+      <dc:date>2026</dc:date>
+      <bib:pages>1138--</bib:pages>
+      <dc:identifier><dcterms:URI><rdf:value>https://academic.oup.com/dsh/article-abstract/41/2/1138/8643957</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B2-5</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>B2</dc:subject>
+      <dc:subject>RAG</dc:subject>
+      <dc:subject>中国案例</dc:subject>
+      <dc:subject>地方志</dc:subject>
+      <dc:description>编号 B2-5  |  ③ 需订阅·走图书馆  |  理由：中国少数民族口传知识的多模态 RAG，与你"地方志 + 口述史进 RAG"的思路最接近的中国案例。  |  需订阅。中国少数民族口传知识的多模态RAG —— 与"地方志+口述史进RAG"思路最接近的中国案例。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_53">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>npj Heritage Science</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Visual information identification and Q\&amp;A of intangible cultural heritage inheritors by using enhanced Graph-Retrieval framework</dc:title>
+      <dc:date>2026</dc:date>
+      <dc:identifier>DOI 10.1038/s40494-026-02384-z</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.nature.com/articles/s40494-026-02384-z</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B2-6</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>B2</dc:subject>
+      <dc:subject>GraphRAG</dc:subject>
+      <dc:subject>知识图谱</dc:subject>
+      <dc:description>编号 B2-6  |  ① 脚本自动下载  |  理由：Graph-RAG（知识图谱 + 检索）缓解幻觉。如果你的长江文化知识库要做实体关系（人物—事件—器物—地点），这是路线参照。  |  开放获取。Graph-RAG 缓解幻觉。做实体关系型知识库(人物—事件—器物—地点)的路线参照。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_54">
+      <z:itemType>preprint</z:itemType>
+      <dc:publisher><foaf:Organization><foaf:name>arXiv</foaf:name></foaf:Organization></dc:publisher>
+      <dc:title>Evaluating Cultural Knowledge Processing in Large Language Models: A Cognitive Benchmarking Framework Integrating Retrieval-Augmented Generation</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://arxiv.org/pdf/2511.01649</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B2-7</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>B2</dc:subject>
+      <dc:subject>评测基准</dc:subject>
+      <dc:subject>RAG</dc:subject>
+      <dc:description>编号 B2-7  |  ① 脚本自动下载  |  理由：给你文化知识评测基准的构建方法。你要测"AI NPC 的事实错误率"，需要一套题库——这篇提供框架。  |  开放获取。文化知识评测基准的构建方法 —— 测"AI NPC 事实错误率"需要的题库框架。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_55">
+      <z:itemType>conferencePaper</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Exploring LLM-Powered Role and Action-Switching Pedagogical Agents for History Education in Virtual Reality</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1145/3706598.3713109</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://dl.acm.org/doi/10.1145/3706598.3713109</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B2-8</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>B2</dc:subject>
+      <dc:subject>实验范式</dc:subject>
+      <dc:subject>CHI</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 B2-8  |  ③ 需订阅·走图书馆  |  理由：这是 B 组的方法学金标准，也是你最该模仿的一篇。 2×2、84 人、历史文化场景、VR、LLM 智能体——你的"AI 个性化叙事实验"几乎可以照搬它的设计，只把自变量换成"文化整合深度 × 是否RAG"。而且"提升可信度但体验不一致"的结论，和你 H7 的双刃剑判断一致，是很好的先例支持。  |  需订阅。2x2 被试间,84人,滕王阁历史学习;自适应角色切换提升可信度与专业性感知,但学习体验不一致。B组方法学金标准,AI个性化叙事实验可照搬其设计。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_56">
+      <z:itemType>conferencePaper</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Extended Abstracts of the CHI Conference on Human Factors in Computing Systems</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>"Ask Sir Oliver Ingham": LLM-based Social Simulations for History Education</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1145/3706599.3719728</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://dl.acm.org/doi/10.1145/3706599.3719728</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B2-9</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>B2</dc:subject>
+      <dc:subject>历史人物AI</dc:subject>
+      <dc:subject>张之洞对标</dc:subject>
+      <dc:description>编号 B2-9  |  ③ 需订阅·走图书馆  |  理由：历史人物 AI 角色的直接先例。你做"张之洞 AI"时的同类工作，必须处理。  |  需订阅。历史人物 AI 角色的直接先例 —— 做"张之洞 AI"时必须处理的同类工作。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_57">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>CyberPsychology \&amp; Behavior</dc:title>
+          <prism:volume>11</prism:volume>
+          <prism:number>4</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Lewis</foaf:surname><foaf:givenName>Melissa L.</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Weber</foaf:surname><foaf:givenName>Ren{\'e}</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Bowman</foaf:surname><foaf:givenName>Nicholas David</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>"They may be pixels, but they're MY pixels": Developing a metric of character attachment in role-playing video games</dc:title>
+      <dc:date>2008</dc:date>
+      <dc:identifier>DOI 10.1089/cpb.2007.0137</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://dx.doi.org/10.1089/cpb.2007.0137</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B3-1</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>B3</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>量表</dc:subject>
+      <dc:subject>角色依恋</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 B3-1  |  ③ 需订阅·走图书馆  |  理由：你 H8 的核心量表，直接用，不要自编。 五个维度里"友谊"和"责任感"两维对 AI NPC 特别有意义——固定脚本 NPC 很难产生"责任感"，而 LLM NPC 可能可以，这本身就是一个可检验的细化假设。  |  经典。17题角色依恋量表,五维:认同/控制/友谊/怀疑悬置/责任感。H8 核心量表,直接用勿自编。"友谊""责任感"两维对 AI NPC 特别有意义。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_58">
+      <z:itemType>conferencePaper</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>International Conference on Entertainment Computing (ICEC)</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Hefner</foaf:surname><foaf:givenName>Dorothée</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Klimmt</foaf:surname><foaf:givenName>Christoph</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Vorderer</foaf:surname><foaf:givenName>Peter</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>Identification with the player character as determinant of video game enjoyment</dc:title>
+      <dc:date>2007</dc:date>
+      <dc:identifier>DOI 10.1007/978-3-540-74873-1_6</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://link.springer.com/chapter/10.1007/978-3-540-74873-1_6</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B3-2</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>B3</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>角色认同</dc:subject>
+      <dc:subject>H8</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 B3-2  |  ③ 需订阅·走图书馆  |  经典。交互组认同分数显著高于纯观看组 —— "为什么要做互动型文化IP"(H8)的学理依据。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_59">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Communication Theory</dc:title>
+          <prism:volume>19</prism:volume>
+          <prism:number>4</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Klimmt</foaf:surname><foaf:givenName>Christoph</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Hefner</foaf:surname><foaf:givenName>Dorothée</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Vorderer</foaf:surname><foaf:givenName>Peter</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>The video game experience as "true" identification: A theory of enjoyable alterations of players' self-perception</dc:title>
+      <dc:date>2009</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>http://net-workingworlds.weebly.com/uploads/1/5/1/5/15155460/videogames__identity.pdf</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B3-3</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>B3</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>角色认同</dc:subject>
+      <dc:subject>RQ-E</dc:subject>
+      <dc:description>编号 B3-3  |  ① 脚本自动下载  |  经典。游戏角色认同 = 玩家自我概念的临时性位移,不同于传统媒介的观看式认同。免费PDF。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_60">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Media Psychology</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Klimmt</foaf:surname><foaf:givenName>Christoph</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Hefner</foaf:surname><foaf:givenName>Dorothée</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Vorderer</foaf:surname><foaf:givenName>Peter</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Roth</foaf:surname><foaf:givenName>Christian</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Blake</foaf:surname><foaf:givenName>Christopher</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>Identification with video game characters as automatic shift of self-perceptions</dc:title>
+      <dc:subject>B3-4</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>B3</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>角色认同</dc:subject>
+      <dc:description>编号 B3-4  |  ③ 需订阅·走图书馆  |  理由：这三篇是 RQ-E 的理论核心，也是你区分"互动型IP vs 静态IP"（H8）的理论依据。 "交互提高认同"这个已被实验证明的结论，正是你把 IP 从海报/短视频推向可交互 AI 角色的学理理由。基金本子里论证"为什么要做互动型文化IP"，就引这一组。  |  经典。实验证据。[WAIT-VERIFY: 年份/卷期]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_61">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Journal of Social Issues</dc:title>
+          <prism:volume>56</prism:volume>
+          <prism:number>1</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Nass</foaf:surname><foaf:givenName>Clifford</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Moon</foaf:surname><foaf:givenName>Youngme</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>Machines and mindlessness: Social responses to computers</dc:title>
+      <dc:date>2000</dc:date>
+      <bib:pages>81--103</bib:pages>
+      <dc:subject>B3-5</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>B3</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>CASA</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 B3-5  |  ③ 需订阅·走图书馆  |  理由：你整个 AI 文化角色研究的最底层假设。 为什么人会对 AI NPC 产生依恋、信任、认同？CASA 是标准答案。近三年 AI 陪伴研究全部建立在它之上。  |  经典,CASA 范式奠基作。整个 AI 文化角色研究的最底层假设:人会无意识地把计算机当社会行动者。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_62">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Communication Research</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Lee</foaf:surname><foaf:givenName>Eun-Ju</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>What triggers social responses to flattering computers? Experimental tests of anthropomorphism and mindlessness explanations</dc:title>
+      <dc:date>2010</dc:date>
+      <dc:identifier>DOI 10.1177/0093650209356389</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://journals.sagepub.com/doi/10.1177/0093650209356389</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B3-6</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>B3</dc:subject>
+      <dc:subject>CASA</dc:subject>
+      <dc:subject>机制争论</dc:subject>
+      <dc:description>编号 B3-6  |  ③ 需订阅·走图书馆  |  理由：CASA 的机制之争——是"无意识"还是"拟人化"？这个争论在 LLM 时代重新变得关键（LLM 明显更拟人）。你若要在理论上有贡献，这是切入点。  |  CASA 的机制之争(无意识 vs 拟人化)。LLM 时代这个争论重新变得关键 —— 理论贡献的切入点。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_63">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Psychiatry</dc:title>
+          <prism:volume>19</prism:volume>
+          <prism:number>3</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Horton</foaf:surname><foaf:givenName>Donald</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Wohl</foaf:surname><foaf:givenName>R. Richard</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>Mass communication and para-social interaction: Observations on intimacy at a distance</dc:title>
+      <dc:date>1956</dc:date>
+      <bib:pages>215--229</bib:pages>
+      <dc:subject>B3-7</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>B3</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>拟社会互动</dc:subject>
+      <dc:description>编号 B3-7  |  ③ 需订阅·走图书馆  |  理由：拟社会互动的源头。引一次即可，但必须引——你的"角色依恋"若不追溯到 PSI，理论链是断的。  |  经典,拟社会互动奠基作。角色依恋的理论链若不追溯到 PSI 则是断的。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_64">
+      <z:itemType>journalArticle</z:itemType>
+      <dc:title>Parasocial relationships with artificial intelligence (AI): A systematic review of benefits and risks</dc:title>
+      <dc:date>2026</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.sciencedirect.com/science/article/pii/S2949882126000757</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B3-8</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>B3</dc:subject>
+      <dc:subject>综述</dc:subject>
+      <dc:subject>人机关系</dc:subject>
+      <dc:subject>伦理</dc:subject>
+      <dc:description>编号 B3-8  |  ③ 需订阅·走图书馆  |  理由：最新的系统综述，一篇抵十篇。让你快速掌握"人—AI 拟社会关系"的研究版图与伦理争议，且给你现成的风险清单（写伦理章节时用）。  |  需订阅。最新系统综述,一篇抵十篇。含现成的风险清单,写伦理章节时用。[WAIT-VERIFY: 期刊与作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_65">
+      <z:itemType>preprint</z:itemType>
+      <dc:publisher><foaf:Organization><foaf:name>arXiv</foaf:name></foaf:Organization></dc:publisher>
+      <dc:title>How AI Companionship Develops: Evidence from a Longitudinal Study</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://arxiv.org/pdf/2510.10079</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B3-9</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>B3</dc:subject>
+      <dc:subject>纵向</dc:subject>
+      <dc:subject>AI依恋</dc:subject>
+      <dc:description>编号 B3-9  |  ① 脚本自动下载  |  理由：纵向设计，这在 AI 依恋研究里很稀缺。你若想做"AI 文化角色的长期依恋"（这会是很强的差异化），这是方法参照。  |  开放获取。纵向设计,在AI依恋研究里稀缺 —— 做"AI文化角色长期依恋"的方法参照。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_66">
+      <z:itemType>preprint</z:itemType>
+      <dc:publisher><foaf:Organization><foaf:name>arXiv</foaf:name></foaf:Organization></dc:publisher>
+      <dc:title>The Adaptation Paradox: Agency vs. Mimicry in Companion Chatbots</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://arxiv.org/pdf/2509.12525</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B3-10</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>B3</dc:subject>
+      <dc:subject>倒U形</dc:subject>
+      <dc:subject>AI依恋</dc:subject>
+      <dc:description>编号 B3-10  |  ① 脚本自动下载  |  理由：一个倒U形结论——这和你要检验的"文化整合深度是否存在倒U形"结构完全同构。可作为你倒U形假设的跨领域类比支持。  |  开放获取。中等程度寻求关系的AI产生最高喜爱与依恋,但无相应心理益处 —— 倒U形结论,与"文化整合深度是否存在倒U形"同构。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_67">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>心理科学</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>从拟社会互动到依恋:人机情感关系的演化</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://jps.ecnu.edu.cn/EN/10.16719/j.cnki.1671-6981.20250415</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B3-11</dc:subject>
+      <dc:subject>② 免费·浏览器另存</dc:subject>
+      <dc:subject>B3</dc:subject>
+      <dc:subject>中文核心</dc:subject>
+      <dc:subject>人机关系</dc:subject>
+      <dc:description>编号 B3-11  |  ② 免费·浏览器另存  |  理由：中文核心期刊的人机情感关系综述。你发中文 C 刊时需要中文理论引用，这一篇是目前最对口的。  |  中文核心。发中文C刊时的理论引用来源。[WAIT-VERIFY: 作者与卷期]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_68">
+      <z:itemType>journalArticle</z:itemType>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Liu</foaf:surname><foaf:givenName>Jiahui</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>Virtual presence, real connections: Exploring the role of parasocial relationships in virtual idol fan community participation</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1177/20594364231222976</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://journals.sagepub.com/doi/10.1177/20594364231222976</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B3-12</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>B3</dc:subject>
+      <dc:subject>虚拟偶像</dc:subject>
+      <dc:subject>拟社会互动</dc:subject>
+      <dc:description>编号 B3-12  |  ③ 需订阅·走图书馆  |  需订阅。虚拟偶像 = 中国最成熟的数字角色IP生态。[WAIT-VERIFY: 期刊名]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_69">
+      <z:itemType>journalArticle</z:itemType>
+      <dc:title>The creative behavior of virtual idol fans: a psychological perspective based on MOA theory</dc:title>
+      <dc:date>2023</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://pmc.ncbi.nlm.nih.gov/articles/PMC10702592/</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B3-13</dc:subject>
+      <dc:subject>② 免费·浏览器另存</dc:subject>
+      <dc:subject>B3</dc:subject>
+      <dc:subject>虚拟偶像</dc:subject>
+      <dc:subject>行为外溢</dc:subject>
+      <dc:description>编号 B3-13  |  ② 免费·浏览器另存  |  理由：虚拟偶像是中国最成熟的"数字角色 IP"生态。你研究文化 IP 角色依恋，虚拟偶像文献是绕不过的邻近领域，而且它证明了角色依恋能转化为创作与消费行为（对应你的 H10 行为外溢）。  |  开放获取。证明角色依恋可转化为创作与消费行为 —— 对应 H10 行为外溢。[WAIT-VERIFY: 期刊与作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_70">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Game Studies</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Burgess</foaf:surname><foaf:givenName>Jacqueline</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Jones</foaf:surname><foaf:givenName>Christian</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>"I Harbour Strong Feelings for Tali Despite Her Being a Fictional Character": Investigating Videogame Players' Emotional Attachments to Non-Player Characters</dc:title>
+      <dc:identifier><dcterms:URI><rdf:value>https://gamestudies.org/2001/articles/burgessjones</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B3-14</dc:subject>
+      <dc:subject>② 免费·浏览器另存</dc:subject>
+      <dc:subject>B3</dc:subject>
+      <dc:subject>NPC依恋</dc:subject>
+      <dc:subject>量表错位</dc:subject>
+      <dc:description>编号 B3-14  |  ② 免费·浏览器另存  |  理由：对 NPC（而非玩家角色）的依恋——你的 AI 文化角色正是 NPC，而 B3-1 的量表是为玩家角色开发的。这个错位你必须处理，这篇是处理它的起点。  |  开放获取。对 NPC(而非玩家角色)的依恋 —— 你的AI文化角色正是NPC,而 Lewis 量表是为玩家角色开发的,这个错位必须处理。[WAIT-VERIFY: 年份/卷期]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_71">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Current Issues in Tourism</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>The impact of cultural tourism digital humans in China on tourists' travel intentions</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1080/13683500.2025.2555501</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.tandfonline.com/doi/full/10.1080/13683500.2025.2555501</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B4-1</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>B4</dc:subject>
+      <dc:subject>数字人</dc:subject>
+      <dc:subject>中国实证</dc:subject>
+      <dc:subject>H6</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 B4-1  |  ③ 需订阅·走图书馆  |  理由：B 组里和你最对口的一篇中国实证。"知识表征"作用最强这个发现，直接支持你把 RAG（提升知识准确性）作为核心自变量——这是 H6 的行为学侧依据，比纯技术论文有力得多。  |  需订阅。模因论+可供性+拟社会互动;537名中国游客;外观与知识表征作用最强 —— "知识表征最强"是 H6 的行为学侧依据。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_72">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>npj Heritage Science</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>The impact of hyperrealistic virtual humans on cultural heritage dissemination</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1038/s40494-025-02098-8</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.nature.com/articles/s40494-025-02098-8</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B4-2</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>B4</dc:subject>
+      <dc:subject>数字人</dc:subject>
+      <dc:subject>CIDI编码</dc:subject>
+      <dc:description>编号 B4-2  |  ① 脚本自动下载  |  理由：给你数字人设计的要素级评价框架，可直接并入 CIDI 的 R（表征）维度编码手册。  |  开放获取。五要素(角色/造型/动态/声音/场景)两阶段实验;角色与动态设计不足。可并入 CIDI 的 R 维度编码手册。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_73">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Virtual Reality</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>New "Mediators" in museum settings: a study on the impact of AI-generated virtual digital humans' mediality on visitors' continuous participation intention in museum holographic cabins</dc:title>
+      <dc:date>2026</dc:date>
+      <dc:identifier>DOI 10.1007/s10055-026-01447-7</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://link.springer.com/article/10.1007/s10055-026-01447-7</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B4-3</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>B4</dc:subject>
+      <dc:subject>数字人</dc:subject>
+      <dc:subject>拟人vs智能</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 B4-3  |  ③ 需订阅·走图书馆  |  理由：这是个反直觉且极其有用的发现，可能是你 B 组最重要的一篇近期文献。 它把"拟人 vs 智能"拆开了：拟人管临场感，智能管信任。 你的三组 NPC 实验（脚本/通用LLM/RAG）本质上就是在操纵"智能"这一维——这篇给了你预测方向。而且它提示你：不要把拟人度和智能度混在一个自变量里，否则结论会解释不清。  |  需订阅。关键发现:拟人化不显著提升信任,智能程度才是信任驱动;但拟人化显著提升空间临场感。"拟人管临场感、智能管信任" —— 不要把两者混在一个自变量里。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_74">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Sustainability</dc:title>
+          <prism:volume>18</prism:volume>
+          <prism:number>8</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>When Intangible Cultural Heritage Meets AI---Can AI with Anthropomorphism Elements Attract Tourists to Visit Cultural Heritage Sites?</dc:title>
+      <dc:date>2026</dc:date>
+      <dc:identifier>DOI 10.3390/su18083977</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://doi.org/10.3390/su18083977</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B4-4</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>B4</dc:subject>
+      <dc:subject>拟人化</dc:subject>
+      <dc:subject>外溢</dc:subject>
+      <dc:subject>C组交叉</dc:subject>
+      <dc:description>编号 B4-4  |  ① 脚本自动下载  |  理由：非遗 + AI 拟人化 + 到访意向，同时覆盖 B 组和 C 组，是你"AI角色 → 现实文旅行为"这条外溢链的直接先例。  |  开放获取。同时覆盖B组与C组:AI角色→现实文旅行为的外溢链先例。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_75">
+      <z:itemType>journalArticle</z:itemType>
+      <dc:title>The Impact of AI Guide Language Strategies on Museum Visitor Experience: The Mediating Role of Psychological Distance in the Arousal--Topic Fit Effect</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://pmc.ncbi.nlm.nih.gov/articles/PMC12649338/</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B4-5</dc:subject>
+      <dc:subject>② 免费·浏览器另存</dc:subject>
+      <dc:subject>B4</dc:subject>
+      <dc:subject>AI讲解</dc:subject>
+      <dc:subject>混淆变量</dc:subject>
+      <dc:description>编号 B4-5  |  ② 免费·浏览器另存  |  理由：AI 讲解的语言策略（而非技术架构）如何影响体验。你做 AI NPC 时，提示词风格是个容易被忽略的混淆变量，这篇提醒你要控制它。  |  开放获取。提示词/语言风格是容易被忽略的混淆变量,实验须控制。[WAIT-VERIFY: 期刊与作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_76">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Behavioral Sciences</dc:title>
+          <prism:volume>16</prism:volume>
+          <prism:number>6</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>How AI-Generated Content Shapes User Trust: The Roles of Cognitive Processing, Perceived Risk, and Transparency Labels</dc:title>
+      <dc:date>2026</dc:date>
+      <dc:identifier>DOI 10.3390/bs16060957</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://doi.org/10.3390/bs16060957</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B4-6</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>B4</dc:subject>
+      <dc:subject>AI标识</dc:subject>
+      <dc:subject>真实性</dc:subject>
+      <dc:subject>实验设计</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 B4-6  |  ① 脚本自动下载  |  理由：这一篇直接决定你 AI 实验的一个设计细节。 你的 PDF 把"是否进行AI标识"列为 AI 调节变量——这是对的，而且这篇告诉你预期方向：标识会压低感知真实性。既然你的因变量里有"感知文化真实性"，那么AI 标识必须作为控制变量或自变量显式处理，否则你测到的"RAG 提升真实性"可能被标识效应污染。同时它是你做合规设计（《人工智能生成合成内容标识办法》）的学理支撑：标识是法定义务，但有代价，设计要补偿这个代价——这本身就是一个很好的设计学研究问题。  |  开放获取。2x2 被试间,617人;AI透明标识降低感知真实性,但不直接影响信任或采纳意向。直接决定实验设计:AI标识必须作为控制变量或自变量显式处理。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_77">
+      <z:itemType>journalArticle</z:itemType>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Li</foaf:surname><foaf:givenName>Fan</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Yang</foaf:surname><foaf:givenName>Ya</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Yu</foaf:surname><foaf:givenName>Guoming</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>Nudging Perceived Credibility: The Impact of AIGC Labeling on User Distinction of AI-Generated Content</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1177/27523543251317572</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://journals.sagepub.com/doi/10.1177/27523543251317572</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B4-7</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>B4</dc:subject>
+      <dc:subject>AI标识</dc:subject>
+      <dc:description>编号 B4-7  |  ③ 需订阅·走图书馆  |  需订阅。[WAIT-VERIFY: 期刊名]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_78">
+      <z:itemType>preprint</z:itemType>
+      <dc:publisher><foaf:Organization><foaf:name>arXiv</foaf:name></foaf:Organization></dc:publisher>
+      <dc:title>AI labeling reduces the perceived accuracy of online content but has limited broader effects</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://arxiv.org/pdf/2506.16202</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B4-8</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>B4</dc:subject>
+      <dc:subject>AI标识</dc:subject>
+      <dc:description>编号 B4-8  |  ① 脚本自动下载  |  开放获取。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_79">
+      <z:itemType>conferencePaper</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Labeling Synthetic Content: User Perceptions of Label Designs for AI-Generated Content on Social Media</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1145/3706598.3713171</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://dl.acm.org/doi/full/10.1145/3706598.3713171</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B4-9</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>B4</dc:subject>
+      <dc:subject>AI标识</dc:subject>
+      <dc:subject>设计切口</dc:subject>
+      <dc:description>编号 B4-9  |  ③ 需订阅·走图书馆  |  需订阅。标识"设计"的用户感知 —— 设计学能贡献的切口:什么样的标识设计能在合规同时减少真实性损失?[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_80">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Journal of Science Communication</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Visible sources and invisible risks: exploring the impact of AI disclosure on perceived credibility of AI-generated content</dc:title>
+      <dc:date>2026</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://jcom.sissa.it/article/pubid/JCOM_2501_2026_A09/</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B4-10</dc:subject>
+      <dc:subject>② 免费·浏览器另存</dc:subject>
+      <dc:subject>B4</dc:subject>
+      <dc:subject>AI标识</dc:subject>
+      <dc:description>编号 B4-10  |  ② 免费·浏览器另存  |  理由：AI 标识效应的证据群。结论高度一致（标识降低可信度/准确性感知），所以你可以放心地把它作为已确立的效应来预测。B4-9 还给了标识设计的用户感知——这是设计学能贡献的地方：什么样的标识设计能在合规的同时减少真实性损失？ 这可能是你最容易出成果的一个小切口。  |  开放获取。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_81">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>PNAS Nexus</dc:title>
+          <prism:volume>3</prism:volume>
+          <prism:number>9</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Cultural bias and cultural alignment of large language models</dc:title>
+      <dc:date>2024</dc:date>
+      <bib:pages>pgae346</bib:pages>
+      <dc:identifier>DOI 10.1093/pnasnexus/pgae346</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://academic.oup.com/pnasnexus/article/3/9/pgae346/7756548</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B4-11</dc:subject>
+      <dc:subject>② 免费·浏览器另存</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>B4</dc:subject>
+      <dc:subject>文化偏见</dc:subject>
+      <dc:subject>RAG必要性</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 B4-11  |  ② 免费·浏览器另存  |  理由：你做中国文化 AI 角色的根本性论据。 通用 LLM 带有西方文化偏见 → 所以需要长江文化 RAG 知识库。这一步论证如果没有硬证据，你的 RAG 路线就只是工程选择而非科学必要。这一篇（PNAS Nexus，正在快速成为高被引）就是那个硬证据。  |  开放获取,正在成为高被引。GPT系列偏向英语/新教欧洲价值观;文化提示可显著降低偏见。做中国文化AI角色、论证RAG科学必要性的根本依据。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_82">
+      <z:itemType>preprint</z:itemType>
+      <dc:publisher><foaf:Organization><foaf:name>arXiv</foaf:name></foaf:Organization></dc:publisher>
+      <dc:title>Investigating Cultural Alignment of Large Language Models</dc:title>
+      <dc:date>2024</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://arxiv.org/pdf/2402.13231</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B4-12</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>B4</dc:subject>
+      <dc:subject>文化对齐</dc:subject>
+      <dc:description>编号 B4-12  |  ① 脚本自动下载  |  开放获取。ACL 2024。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_83">
+      <z:itemType>preprint</z:itemType>
+      <dc:publisher><foaf:Organization><foaf:name>arXiv</foaf:name></foaf:Organization></dc:publisher>
+      <dc:title>Fluent but Foreign: Even Regional LLMs Lack Cultural Alignment</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://arxiv.org/pdf/2505.21548</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B4-13</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>B4</dc:subject>
+      <dc:subject>文化对齐</dc:subject>
+      <dc:subject>技术路线辩护</dc:subject>
+      <dc:description>编号 B4-13  |  ① 脚本自动下载  |  开放获取。即便区域性LLM也缺乏文化对齐 —— "用国产大模型就够了"是错的,必须做领域RAG。技术路线的关键辩护。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_84">
+      <z:itemType>preprint</z:itemType>
+      <dc:publisher><foaf:Organization><foaf:name>arXiv</foaf:name></foaf:Organization></dc:publisher>
+      <dc:title>From Word to World: Evaluate and Mitigate Culture Bias in LLMs via Word Association Test</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://arxiv.org/pdf/2505.18562</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>B4-14</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>B4</dc:subject>
+      <dc:subject>文化偏见</dc:subject>
+      <dc:description>编号 B4-14  |  ① 脚本自动下载  |  理由：B4-11 的补充证据。B4-13 的结论尤其重要：即便是区域性 LLM（如中文模型）也缺乏文化对齐——这意味着"用国产大模型就够了"是错的，必须做领域 RAG。这是你技术路线的关键辩护。  |  开放获取。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_85">
+      <z:itemType>journalArticle</z:itemType>
+      <dc:title>How cultural identity in "Black Myth: Wukong" drives tourism intentions</dc:title>
+      <dc:date>2026</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.sciencedirect.com/science/article/pii/S2211973626000620</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>C-1</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>C</dc:subject>
+      <dc:subject>H10</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 C-1  |  ③ 需订阅·走图书馆  |  理由：你 PDF 里已经引了，H10 的核心前序。它建立了"游戏文化认同 → 现实旅游意向"的路径，但同样是问卷研究。你的增量在于：用实验 + 真实行为数据（二维码点击、到馆记录）替代意向自陈。 ⚠️ 期刊名与作者我未能完全核实，导入文献管理器后请补。  |  需订阅。H10 核心前序:游戏文化认同→现实旅游意向。你的增量在于用实验+真实行为数据替代意向自陈。[WAIT-VERIFY: 期刊名与作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_86">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Sustainability</dc:title>
+          <prism:volume>18</prism:volume>
+          <prism:number>1</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>How Digital Mythological Narratives in Video Games Enhance Audiences' Destination Perceptions and Travel Intentions: Evidence from YouTube Comments on Black Myth: Wukong</dc:title>
+      <dc:date>2026</dc:date>
+      <bib:pages>160</bib:pages>
+      <dc:identifier>DOI 10.3390/su18010160</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.mdpi.com/2071-1050/18/1/160</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>C-2</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>C</dc:subject>
+      <dc:subject>文本挖掘</dc:subject>
+      <dc:subject>跨文化</dc:subject>
+      <dc:description>编号 C-2  |  ① 脚本自动下载  |  理由：跨文化 + 大样本文本数据的路径，和 C-1 的问卷路径互补。给你一个低成本的研究选项：如果实验招募困难，UGC 文本挖掘是可行的替代。  |  开放获取。40,500条YouTube评论;跨文化"认知—情感—意向"链。低成本替代方案:UGC文本挖掘。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_87">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>自然资源学报 (Journal of Natural Resources)</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>The tourism impact and mechanism of digital games on associated real-world locations: A case study of Black Myth: Wukong</dc:title>
+      <dc:date>2026</dc:date>
+      <dc:identifier>DOI 10.31497/zrzyxb.20260613</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.jnr.ac.cn/EN/10.31497/zrzyxb.20260613</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>C-3</dc:subject>
+      <dc:subject>② 免费·浏览器另存</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>C</dc:subject>
+      <dc:subject>面板数据</dc:subject>
+      <dc:subject>真实行为</dc:subject>
+      <dc:subject>中文核心</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 C-3  |  ② 免费·浏览器另存  |  理由：这是 C 组方法学上最硬的一篇，而且是中文 C 刊。 它用的是准实验（前后 + 面板），拿到的是真实客流数据而非意向。你的 H10 如果想真正立得住，这才是标杆——不是问"你想去吗"，而是看"客流变了吗"。武汉有博物馆、有文旅局数据，你有条件复制这个设计。强烈建议精读。  |  中文C刊。327个景区、前后30周面板数据,真实客流而非意向。C组方法学标杆,武汉有条件复制。强烈建议精读。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_88">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Journal of Hospitality and Tourism Technology</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>The impact of video game experiences on destination image and visit intention: exploring the moderating role of character attachment</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1108/JHTT-04-2025-0342</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.emerald.com/jhtt/article-abstract/doi/10.1108/JHTT-04-2025-0342/1369415/</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>C-4</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>C</dc:subject>
+      <dc:subject>角色依恋</dc:subject>
+      <dc:subject>主线咬合</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 C-4  |  ③ 需订阅·走图书馆  |  理由：角色依恋作为调节变量——这一篇把 B 组（角色依恋）和 C 组（外溢行为）直接缝在一起，正是你 H8 + H10 的交叉点。你的三条主线要证明自己"相互咬合而非割裂"，这篇就是咬合点的现成证据。  |  需订阅。角色依恋作为调节变量 —— B组与C组的直接缝合点,H8+H10 交叉的现成证据。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_89">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Humanities and Social Sciences Communications</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>From pixels to places: how video games influence real-world travel to natural and cultural heritage sites</dc:title>
+      <dc:date>2026</dc:date>
+      <dc:identifier>DOI 10.1038/s41599-026-07299-5</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.nature.com/articles/s41599-026-07299-5</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>C-5</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>C</dc:subject>
+      <dc:subject>遗产地</dc:subject>
+      <dc:subject>外溢</dc:subject>
+      <dc:description>编号 C-5  |  ① 脚本自动下载  |  理由：明确聚焦文化遗产地（而非一般目的地），与你的场景完全一致。OA，优先下载。  |  开放获取。明确聚焦文化遗产地,场景完全一致。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_90">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Tourism Management</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Video game-inspired tourism: A synergistic framework</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.sciencedirect.com/science/article/abs/pii/S0261517725001529</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>C-6</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>C</dc:subject>
+      <dc:subject>框架</dc:subject>
+      <dc:subject>顶刊</dc:subject>
+      <dc:description>编号 C-6  |  ③ 需订阅·走图书馆  |  理由：*Tourism Management* 是旅游学顶刊，这篇是该领域的框架性文献。引它等于宣告你知道这个领域的天花板在哪。  |  需订阅。旅游学顶刊的框架性文献。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_91">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Tourism and Hospitality</dc:title>
+          <prism:volume>7</prism:volume>
+          <prism:number>4</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>From Virtual Worlds to Real Places: A Journey Through Video Game Play, Flow, and Place Attachment</dc:title>
+      <dc:date>2026</dc:date>
+      <bib:pages>99</bib:pages>
+      <dc:identifier>DOI 10.3390/tourhosp7040099</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.mdpi.com/2673-5768/7/4/99</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>C-7</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>C</dc:subject>
+      <dc:subject>虚拟地方依恋</dc:subject>
+      <dc:subject>H10前提</dc:subject>
+      <dc:description>编号 C-7  |  ① 脚本自动下载  |  理由："虚拟地方依恋"概念的直接来源。 你的 CGEL 里"情感连接"包含地方依恋，这篇论证了它在虚拟环境中成立——这是 H10 的理论前提，不能跳过。  |  开放获取。依恋的形成不需要实体到场,数字中介的临场感即可产生 —— "虚拟地方依恋"概念来源,H10 的理论前提。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_92">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Administrative Sciences</dc:title>
+          <prism:volume>15</prism:volume>
+          <prism:number>12</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Trusting the Virtual, Traveling the Real: How Destination Trust in Video Games Shapes Real-World Travel Willingness Through Player Type Differences</dc:title>
+      <dc:date>2025</dc:date>
+      <bib:pages>470</bib:pages>
+      <dc:identifier>DOI 10.3390/admsci15120470</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://doi.org/10.3390/admsci15120470</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>C-8</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>C</dc:subject>
+      <dc:subject>调节变量</dc:subject>
+      <dc:subject>玩家类型</dc:subject>
+      <dc:description>编号 C-8  |  ① 脚本自动下载  |  理由：引入玩家类型差异作为调节。你的 PDF 里把"游戏经验"列为用户调节变量，这篇提供了更细的分型依据。  |  开放获取。玩家类型差异作为调节 —— 用户调节变量的分型依据。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_93">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>International Communication of Chinese Culture</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>A three-dimensional study on the international communication of Black Myth: Wukong</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1007/s40636-025-00322-5</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://link.springer.com/article/10.1007/s40636-025-00322-5</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>C-9</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>C</dc:subject>
+      <dc:subject>国际传播</dc:subject>
+      <dc:description>编号 C-9  |  ③ 需订阅·走图书馆  |  需订阅。对外传播视角。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:BookSection rdf:about="#item_94">
+      <z:itemType>bookSection</z:itemType>
+      <dc:title>Gaming as a Cultural Bridge: Black Myth: Wukong and Its Effect on Perception Towards China</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1007/978-3-032-12764-8_14</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://link.springer.com/chapter/10.1007/978-3-032-12764-8_14</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>C-10</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>C</dc:subject>
+      <dc:subject>国际传播</dc:subject>
+      <dc:description>编号 C-10  |  ③ 需订阅·走图书馆  |  理由：《黑神话》的国际传播视角。如果你未来想把长江文化做对外传播（这在武汉的政策语境里很受欢迎），这两篇是切入点。  |  需订阅。[WAIT-VERIFY: 作者与书名]</dc:description>
+    </bib:BookSection>
+    <bib:Article rdf:about="#item_95">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Forest Science</dc:title>
+          <prism:volume>49</prism:volume>
+          <prism:number>6</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Williams</foaf:surname><foaf:givenName>Daniel R.</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Vaske</foaf:surname><foaf:givenName>Jerry J.</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>The measurement of place attachment: Validity and generalizability of a psychometric approach</dc:title>
+      <dc:date>2003</dc:date>
+      <bib:pages>830--840</bib:pages>
+      <dc:identifier><dcterms:URI><rdf:value>https://research.fs.usda.gov/treesearch/23746</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>C-11</dc:subject>
+      <dc:subject>② 免费·浏览器另存</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>C</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>量表</dc:subject>
+      <dc:subject>地方依恋</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 C-11  |  ② 免费·浏览器另存  |  理由：你"地方依恋"变量的标准量表，直接用。 而且它的两维结构对你特别有意义：地方依赖（功能性）在虚拟环境中可能不成立，而地方认同（情感性）可能成立——这个不对称本身就是个可发表的发现。  |  经典。地方依恋两维结构(地方依赖/地方认同),12题PAI量表,全文免费。注意:地方依赖(功能性)在虚拟环境可能不成立而地方认同(情感性)成立 —— 这个不对称本身是可发表的发现。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_96">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Journal of Consumer Psychology</dc:title>
+          <prism:volume>15</prism:volume>
+          <prism:number>1</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Thomson</foaf:surname><foaf:givenName>Matthew</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>MacInnis</foaf:surname><foaf:givenName>Deborah J.</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Park</foaf:surname><foaf:givenName>C. Whan</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>The ties that bind: Measuring the strength of consumers' emotional attachments to brands</dc:title>
+      <dc:date>2005</dc:date>
+      <bib:pages>77--91</bib:pages>
+      <dc:identifier>DOI 10.1207/s15327663jcp1501_10</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://myscp.onlinelibrary.wiley.com/doi/10.1207/s15327663jcp1501_10</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>C-12</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>★必读</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>C</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>量表</dc:subject>
+      <dc:subject>IP依恋</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 C-12  |  ③ 需订阅·走图书馆  |  理由：你"IP依恋"变量的量表来源。 关键价值在于它证明了依恋 ≠ 满意——这正好对应你 RQ-C 想区分的"娱乐满意度 vs 真正的文化认同"。这个区分是你整个课题的立身之本，它的方法学先例就在这里。  |  经典。情感依恋量表(情感/激情/联结);证明依恋≠满意 —— 正对应 RQ-C 想区分的"娱乐满意度 vs 文化认同"。IP依恋量表来源。</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="#item_97">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Journal of Marketing</dc:title>
+          <prism:volume>74</prism:volume>
+          <prism:number>6</prism:number>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Park</foaf:surname><foaf:givenName>C. Whan</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>MacInnis</foaf:surname><foaf:givenName>Deborah J.</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Priester</foaf:surname><foaf:givenName>Joseph</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Eisingerich</foaf:surname><foaf:givenName>Andreas B.</foaf:givenName></foaf:Person></rdf:li>
+          <rdf:li><foaf:Person><foaf:surname>Iacobucci</foaf:surname><foaf:givenName>Dawn</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>Brand attachment and brand attitude strength: Conceptual and empirical differentiation of two critical brand equity drivers</dc:title>
+      <dc:date>2010</dc:date>
+      <bib:pages>1--17</bib:pages>
+      <dc:identifier>DOI 10.1509/jmkg.74.6.1</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://journals.sagepub.com/doi/10.1509/jmkg.74.6.1</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>C-13</dc:subject>
+      <dc:subject>③ 需订阅·走图书馆</dc:subject>
+      <dc:subject>量表·方法</dc:subject>
+      <dc:subject>C</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>量表</dc:subject>
+      <dc:subject>行为预测</dc:subject>
+      <dc:description>编号 C-13  |  ③ 需订阅·走图书馆  |  理由：进一步区分依恋与态度强度，并证明依恋更能预测实际行为（而非仅意向）。这直接支持你用行为指标而非意向指标做因变量。  |  经典。依恋比态度强度更能预测实际行为(而非仅意向) —— 支持用行为指标作因变量。</dc:description>
+    </bib:Article>
+    <bib:Book rdf:about="#item_98">
+      <z:itemType>book</z:itemType>
+      <dc:publisher><foaf:Organization><foaf:name>New York University Press</foaf:name></foaf:Organization></dc:publisher>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Person><foaf:surname>Jenkins</foaf:surname><foaf:givenName>Henry</foaf:givenName></foaf:Person></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>Convergence Culture: Where Old and New Media Collide</dc:title>
+      <dc:date>2006</dc:date>
+      <dc:subject>C-14</dc:subject>
+      <dc:subject>④ 专著·借阅或购买</dc:subject>
+      <dc:subject>C</dc:subject>
+      <dc:subject>经典</dc:subject>
+      <dc:subject>专著</dc:subject>
+      <dc:subject>跨媒介</dc:subject>
+      <dc:subject>H9</dc:subject>
+      <dc:description>编号 C-14  |  ④ 专著·借阅或购买  |  理由：H9（跨媒介一致性）的理论源头。⚠️ 但请注意：Jenkins 是理论与文化批评，不提供可检验的一致性指标。你的 H9 要做实验，就必须自己操作化"世界观/角色/视觉/故事/史实五层一致性"——这反而是你能做出原创贡献的地方（类似 CIDI，可以做一个"跨媒介一致性指数"）。  |  跨媒介叙事奠基作。注意:属理论与文化批评,不提供可检验的一致性指标 —— H9 需自行操作化"世界观/角色/视觉/故事/史实"五层一致性,这正是可做出原创贡献之处(可类比 CIDI 做"跨媒介一致性指数")。</dc:description>
+    </bib:Book>
+    <bib:Article rdf:about="#item_99">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Frontiers in Communication</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Transmedia storytelling: expanding formatted contents in global</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.3389/fcomm.2025.1692175</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.frontiersin.org/journals/communication/articles/10.3389/fcomm.2025.1692175/full</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>C-15</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>C</dc:subject>
+      <dc:subject>学术断层</dc:subject>
+      <dc:subject>机会论证</dc:subject>
+      <dc:subject>必读</dc:subject>
+      <dc:description>编号 C-15  |  ① 脚本自动下载  |  理由：近期跨媒介叙事研究的计量分析，指出跨媒介叙事研究与 AI 传播研究之间存在明显学术断层（无共同作者、无交叉论文）。  |  开放获取。计量分析指出跨媒介叙事研究与AI传播研究之间存在明显学术断层(无共同作者、无交叉论文) —— 本课题恰好跨在两者之间:断层即空白,亦即需同时说服两个互不往来的审稿群体。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Document rdf:about="#item_100">
+      <z:itemType>webpage</z:itemType>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Organization><foaf:name>中华人民共和国文化和旅游部</foaf:name></foaf:Organization></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>《长江国家文化公园建设保护规划》答记者问</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.mct.gov.cn/whzx/whyw/202501/t20250110_957788.htm</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>D-1</dc:subject>
+      <dc:subject>② 免费·浏览器另存</dc:subject>
+      <dc:subject>D</dc:subject>
+      <dc:subject>政策</dc:subject>
+      <dc:subject>顶层依据</dc:subject>
+      <dc:description>编号 D-1  |  ② 免费·浏览器另存  |  理由：国家级规划的权威解读，是你所有"长江文化"课题的顶层政策依据。 涉及 13 个省市，武汉是核心节点之一。基金本子的"选题依据"第一段应该从这里起。  |  国家级规划权威解读,涉13省市,武汉为核心节点。所有"长江文化"课题的顶层政策依据。</dc:description>
+    </bib:Document>
+    <bib:Document rdf:about="#item_101">
+      <z:itemType>webpage</z:itemType>
+      <dc:title>蓝皮书解读:长江文化文艺创作、学术研究和传播领域均呈现新趋势</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.yrcpa.org.cn/cjwhcjh/xxzx/xydt37/2025120114193314173/index.html</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>D-2</dc:subject>
+      <dc:subject>② 免费·浏览器另存</dc:subject>
+      <dc:subject>D</dc:subject>
+      <dc:subject>竞争格局</dc:subject>
+      <dc:subject>年度更新</dc:subject>
+      <dc:description>编号 D-2  |  ② 免费·浏览器另存  |  理由：这是判断"长江文化研究竞争格局"的最快入口。 它告诉你别人在做什么、哪里还空着。建议每年更新一次。  |  2024--2025长江文化研究呈"核心区域集聚、跨学科渗透、核心议题导向";向文旅融合、数字技术延伸。判断竞争格局的最快入口,建议每年更新。</dc:description>
+    </bib:Document>
+    <bib:Document rdf:about="#item_102">
+      <z:itemType>webpage</z:itemType>
+      <bib:authors>
+        <rdf:Seq>
+          <rdf:li><foaf:Organization><foaf:name>湖北省图书馆信息咨询部</foaf:name></foaf:Organization></rdf:li>
+        </rdf:Seq>
+      </bib:authors>
+      <dc:title>长江国家文化公园建设专题文献信息参考</dc:title>
+      <dc:date>2024</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://lh.library.hb.cn/ztjj/lhzt/2024/202401/P020240126535677332439.pdf</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>D-3</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>D</dc:subject>
+      <dc:subject>本地资源</dc:subject>
+      <dc:subject>文献汇编</dc:subject>
+      <dc:description>编号 D-3  |  ① 脚本自动下载  |  理由：现成的本地专题文献汇编，省掉你大量检索工作。湖北本地机构编的，政策口径准确。  |  现成的本地专题文献汇编,湖北本地机构编,政策口径准确。省大量检索工作。</dc:description>
+    </bib:Document>
+    <bib:Document rdf:about="#item_103">
+      <z:itemType>webpage</z:itemType>
+      <dc:title>鄂苏皖赣湘云贵七省党报聚焦长江国家文化公园建设:把长江文化保护好、传承好、弘扬好</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.xhby.net/content/s67d02aabe4b06bf0396a1b7e.html</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>D-4</dc:subject>
+      <dc:subject>② 免费·浏览器另存</dc:subject>
+      <dc:subject>D</dc:subject>
+      <dc:subject>政策话语</dc:subject>
+      <dc:description>编号 D-4  |  ② 免费·浏览器另存  |  理由：跨省协同的舆论口径。写申报书时的话语资源。  |  跨省协同的舆论口径,申报书话语资源。</dc:description>
+    </bib:Document>
+    <bib:Article rdf:about="#item_104">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>大学图书馆学报</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>数字文化战略视域下文化遗产数字化传承:机理、挑战与路径</dc:title>
+      <dc:date>2024</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://journal12.magtechjournal.com/Jwk_dax/CN/10.16065/j.cnki.issn1002-1620.2024.05.013</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>D-5</dc:subject>
+      <dc:subject>② 免费·浏览器另存</dc:subject>
+      <dc:subject>D</dc:subject>
+      <dc:subject>中文核心</dc:subject>
+      <dc:subject>必要性论证</dc:subject>
+      <dc:description>编号 D-5  |  ② 免费·浏览器另存  |  理由：中文 C 刊里最对口的"问题诊断"文献。 "文化认同不高"被明确列为挑战——这就是你研究的现实必要性论证。中文本子里引它，比引英文更有说服力。  |  中文C刊。技术/市场/文化/社会四维机理;明确把"社会参与度与文化认同不高"列为挑战 —— 研究现实必要性的中文论证来源。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+    <bib:Document rdf:about="#item_105">
+      <z:itemType>webpage</z:itemType>
+      <dc:title>数字博物馆游戏化传播路径探索</dc:title>
+      <dc:date>2024</dc:date>
+      <dc:identifier><dcterms:URI><rdf:value>https://m.fx361.com/news/2024/1231/25544286.html</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>D-6</dc:subject>
+      <dc:subject>② 免费·浏览器另存</dc:subject>
+      <dc:subject>D</dc:subject>
+      <dc:subject>中文</dc:subject>
+      <dc:subject>现状素材</dc:subject>
+      <dc:description>编号 D-6  |  ② 免费·浏览器另存  |  理由：中文语境下"数字博物馆 + 游戏化"的路径梳理（以 Google Arts &amp; Culture 为例）。⚠️ 属于一般期刊，作为现状素材用，不作为理论依据引。  |  以 Google Arts \&amp; Culture 为例。属一般期刊,作为现状素材用,不作为理论依据引。[WAIT-VERIFY: 作者与刊物]</dc:description>
+    </bib:Document>
+    <bib:Article rdf:about="#item_106">
+      <z:itemType>journalArticle</z:itemType>
+      <dcterms:isPartOf>
+        <bib:Journal>
+          <dc:title>Humanities and Social Sciences Communications</dc:title>
+        </bib:Journal>
+      </dcterms:isPartOf>
+      <dc:title>Knowledge graph-driven digital preservation of intangible cultural heritage: a cross-cultural comparative study of Chinese and Western implementation paradigms</dc:title>
+      <dc:date>2025</dc:date>
+      <dc:identifier>DOI 10.1038/s41599-025-06186-9</dc:identifier>
+      <dc:identifier><dcterms:URI><rdf:value>https://www.nature.com/articles/s41599-025-06186-9</rdf:value></dcterms:URI></dc:identifier>
+      <dc:subject>D-7</dc:subject>
+      <dc:subject>① 脚本自动下载</dc:subject>
+      <dc:subject>D</dc:subject>
+      <dc:subject>知识图谱</dc:subject>
+      <dc:subject>中国范式</dc:subject>
+      <dc:description>编号 D-7  |  ① 脚本自动下载  |  理由：中西对比的非遗数字化范式研究，OA。你做长江文化知识库时的中国范式参照。  |  开放获取。中西非遗数字化范式对比 —— 做长江文化知识库时的中国范式参照。[WAIT-VERIFY: 作者]</dc:description>
+    </bib:Article>
+
+</rdf:RDF>
