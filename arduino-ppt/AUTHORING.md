@@ -67,6 +67,8 @@ V.textW(str, size) / V.textH(str, w, size)                       // 估算文字
 ```
 
 `codeBlock` 放不下时会抛错并提示拆页；`explain` 超出 `maxY` 会抛错——缩短文字或拆页，不要硬塞。
+`explain` 每条讲解至少占 0.38 in，而代码行距约 0.2 in：相邻 3 行以上都要讲时，合并成一条 `{ line:[a,b] }`，否则讲解会逐条下移、离开对应代码行。
+`V.text` 的 `bold` 作用于整个文本框；同一框里要粗细混排时，框不设 bold，只在需要的 run 上写 `bold:true`。
 
 ## 4. 生成与检查
 

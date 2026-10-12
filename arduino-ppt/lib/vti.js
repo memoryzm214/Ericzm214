@@ -280,7 +280,7 @@ function bullets(slide, items, o) {
     const last = i === items.length - 1;
     const base = { bullet: o.numbered ? { type: 'number' } : { indent: size * 0.9 }, breakLine: !last, paraSpaceAfter: o.gap ?? 6 };
     if (Array.isArray(it)) {
-      it.forEach((r, j) => runs.push({ text: r.text, options: { ...(j === 0 ? base : {}), ...r.options, breakLine: j === it.length - 1 ? !last : false } }));
+      it.forEach((r, j) => runs.push({ text: r.text, options: { ...base, ...r.options, breakLine: j === it.length - 1 ? !last : false } }));
     } else if (typeof it === 'object') {
       runs.push({ text: it.text, options: { ...base, bold: !!it.bold, color: it.color } });
     } else {
@@ -315,7 +315,7 @@ function tiles(slide, o) {
     const pad = 0.22;
     if (it.big) text(slide, it.big, { x: cx + pad, y: cy + pad - 0.04, w: tw - 2 * pad, h: 0.6, size: it.bigSize || 30, bold: true, color: dark ? P.turq : col });
     if (it.title) text(slide, it.title, { x: cx + pad, y: it.big ? cy + th - pad - 0.95 : cy + (th - 0.9) / 2, w: tw - 2 * pad, h: 0.45, size: it.titleSize || 16, bold: true, color: col, align: it.big ? 'left' : 'center', valign: 'middle' });
-    if (it.sub) text(slide, it.sub, { x: cx + pad, y: it.big ? cy + th - pad - 0.5 : cy + (th - 0.9) / 2 + 0.45, w: tw - 2 * pad, h: 0.5, size: it.subSize || 11, color: dark ? 'CFCFCF' : (fill === P.turq ? P.ink : P.muted), align: it.big ? 'left' : 'center', valign: 'top' });
+    if (it.sub) text(slide, it.sub, { x: cx + pad, y: it.big ? cy + th - pad - 0.5 : cy + (th - 0.9) / 2 + 0.45, w: tw - 2 * pad, h: 0.5, size: it.subSize || 12, color: dark ? 'CFCFCF' : (fill === P.turq ? P.ink : P.muted), align: it.big ? 'left' : 'center', valign: 'top' });
   });
 }
 
@@ -413,18 +413,28 @@ function tokenizeLine(line, state) {
 }
 
 // Split a source line that is too long into display rows (continuations get no line number).
+function cols(str) {
+  let n = 0;
+  for (const ch of str) n += isWide(ch) ? 2 : 1;
+  return n;
+}
+// Longest prefix of `str` that fits in `max` columns.
+function fitPrefix(str, max) {
+  let n = 0, i = 0;
+  for (const ch of str) { n += isWide(ch) ? 2 : 1; if (n > max) break; i += ch.length; }
+  return i;
+}
 function wrapLine(line, max) {
-  if (line.length <= max) return [line];
+  if (cols(line) <= max) return [line];
   const rows = [];
   const indent = (line.match(/^\s*/)[0].length) + 2;
   let cur = line;
-  let first = true;
-  while (cur.length > (first ? max : max)) {
-    let cut = cur.lastIndexOf(' ', max);
-    if (cut <= indent + 4) cut = max;
+  while (cols(cur) > max) {
+    const fit = fitPrefix(cur, max);
+    let cut = cur.lastIndexOf(' ', fit);
+    if (cut <= indent + 4) cut = fit;
     rows.push(cur.slice(0, cut));
     cur = ' '.repeat(indent) + cur.slice(cut).replace(/^\s+/, '');
-    first = false;
   }
   rows.push(cur);
   return rows;
@@ -460,8 +470,8 @@ function codeBlock(slide, o) {
   }
 
   card(slide, { x: o.x, y: o.y, w: o.w, h: o.h, fill: P.ink, radius: 0.1 });
-  if (o.file) text(slide, o.file, { x: o.x + padX, y: o.y + 0.07, w: o.w * 0.6, h: 0.22, size: 9, color: P.faint, mono: true, valign: 'middle' });
-  if (o.right) text(slide, o.right, { x: o.x + o.w * 0.4, y: o.y + 0.07, w: o.w * 0.6 - padX, h: 0.22, size: 9, color: P.faint, align: 'right', valign: 'middle' });
+  if (o.file) text(slide, o.file, { x: o.x + padX, y: o.y + 0.07, w: o.w * 0.6, h: 0.22, size: 10, color: P.faint, mono: true, valign: 'middle' });
+  if (o.right) text(slide, o.right, { x: o.x + o.w * 0.4, y: o.y + 0.07, w: o.w * 0.6 - padX, h: 0.22, size: 10, color: P.faint, align: 'right', valign: 'middle' });
 
   const y0 = o.y + headH;
   const lineY = {};
@@ -511,7 +521,7 @@ function serialMonitor(slide, o) {
   card(slide, { x: o.x, y: o.y, w: o.w, h: o.h, fill: P.white, line: P.gray2, radius: 0.1 });
   slide.addShape('rect', { x: o.x + 0.01, y: o.y + 0.01, w: o.w - 0.02, h: 0.32, fill: { color: P.card }, line: { color: P.card, width: 0 } });
   text(slide, o.title || '串口监视器', { x: o.x + 0.14, y: o.y + 0.03, w: o.w / 2, h: 0.28, size: 10, bold: true, valign: 'middle' });
-  text(slide, `${o.baud || 9600} 波特率`, { x: o.x + o.w / 2, y: o.y + 0.03, w: o.w / 2 - 0.14, h: 0.28, size: 9.5, color: P.muted, align: 'right', valign: 'middle' });
+  text(slide, `${o.baud || 9600} 波特率`, { x: o.x + o.w / 2, y: o.y + 0.03, w: o.w / 2 - 0.14, h: 0.28, size: 10, color: P.muted, align: 'right', valign: 'middle' });
   const size = o.size || 10.5;
   const lh = size * 1.32 / 72;
   const maxRows = Math.floor((o.h - 0.45) / lh);
@@ -529,7 +539,7 @@ function steps(slide, o) {
     card(slide, { x, y: o.y, w, h: o.h, fill: it.fill || (i === o.focus ? P.turq : P.card) });
     numCircle(slide, it.n ?? i + 1, { x: x + 0.16, y: o.y + 0.16, d: 0.38, fill: i === o.focus ? P.ink : P.turq, color: i === o.focus ? P.white : P.ink, size: 12 });
     text(slide, it.title, { x: x + 0.16, y: o.y + 0.64, w: w - 0.32, h: 0.34, size: o.titleSize || 14, bold: true, valign: 'middle', mono: it.mono });
-    if (it.sub) text(slide, it.sub, { x: x + 0.16, y: o.y + 1.0, w: w - 0.32, h: o.h - 1.1, size: o.subSize || 11.5, color: i === o.focus ? P.ink : P.muted });
+    if (it.sub) text(slide, it.sub, { x: x + 0.16, y: o.y + 1.0, w: w - 0.32, h: o.h - 1.1, size: o.subSize || 12, color: i === o.focus ? P.ink : P.muted });
     if (i < n - 1) arrow(slide, x + w + 0.06, o.y + o.h / 2, x + w + gap - 0.06, o.y + o.h / 2, { color: P.muted });
   });
 }
@@ -594,7 +604,7 @@ class Deck {
     const footMark = () => ({ image: { x: G.L, y: 5.2, w: 0.2, h: 0.2, data: ART.cube } });
     const footLabel = () => ({ text: { text: esc(o.label), options: { x: G.L + 0.3, y: 5.18, w: 4.2, h: 0.24, fontFace: FONT, fontSize: 8, color: P.ink, margin: 0, valign: 'middle' } } });
     const footRight = () => ({ placeholder: { options: { name: 'foot', type: 'body', x: 5.0, y: 5.18, w: 4.05, h: 0.24, fontFace: FONT, fontSize: 8, color: P.ink, align: 'right', margin: 0, valign: 'middle' }, text: '' } });
-    const slideNumber = () => ({ x: 9.12, y: 5.18, w: 0.43, h: 0.24, fontFace: FONT, fontSize: 8, color: P.muted, align: 'right', margin: 0 });
+    const slideNumber = () => ({ x: 9.12, y: 5.18, w: 0.43, h: 0.24, fontFace: FONT, fontSize: 8, color: P.muted, align: 'right', valign: 'middle', margin: 0 });
 
     pres.defineSlideMaster({
       title: 'COVER',
