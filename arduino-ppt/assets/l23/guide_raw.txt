@@ -1,0 +1,148 @@
+   12 位 RGB 灯环采用12颗 WS2812RGB 灯珠串联组成只需要一个 IO 口就可
+以驱动此模块。WS2812 RGB 灯内部集成了一个芯片我们只需单个IO口就可以控
+制WS2812RGB灯，D脚为信号输出可以串连下个灯珠，R脚为信号输入控制 RGB
+灯珠颜色与串联数量，V脚 VDD 为电源正极，G脚为电源负极。
+
+
+
+
+                               R
+          12
+12
+
+
+
+
+     12
+              串行 LCD1602 模块动态显示屏实验
+LCD1602 介绍
+      LCD1602 是一种专门用于显示字母，数字和符号的字符 LCD 模块。 它广泛应用于工业，比如
+ 电子钟，温度显示器。市场上的字符液晶显示器大多是基于 HD44780 字符的 LCD 芯片，控制原理完
+ 全相同。 “1602”表示每行 2 行和 16 个字符。带了转接板的 LCD1602 显示屏,使用了 IIC 接口,节省了
+ 许多的 I/O 口. 1602 液晶显示器（1602Liquid Crystal Display，此后简称 1602 LCD）是一种常见的字
+ 符液晶显示器，因其能显示 16*2 个字符而得名。通常我们使用的 1602 LCD 中集成了字库芯片，通
+ 过 LiquidCrystal 类库提供的 API，我们可以很方便的使用 1602LCD 显示英文字母与一些符号。在使
+ 用 1602 LCD 前，我们需要将其连接到 Arduino 上。
+  在套件中我们使用 IIC LCD1602 模块集成了 IIC I/O 扩展芯片 PCA8574，使 LCD 1602 的使用更为
+ 简单。通过两线制的 IIC 总线（串行时钟线 SCL，串行数据线 SDA），可使 Arduino 实现控制 LCD 1602
+ 显示的目的。既简化了电路，又节省了 I/O 口，使 Arduino 能实现更多的功能。通过模块上的电位器
+ 还可以调节 LCD 显示器的对比度。通过设置跳线还可以设置地址: 0x20-0x27。使 Arduino 能控制多块
+ LCD 1602。
+  模块背面可以看到一块蓝色的电位器，旋转它可以调节 1602 液晶显示器的对比度。背后的接线引
+ 脚分别为 GND，VCC，SDA，SCL（SDA 和 SCL 分别 iic 通讯的数据线和时钟线）LCD1602 的物理
+ 图：
+
+
+
+
+实验原理
+   通过 Arduino UNO R3 主控板和串行 LCD1602 液晶显示屏连接，使用 I2C 通信，控制 LCD1602
+ 液晶显示屏显示字符。
+
+实验目的
+ 通过 Arduino UNO R3 主控板控制 LCD1602 液晶显示屏显示字符。
+
+组件清单
+  Arduino Uno R3 主板
+                                    1
+ 面包板
+
+ USB 数据线
+
+ 带转接板的 LCD1602 显示屏
+
+ 若干跳线
+
+接线
+首先，把转接板焊接到 LCD 显示屏上
+                LCD1602 模块       Arduino
+                    GND           GND
+                    VCC            5V
+                    SDA            A4
+                    SCL            A5
+
+
+
+
+                             2
+程序
+ 扫描 I2C 地址
+ 将以下代码拷贝到 Arduino IDE，并执行。然后选择工具->串口监视器，把右下角的波特率改为 9600，
+ 即可读出 I2C 地址，程序如下，很多的 I2C 转接板的默认地址为 0x27,但是为了能够确认自己的 I2C
+ 转接板地址，最好自己去扫描一下，以防后面的实验出错。
+void setup()
+{
+  Serial.begin (9600); // Leonardo: wait for serial port to connect
+  while (!Serial) { }
+  Serial.println ();
+  Serial.println ("I2C scanner. Scanning ...");
+  byte count = 0;
+  Wire.begin();
+  for (byte i = 8; i < 120; i++) {
+    Wire.beginTransmission (i);
+    if (Wire.endTransmission () == 0) {
+      Serial.print ("Found address: ");
+      Serial.print (i, DEC);
+      Serial.print (" (0x");
+      Serial.print (i, HEX);
+      Serial.println (")");
+      count++;
+      delay (1); // maybe unneeded?
+    } // end of good response
+  } // end of for loop
+  Serial.println ("Done.");
+  Serial.print ("Found ");
+  Serial.print (count, DEC);
+  Serial.println (" device(s).");
+} // end of setup
+void loop()
+{
+
+
+                                              3
+}
+
+
+
+
+串口监视器扫描到的 I2C 地址为 0x27
+
+
+
+
+                         4
+烧录显示字符程序
+#include <Wire.h>
+#include "LiquidCrystal_I2C.h"
+
+LiquidCrystal_I2C lcd(0x27,16,2);   // set the LCD address to 0x27 for a 16 chars and 2 line
+display
+
+void setup()
+{
+    lcd.init();                      // initialize the lcd
+    // Print a message to the LCD.
+    lcd.backlight();
+    lcd.setCursor(0,0); // go to start of 2nd line
+    lcd.print("Hello Word");
+    lcd.setCursor(4,1); // go to start of 2nd line
+    lcd.print("Science Robot");
+}
+
+void loop()
+{
+}
+
+
+实验结果
+
+
+
+
+LCD1602 显示常见问题及解决方案
+ 如果碰到上传程序后背景灯亮了，但是不显示字符的问题，尝试去调节转接板后面的电位器，调节亮
+ 度和显示效果。
+
+
+                                               5
+

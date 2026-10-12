@@ -366,7 +366,7 @@ function pullupPanel(s, o) {
     txt(s, [R('小知识　', { bold: true }), R('管内充有惰性气体（如氮气）；', { breakLine: true }), R('触点镀了很硬的铑、钌，开关次数更多、寿命更长。')],
       { x: G.L + 0.66, y: fy, w: lw - 0.8, h: G.bottom - fy, size: 12, valign: 'middle' });
     if (G.bottom - fy < 0.6) warn('reed facts card too short');
-    V.imageBox(s, { file: 'pdf/reed_module_photo.jpg', x: 6.0, y: G.top, w: G.R - 6.0, h: G.ch, caption: '小磁簧开关模块：左上方的玻璃管就是磁簧开关' });
+    V.imageBox(s, { file: 'l13/reed_module_photo.jpg', x: 6.0, y: G.top, w: G.R - 6.0, h: G.ch, caption: '小磁簧开关模块：左上方的玻璃管就是磁簧开关' });
   }
 
   // ================================================================ 4 how it works (drawn)
@@ -541,7 +541,7 @@ function pullupPanel(s, o) {
   });
   {
     const iw = 4.35;
-    V.imageBox(s, { file: 'pdf/reed_wiring.jpg', x: G.L, y: G.top, w: iw, h: G.ch, diagram: true, caption: '原指南接线图' });
+    V.imageBox(s, { file: 'l13/reed_wiring.jpg', x: G.L, y: G.top, w: iw, h: G.ch, diagram: true, caption: '原指南接线图' });
     const rx = G.L + iw + 0.35, rw = G.R - rx, n = 3, gap = 0.3, ch = (G.ch - gap * (n - 1)) / n;
     const M = [
       ['上', [R('RGB 灯模块', { bold: true, breakLine: true }), R('当 LED 模块用', { fontSize: 12, color: P.muted })], [['黄线', '11 → R 脚'], ['黑线', 'GND → − 脚']]],
@@ -762,7 +762,7 @@ function pullupPanel(s, o) {
   });
   {
     const iw = 4.95;
-    V.imageBox(s, { file: 'pdf/reed_result_photo.jpg', x: G.L, y: G.top, w: iw, h: G.ch, caption: '原指南实物图：磁铁靠近磁簧开关，RGB 灯亮红光' });
+    V.imageBox(s, { file: 'l13/reed_result_photo.jpg', x: G.L, y: G.top, w: iw, h: G.ch, caption: '原指南实物图：磁铁靠近磁簧开关，RGB 灯亮红光' });
     const rx = G.L + iw + 0.35, rw = G.R - rx;
     const smH = 1.86;
     serialMock(s, { x: rx, y: G.top, w: rw, h: smH, title: '串口监视器（示意）', lines: ['1', '1', '0', '0', '1', '1'], annX: 0.7,
@@ -779,7 +779,7 @@ function pullupPanel(s, o) {
   });
   {
     const iw = 2.75;
-    V.imageBox(s, { file: 'pdf/reed_shield_photo.jpg', x: G.L, y: G.top, w: iw, h: G.ch, caption: '原指南：扩展板接法' });
+    V.imageBox(s, { file: 'l13/reed_shield_photo.jpg', x: G.L, y: G.top, w: iw, h: G.ch, caption: '原指南：扩展板接法' });
     const rx = G.L + iw + 0.35, rw = G.R - rx;
     const qh = 0.78;
     V.tip(s, { x: rx, y: G.top, w: rw, h: qh, kind: 'note', text: '原指南：如果你的套件中有 Sensor V5.0 的扩展板，\n按照下图（即左图）接线，更加方便。', size: 12.5 }, I.book);

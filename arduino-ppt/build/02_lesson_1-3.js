@@ -400,8 +400,8 @@ function fitCodeSize(code, from, to, w, h, start = 11.5) {
     txt(s, '注：原指南此处材料名印重复了，这里只保留结论。', { x: G.L, y: y + 0.12, w, h: 0.22, size: 10, color: P.muted, valign: 'middle' });
     if (y + 0.34 > G.bottom) warn('LED intro text overflow');
     const rx = 4.75, rw = G.R - rx, iw = (rw - 0.3) / 2, ih = 2.5;
-    V.imageBox(s, { file: 'pdf/led_photo.jpg', x: rx, y: G.top, w: iw, h: ih, diagram: true, caption: '实物：红色 LED' });
-    V.imageBox(s, { file: 'pdf/led_symbol.jpg', x: rx + iw + 0.3, y: G.top, w: iw, h: ih, diagram: true, caption: '电路符号' });
+    V.imageBox(s, { file: 'l13/led_photo.jpg', x: rx, y: G.top, w: iw, h: ih, diagram: true, caption: '实物：红色 LED' });
+    V.imageBox(s, { file: 'l13/led_symbol.jpg', x: rx + iw + 0.3, y: G.top, w: iw, h: ih, diagram: true, caption: '电路符号' });
     const by = G.top + ih + 0.3, bh = G.bottom - by;
     const pol = [
       { x: rx, big: '+', t: '长脚 = 正极', d: '接电源这一边' },
@@ -493,7 +493,7 @@ function fitCodeSize(code, from, to, w, h, start = 11.5) {
     notes: '这一页是整个实验的关键。很多同学以为 HIGH 才是亮，这里正好相反：LED 正极已经接在 5V 上，引脚拉到 LOW（0V）时两端有电压差，电流从 5V 经 LED、电阻流进引脚，灯就亮；引脚输出 HIGH 时两端都是 5V，没有电流，灯就灭。用“水往低处流”来类比。',
   });
   {
-    V.imageBox(s, { file: 'pdf/flow_schematic.jpg', x: G.L, y: G.top, w: 5.75, h: G.ch, diagram: true, caption: '原指南原理图：VCC_5V → LED1～LED8 → 1K 电阻 → D2～D9' });
+    V.imageBox(s, { file: 'l13/flow_schematic.jpg', x: G.L, y: G.top, w: 5.75, h: G.ch, diagram: true, caption: '原指南原理图：VCC_5V → LED1～LED8 → 1K 电阻 → D2～D9' });
     const rx = 6.5, rw = G.R - rx, th = 1.15;
     const st = [
       { fill: P.turq, big: 'LOW', t: '灯亮', d: '引脚 0V，比正极低 5V\n电流流过 LED', col: P.ink, sub: P.ink },
@@ -517,7 +517,7 @@ function fitCodeSize(code, from, to, w, h, start = 11.5) {
     notes: '先断电再接线。8 个 LED 方向要一致：长脚全部朝 5V 电源轨。每个短脚串一个电阻再接到数字口，电源轨用一根红线接到 UNO 的 5V。接完数一数：8 根信号线、1 根电源线。',
   });
   {
-    V.imageBox(s, { file: 'pdf/flow_wiring.jpg', x: G.L, y: G.top, w: 4.4, h: G.ch, diagram: true, caption: '原指南接线图（短脚 · 电阻 1K · 长脚）' });
+    V.imageBox(s, { file: 'l13/flow_wiring.jpg', x: G.L, y: G.top, w: 4.4, h: G.ch, diagram: true, caption: '原指南接线图（短脚 · 电阻 1K · 长脚）' });
     const rx = 5.15, rw = G.R - rx, tw = (rw - 0.3) / 2;
     const rows1 = [['LED', 'Arduino'], ['LED1', 'D2'], ['LED2', 'D3'], ['LED3', 'D4'], ['LED4', 'D5']];
     const rows2 = [['LED', 'Arduino'], ['LED5', 'D6'], ['LED6', 'D7'], ['LED7', 'D8'], ['LED8', 'D9']];
@@ -769,7 +769,7 @@ function fitCodeSize(code, from, to, w, h, start = 11.5) {
     notes: '原指南的结果照片里用了黄、红两种颜色的 LED，效果更好看。原指南最后半开玩笑地建议“做一个心形流水灯”，可以作为课后小挑战：同样的 8 个引脚，换一种摆法就是新作品——这正是工业设计同学的强项。右边三个小改动建议当堂试，每次只改一处。',
   });
   {
-    V.imageBox(s, { file: 'pdf/flow_result_photo.jpg', x: G.L, y: G.top, w: 5.4, h: G.ch, caption: '原指南实物照片：8 个 LED 接 UNO' });
+    V.imageBox(s, { file: 'l13/flow_result_photo.jpg', x: G.L, y: G.top, w: 5.4, h: G.ch, caption: '原指南实物照片：8 个 LED 接 UNO' });
     const rx = 6.15, rw = G.R - rx;
     V.tip(s, { x: rx, y: G.top, w: rw, h: 1.15, kind: 'note', title: '小挑战：心形流水灯', text: '原指南的彩蛋：把 LED 摆成心形，做一盏送给重要的人。', size: 12 }, I.heart);
     const cy = G.top + 1.15 + 0.3, chh = G.bottom - cy;
@@ -813,8 +813,8 @@ function fitCodeSize(code, from, to, w, h, start = 11.5) {
     const labW = 1.75, cw = (G.cw - labW) / 2;
     const c1 = G.L + labW, c2 = c1 + cw;
     const ih = 1.6, iw = cw - 0.5;
-    V.imageBox(s, { file: 'pdf/buzzer_active_module.jpg', x: c1 + 0.25, y: G.top, w: iw, h: ih, diagram: true });
-    V.imageBox(s, { file: 'pdf/buzzer_passive_module.jpg', x: c2 + 0.25, y: G.top, w: iw, h: ih, diagram: true });
+    V.imageBox(s, { file: 'l13/buzzer_active_module.jpg', x: c1 + 0.25, y: G.top, w: iw, h: ih, diagram: true });
+    V.imageBox(s, { file: 'l13/buzzer_passive_module.jpg', x: c2 + 0.25, y: G.top, w: iw, h: ih, diagram: true });
     {
       const tw = labW - 0.3;
       s.addShape('rect', { x: G.L, y: G.top, w: tw, h: ih, fill: { color: P.ink }, line: { color: P.ink, width: 0 } });
@@ -842,7 +842,7 @@ function fitCodeSize(code, from, to, w, h, start = 11.5) {
     notes: '只有三根线：红线 5V 接 V，黑线 GND 接 G，黄线 9 号脚接 S。原指南表格里写的 VCC 就是 UNO 上的 5V。无源模块上印的是 VCC、I/O、GND，对应关系一样。对照下面的组件清单检查一遍再通电。',
   });
   {
-    V.imageBox(s, { file: 'pdf/buzzer_wiring.jpg', x: G.L, y: G.top, w: 5.75, h: 2.85, diagram: true, caption: '原指南接线图：黄线 9 → S · 红线 5V → V · 黑线 GND → G' });
+    V.imageBox(s, { file: 'l13/buzzer_wiring.jpg', x: G.L, y: G.top, w: 5.75, h: 2.85, diagram: true, caption: '原指南接线图：黄线 9 → S · 红线 5V → V · 黑线 GND → G' });
     const rx = 6.5, rw = G.R - rx;
     V.wiring(s, { x: rx, y: G.top, w: rw, right: '蜂鸣器模块', rows: [['5V（VCC）', 'V'], ['GND', 'G'], ['9', 'S']], rowH: 0.32, colW: [rw * 0.55, rw * 0.45] });
     const ty = G.top + 0.32 * 4 + 0.3;
@@ -884,7 +884,7 @@ function fitCodeSize(code, from, to, w, h, start = 11.5) {
     notes: '上传后能听到“滴——滴——”，每声 1 秒。照片里模块上的红灯是电源指示灯。让学生思考：既然音调固定，有源蜂鸣器适合做什么？（报警、提示音、倒计时）想要旋律，就得用无源蜂鸣器。',
   });
   {
-    V.imageBox(s, { file: 'pdf/buzzer_active_photo.jpg', x: G.L, y: G.top, w: 4.9, h: G.ch, caption: '原指南实物照片：有源蜂鸣器模块接 UNO' });
+    V.imageBox(s, { file: 'l13/buzzer_active_photo.jpg', x: G.L, y: G.top, w: 4.9, h: G.ch, caption: '原指南实物照片：有源蜂鸣器模块接 UNO' });
     const rx = 5.7, rw = G.R - rx;
     V.tip(s, { x: rx, y: G.top, w: rw, h: 0.95, kind: 'note', title: '原指南结论', text: '有源蜂鸣器发出只有一个频率的“滴滴”声。', size: 12 }, I.headphones);
     const cy = G.top + 0.95 + 0.3, chh = 1.15;
@@ -1032,7 +1032,7 @@ function fitCodeSize(code, from, to, w, h, start = 11.5) {
     notes: '原指南的照片里用的是一只单独的无源蜂鸣器，直接插在面包板上，再用跳线连到 UNO。原指南说能听到两种频率；实际上要把 delay(0.5) 改成 delayMicroseconds(500)，1 kHz 那一段才明显。可以让学生对比改之前和改之后，用耳朵验证上一页的结论。',
   });
   {
-    V.imageBox(s, { file: 'pdf/buzzer_passive_photo.jpg', x: G.L, y: G.top, w: 2.75, h: G.ch, caption: '原指南实物照片' });
+    V.imageBox(s, { file: 'l13/buzzer_passive_photo.jpg', x: G.L, y: G.top, w: 2.75, h: G.ch, caption: '原指南实物照片' });
     const rx = G.L + 2.75 + 0.3, rw = G.R - rx;
     V.tip(s, { x: rx, y: G.top, w: rw, h: 1.1, kind: 'note', title: '原指南结论', text: '接线不变，直接用无源蜂鸣器替换有源蜂鸣器；无源蜂鸣器没有正负极之分；可以听到两个频率不一样的蜂鸣声。', size: 12 }, I.headphones);
     const cy = G.top + 1.1 + 0.3, chh = 1.15;

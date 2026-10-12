@@ -24,7 +24,7 @@ for r in a.require:
         print('image ok:', r)
 
 md = subprocess.run(['markitdown', a.deck], capture_output=True, text=True).stdout
-for bad in ['mBlock', 'mblock', '网页版', '模拟器', '点 ▶', 'lorem', 'TODO', 'xxx', 'Click to add']:
+for bad in ['mBlock', 'mblock', 'Mixly', 'mixly', '网页版', '模拟器', '点 ▶', 'lorem', 'TODO', 'xxx', 'Click to add']:
     if bad in md:
         print('FORBIDDEN TEXT:', bad); ok = False
 

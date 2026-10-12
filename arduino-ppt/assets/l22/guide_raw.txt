@@ -1,0 +1,552 @@
+                      超声波模块实验
+超声波模块介绍
+ 超声波测距原理：超声波发射器向某个方向发射超声波，我们同时开始计时。当空气中的超声波遇到
+障碍物时，它会立即返回，超声波接收器接收到反射波，然后我们停止计时。空气中的声波速率为
+340 米/秒，根据记录的时间 t，可以计算出发点和障碍物之间的距离 s，即：s = 340m / s * t / 2.所以我
+们可以得到距离。
+  超声波测距模块有四个引脚，它们分别是 Vcc，Trig，Echo，GND，Trig 是距离测量触发引脚，
+
+只要 Trig 引脚至少有 10μs 高电平，超声波发送模块会自动发送 8 个 40KHZ 超声波脉冲，并自动检测
+
+是否有返回的信号。此步骤将由内部模块自动完成。如果有任何返回信号，Echo 引脚将输出高电平，
+
+高电平的持续时间是超声波从发射到返回的时间。此时，我们可以使用 pulseIn（）函数来获得距离
+
+测量的结果，并计算实际距离。
+
+
+
+
+实验目的
+  目的是通过串口输入超声波测距模块的距离。
+
+组件清单
+ Arduino UNO R3 主板
+
+ 面包板
+
+ USB 数据线
+                               1
+ 超声波模块   *1
+
+ 若干跳线
+
+接线
+               Arduino Uno       Ultrasonic
+                  VCC              1Vcc)
+                    2             2 (Trig)
+                    3             3(Echo)
+                  GND             4 (Gnd)
+
+
+
+
+程序
+
+
+
+
+                             2
+实验结果
+
+
+
+
+mBlock 图形化编程
+mBlock 编写超声波测距程序如下图所示：
+
+⚫               --Trig 接数字口 2，是距离测量触发引脚，
+
+                         3
+                     串口调节舵机角度实验
+舵机介绍
+  在机器人机电控制系统中，舵机控制效果是性能的重要影响因素。舵机可以在微机电系统和航模
+
+中作为基本的输出执行机构，其简单的控制和输出使得单片机系统非常容易与之接口。
+
+  舵机是一种位置（角度）伺服的驱动器，适用于那些需要角度不断变化并可以保持的控制系统。
+
+目前在高档遥控玩具，如航模，包括飞机模型，潜艇模型；遥控机器人中已经使用得比较普遍。可以旋
+
+转到 0 到 180 度之间的任何角度，然后根据您的指令精确停止，因此适用于需要角度变化和保持的控制
+
+系统。舵机是一个不专业的名称，实际上它是一种伺服电机，一套自动控制装置，由直流电机， 减速
+
+齿轮组，传感器和控制电路组成。 什么是自动控制？ 所谓的自动控制 - 通过使用闭环反馈控制电路不
+
+断调整输出偏差 - 使系统输出恒定。
+
+
+实验目的
+  使用 Keywish Arduino Uno R3 主板实现调整舵机角度的实验。
+
+组件清单
+ Keywish Arduino Uno R3 主板
+
+ USB 数据线
+
+ SG90 舵机
+
+ 若干跳线
+
+工作原理
+  舵机控制信号由接收机的通道进入信号调制芯片，获得直流偏置电压。它内部有一个基准电路，
+
+产生周期为 20ms，宽度为 1.5ms 的基准信号，将获得的直流偏置电压与电位器的电压比较，获得电压
+
+差输出。最后，电压差的正负输出到电机驱动芯片决定电机的正反转。当电机转速一定时，通过级联减
+
+速齿轮带动电位器旋转，使得电压差为 0，电机停止转动。舵机具有最大旋转角度，中间位置是指从该
+
+位置到最小角度的体积，并且最大角度完全相同。 最重要的部分，最大旋转角度随着不同的转向齿轮
+
+而变化，但中间位置的带宽是确定的，即 1.5 毫秒。
+
+
+                              1
+舵机的控制
+  舵机的控制一般需要一个 20ms 左右的时基脉冲，该脉冲的高电平部分一般为 0.5ms~2.5ms 范围
+
+内的角度控制脉冲部分。以 180 度角度伺服为例，那么对应的控制关系是这样的：
+
+    ⚫   0.5ms------------0 度；
+
+    ⚫   1.0ms----------45 度；
+
+    ⚫   1.5ms----------90 度；
+
+    ⚫   2.0ms ---------135 度；
+
+    ⚫   2.5ms ---------180 度；
+
+
+
+
+  旋转角度由来自控制线的连续脉冲产生。 该方法称为脉冲调制。 脉冲长度决定了转向器的旋转
+
+角度。 例如：舵机旋转到中间位置 1.5 毫秒脉冲（对于 180°舵机，中间位置为 90°）。 当控制系统
+
+发出命令将转向器移动到特定位置并使其保持一定角度时，外力的影响不会改变角度。 除非控制系统
+
+连续发出脉冲以稳定转向角，否则角度将不会始终保持不变。
+
+  当舵机接收到小于 1.5ms 的脉冲时，输出轴将作为标准中间位置，逆时针旋转一定角度; 当接收
+
+脉冲大于 1.5ms 时，输出轴顺时针旋转。 不同品牌的转向器，甚至同一品牌的不同转向器，最大值
+
+和最小值可能不同。
+
+
+
+
+                                2
+舵机内部结构
+
+
+
+
+实验原理
+ 舵机信号线连接到 Keywish Arduino Uno R3 主板,烧录程序之后，在串口监视器中输入要调整舵机
+的角度，让舵机转到相应角度的位置
+
+接线
+                            3
+       Arduino UNO       舵机
+          GND            黑线
+          VCC            红线
+
+           13            黄线
+
+
+实验结论
+
+
+
+
+                     4
+程序
+#include <Servo.h>
+Servo myservo;
+int ServoPin = 13;
+char inByte = 0;
+int angle = 0;
+String temp = "";//Temporary character variables, or use it for the cache
+void setup()
+{
+  Serial.begin(9600); //Set the baud rate
+  pinMode(ServoPin, OUTPUT);
+  myservo.attach(ServoPin);
+}
+void loop()
+
+                                            5
+{
+  while (Serial.available() > 0) //Determine whether the serial data
+  {
+    inByte = Serial.read();//Read data, the serial port can only read 1 character
+    temp += inByte;//The characters read into temporary variables inside the cache,
+Continue to determine the serial port there is no data, know all the data read out
+  }
+
+    if (temp != "")// Determine whether the temporary variable is empty
+    {
+      angle = temp.toInt();    //Convert variable string type to integer
+      Serial.print("Servo degree: ");
+      Serial.println(angle);
+      //Control the servo to rotate the corresponding angle.
+    }
+    temp = "";//Please see temporary variables
+    myservo.write(angle);
+    delay(100);//Delayed 100 milliseconds
+
+}
+
+    将程序烧录到 UNO 板之后,先不要拔下 USB 线,并将电池插头插到 UNO 板上给其供电，然后打开
+    Arduino IED 的串口监视器；
+
+
+
+
+                                    打开串口监视器示意图
+
+
+
+
+                                              6
+打开串口监视器之后，在串口监视器依次收入 0，90，180，90，这样的舵机角度值。
+
+
+
+
+                  串口输入舵机角度数值
+在串口监视器分别输入以上舵机角度值之后，会发现舵机会转动。
+
+Mixly图形化编程
+
+⚫                   --申明字符串的变量；
+
+⚫                --判断串口是否有数据输入；
+
+
+⚫                     --设置一个变量赋值为串口读到的数据；
+
+
+
+
+⚫             --舵机库函数管脚、角度的设置与申明；
+
+
+
+
+                        7
+                          红外避障模块实验
+红外避障模块介绍
+  红外避障模块是具有一对红外线发射与接收管，发射管发射出一定频率的红外线，当检测方向遇到
+障碍物（反射面）时，红外线反射回来被接收管接收，经过比较器电路处理之后，绿色指示灯会亮起，
+同时信号输出接口输出数字信号（一个低电平信号），可通过电位器旋钮调节检测距离，有效距离范围
+2～30cm，工作电压为 3.3V-5V。该传感器的探测距离可以通过电位器调节，由于使用的是红外线，所
+以抗干扰能力很强、干扰小，在距离适中的时候测量精度很高。除此外，该模块便于装配、使用方便，
+可以广泛应用于机器人避障、避障小车、流水线计数及黑白线循迹等众多场合。
+
+
+
+
+                           红外避障模块实物图
+
+实验目的
+  ⚫   了解红外避障模块的工作原理
+
+  ⚫   使用 Arduino UNO 获取红外避障模块的值，控制蜂鸣器和 LED 灯。
+
+组件清单
+  ⚫   Arduino UNO R3 主板
+  ⚫   面包板
+  ⚫   USB 数据线
+  ⚫   红外避障模块* 1
+  ⚫   LED 模块*1
+  ⚫   有源蜂鸣器*1
+  ⚫   若干跳线
+
+实验原理
+ 利用红外避障模块的工作特性, 当红外避障模块检测到障碍物,LED 亮,蜂鸣器响;如果没有检测到
+障碍物,LED 熄灭,蜂鸣器不响.
+
+接线
+                               1
+       Arduino UNO       红外避障模块
+            12             OUT
+            5V             VCC
+          GND              GND
+
+
+       Arduino UNO         LED
+            11              +
+          GND               —
+
+
+       Arduino UNO       有源蜂鸣器
+            13             +
+          GND              —
+
+
+
+
+程序
+
+实验结果
+
+
+
+
+                     2
+3
+如果你的套件中有 Sensor V5.0 扩展板 ，可以按照下图接线,更加方便。
+
+
+
+
+mBlock 图形化编程程序
+                           4
+                 温湿度传感器模块实验
+温湿度传感器模块介
+  DHT11 数字温度 - 湿度传感器是一种包含校准数字信号输出的复合传感器。
+
+  它采用特殊的数字模块采集技术和湿度 - 温度传感器技术，确保高可靠性和出色的长期稳定性。
+
+传感器由电阻式湿度元件和 NTC 温度测量元件组成，并连接到高性能8 位微控制器。
+
+
+
+
+                       温湿度传感器实物图
+
+引脚说明
+1, VDD: 连接电源正极（3-5V）
+
+2, DATA: 串行数据，单总线，必须连接到一个接近 5.1 K 的上拉电阻，因此 DATA 在
+
+空闲时间内始终处于高电平。
+
+3, GND: 连接电源负极
+
+4, NC:悬空引脚
+
+DHT11 的工作原理
+  DHT11 通过单总线与微处理器通信。 它只需要一个线程，一次发送 40 个数据，大端。
+
+数据格式
+  8 位湿度整数数据+ 8 位湿度十进制数据+ 8 位温度整数数据+ 8 位温度十进制数据+ 8 位奇偶校验
+
+位。
+
+
+                           1
+通信方式
+  将整数添加到湿度和温度的小数，只保持低 8 位。 微处理器（M0）和 DHT11 的通信协议：主从
+
+结构。 DHT11 是从属设备，而 M0 是主机。 从机只能在主机呼叫时响应。
+
+
+详细过程
+  M0 发送启动信号 - > DHT 响应信号 - > DHT 通知 M0 它已准备好接受信号 - > DHT 发送准备好
+
+的数据 - > DHT 结束信号 - > DHT 内部重新测试环境温度和湿度，记录下一个数据 从 M0 开始发出
+
+信号。
+
+  通过该过程获得，每次收集的数据 M0 始终是最后一次 DHT 数据。如果我们想获得实时数据，那么
+
+M0 可以收集两个连续的数据，但是，正式地，不建议连续多次读取 DHT。如果每次读取的间隔时间
+
+超过 5 秒，则足以获得准确的数据。DHT 在通电时需要 1 秒才能稳定。
+
+M0 启动信号
+1. 将 DATA 引脚设置为输出状态并输出高电平
+2. 然后 DATA 引脚输出低电平，持续时间超过 18ms，检测到后，DHT 从低功耗模式 - >高速模式。
+3. 将 DATA 引脚设置为输入状态，由于上拉电阻，它变为高电平，从而完成启动信号。
+
+
+                                  >18ms
+          VDD
+
+
+                                                           The pulled-down host bus
+          GND
+
+
+                           host signal                               slave signal
+
+                           The host sends a start signal
+
+
+THD 响应信号，就绪信号
+  （当 M0 DATA 引脚输出低电平时，DHT 从低功耗模式切换到高速模式，等待 DATA 引脚进入高
+
+电平）
+
+1. DHT 输出 80us 低电平作为响应信号
+
+2 . DHT 输出 80us 高电平，通知微处理器准备好接收数据
+
+3. 连续发送 40 个数据（上次数据）
+                                         2
+                           80us                  80us
+    VDD
+
+
+                                                                 start to sent data
+    GND
+
+
+                       host signal                       slave signal
+
+
+DHT 数据信号
+“0”格式数据：50us 低电平+ 26-28us 高电平
+
+“1”格式数据：50us 低级别+ 70us 高级别
+
+
+                               50us               26-28us
+     VDD
+
+
+
+
+     GND
+
+
+                           host signal                  slave signal
+
+                                     "0" format data
+
+
+
+
+                                          3
+                               50us                        70us
+       VDD
+
+
+
+
+       GND
+
+
+                          host signal                     slave signal
+
+                                    "1" format data
+
+
+
+DHT 终止信号
+   DHT DATA 引脚输出 40 个数据，在连续输出低电平 50us 后，转入输入状态。 由于上拉电阻，
+
+DATA 变为高电平。 DHT 内部重新测试环境温度和湿度，记录来自外部的下一个启动信号的数据。
+
+
+ VDD
+
+              start
+ GND
+
+                                        "0" format data   "1" format dat
+ Single Bus           host signal                                          slave signal
+
+                                        The time sequence diagram
+
+
+   该实验的目的是使用温度 - 湿度传感器检测空气中的温度和湿度。 传感器将收集的数据发送到
+
+ARDUINO 板。 处理完毕后，结果将反映在 LCD 上，第一行显示温度，第二行显示湿度。
+
+组件清单
+   ⚫ Arduino UNO R3 主板
+
+   ⚫ 面包板
+
+   ⚫ USB 数据线
+
+   ⚫ LCD1602 模块 * 1
+   ⚫ DTH11 温湿度传感器模块 * 1
+
+                                                 4
+    ⚫ 若干跳线
+
+实验目的
+    ⚫ 学习温湿度传感器的工作原理
+
+    ⚫ 使用 Arduino UNO 获取温湿度传感器模块的值并将该值通过 LCD 1602 显示屏
+
+       显示出来。
+
+接线
+                       LCD 显示屏 PCF8574T           Arduino
+                                 GND                GND
+                                 VCC                 5V
+                                 SDA                 A4
+                                 SCL                 A5
+                           温湿度传感器                 Arduino
+                                 GND                GND
+                                 VCC                 5V
+                                 OUT                 8
+
+
+
+
+Arduino IDE 编程程序
+#include <Wire.h>
+#include"dht11.h"
+#include "LiquidCrystal_I2C.h"
+
+#define    DHT11PIN     8
+dht11 DHT11;
+LiquidCrystal_I2C lcd(0x27, 16, 2);// 0x27 is the I2C bus address for an unmodified
+backpack
+void setup() {
+                                             5
+    pinMode(DHT11PIN, OUTPUT);
+    lcd.init();
+    lcd.backlight();
+    Serial.begin(9600);
+}
+
+void loop() {
+  int chk = DHT11.read(DHT11PIN);
+  lcd.setCursor(0, 0);
+  lcd.print("Tep: ");
+  lcd.print((float)DHT11.temperature, 2);
+  lcd.print("C");
+  lcd.setCursor(0, 1);
+  lcd.print("Hum: ");
+  lcd.print((float)DHT11.humidity, 2);
+  lcd.print("%");
+  delay(200);
+}
+
+
+    实验结果
+
+
+
+
+如果你的套件中有 sensor V5.0 的扩展板，可以按照下图中的接线方法接线，更加的方便。
+
+
+                                            6
+mBlock 图形化编程程序
+mBlock 编写温湿度传感器程序主要用到的积木块分别是：
+
+⚫           设置串口波特率
+
+
+⚫          设置温湿度传感器的引脚
+
+
+⚫          LCD1602 显示屏初始化
+
+⚫          设置显示屏显示内容
+
+⚫            设置显示屏显示位置
+                            7
+

@@ -485,7 +485,7 @@ function lead(s, title, body, o) {
     notes: '先断电再接线。红线 5V、黑线 GND、黄线 A0 是电位器的三根线；蓝线从 13 号脚到 LED，LED 另一脚经 220Ω 电阻回到 GND。提醒学生 LED 长脚是正极，接反了不会亮。',
   });
   {
-    V.imageBox(s, { file: 'pdf/ad_wiring.jpg', x: G.L, y: G.top, w: 5.1, h: G.ch, diagram: true, caption: '原指南接线图：红线 5V · 黄线 A0 · 黑线 GND · 蓝线 13 号脚' });
+    V.imageBox(s, { file: 'l13/ad_wiring.jpg', x: G.L, y: G.top, w: 5.1, h: G.ch, diagram: true, caption: '原指南接线图：红线 5V · 黄线 A0 · 黑线 GND · 蓝线 13 号脚' });
     const tx = 5.85, tw = G.R - tx;
     V.table(s, [['Arduino UNO', '10K 电位器'], ['5V', '一端'], ['A0', '中间引脚'], ['GND', '另一端']], { x: tx, y: G.top, w: tw, colW: [1.45, tw - 1.45], rowH: 0.3, size: 12, monoCols: [0], boldCols: [0], align: ['center', 'center'] });
     V.table(s, [['Arduino UNO', 'LED（串 220Ω 电阻）'], ['13', 'LED 正极（长脚）'], ['GND', '220Ω 电阻 → LED 负极']], { x: tx, y: 2.85, w: tw, colW: [1.45, tw - 1.45], rowH: 0.3, size: 12, monoCols: [0], boldCols: [0], align: ['center', 'center'] });
@@ -603,8 +603,8 @@ function lead(s, title, body, o) {
     const Hi = 2.05, capH = 0.3, pad = 0.12;
     const bh = Hi + 2 * pad + capH;
     const pw = Hi * 1196 / 803 + 2 * pad, sw = Hi * 449 / 366 + 2 * pad;
-    V.imageBox(s, { file: 'pdf/ad_result_photo.jpg', x: G.L, y: G.top, w: pw, h: bh, caption: '实物连接（原指南照片）' });
-    V.imageBox(s, { file: 'pdf/ad_serial_monitor.jpg', x: G.L + pw + 0.3, y: G.top, w: sw, h: bh, diagram: true, caption: '串口监视器（原指南截图）' });
+    V.imageBox(s, { file: 'l13/ad_result_photo.jpg', x: G.L, y: G.top, w: pw, h: bh, caption: '实物连接（原指南照片）' });
+    V.imageBox(s, { file: 'l13/ad_serial_monitor.jpg', x: G.L + pw + 0.3, y: G.top, w: sw, h: bh, diagram: true, caption: '串口监视器（原指南截图）' });
     const ix = G.L + pw + sw + 0.6, iw = G.R - ix;
     V.card(s, { x: ix, y: G.top, w: iw, h: G.ch });
     txt(s, '输出怎么读', { x: ix + 0.16, y: G.top + 0.14, w: iw - 0.32, h: 0.3, size: 13, bold: true, valign: 'middle' });
@@ -679,7 +679,7 @@ function lead(s, title, body, o) {
     y = lead(s, '变化有多大', '强光下可小于 1 kΩ，完全无光时约 1.5 MΩ——相差上千倍，所以非常灵敏。', { x: G.L, y, w });
     if (y > G.bottom) warn('ldr intro text overflow');
     const px = 4.45, pw = G.R - px;
-    V.imageBox(s, { file: 'pdf/ldr_module_photo.jpg', x: px, y: G.top, w: pw, h: 2.5, pad: 0.1 });
+    V.imageBox(s, { file: 'l13/ldr_module_photo.jpg', x: px, y: G.top, w: pw, h: 2.5, pad: 0.1 });
     const facts = [['< 1 kΩ', '强光下的电阻', false], ['≈ 1.5 MΩ', '无光时的电阻', false], ['S V G', '信号 电源 地', true]];
     const fw = (pw - 0.5) / 3;
     facts.forEach(([b, t, mono], i) => {
@@ -732,7 +732,7 @@ function lead(s, title, body, o) {
     notes: '光敏模块三根线：S 接 A0、G 接 GND、V 接 5V；RGB 模块只接 R 和 GND 两根。提醒学生 R 接的是 11 号——板上 11 旁边有 ~ 号，表示它能输出 PWM，下一页就讲。',
   });
   {
-    V.imageBox(s, { file: 'pdf/ldr_wiring.jpg', x: G.L, y: G.top, w: 5.6, h: 2.6, diagram: true, caption: '原指南接线图：上方是 RGB LED 模块，下方是光敏电阻模块' });
+    V.imageBox(s, { file: 'l13/ldr_wiring.jpg', x: G.L, y: G.top, w: 5.6, h: 2.6, diagram: true, caption: '原指南接线图：上方是 RGB LED 模块，下方是光敏电阻模块' });
     const tx = 6.35, tw = G.R - tx;
     V.table(s, [['Arduino UNO 板', '光敏电阻模块'], ['A0', 'S'], ['GND', 'G'], ['5V', 'V']], { x: tx, y: G.top, w: tw, colW: [1.6, tw - 1.6], rowH: 0.3, size: 12, monoCols: [0, 1], boldCols: [0], align: ['center', 'center'] });
     txt(s, 'S = 信号　G = 地　V = 电源', { x: tx, y: 2.6, w: tw, h: 0.24, size: 10.5, color: P.muted, valign: 'middle' });
@@ -822,7 +822,7 @@ function lead(s, title, body, o) {
     notes: '上传后打开串口监视器（9600），按表格顺序做三次：正常光线、用手盖住、用手机手电筒照，每次把串口数值和红灯亮度填进表里。数值是变大还是变小取决于模块内部电路，原指南没有写，让学生自己测出来、再和同桌对比。',
   });
   {
-    V.imageBox(s, { file: 'pdf/ldr_result_photo.jpg', x: G.L, y: G.top, w: 4.25, h: G.ch, caption: '实物：光敏模块和 RGB 模块接在 UNO 上，红灯亮起' });
+    V.imageBox(s, { file: 'l13/ldr_result_photo.jpg', x: G.L, y: G.top, w: 4.25, h: G.ch, caption: '实物：光敏模块和 RGB 模块接在 UNO 上，红灯亮起' });
     const rx = 5.0, rw = G.R - rx;
     V.tip(s, { x: rx, y: G.top, w: rw, h: 0.8, kind: 'note', text: '原指南：“现在我们盖住光敏电阻，\n我们将清楚地看到光的亮度变化。”', size: 12 }, I.book);
     const ty = 2.45;

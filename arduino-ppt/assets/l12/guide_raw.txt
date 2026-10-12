@@ -1,0 +1,303 @@
+                       按键模块实验
+按键模块介绍
+ 数字 I/O 端口的含义是 INPUT 和 OUTPUT 接口，在以前的 LED 灯实验中，我们只使用 GPIO 的
+OUTPUT 功能。 现在让我们尝试在 Arduino 中使用 I / O 的 INPUT 功能，即该功能是在本实验中从外
+ 部设备读取输出值。 我们使用按键和 LED 灯来完成使用 INPUT 和 OUTPUT 作为组合的实验。
+
+
+
+
+实验目的
+我们将按键连接到 D7 号接口，红灯连接到 D11 号接口（Arduino 控制器中的所有 D0-D13 数字 I / O
+接口可用于连接按键和指示灯，但尽量不要选择数字 D0 和 D1 接口，因为 D0 和 D1 功能复用，除了
+I / O 端口功能外，它们还用作串行通信接口。下载程序时，设备正在与 PC 通信。所以我们应该保留
+D0 和 D1 接口 为了避免插入线路的麻烦，我们不选择 D0 号和 D1 号接口。
+
+组件清单
+ Arduino Uno 主板
+
+ 面包板
+
+ USB 数据线
+
+ 按键 * 1
+
+ LED 灯模块 * 1
+
+ 若干跳线
+                              1
+接线
+
+     Arduino Uno       按键模块
+         7               S
+        GND              G
+         5V              V
+     Arduino Uno       LED 灯
+         11               +
+        GND               -
+
+
+
+
+                   2
+实验原理
+    通过分析电路我们可以知道，当按下按钮时，D7 号接口处于高电平，它将 D11 号输出引脚置高
+
+电平，这可以使灯亮。 当 D7 号接口读为低电平时，D11 号输出保持低电平，此时指示灯熄灭。 原
+
+理与上述相同。
+
+
+程序
+int led_out = 11 ; //GPIO 11 LED pin
+int keypad_pin = 7; //GPIO 7 key pin
+int value;
+void setup()
+{
+    pinMode(led_out,OUTPUT);                     // init led pin output
+    pinMode(keypad_pin,INPUT);          // init key pin input
+     digitalWrite(led_out,LOW);
+}
+void loop()
+{
+        value = digitalRead(keypad_pin);    // read key pad pin vaule
+        if( value == LOW )
+        {
+            digitalWrite(led_out,HIGH);      // if key value is down turn on LED
+
+       }
+       else
+       {
+              digitalWrite(led_out,LOW);   // if key value is down   turn off LED
+       }
+}
+
+
+
+
+实验结论：
+
+
+
+
+                                           3
+mBlock 图形化编程程序
+mBlock 编写按键试验的程序如下图所示：
+
+
+
+
+也可以用 mBlock 直接打开已经做好的程序文件，它是一个.sb2 文件，以下是打开步骤：
+
+
+
+
+                         4
+                         触摸开关模块实验
+触摸开关模块介绍
+ 触摸开关模块是一个基于触摸检测 IC（TTP223B）的电容式点动型触摸开关模块。常态下，模块
+输出低电平，模式为低功耗模式；当用手指触摸相应位置时，模块会输出高电平，模式切换为快速模式；
+当持续 12 秒没有触摸时，模式又切换为低功耗模式。可以将模块安装在非金属材料如塑料、玻璃的
+表面，另外将薄薄的纸片（非金属）覆盖在模块的表面，只要触摸的位置正确，即可做成隐藏在墙壁、
+桌面等地方的按键。
+
+
+
+
+                          触摸开关模块实物图
+
+实验目的
+ ⚫   了解触摸开关模块的工作原理
+ ⚫   实现使用 Arduino 控制触摸开关控制 LED 灯。
+
+组件
+ ⚫   Arduino UNO R3 主板
+ ⚫   面包板
+ ⚫   USB 数据线
+ ⚫   触摸开关模块 * 1
+ ⚫   LED 模块*1
+ ⚫   若干跳线
+
+实验原理
+                               1
+  使用 Arduino 控制触摸开关控制 LED 灯亮灭,用手指触摸触摸开关模块,当 Arduino UNO 板检测到触
+摸开关模块输出高电平,控制 LED 灯亮,负责 LED 灯灭。
+
+接线
+                  Arduino UNO       触摸开关模块
+                      A0             SIG（信号引脚）
+                      5V             VCC(+)
+                     GND             GND(-)
+
+                  Arduino UNO         LED
+                      A5               +
+                     GND             GND(-)
+
+
+
+
+ArduinoIDE 编程程序
+实验结果
+
+
+
+
+                                2
+如果你的套件中有 Sensor V5.0 扩展板 ，可以按照下图接线。
+
+
+
+
+                           3
+mBlock 图形化编程程序
+使用 mBlock 编程，主要用到的积木块分别是：
+
+
+
+                            4
+第 2.17 讲：限位开关模块实验
+1、介绍
+  限位开关又称行程开关，用于反应设备机械位置的变化，并在设备达到预定位置时
+实现电路的切换，进而实现行程控制、限位保护、报警、联锁启停设备等功能。
+
+
+
+
+2、组件清单
+  Arduino UNO R3 主板
+  USB 数据线
+  限位开关模块*1
+  LED灯模块*1
+  220Ω电阻*1
+  若干跳线
+3、实验原理
+
+
+
+
+4、连线
+               Arduino Uno    限位开关模块
+                    10          OUT
+                   GND          GND
+                    5V          VCC
+
+               Arduino Uno   LED（中间加电阻）
+                    11            长脚
+                   GND            短脚
+5、程序
+Arduino程序：
+    Arduino编写的程序如下图所示,您也可以直接打开程序文件，它是一个.ino文件，
+打开步骤可以参考第2.1讲：Hello Arduino !实验
+int Led =11; //定义 LED 接口
+int SensorPin=10; //定义限位开关接口
+int val=0;//定义数字变量 val
+void setup()
+{
+  pinMode(Led,OUTPUT);//定义 LED 为输出接口
+  pinMode(SensorPin,INPUT);//定义限位开关引脚为输出接口
+  Serial.begin(9600);
+}
+void loop()
+{
+  val=digitalRead(SensorPin);
+  Serial.println(val);
+  if(val==0)
+  {
+       digitalWrite(Led,HIGH);
+     }
+  else
+     {
+       digitalWrite(Led,LOW);
+     }
+}
+实验结果
+   现在，上传程序之后，按下限位开关，灯会随之亮起；
+mBlock 图形化编程程序：
+  mBlock编写的程序如下图所示,您也可以直接打开程序文件，它是一个.sb2文件，
+
+打开步骤可以参考第2.1讲：Hello Arduino !实验
+
+
+
+
+Mixly 图形化编程程序：
+    Mixly 编写的程序如下图所示,您也可以直接打开程序文件，它是一个.mix 文件，
+打开步骤可以参考第2.1讲：Hello Arduino !实验
+               倾斜开关模块实验
+倾斜开关模块介绍
+  倾斜开关模块也称为滚珠开关，滚珠开关也叫钢珠开关，珠子开关，其实都是震动
+开关 的一种只是叫法不一样，都是通过珠子滚动接触导针的原理来控制电路的接通或
+者断开的。 当倾斜传感器感应到倾斜时，模块会输出低电平信号，否则输出高电平。
+1、SW-520、SW-520D 为滚珠型倾斜震动感应单方向性触发开关。
+2、当产品向帽盖端倾斜、倾斜角大于 10 度时，为开路 OFF 状态， 当产品水平状态
+发生倾斜改变(并 且引线平行于平面方向，上 下高度一样)，触发端(镀金引脚端 A
+与 B)低于水平倾斜角大于 10 度角时，为闭路 ON 状态。
+
+
+
+
+                 倾斜开关模块实物图
+
+                     1
+实验目的
+ ⚫   了解倾斜开关模块的工作原理
+
+ ⚫   使用 Arduino 控制倾斜开关模块实现防盗报警的功能。
+
+组件清单
+ ⚫ Arduino UNO R3 主板
+
+ ⚫ 面包板
+
+ ⚫ USB 数据线
+
+ ⚫ 倾斜开关模块 * 1
+
+ ⚫ 贴片 模块*1
+
+ ⚫ 有源蜂鸣器*1
+
+ ⚫ 若干跳线
+
+
+
+
+                           2
+实验原理
+ 利用倾斜开关模块的工作特性, 当在电路板在静止状态时, 倾斜开关模块处于闭合状态,当有外力
+触碰到了电路板致使其倾斜开关里面的滚珠和导线断开接触从而断开电路,此时触发报警,LED 亮,蜂
+鸣器响;当断开模块恢复到静止状态时,LED 熄灭,蜂鸣器不响.
+
+接线
+              Arduino UNO        倾斜开关模块
+                   12              S
+                   5V              V
+                 GND               G
+
+              Arduino UNO         贴片模块
+                   11               R
+                 GND               GND
+
+               Arduino UNO       有源蜂鸣器
+                    13             S
+                  GND              G
+                   5V              V
+
+
+
+
+                             3
+Arduino IDE 编程程序
+
+
+
+
+烧录程序后,将倾斜开关模块稍微触碰一下,即可触发报警,LED 灯亮,蜂鸣器响.
+
+实验结果
+
+
+
+
+                          4
+
