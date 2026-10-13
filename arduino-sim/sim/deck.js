@@ -453,9 +453,12 @@
         const a = Array.isArray(n.line) ? n.line[0] : n.line, b = Array.isArray(n.line) ? n.line[1] : n.line;
         return { a: Number(a) || from, b: Number(b) || Number(a) || from, text: n.text };
       }).sort((x, y) => x.a - y.a);
+      // long lines (the guides' trailing comments) wrap with a hanging indent: own indentation + 4 columns
+      const raw = code.split('\n');
       let lines = '';
       for (let ln = from; ln <= to; ln++) {
-        lines += `<div class="cl${hl.has(ln) ? ' hl' : ''}" data-line="${ln}"><span class="ln">${ln}</span><span class="tx">${all[ln - 1] || ' '}</span></div>`;
+        const ind = Math.min(24, (/^[ \t]*/.exec(raw[ln - 1] || '')[0].replace(/\t/g, '  ').length) + 4);
+        lines += `<div class="cl${hl.has(ln) ? ' hl' : ''}" data-line="${ln}"><span class="ln">${ln}</span><span class="tx" style="--ind:${ind}ch">${all[ln - 1] || ' '}</span></div>`;
       }
       const notesHtml = notes.map((n, i) => `<div class="note" data-line="${n.a}" data-a="${n.a}" data-b="${n.b}" data-i="${i}">` +
         `<span class="tag line">${n.a === n.b ? 'L' + n.a : 'L' + n.a + '–' + n.b}</span><div class="note-tx">${n.text}</div></div>`).join('');

@@ -8,11 +8,12 @@
                                  without it font requests get an empty stylesheet (no network needed)
           SIM_QUICK=1            only the desktop / light pass (skips phone + dark screenshot passes)
           SIM_LESSON=l12         only test this lesson (same as the first argument); home is always checked
+          SIM_MODES=phone-light,desktop-dark   only these passes (desktop-light runs the full checks)
 
    What it does (opens index.html over file://, like a student double-clicking it):
      · home view: title, 5 lesson cards, “制作中” exactly for lesson files that do not exist,
        every existing lessons/l*.js is loaded by index.html, no horizontal overflow
-     · every registered lesson (#_demo + the course lessons that exist): walks every slide with the
+     · every lesson (#_demo, #_parts + the course lessons that exist): walks every slide with the
        “下一页” button, checks the slide renders, images load, nothing overflows sideways
      · every lab slide: compiles every program and every task's reference code in the page
        (a program marked `expect:'error'` must FAIL to compile, all others must compile), runs
@@ -44,6 +45,7 @@ const SHOTS = process.env.SIM_SHOTS || path.join(os.tmpdir(), 'arduino-sim-smoke
 const FONT_CACHE = process.env.SIM_FONT_CACHE || '';
 const QUICK = process.env.SIM_QUICK === '1';
 const ONLY = process.argv[2] || process.env.SIM_LESSON || '';
+const MODES = process.env.SIM_MODES ? process.env.SIM_MODES.split(',') : null;
 const COURSE = ['l12', 'l13', 'l21', 'l22', 'l23'];
 fs.mkdirSync(SHOTS, { recursive: true });
 
@@ -90,8 +92,16 @@ async function newPage(browser, mode) {
   return { ctx, page };
 }
 
+// <name>.png = what the student sees (viewport); <name>-full.png = whole page when it is taller than the
+// viewport (sticky top / bottom bars made static for the capture so they do not float mid-page)
 async function shot(page, name) {
   await page.screenshot({ path: path.join(SHOTS, name + '.png'), animations: 'disabled' });
+  const tall = await page.evaluate(() => document.documentElement.scrollHeight > innerHeight + 4);
+  if (!tall) return;
+  const y = await page.evaluate(() => scrollY);
+  await page.addStyleTag({ content: '.deck-top,.deck-bottom{position:static!important}' }).then(h => h.evaluate(e => e.setAttribute('data-smoke-shot', '')));
+  await page.screenshot({ path: path.join(SHOTS, name + '-full.png'), animations: 'disabled', fullPage: true });
+  await page.evaluate(y => { document.querySelectorAll('style[data-smoke-shot]').forEach(e => e.remove()); scrollTo(0, y); }, y);
 }
 async function noOverflow(page, where) {
   const r = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth }));
@@ -231,12 +241,18 @@ async function expectPoll(page, exp, timeout, where) {
 // ------------------------------------------------------------------ lab driving helpers
 const LAB = '#deck-main .lab';
 const partSel = (type, k) => `${LAB} .part[data-type="${type}"] >> nth=${k || 0}`;
+// scroll the element to the middle of the viewport (clear of the sticky top / bottom bars) and make
+// sure a pointer at its centre really hits it — a student's finger would hit the same element
 async function center(page, sel) {
   const loc = page.locator(sel).first();
-  await loc.scrollIntoViewIfNeeded();
+  await loc.evaluate(el => el.scrollIntoView({ block: 'center', inline: 'nearest' }));
+  await sleep(40);
   const b = await loc.boundingBox();
   if (!b) throw new Error('not visible: ' + sel);
-  return { x: b.x + b.width / 2, y: b.y + b.height / 2, b };
+  const x = b.x + b.width / 2, y = b.y + b.height / 2;
+  const hit = await loc.evaluate((el, [px, py]) => { const t = document.elementFromPoint(px, py); return t ? (el === t || el.contains(t) ? '' : (t.className && t.className.baseVal != null ? t.className.baseVal : t.className) || t.tagName) : 'nothing'; }, [x, y]);
+  if (hit) throw new Error(`${sel} is covered by “${hit}” at its centre`);
+  return { x, y, b };
 }
 async function clickRun(page) { await page.locator(`${LAB} .btn-run`).click(); }
 async function clickStop(page) { await page.locator(`${LAB} .btn-stop`).click(); }
@@ -246,19 +262,50 @@ async function selectTab(page, i) {
   await page.waitForFunction(i => SIM.deck.current.lab && SIM.deck.current.lab.program === i, i);
 }
 
+/* One smoke step (all keys optional, applied in this order; see AUTHORING_LESSONS.md §6):
+     tab:i  code:'…'  task:n  run  stop  speed  wait:ms
+     press:type [target]   mouse down on the part's press-and-hold control (held until release)
+     release               mouse up
+     knob:type to:0…1 [index]       drag a rotary knob to a position
+     slider:type value [index]      set a range slider (index = which slider in the card)
+     stick:[dx,dy]         drag the joystick (−1…1, right / up positive; held until release)
+     click:type [target]   click a button inside the part (default '.pbtn': 用手盖住 / 碰一下 / 开启声音 …)
+     key:'ArrowRight' part:type [target] [times] [hold]   keyboard on a focused part control
+                           (hold:true keeps the key down until release — for programs that delay())
+     sound                 click 开启声音 on the buzzer
+     send:'90' ending:'none'|'nl'|'cr'|'both'      type into the serial monitor and press 发送
+     baud:115200           change the serial monitor baud
+     expect:{…} [timeout]  poll until every expectation holds (see pageCheck) */
+const HELD = []; // keys held down by {key, hold:true}
 async function doStep(page, st, where) {
   const k = st.n || 0;
+  const inPart = (type, target) => `${LAB} .part[data-type="${type}"] >> nth=${k} >> ${target}`;
   if (st.tab != null) { await selectTab(page, st.tab); }
+  if (st.code != null) { await page.evaluate(c => SIM.deck.current.lab.setCode(c), String(st.code)); }
+  if (st.task != null) { await page.locator(`${LAB} .lab-tasks li.task >> nth=${st.task - 1} >> button`).click(); }
   if (st.run) { await clickRun(page); await sleep(60); }
   if (st.stop) { await clickStop(page); }
+  if (st.speed) { await page.locator(`${LAB} .ed-opt.speed select`).selectOption(String(st.speed)); }
   if (st.wait) await sleep(st.wait);
   if (st.press) {
-    const c = await center(page, `${LAB} .part[data-type="${st.press}"] >> nth=${k} >> [aria-pressed]`);
+    const c = await center(page, inPart(st.press, st.target || '[aria-pressed]'));
     await page.mouse.move(c.x, c.y); await page.mouse.down();
   }
-  if (st.release) { await page.mouse.up(); }
+  if (st.release) {
+    await page.mouse.up();
+    for (const key of HELD.splice(0)) await page.keyboard.up(key);
+  }
+  if (st.stick) {
+    // geometry of the joystick card's SVG (viewBox 280×140, stick centre 70,68, travel radius 38)
+    const c = await center(page, inPart('joystick', 'svg >> nth=0'));
+    const sx = c.b.width / 280, sy = c.b.height / 140;
+    const x0 = c.b.x + 70 * sx, y0 = c.b.y + 68 * sy;
+    const [dx, dy] = st.stick;
+    await page.mouse.move(x0, y0); await page.mouse.down();
+    for (let i = 1; i <= 8; i++) await page.mouse.move(x0 + dx * 38 * sx * i / 8, y0 - dy * 38 * sy * i / 8);
+  }
   if (st.knob) {
-    const sel = `${LAB} .part[data-type="${st.knob}"] >> nth=${k} >> svg.knob`;
+    const sel = inPart(st.knob, `svg.knob >> nth=${st.index || 0}`);
     const c = await center(page, sel);
     const cur = Number(await page.locator(sel).first().getAttribute('aria-valuenow')) / 100;
     const R = c.b.width * 0.44;
@@ -270,18 +317,24 @@ async function doStep(page, st, where) {
     await page.mouse.up();
   }
   if (st.slider) {
-    const sel = `${LAB} .part[data-type="${st.slider}"] >> nth=${k} >> input[type=range] >> nth=${st.index || 0}`;
+    const sel = inPart(st.slider, `input[type=range] >> nth=${st.index || 0}`);
     await page.locator(sel).scrollIntoViewIfNeeded();
     await page.locator(sel).evaluate((el, v) => { el.value = String(v); el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true })); }, st.value);
   }
-  if (st.sound) { await page.locator(`${LAB} .part[data-type="${st.sound === true ? 'buzzer' : st.sound}"] >> nth=${k} >> .pbtn.sound`).click(); }
+  if (st.click) { await page.locator(inPart(st.click, st.target || '.pbtn')).first().click(); }
+  if (st.key) {
+    const loc = page.locator(inPart(st.part, st.target || '[tabindex="0"]')).first();
+    await loc.focus();
+    if (st.hold) { await page.keyboard.down(st.key); HELD.push(st.key); }
+    else for (let i = 0; i < (st.times || 1); i++) await page.keyboard.press(st.key);
+  }
+  if (st.sound) { await page.locator(inPart(st.sound === true ? 'buzzer' : st.sound, '.pbtn.sound')).click(); }
   if (st.send != null) {
     if (st.ending) await page.locator(`${LAB} .serial-in select`).selectOption(st.ending);
     await page.locator(`${LAB} .serial-in input`).fill(String(st.send));
     await page.locator(`${LAB} .serial-in .send`).click();
   }
   if (st.baud) { await page.locator(`${LAB} .serial-head select`).selectOption(String(st.baud)); }
-  if (st.speed) { await page.locator(`${LAB} .ed-opt.speed select`).selectOption(String(st.speed)); }
   if (st.expect) await expectPoll(page, st.expect, st.timeout || 5000, where + ' ' + JSON.stringify(st.expect).slice(0, 80));
 }
 
@@ -341,6 +394,7 @@ async function testLab(page, mode, id, idx, full) {
     await sleep(80);
     for (const st of info.smoke) await doStep(page, st, where);
     await page.mouse.up().catch(() => {});
+    for (const key of HELD.splice(0)) await page.keyboard.up(key).catch(() => {});
   } else {
     await clickRun(page);
     await sleep(1200);
@@ -528,14 +582,21 @@ async function robustness(page, mode) {
     { name: 'phone-light', w: 390, h: 844, dark: false },
     { name: 'desktop-dark', w: 1280, h: 800, dark: true },
     { name: 'phone-dark', w: 390, h: 844, dark: true }
-  ].filter(m => !QUICK || m.full);
+  ].filter(m => (!QUICK || m.full) && (!MODES || MODES.includes(m.name)));
   const t0 = Date.now();
   try {
     for (const mode of modes) {
       console.log(`== ${mode.name} (${mode.w}×${mode.h})`);
       const { ctx, page } = await newPage(browser, mode);
       await checkHome(page, mode);
-      const ids = await page.evaluate(course => ['_demo'].concat(course.filter(id => SIM.deck.lessons[id])), COURSE);
+      // the two built-in lessons (#_demo: the hard labs, #_parts: every other part type), then every course lesson that exists
+      const extra = ['_demo', '_parts'].filter(id => fs.existsSync(path.join(ROOT, 'lessons', id + '.js')));
+      const ids = await page.evaluate(([extra, course]) => extra.concat(course.filter(id => SIM.deck.lessons[id])), [extra, COURSE]);
+      if (ONLY && !ids.includes(ONLY)) {
+        // a course lesson must be loaded by index.html (checked above); any other id is loaded on demand
+        if (COURSE.includes(ONLY)) fail(mode.name, `#${ONLY} is not loaded by index.html, so it cannot be walked`);
+        else ids.push(ONLY);
+      }
       for (const id of ids) {
         if (ONLY && id !== ONLY) continue;
         await walkLesson(page, mode, id, !!mode.full);

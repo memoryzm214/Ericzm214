@@ -27,11 +27,18 @@
        Tabs *into* the editor can Tab straight out again (accessibility); Esc then Tab always leaves.
      · The pin panel wraps board.setDigitalSource / setAnalogSource on this lab's own board instance to know
        what an input pin would read (pure pass-through to hw.js).
+     · (integration) When the editor column sits above the circuit (narrow screens), messages / status-line
+       changes keep the circuit in place on screen (manual scroll anchoring; .lab has overflow-anchor:none),
+       so a knob being dragged never jumps away from the finger when a runtime warning appears.
+     · (integration) The serial monitor never wraps lines (white-space: pre, scrolls sideways) — one program
+       line is one monitor line, as in the Arduino IDE.
    Extra (optional) config keys beyond §5.1:
      key         storage key for task checkboxes / in-session edits (deck passes one)
      lineEnding  default line ending of the serial monitor: 'none' | 'nl' | 'cr' | 'both' (default 'none')
      programs[i].note   one-line note shown under the toolbar for that program
      tasks[i].program   which program tab “载入参考代码” loads into (default: current tab)
+     programs[i].expect / tasks[i].expect = 'error'   read by test/smoke.js only (must fail to compile)
+     smoke       scripted interaction for test/smoke.js (ignored here; see AUTHORING_LESSONS.md §6)
    ===================================================================== */
 (function (root) {
   'use strict';
@@ -540,8 +547,10 @@
     }
     function showNote() {
       const n = programs[cur].note;
-      noteEl.hidden = !n;
-      noteEl.innerHTML = n ? `${icon('info')}<span>${n}</span>` : '';
+      keepPlace(() => {
+        noteEl.hidden = !n;
+        noteEl.innerHTML = n ? `${icon('info')}<span>${n}</span>` : '';
+      });
     }
     function loadProgram(i) {
       i = Math.max(0, Math.min(programs.length - 1, Number(i) || 0));
@@ -586,8 +595,29 @@
     }
 
     // ---------------- messages / status
-    function clearMsgs() { msgs.innerHTML = ''; warned.clear(); }
+    // Narrow layout: the editor column (messages, status bar) sits ABOVE the circuit. A runtime warning or a
+    // status line that wraps would push the parts down while a student is dragging a knob below — the knob
+    // would jump away from the finger. Keep the circuit where it is (manual scroll anchoring; native CSS
+    // anchoring is switched off for .lab so the two never add up, and Safari has none).
+    function keepPlace(fn) {
+      let top = null;
+      try {
+        const r = circuit.getBoundingClientRect(), vh = root.innerHeight || 0;
+        if (r.bottom > 0 && r.top < vh && edEl.getBoundingClientRect().bottom <= r.top + 1) top = r.top;
+      } catch (e) { top = null; }
+      fn();
+      if (top != null) {
+        const d = circuit.getBoundingClientRect().top - top;
+        if (Math.abs(d) >= 1) { try { root.scrollBy(0, d); } catch (e) { /* */ } }
+      }
+    }
+    function clearMsgs() { if (msgs.firstChild) keepPlace(() => { msgs.innerHTML = ''; }); warned.clear(); }
     function addMsg(kind, html, action) {
+      let m;
+      keepPlace(() => { m = addMsg_(kind, html, action); });
+      return m;
+    }
+    function addMsg_(kind, html, action) {
       const m = h('div', { class: 'ed-msg ' + kind }, `${icon(kind === 'err' ? 'error' : kind === 'warn' ? 'warn' : 'info')}<span class="tx">${html}</span>`);
       if (action) {
         const b = h('button', { type: 'button', text: action.text });
@@ -607,7 +637,7 @@
     }
     function setStatus(kind, text) {
       status.className = 'ed-status ' + kind;
-      if (stText.textContent !== text) stText.textContent = text;
+      if (stText.textContent !== text) keepPlace(() => { stText.textContent = text; });
     }
     function runningText() {
       if (!runner) return '';
@@ -699,7 +729,7 @@
             if (prevVals[v.name] !== undefined && prevVals[v.name] !== val) changedAt[v.name] = now;
             prevVals[v.name] = val;
             const ch = now - (changedAt[v.name] || -1e9) < 700;
-            return `<tr${ch ? ' class="changed"' : ''}><td class="n" title="${esc(v.name)}">${esc(v.name)}</td><td class="t">${esc(v.type || '')}</td><td class="v">${esc(val)}</td></tr>`;
+            return `<tr${ch ? ' class="changed"' : ''}><td class="n" title="${esc(v.name)}">${esc(v.name)}</td><td class="t"><span title="${esc(v.type || '')}">${esc(v.type || '')}</span></td><td class="v">${esc(val)}</td></tr>`;
           }).join('') + '</tbody></table>';
         }
       }
@@ -708,6 +738,13 @@
     const i2cPins = partCfgs.some(pc => pc.type === 'lcd1602');
     const partPins = new Set();
     for (const pc of partCfgs) { try { (SIM.parts.pinsOf ? SIM.parts.pinsOf(pc.type, pc) : []).forEach(n => { if (n >= 0 && n < 20) partPins.add(n); }); } catch (e) { /* */ } }
+    // pins driven by a module protocol rather than a plain level (shown instead of “浮空”)
+    const pinRole = {};
+    const pn = v => { try { return SIM.parts._util.pinNum(v); } catch (e) { return Number(v); } };
+    for (const pc of partCfgs) {
+      if (pc.type === 'ultrasonic') pinRole[pn(pc.echo == null ? 3 : pc.echo)] = '等回波';
+      if (pc.type === 'dht11') pinRole[pn(pc.pin == null ? 8 : pc.pin)] = 'DHT 数据';
+    }
     const label = n => (typeof board.pinLabel === 'function' ? board.pinLabel(n) : (n >= 14 ? 'A' + (n - 14) : 'D' + n));
     function srcVal(f) { try { return f(); } catch (e) { return null; } }
     function renderPins() {
@@ -734,6 +771,7 @@
           } else {
             const d = dsrc[n] ? srcVal(dsrc[n]) : null;
             if (d != null) val = `<span class="lv${d ? ' hi' : ''}">${d ? 'HIGH' : 'LOW'}</span>`;
+            else if (pinRole[n]) val = `<span class="lv">${pinRole[n]}</span>`;
             else if (p.pullup || p.mode === 'INPUT_PULLUP') val = '<span class="lv hi">HIGH</span>';
             else if (p.mode === 'INPUT') val = '<span class="lv">浮空</span>';
             else val = '<span class="lv">—</span>';
@@ -848,7 +886,7 @@
         const warns = Array.from(msgs.querySelectorAll('.ed-msg.warn'));
         const match = re && warns.filter(m => m.querySelector('.tx').textContent === re.msg).pop();
         const last = re ? match : warns[warns.length - 1];
-        if (last) { last.classList.remove('warn'); last.classList.add('err'); }
+        if (last) { last.classList.remove('warn'); last.classList.add('err'); const ic = last.querySelector('svg.i'); if (ic) ic.outerHTML = icon('error'); }
         else if (re) addMsg('err', esc(re.msg), re.line ? { text: `跳到第 ${re.line} 行`, fn: () => ed.gotoLine(re.line) } : null);
         const txt = re ? re.msg : last ? last.querySelector('.tx').textContent : '运行出错';
         setStatus('error', '运行错误：' + txt);
