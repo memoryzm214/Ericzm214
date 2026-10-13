@@ -299,7 +299,7 @@ a.btn { text-decoration: none; }
 .fig-grid.no-side { grid-template-columns: minmax(0, 1fr); }
 .fig-box { background: var(--card); border-radius: var(--radius); padding: 16px; margin: 0; }
 .fig-box .zoom { display: block; width: 100%; padding: 0; border: 0; background: #fff; border-radius: 6px; cursor: zoom-in; position: relative; }
-.fig-box img { display: block; width: 100%; height: auto; max-height: min(62vh, 560px); object-fit: contain; border-radius: 6px; }
+.fig-box img { display: block; width: 100%; height: auto; max-height: min(560px, max(280px, calc(100vh - 340px))); object-fit: contain; border-radius: 6px; }
 .fig-box .zoom .zbadge { position: absolute; right: 8px; bottom: 8px; width: 30px; height: 30px; border-radius: 50%; background: rgba(45, 45, 45, .78); color: #fff; display: grid; place-items: center; opacity: .0; transition: opacity .15s; }
 .fig-box .zoom:hover .zbadge, .fig-box .zoom:focus-visible .zbadge { opacity: 1; }
 .fig-box figcaption { font-size: 12.5px; color: var(--muted); text-align: center; margin-top: 10px; line-height: 1.5; }
