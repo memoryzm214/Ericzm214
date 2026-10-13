@@ -745,6 +745,16 @@
     };
   };
 
+  /* frequency readout: tone() frequencies are exact; frequencies measured from pin toggles are an
+     estimate (loop overhead makes delay(2)+delay(2) ≈ 4.01 ms → 249 Hz, as on a real UNO), so they are
+     shown as “约 …” rounded to 2 significant digits (249 → 约 250 Hz, 1003 → 约 1.0 kHz). */
+  function fmtFreq(f, exact) {
+    if (exact) return f < 1000 ? `${Math.round(f)} Hz` : `${(f / 1000).toFixed(2)} kHz`;
+    const p = f >= 100 ? Math.pow(10, Math.floor(Math.log10(f)) - 1) : 1;
+    const r = Math.round(f / p) * p;
+    return '约 ' + (r < 1000 ? `${r} Hz` : r < 10000 ? `${(r / 1000).toFixed(1)} kHz` : `${Math.round(r / 1000)} kHz`);
+  }
+
   /* ---------- buzzer (active: HIGH = ~2.3 kHz; passive: frequency from pin toggles / tone()) */
   F.buzzer = function (cfg, board) {
     const pin = pinNum(cfg.pin);
@@ -769,7 +779,22 @@
     sb.addEventListener('click', () => { const ok = audioToggle(!AUD.on); if (!ok) sb.textContent = '浏览器不支持声音'; });
     c.ctl.append(el('div', { class: 'part-btns' }, sb));
     const T = tracker(board);
-    let running = false, lastKey = '', highUntil = 0, highFreq = 0, freqShown = 0, freqT = 0;
+    let running = false, lastKey = '', highUntil = 0, highFreq = 0, freqShown = 0, freqT = 0, scanT = -1;
+    // Bursts above 20 kHz can be shorter than one frame of virtual time (frequence_1 with delay(0.5)
+    // flips ~1600 times in ≈10 ms, then delay(1000)); scan every toggle since the last frame so the
+    // “too high to hear” readout appears at any speed, not only when the frame ends inside the burst.
+    function scanHigh() {
+      const tg = T.toggles(pin), n = tg.length;
+      let i = n - 1;
+      while (i > 0 && tg[i - 1] > scanT) i--;
+      const from = Math.max(1, i);
+      const short = [];
+      for (let k = from; k < n; k++) { const d = tg[k] - tg[k - 1]; if (d > 0 && d < 25) short.push(d); }
+      if (n) scanT = tg[n - 1];
+      if (short.length < 6) return 0;
+      short.sort((a, b) => a - b);
+      return 1e6 / (2 * short[short.length >> 1]);
+    }
     function estimate() {
       const tg = T.toggles(pin), now = board.now();
       const n = tg.length;
@@ -783,7 +808,7 @@
       const span = last - tg[i];
       if (span <= 0) return 1e6;
       const half = span / (cnt - 1);              // average µs between toggles
-      if (now - last > Math.max(3 * half, 3000)) return 0; // stopped toggling
+      if (now - last > Math.max(3 * half, 20000)) return 0; // stopped toggling (20 ms grace: frames can jump virtual time)
       return 1e6 / (2 * half);
     }
     return {
@@ -797,17 +822,19 @@
         else if (kind === 'active') freq = driving(st) && T.duty(pin) > 0.3 ? 2300 : 0;
         else freq = driving(st) ? estimate() : 0;
         const t = nowMs();
+        const burst = running && kind === 'passive' && !(tn && tn.freq) ? scanHigh() : 0;
         if (freq > 20000) { highUntil = t + 1500; highFreq = freq; }
+        else if (burst > 20000 && !(freq >= 20 && freq <= 20000)) { highUntil = t + 1500; highFreq = burst; }
         if (freq >= 20 && freq <= 20000) {
           sounding = true;
           // smooth the readout so it does not flicker
           if (!freqShown || Math.abs(freq - freqShown) / freqShown > 0.04 || t - freqT > 400) { freqShown = freq; freqT = t; }
-          txt = kind === 'active' ? '响（约 <b>2.3 kHz</b>）' : `频率 <b>${freqShown >= 1000 ? (freqShown / 1000).toFixed(2) + ' kHz' : Math.round(freqShown) + ' Hz'}</b>`;
+          txt = kind === 'active' ? '响（约 <b>2.3 kHz</b>）' : `频率 <b>${fmtFreq(freqShown, !!(tn && tn.freq))}</b>`;
           voice.set(freq, kind === 'active' ? 0.03 : 0.045);
         } else {
           voice.silence();
           freqShown = 0;
-          if (t < highUntil) txt = `频率太高（约 ${Math.round(highFreq / 1000)} kHz），人耳听不到`;
+          if (t < highUntil) txt = `频率太高（约 ${Math.round(highFreq / 1000)} kHz，超过 20 kHz），人耳听不到`;
           else txt = '安静';
         }
         if (!AUD.on && sounding) txt += ' · 点“开启声音”能听到';
@@ -820,7 +847,7 @@
           c.setRead(txt);
         }
       },
-      rebind() {}, setRunning(r) { running = r; if (!r) voice.silence(); },
+      rebind() { scanT = -1; highUntil = 0; }, setRunning(r) { running = r; if (!r) voice.silence(); },
       destroy() { voice.destroy(); AUD.subs.delete(onAud); c.el.remove(); }
     };
   };
@@ -903,25 +930,26 @@
       ghost, arm,
       sv('circle', { cx, cy, r: 6.5, fill: '#fff', stroke: '#8A9092', 'stroke-width': 1.2 }));
     c.fig.append(s);
-    let lastKey = '';
+    let lastKey = '', everAttached = false;
     return {
       el: c.el,
       update() {
         const st = (board.servo && board.servo(pin)) || {};
         const a = Number(st.angle) || 0, tg = Number(st.target) || 0, att = !!st.attached;
-        const key = att + '|' + a.toFixed(1) + '|' + tg.toFixed(0);
+        if (att) everAttached = true;
+        const key = att + '|' + a.toFixed(1) + '|' + tg.toFixed(0) + '|' + everAttached;
         if (key === lastKey) return;
         lastKey = key;
         arm.setAttribute('transform', `rotate(${(-a).toFixed(2)} ${cx} ${cy})`);
-        arm.setAttribute('opacity', att ? 1 : 0.45);
+        arm.setAttribute('opacity', att ? 1 : everAttached ? 0.8 : 0.45);
         const moving = att && Math.abs(tg - a) > 0.6;
         ghost.setAttribute('opacity', moving ? 0.8 : 0);
         if (moving) ghost.setAttribute('transform', `rotate(${(-tg).toFixed(1)} ${cx} ${cy})`);
         c.el.dataset.angle = String(Math.round(a));
         c.el.dataset.target = String(Math.round(tg));
-        c.setRead(!att ? '还没 attach()，舵机不动' : moving ? `角度 <b>${Math.round(a)}°</b> → 目标 ${Math.round(tg)}°` : `角度 <b>${Math.round(a)}°</b>`);
+        c.setRead(!att ? (everAttached ? `角度 <b>${Math.round(a)}°</b>（已停止，保持不动）` : '还没 attach()，舵机不动') : moving ? `角度 <b>${Math.round(a)}°</b> → 目标 ${Math.round(tg)}°` : `角度 <b>${Math.round(a)}°</b>`);
       },
-      rebind() {}, setRunning() {}, destroy() { c.el.remove(); }
+      rebind() { everAttached = false; lastKey = ''; }, setRunning() {}, destroy() { c.el.remove(); }
     };
   };
 
@@ -1158,19 +1186,26 @@
       if (nd != null) { e.preventDefault(); e.stopPropagation(); dist = clamp(nd, 1, 40); sl.set(dist); paint(); }
     });
     const sl = slider('距离', 1, 40, 1, dist, v => v + 'cm', v => { dist = v; paint(); });
-    const sl2 = slider('检测', 2, 30, 1, th, v => v + 'cm', v => { th = v; paint(); });
-    sl2.input.setAttribute('aria-label', '检测距离（模块上的蓝色旋钮）');
-    c.ctl.append(sl.row, sl2.row, el('div', { class: 'part-note', text: '“检测”= 模块上蓝色旋钮调的检测距离' }));
+    const thOut = el('output', {});
+    const k = knob({ size: 40, value: (th - 2) / 28, label: '检测距离旋钮（模块上的蓝色电位器）', body: '#3A6FD8',
+      text: v => Math.round(2 + v * 28) + ' cm', onChange: v => { th = Math.round(2 + v * 28); paint(); } });
+    c.ctl.append(sl.row, el('div', { class: 'part-row knob-row' }, k.el, el('span', { text: '检测距离' }), thOut));
     function paint() {
       obs.setAttribute('transform', `translate(${xOf(dist).toFixed(1)} 0)`);
       obs.setAttribute('aria-valuenow', dist);
       thLine.setAttribute('x1', xOf(th).toFixed(1)); thLine.setAttribute('x2', xOf(th).toFixed(1));
+      thOut.textContent = th + ' cm';
       obsLed.setAttribute('opacity', hit() ? 1 : 0.2);
       c.el.dataset.detected = hit() ? '1' : '0';
       c.setRead(hit() ? `${dist} cm ≤ ${th} cm · 有障碍 → OUT <b>0</b>` : `${dist} cm > ${th} cm · 没障碍 → OUT <b>1</b>`);
     }
     paint();
-    return { el: c.el, update() {}, rebind: reg, setRunning() {}, setDistance(d) { dist = clamp(d, 1, 40); sl.set(dist); paint(); }, destroy() { board.setDigitalSource(pin, () => null); c.el.remove(); } };
+    return {
+      el: c.el, update() {}, rebind: reg, setRunning() {},
+      setDistance(d) { dist = clamp(d, 1, 40); sl.set(dist); paint(); },
+      setThreshold(t) { th = clamp(Math.round(t), 2, 30); k.set((th - 2) / 28); paint(); },
+      destroy() { board.setDigitalSource(pin, () => null); c.el.remove(); }
+    };
   };
 
   /* ---------- DHT11 temperature / humidity */
@@ -1252,10 +1287,22 @@
     if (Array.isArray(row)) return row.map(v => (typeof v === 'number' ? v : String(v).charCodeAt(0)));
     return Array.from(String(row || '')).map(ch => ch.charCodeAt(0));
   }
+  // the 16 visible columns of each DDRAM row (honours scrollDisplayLeft/Right shift and noDisplay)
+  function visibleCodes(st) {
+    const out = [[], []];
+    if (!st || !st.inited || st.display === false) return out;
+    const sh = ((Number(st.shift) || 0) % 40 + 40) % 40;
+    for (let r = 0; r < 2; r++) {
+      const codes = rowCodes((st.ddram || [])[r]);
+      for (let q = 0; q < 16; q++) { const v = codes[(q + sh) % 40]; out[r].push(v == null ? 32 : v); }
+    }
+    return out;
+  }
   F.lcd1602 = function (cfg, board) {
     const addr = cfg.addr == null ? 0x27 : Number(cfg.addr);
     const c = makeCard('lcd1602', cfg, `LCD1602 显示屏（I2C 0x${addr.toString(16).toUpperCase()}）`, 'SDA:A4 SCL:A5', { wide: true });
-    c.el.append(el('span', { class: 'stopped-tag', text: '已停止' }));
+    const stopTag = el('span', { class: 'stopped-tag', text: '已停止' });
+    c.el.append(stopTag);
     const DOT = 3, GAP = 1, CG = 3, PAD = 8, SC = 2;
     const cw = 5 * (DOT + GAP), ch = 8 * (DOT + GAP);
     const W = PAD * 2 + 16 * cw + 15 * CG, H = PAD * 2 + 2 * ch + 6;
@@ -1268,7 +1315,7 @@
     const offLcd = listen(board, 'lcd', () => { dirty = true; });
     const k = knob({ size: 40, value: contrast, label: 'LCD 背面对比度旋钮', body: '#3A6FD8', onChange: v => { contrast = v; dirty = true; } });
     const hintEl = el('span', { class: 'part-note' });
-    c.ctl.append(el('div', { class: 'part-row', style: 'justify-content:center;gap:10px' }, k.el, el('span', { text: '背面对比度旋钮' }), hintEl));
+    c.ctl.append(el('div', { class: 'part-row knob-row' }, k.el, el('span', { text: '背面对比度旋钮' }), hintEl));
     function draw(st) {
       if (!ctx) return;
       const bl = !!st.backlight;
@@ -1278,13 +1325,14 @@
       ctx.fillRect(0, 0, W, H);
       const aText = clamp((contrast - 0.12) / 0.26, 0, 1) * (bl ? 1 : 0.32);
       const aBlock = clamp((contrast - 0.8) / 0.16, 0, 1) * (bl ? 0.92 : 0.3);
-      const rows = st.ddram || [];
+      const vis = visibleCodes(st);
       for (let r = 0; r < 2; r++) {
-        const codes = inited ? rowCodes(rows[r]) : [];
+        const codes = vis[r];
         for (let q = 0; q < 16; q++) {
           const x0 = PAD + q * (cw + CG), y0 = PAD + r * (ch + 6);
           const code = codes[q] == null ? 32 : codes[q];
-          const g = !inited ? (r === 0 ? [31, 31, 31, 31, 31, 31, 31, 31] : null) : glyph(code);
+          const cust = code < 8 && st.custom && st.custom[code];
+          const g = !inited ? (r === 0 ? [31, 31, 31, 31, 31, 31, 31, 31] : null) : cust ? cust.slice(0, 8).map(v => v & 31) : glyph(code);
           for (let y = 0; y < 8; y++) {
             for (let x = 0; x < 5; x++) {
               const on = g && (g[y] & (1 << (4 - x)));
@@ -1302,8 +1350,8 @@
       el: c.el,
       update() {
         const st = (board.lcd && board.lcd(addr)) || {};
-        const rows = (st.ddram || []).map(r => rowCodes(r).slice(0, 16).map(x => String.fromCharCode(x)).join(''));
-        const key = [st.backlight, st.inited, rows.join('|'), contrast.toFixed(3)].join('#');
+        const rows = visibleCodes(st).map(r => r.map(x => (x >= 32 && x < 127 ? String.fromCharCode(x) : x === 0xDF ? '°' : x < 8 ? '▒' : '?')).join(''));
+        const key = [st.backlight, st.inited, st.display, st.shift, st.stopped, rows.join('|'), contrast.toFixed(3), st.custom ? JSON.stringify(st.custom) : ''].join('#');
         if (!dirty && key === lastKey) return;
         dirty = false; lastKey = key;
         draw(st);
@@ -1312,7 +1360,10 @@
         c.el.dataset.backlight = st.backlight ? '1' : '0';
         hintEl.textContent = contrast < 0.2 ? '太低：看不见字' : contrast > 0.84 ? '太高：满屏方块' : '';
         let txt;
-        if (!st.inited) txt = '还没初始化（lcd.init()）或地址不对';
+        stopTag.style.display = st.stopped ? 'inline-flex' : '';
+        if (st.present === false) txt = `总线上没有 0x${addr.toString(16).toUpperCase()} 这个地址的设备，屏幕不会显示`;
+        else if (!st.inited) txt = '还没初始化（lcd.init()）或地址不对';
+        else if (st.display === false) txt = '显示已关闭（noDisplay）';
         else txt = `背光${st.backlight ? '开' : '关'} · 第 1 行「${(vis[0] || '').replace(/\s+$/, '')}」 · 第 2 行「${(vis[1] || '').replace(/\s+$/, '')}」`;
         c.setRead(txt.replace(/</g, '&lt;'), txt);
       },

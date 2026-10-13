@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arduino 互动实验室</title>
+<meta name="description" content="5 份 Arduino 实验指南、19 个实验：看懂原理和接线，再在浏览器里运行指南里的真实程序。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="sim/sim.css">
+</head>
+<body>
+<div id="home" class="home">
+  <header class="home-hero">
+    <div class="wrap">
+      <div class="home-top">
+        <div class="brand">
+          <svg class="brand-cube" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,10 84.6,30 50,50 15.4,30" fill="#40E0D0"/><polygon points="15.4,30 50,50 50,90 15.4,70" fill="#2D2D2D"/><polygon points="50,50 84.6,30 84.6,70 50,90" fill="#474747"/></svg>
+          <span>湖北工业大学 · 工业设计学院</span>
+        </div>
+        <button type="button" class="theme-btn">主题：自动</button>
+      </div>
+      <h1>Arduino 互动实验室</h1>
+      <p class="lead">5 份实验指南、19 个实验。先看懂原理、接线和每一行代码，再在浏览器里运行指南里的真实程序：改代码、按按键、拧旋钮、移动磁铁和障碍物，看 LED、舵机、蜂鸣器、LCD 和串口监视器怎么反应。</p>
+      <svg class="cubes" viewBox="0 0 200 200" aria-hidden="true"><polygon points="70,72 104.64,92 70,112 35.36,92" fill="#6B6B6B"/><polygon points="35.36,92 70,112 70,152 35.36,132" fill="#2D2D2D"/><polygon points="70,112 104.64,92 104.64,132 70,152" fill="#474747"/><polygon points="140,112 174.64,132 140,152 105.36,132" fill="#6B6B6B"/><polygon points="105.36,132 140,152 140,192 105.36,172" fill="#2D2D2D"/><polygon points="140,152 174.64,132 174.64,172 140,192" fill="#474747"/><polygon points="140,32 174.64,52 140,72 105.36,52" fill="#EBEBEB"/><polygon points="105.36,52 140,72 140,112 105.36,92" fill="#2D2D2D"/><polygon points="140,72 174.64,52 174.64,92 140,112" fill="#474747"/></svg>
+    </div>
+  </header>
+
+  <main>
+    <section class="home-section wrap" aria-labelledby="howto-title">
+      <h2 id="howto-title">怎么用</h2>
+      <p class="sub">三步：看懂 → 动手 → 改一改。电脑和手机都能打开，不用接真实硬件。</p>
+      <ol class="howto">
+        <li><span class="n">1</span><b>选一课，翻页看懂</b><span>原理 → 接线 → 代码逐行看懂。用 ← → 键或底部按钮翻页，右上角下拉可以直接跳到某个实验。</span></li>
+        <li><span class="n">2</span><b>到“动手实验室”点 ▶ 运行</b><span>运行指南里的原样程序：按住按键、拧旋钮、拖动磁铁，看虚拟元件和串口监视器的反应。</span></li>
+        <li><span class="n">3</span><b>按任务卡改代码再运行</b><span>改一个数、换一个引脚，看看结果怎么变；做完把任务勾上，浏览器会记住进度。</span></li>
+      </ol>
+    </section>
+
+    <section class="home-section wrap" aria-labelledby="lessons-title">
+      <h2 id="lessons-title">5 次课 · 19 个实验</h2>
+      <p class="sub">每份实验指南一课，按指南里的实验顺序讲，图形化编程（mBlock / Mixly）部分不收录。</p>
+      <ul class="lessons">
+        <li>
+          <a class="lesson-card" data-lesson="l12" href="#l12">
+            <span class="no">1-2</span>
+            <h3>开关类传感器</h3>
+            <ol>
+              <li>按键模块实验</li>
+              <li>触摸开关模块实验</li>
+              <li>限位开关模块实验</li>
+              <li>倾斜开关模块实验</li>
+            </ol>
+            <span class="meta"><span class="count">4 个实验</span><span class="state">加载中…</span></span>
+          </a>
+        </li>
+        <li>
+          <a class="lesson-card" data-lesson="l13" href="#l13">
+            <span class="no">1-3</span>
+            <h3>传感器与声光输出</h3>
+            <ol>
+              <li>AD 模数转换实验</li>
+              <li>光敏电阻模块实验</li>
+              <li>LED 流水灯实验</li>
+              <li>蜂鸣器模块实验</li>
+              <li>小磁簧开关模块实验</li>
+            </ol>
+            <span class="meta"><span class="count">5 个实验</span><span class="state">加载中…</span></span>
+          </a>
+        </li>
+        <li>
+          <a class="lesson-card" data-lesson="l21" href="#l21">
+            <span class="no">2-1</span>
+            <h3>PWM 与舵机控制</h3>
+            <ol>
+              <li>PWM 调节 LED 灯亮度实验</li>
+              <li>RGB 贴片模块呼吸灯实验</li>
+              <li>电位器调节舵机实验</li>
+              <li>摇杆模块实验</li>
+            </ol>
+            <span class="meta"><span class="count">4 个实验</span><span class="state">加载中…</span></span>
+          </a>
+        </li>
+        <li>
+          <a class="lesson-card" data-lesson="l22" href="#l22">
+            <span class="no">2-2</span>
+            <h3>测距、通信与环境感知</h3>
+            <ol>
+              <li>超声波模块实验</li>
+              <li>串口调节舵机角度实验</li>
+              <li>红外避障模块实验</li>
+              <li>温湿度传感器模块实验</li>
+            </ol>
+            <span class="meta"><span class="count">4 个实验</span><span class="state">加载中…</span></span>
+          </a>
+        </li>
+        <li>
+          <a class="lesson-card" data-lesson="l23" href="#l23">
+            <span class="no">2-3</span>
+            <h3>显示模块</h3>
+            <ol>
+              <li>WS2812b RGB LED 模块实验</li>
+              <li>串行 LCD1602 模块动态显示屏实验</li>
+            </ol>
+            <span class="meta"><span class="count">2 个实验</span><span class="state">加载中…</span></span>
+          </a>
+        </li>
+      </ul>
+      <noscript><p class="callout warn">这个课件需要开启 JavaScript 才能翻页和运行程序。</p></noscript>
+    </section>
+  </main>
+
+  <footer class="home-foot">
+    <div class="wrap">
+      <span>湖北工业大学 · 工业设计学院 · Arduino 互动实验室</span>
+      <span>键盘：← → 翻页 · 实验室里 Ctrl+Enter 运行</span>
+    </div>
+  </footer>
+</div>
+
+<div id="deck" class="deck" hidden></div>
+
+<script src="sim/interp.js"></script>
+<script src="sim/hw.js"></script>
+<script src="sim/parts.js"></script>
+<script src="sim/lab.js"></script>
+<script src="sim/deck.js"></script>
+<!-- LESSONS: one <script src="lessons/lXX.js"></script> line per finished lesson, in course order
+     (l12, l13, l21, l22, l23). Only list files that exist — see AUTHORING_LESSONS.md. -->
+<!-- /LESSONS -->
+<script>
+  if (window.SIM && window.SIM.deck) window.SIM.deck.boot({ lessons: ['l12', 'l13', 'l21', 'l22', 'l23'] });
+</script>
+</body>
+</html>

@@ -4,6 +4,8 @@
  *   SIM.interp.compile / Runner — NOT a C interpreter: it recognises a few guide
  *   programs by pattern and fakes their behaviour in JS.
  * index.html must NOT load this file; tests swap it in when the real engine is missing.
+ * The fake Runner only uses public / engine-side Board methods, so it also drives the real sim/hw.js Board
+ * (load this file first, then sim/hw.js replaces SIM.hw).
  */
 (function (root) {
   'use strict';
@@ -124,6 +126,21 @@
     return { ok: true, program: { src, kind, nums, prints, cmpHigh, loopLine: lineOf(src, 'void loop') } };
   }
 
+  // board adapter: works with this file's Board and with the real sim/hw.js Board
+  const isReal = b => typeof b.serialWrite === 'function';
+  const outLevel = (b, n) => b.pin(n).level;
+  function serBegin(b, baud) { if (isReal(b)) b.serialBegin(baud); else b.serialBaud = baud; }
+  function serOut(b, t) { if (isReal(b)) b.serialWrite(t); else b.serialOut(t); }
+  function serTake(b) {
+    if (isReal(b)) { let s = ''; while (b.serialAvailable() > 0) s += String.fromCharCode(b.serialRead()); return s; }
+    return b.rx.length ? String.fromCharCode(...b.rx.splice(0)) : '';
+  }
+  function lcdShow(b, a, prints) {
+    if (isReal(b)) { b.lcdInit(a, 16, 2); b.lcdBacklight(a, true); for (const [c, r, t] of prints) { b.lcdSetCursor(a, c, r); b.lcdWrite(a, t); } }
+    else { b.lcdInit(a); b.lcdBacklight(a, true); for (const [c, r, t] of prints) { b.lcdSetCursor(a, c, r); b.lcdPrint(a, t); } }
+  }
+  const now = b => b.now();
+
   class Runner {
     constructor(program, board, opts) {
       this.p = program; this.b = board; this.opts = opts || {};
@@ -133,64 +150,64 @@
     start() {
       const b = this.b, p = this.p;
       this.state = 'running';
+      if (isReal(b)) b.mcuReset();
       if (p.kind === 'button') {
         const led = p.nums.led || 11, key = p.nums.key || 7;
         b.pinMode(led, 'OUTPUT'); b.pinMode(key, 'INPUT'); b.digitalWrite(led, 0);
         this._g = { led_out: ['int', led], keypad_pin: ['int', key], value: ['int', 0] };
       } else if (p.kind === 'pwm') {
-        b.pinMode(14, 'INPUT'); b.pinMode(11, 'OUTPUT'); b.serialBaud = 9600;
+        b.pinMode(14, 'INPUT'); b.pinMode(11, 'OUTPUT'); serBegin(b, 9600);
         this._g = { ADPIN: ['int', 14], PWM_LEDPIN: ['int', 11], value: ['int', 0], voltage: ['float', 0] };
       } else if (p.kind === 'lcd') {
-        const a = p.nums.addr || 0x27;
-        b.lcdInit(a); b.lcdBacklight(a, true);
-        for (const [c, r, t] of p.prints) { b.lcdSetCursor(a, c, r); b.lcdPrint(a, t); }
+        lcdShow(b, p.nums.addr || 0x27, p.prints);
       } else if (p.kind === 'serial') {
-        b.serialBaud = 9600; b.serialOut('Hello!\r\n'); this._g = { count: ['int', 0] };
+        serBegin(b, 9600); serOut(b, 'Hello!\r\n'); this._g = { count: ['int', 0] };
       } else if (p.kind === 'breathe') {
         b.pinMode(9, 'OUTPUT'); this._g = { i: ['int', 0] };
       }
     }
     stop() {
       if (this.state === 'running') this.state = 'stopped';
+      if (isReal(this.b)) { this.b.stopAll(); return; }
       for (let n = 0; n < 20; n++) { const pn = this.b.pins[n]; if (pn.mode === 'OUTPUT') this.b._set(n, { level: 0, pwm: null }); }
     }
     tick(wallMs, speed) {
       if (this.state !== 'running') return;
       const b = this.b, p = this.p;
-      const target = b.t + wallMs * speed * 1000;
+      const target = now(b) + wallMs * speed * 1000;
       if (p.kind === 'button' || p.kind === 'generic' || p.kind === 'lcd') {
         // fast loop: ~25µs per loop
-        const loops = Math.max(1, Math.floor((target - b.t) / 25));
+        const loops = Math.max(1, Math.floor((target - now(b)) / 25));
         if (p.kind === 'button') {
           const led = p.nums.led || 11, key = p.nums.key || 7;
           const v = b.digitalRead(key);
           this._g.value[1] = v;
           const on = p.cmpHigh ? v === 1 : v === 0;
-          if (b.pins[led].level !== (on ? 1 : 0)) b.digitalWrite(led, on ? 1 : 0);
+          if (outLevel(b, led) !== (on ? 1 : 0)) b.digitalWrite(led, on ? 1 : 0);
           this.curLine = on ? 15 : 20;
         } else this.curLine = p.loopLine + 1;
-        this.loopCount += loops; this.fastLoop = true; b.advance(target - b.t);
+        this.loopCount += loops; this.fastLoop = true; b.advance(target - now(b));
       } else if (p.kind === 'pwm') {
-        while (b.t < target) {
+        while (now(b) < target) {
           const v = b.analogRead(14);
           const volt = v / 1023;
           let pwm = Math.trunc(volt * 256);
           this._g.value[1] = pwm; this._g.voltage[1] = volt;
-          b.serialOut(`value1==${v}     voltage==${volt.toFixed(2)}    PWM==${pwm}\r\n`);
+          serOut(b, `value1==${v}     voltage==${volt.toFixed(2)}    PWM==${pwm}\r\n`);
           b.analogWrite(11, pwm);
           this.loopCount++; b.advance(48000); this.curLine = 22;
         }
       } else if (p.kind === 'serial') {
-        while (b.t < target) {
-          if (b.t >= this._next) {
-            this._g.count[1]++; b.serialOut(`第 ${this._g.count[1]} 次循环\r\n`); this._next = b.t + 1e6; this.loopCount++;
-            if (b.rx.length) { const s = String.fromCharCode(...b.rx.splice(0)); b.serialOut('收到: ' + s + '\r\n'); }
+        while (now(b) < target) {
+          if (now(b) >= this._next) {
+            this._g.count[1]++; serOut(b, `第 ${this._g.count[1]} 次循环\r\n`); this._next = now(b) + 1e6; this.loopCount++;
+            const s = serTake(b); if (s) serOut(b, '收到: ' + s + '\r\n');
           }
-          const step = Math.min(target - b.t, this._next - b.t); b.advance(Math.max(1, step)); this.curLine = 13;
+          const step = Math.min(target - now(b), this._next - now(b)); b.advance(Math.max(1, step)); this.curLine = 13;
         }
       } else if (p.kind === 'breathe') {
-        while (b.t < target) {
-          const ph = Math.floor(b.t / 10000) % 512; const i = ph < 256 ? ph : 511 - ph;
+        while (now(b) < target) {
+          const ph = Math.floor(now(b) / 10000) % 512; const i = ph < 256 ? ph : 511 - ph;
           this._g.i[1] = i; b.analogWrite(9, i); b.advance(10000); this.curLine = 8; if (ph === 0) this.loopCount++;
         }
       }
