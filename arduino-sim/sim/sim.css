@@ -317,6 +317,7 @@ a.btn { text-decoration: none; }
 .cl { display: grid; grid-template-columns: 3.4em minmax(0, 1fr); line-height: 21px; min-height: 21px; padding-right: 12px; }
 .cl .ln { color: var(--code-gutter); text-align: right; padding-right: 1em; user-select: none; }
 .cl .tx { white-space: pre-wrap; overflow-wrap: anywhere; padding-left: var(--ind, 4ch); text-indent: calc(-1 * var(--ind, 4ch)); }
+.cl .tx .lead { white-space: pre; } /* no line break right after the indent (a long first token would leave an empty row) */
 .cl.hl { background: var(--code-line); }
 .cl.hl .ln { color: var(--turq); }
 .cl.dim .tx { opacity: .55; }
@@ -394,6 +395,7 @@ a.btn { text-decoration: none; }
 .callout > .ico { width: 30px; height: 30px; }
 .callout > div { min-width: 0; }
 .callout > div > b:first-child { display: block; margin-bottom: 2px; }
+.callout > div > b.inline, .summary-list li > div > b.inline, .task-list-slide li > div > b.inline { display: inline; margin-bottom: 0; }
 .callout p { margin: 0; }
 .callout.warn { background: var(--red-pale); }
 .callout.warn > .ico { background: var(--red); color: #fff; }
@@ -443,17 +445,17 @@ pre.snippet code { background: none; padding: 0; font-size: inherit; color: inhe
 .kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; font-size: 14px; }
 .kv dt { font-weight: 600; } .kv dd { margin: 0; color: var(--muted); }
 .checklist { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
-.checklist li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.6; }
-.checklist li::before { content: ""; flex: none; width: 20px; height: 20px; margin-top: 1px; border-radius: 50%; background: var(--turq) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232D2D2D' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/13px no-repeat; }
+.checklist li { position: relative; padding-left: 30px; font-size: 14px; line-height: 1.6; }
+.checklist li::before { content: ""; position: absolute; left: 0; top: 1px; width: 20px; height: 20px; border-radius: 50%; background: var(--turq) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232D2D2D' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/13px no-repeat; }
 .summary-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .summary-list li { background: var(--card); border-radius: var(--radius); padding: 14px 16px; display: flex; gap: 12px; font-size: 14px; line-height: 1.6; }
-.summary-list li b, .summary-list li > div > b:first-child { display: block; margin-bottom: 2px; }
+.summary-list li > div > b:first-child { display: block; margin-bottom: 2px; }
 .summary-list li > div { min-width: 0; }
 .summary-list li .n { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--turq); color: var(--on-turq); display: grid; place-items: center; font-weight: 600; font-family: var(--font-head); font-size: 13px; }
 .task-list-slide { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .task-list-slide li { background: var(--card); border-radius: var(--radius); padding: 16px 18px; display: flex; gap: 12px; font-size: 14px; line-height: 1.65; }
 .task-list-slide li .n { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--char); color: #fff; display: grid; place-items: center; font-weight: 600; font-family: var(--font-head); font-size: 13px; }
-.task-list-slide li b { display: block; margin-bottom: 2px; }
+.task-list-slide li > div > b:first-child { display: block; margin-bottom: 2px; }
 
 /* ===================================================================
    LAB

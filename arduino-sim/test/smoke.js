@@ -439,6 +439,8 @@ async function walkLesson(page, mode, id, full) {
           img.scrollIntoView({ block: 'nearest' });
           for (let t = 0; t < 40 && !(img.complete && img.naturalWidth); t++) await new Promise(r => setTimeout(r, 50));
           if (!img.naturalWidth) out.push(img.getAttribute('src'));
+          // loaded is not yet painted: wait for the decode so the screenshot shows the picture
+          else await img.decode().catch(() => {});
         }
         window.scrollTo(0, 0); document.querySelector('#deck-main').scrollTop = 0;
         return out;

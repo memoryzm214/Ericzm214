@@ -906,7 +906,8 @@
     return { el: c.el, update() {}, rebind: reg, setRunning() {}, setDistance(d) { dist = clamp(d, 0.3, 6); sl.set(dist); paint(); }, destroy() { board.setDigitalSource(pin, () => null); c.el.remove(); } };
   };
 
-  /* ---------- servo (SG90): arm follows board.servo(pin).angle (hw smooths it) */
+  /* ---------- servo (SG90): arm follows board.servo(pin).angle (hw smooths it).
+     0° points left and 180° right, as in the guides' angle diagrams (2-1, 2-2). */
   F.servo = function (cfg, board) {
     const pin = pinNum(cfg.pin);
     const c = makeCard('servo', cfg, '舵机 SG90', pinText(pin));
@@ -924,7 +925,7 @@
       ...[14, 22, 30].map(x => sv('circle', { cx: cx + x, cy, r: 1.3, fill: '#8A9092' })));
     s.append(
       sv('path', { d: `M${cx - R} ${cy} A${R} ${R} 0 0 1 ${cx + R} ${cy}`, fill: 'none', stroke: 'var(--line)', 'stroke-width': 1.2 }),
-      ticks, lab(0, '0°'), lab(90, '90°'), lab(180, '180°'),
+      ticks, lab(180, '0°'), lab(90, '90°'), lab(0, '180°'),
       sv('rect', { x: cx - 26, y: cy - 12, width: 52, height: 26, rx: 3, fill: '#2E6FD8' }),
       sv('text', { x: cx - 18, y: cy + 10, 'font-size': 6, fill: '#DCE8FB' }, 'SG90'),
       ghost, arm,
@@ -940,11 +941,11 @@
         const key = att + '|' + a.toFixed(1) + '|' + tg.toFixed(0) + '|' + everAttached;
         if (key === lastKey) return;
         lastKey = key;
-        arm.setAttribute('transform', `rotate(${(-a).toFixed(2)} ${cx} ${cy})`);
+        arm.setAttribute('transform', `rotate(${(a - 180).toFixed(2)} ${cx} ${cy})`);
         arm.setAttribute('opacity', att ? 1 : everAttached ? 0.8 : 0.45);
         const moving = att && Math.abs(tg - a) > 0.6;
         ghost.setAttribute('opacity', moving ? 0.8 : 0);
-        if (moving) ghost.setAttribute('transform', `rotate(${(-tg).toFixed(1)} ${cx} ${cy})`);
+        if (moving) ghost.setAttribute('transform', `rotate(${(tg - 180).toFixed(1)} ${cx} ${cy})`);
         c.el.dataset.angle = String(Math.round(a));
         c.el.dataset.target = String(Math.round(tg));
         c.setRead(!att ? (everAttached ? `角度 <b>${Math.round(a)}°</b>（已停止，保持不动）` : '还没 attach()，舵机不动') : moving ? `角度 <b>${Math.round(a)}°</b> → 目标 ${Math.round(tg)}°` : `角度 <b>${Math.round(a)}°</b>`);

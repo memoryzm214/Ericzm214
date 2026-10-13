@@ -333,6 +333,11 @@
     el.setAttribute('tabindex', '-1');
     el.setAttribute('aria-label', `第 ${idx + 1} 页：${slideLabel(s, idx)}`);
     mainEl.replaceChildren(el);
+    // a callout's or list item's title is a <b> that opens its text; a <b> after some words is ordinary inline bold
+    el.querySelectorAll('.callout > div > b:first-child, .summary-list li > div > b:first-child, .task-list-slide li > div > b:first-child').forEach(b => {
+      const t = b.previousSibling;
+      if (t && t.nodeType === 3 && t.textContent.trim()) b.classList.add('inline');
+    });
     if (el.__after) el.__after(el);
     // chrome
     const n = L.slides.length;
@@ -458,7 +463,7 @@
       let lines = '';
       for (let ln = from; ln <= to; ln++) {
         const ind = Math.min(24, (/^[ \t]*/.exec(raw[ln - 1] || '')[0].replace(/\t/g, '  ').length) + 4);
-        lines += `<div class="cl${hl.has(ln) ? ' hl' : ''}" data-line="${ln}"><span class="ln">${ln}</span><span class="tx" style="--ind:${ind}ch">${all[ln - 1] || ' '}</span></div>`;
+        lines += `<div class="cl${hl.has(ln) ? ' hl' : ''}" data-line="${ln}"><span class="ln">${ln}</span><span class="tx" style="--ind:${ind}ch">${(all[ln - 1] || ' ').replace(/^[ \t]+/, m => `<span class="lead">${m}</span>`)}</span></div>`;
       }
       const notesHtml = notes.map((n, i) => `<div class="note" data-line="${n.a}" data-a="${n.a}" data-b="${n.b}" data-i="${i}">` +
         `<span class="tag line">${n.a === n.b ? 'L' + n.a : 'L' + n.a + '–' + n.b}</span><div class="note-tx">${n.text}</div></div>`).join('');
