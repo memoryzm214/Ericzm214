@@ -122,15 +122,15 @@ void loop()
     const cw = 24, chh = 32, ox = opt.numbers ? 24 : 4, oy = opt.numbers ? 20 : 4;
     let s = '';
     if (opt.numbers) {
-      for (let c = 0; c < 16; c++) s += `<text x="${ox + c * cw + cw / 2}" y="13" font-size="11" text-anchor="middle" fill="var(--muted)">${c}</text>`;
-      for (let r = 0; r < 2; r++) s += `<text x="10" y="${oy + r * chh + chh / 2 + 4}" font-size="11" text-anchor="middle" fill="var(--muted)">${r}</text>`;
+      for (let c = 0; c < 16; c++) s += `<text x="${ox + c * cw + cw / 2}" y="14" font-size="13" text-anchor="middle" fill="var(--muted)">${c}</text>`;
+      for (let r = 0; r < 2; r++) s += `<text x="10" y="${oy + r * chh + chh / 2 + 5}" font-size="13" text-anchor="middle" fill="var(--muted)">${r}</text>`;
     }
     for (let r = 0; r < 2; r++) {
       for (let c = 0; c < 16; c++) {
         const on = hl.has(c + ',' + r);
         const ch = (rows[r] || '')[c] || ' ';
         s += `<rect x="${ox + c * cw}" y="${oy + r * chh}" width="${cw}" height="${chh}" fill="${on ? 'var(--turq)' : 'var(--surface)'}" stroke="var(--line)"/>`;
-        if (ch !== ' ') s += `<text x="${ox + c * cw + cw / 2}" y="${oy + r * chh + 22}" font-size="16" font-weight="600" text-anchor="middle" font-family="JetBrains Mono, Consolas, monospace" fill="${on ? '#2D2D2D' : 'currentColor'}">${escH(ch)}</text>`;
+        if (ch !== ' ') s += `<text x="${ox + c * cw + cw / 2}" y="${oy + r * chh + 22}" font-size="17" font-weight="600" text-anchor="middle" font-family="JetBrains Mono, Consolas, monospace" fill="${on ? '#2D2D2D' : 'currentColor'}">${escH(ch)}</text>`;
       }
     }
     return `<svg viewBox="0 0 ${ox + 16 * cw + 4} ${oy + 2 * chh + 4}" width="100%" role="img" aria-label="${escH(opt.label || 'LCD1602 的 16 × 2 个字符格')}" style="display:block">${s}</svg>`;
@@ -146,28 +146,31 @@ void loop()
       s += out
         ? `<rect x="${x}" y="${oy}" width="${cw}" height="${h}" rx="3" fill="none" stroke="var(--red)" stroke-width="2" stroke-dasharray="4 3"/>`
         : `<rect x="${x}" y="${oy}" width="${cw}" height="${h}" fill="${c >= 4 ? 'var(--turq-pale)' : 'var(--surface)'}" stroke="var(--line)"/>`;
-      if (text[c] && text[c] !== ' ') s += `<text x="${x + cw / 2}" y="${oy + 22}" font-size="16" font-weight="600" text-anchor="middle" font-family="JetBrains Mono, Consolas, monospace" fill="${out ? 'var(--red)' : 'currentColor'}">${text[c]}</text>`;
-      if (c === 0 || c === 4 || c === 15 || c === 16) s += `<text x="${x + cw / 2}" y="13" font-size="11" text-anchor="middle" fill="${out ? 'var(--red)' : 'var(--muted)'}">${c}</text>`;
+      if (text[c] && text[c] !== ' ') s += `<text x="${x + cw / 2}" y="${oy + 23}" font-size="18" font-weight="600" text-anchor="middle" font-family="JetBrains Mono, Consolas, monospace" fill="${out ? 'var(--red)' : 'currentColor'}">${text[c]}</text>`;
+      if (c === 0 || c === 4 || c === 15 || c === 16) s += `<text x="${x + cw / 2}" y="14" font-size="14" text-anchor="middle" fill="${out ? 'var(--red)' : 'var(--muted)'}">${c}</text>`;
     }
     return `<svg viewBox="0 0 ${ox + 17 * cw + 14} ${oy + h + 6}" width="100%" role="img" aria-label="第 2 行：从第 4 号格开始写 Science Robot，最后的 t 落在第 16 号格，在屏幕外" style="display:block">${s}</svg>`;
   })();
 
-  // I2C bus: UNO on the left, SDA / SCL lines, three devices hanging on the bus with their addresses
+  // I2C bus: UNO on the left, SDA / SCL lines, three devices hanging on the bus with their addresses.
+  // Compact viewBox (400 wide) so the labels stay readable on a 390 px phone.
   const busSvg = (() => {
-    const devs = [{ x: 150, t: 'LCD1602', a: '0x27', on: true }, { x: 262, t: '另一块 LCD', a: '0x26' }, { x: 374, t: '其他模块', a: '0x3C' }];
-    let s = `<rect x="6" y="18" width="70" height="78" rx="8" fill="var(--char)"/>` +
-      `<text x="41" y="52" font-size="15" font-weight="600" text-anchor="middle" fill="#fff">UNO</text>` +
-      `<text x="41" y="72" font-size="11" text-anchor="middle" fill="#fff">A4 · A5</text>` +
-      `<path d="M76 40H470" stroke="var(--turq-deep)" stroke-width="3"/><path d="M76 74H470" stroke="currentColor" stroke-width="3"/>` +
-      `<text x="86" y="33" font-size="12" font-weight="600" fill="var(--turq-deep)">SDA 数据线</text>` +
-      `<text x="86" y="67" font-size="12" font-weight="600" fill="currentColor">SCL 时钟线</text>`;
+    const devs = [{ x: 110, t: 'LCD1602', a: '0x27', on: true }, { x: 206, t: '另一块 LCD', a: '0x26' }, { x: 302, t: '其他模块', a: '0x3C' }];
+    let s = `<rect x="4" y="12" width="70" height="72" rx="8" fill="var(--char)" stroke="var(--line)"/>` +
+      `<text x="39" y="43" font-size="17" font-weight="600" text-anchor="middle" fill="#fff">UNO</text>` +
+      `<text x="39" y="66" font-size="13" text-anchor="middle" fill="#fff">A4 · A5</text>` +
+      `<path d="M74 30H396" stroke="var(--turq-deep)" stroke-width="3"/><path d="M74 66H396" stroke="currentColor" stroke-width="3"/>` +
+      `<text x="80" y="23" font-size="13" font-weight="700" fill="var(--turq-deep)">SDA</text>` +
+      `<text x="80" y="59" font-size="13" font-weight="700" fill="currentColor">SCL</text>` +
+      `<text x="4" y="120" font-size="14" font-weight="600" fill="var(--turq-deep)">SDA 数据线</text>` +
+      `<text x="4" y="146" font-size="14" font-weight="600" fill="currentColor">SCL 时钟线</text>`;
     for (const d of devs) {
-      s += `<path d="M${d.x + 30} 40V120" stroke="var(--turq-deep)" stroke-width="2"/><path d="M${d.x + 60} 74V120" stroke="currentColor" stroke-width="2"/>` +
-        `<rect x="${d.x}" y="120" width="90" height="58" rx="8" fill="${d.on ? 'var(--turq)' : 'var(--surface)'}" stroke="${d.on ? 'var(--turq)' : 'var(--line)'}"/>` +
-        `<text x="${d.x + 45}" y="143" font-size="13" font-weight="600" text-anchor="middle" fill="${d.on ? '#2D2D2D' : 'currentColor'}">${d.t}</text>` +
-        `<text x="${d.x + 45}" y="166" font-size="14" font-weight="600" text-anchor="middle" font-family="JetBrains Mono, Consolas, monospace" fill="${d.on ? '#2D2D2D' : 'currentColor'}">${d.a}</text>`;
+      s += `<path d="M${d.x + 26} 30V104" stroke="var(--turq-deep)" stroke-width="2"/><path d="M${d.x + 62} 66V104" stroke="currentColor" stroke-width="2"/>` +
+        `<rect x="${d.x}" y="104" width="88" height="58" rx="8" fill="${d.on ? 'var(--turq)' : 'var(--surface)'}" stroke="${d.on ? 'var(--turq)' : 'var(--line)'}"/>` +
+        `<text x="${d.x + 44}" y="127" font-size="14" font-weight="600" text-anchor="middle" fill="${d.on ? '#2D2D2D' : 'currentColor'}">${d.t}</text>` +
+        `<text x="${d.x + 44}" y="151" font-size="16" font-weight="600" text-anchor="middle" font-family="JetBrains Mono, Consolas, monospace" fill="${d.on ? '#2D2D2D' : 'currentColor'}">${d.a}</text>`;
     }
-    return `<svg viewBox="0 0 476 184" width="100%" role="img" aria-label="I2C 总线：UNO 的 SDA、SCL 两根线上挂着地址 0x27、0x26、0x3C 三个设备" style="display:block">${s}</svg>`;
+    return `<svg viewBox="0 0 400 168" width="100%" role="img" aria-label="I2C 总线：UNO 的 SDA、SCL 两根线上挂着地址 0x27、0x26、0x3C 三个设备" style="display:block">${s}</svg>`;
   })();
 
   const LIT = '/^([1-9]|1[01])$/';   // some, but not all 12 pixels lit
@@ -701,7 +704,7 @@ ${callout('info', '背光亮 ≠ 能显示字', '背光亮只说明电源接对�
             { text: '切到“② 原指南原样”点运行：读一读红色的编译错误，它指向第几行？再在最前面加上 <code>#include &lt;Wire.h&gt;</code> 运行。', code: SCAN_FIXED, program: 1 },
             { text: '切到“③ 显示文字”点运行：第 2 行 <code>Science Robot</code> 最后的 t 去哪了？再拧屏幕卡片下面的对比度旋钮：太低看不见字，太高满屏方块，调回中间。' },
             { text: '改正拼写，再写上你的名字：第 12 行改成 <code>"Hello World"</code>；第 13 行改成 <code>setCursor(0,1)</code>，第 14 行写你的名字（只能用英文字母和数字，屏幕里没有汉字字库）。', code: LCD_NAME, program: 2 },
-            { text: '做个秒表：把 <code>loop()</code> 改成每 0.2 秒在第 2 行开头打印 <code>millis()/1000</code>。<code>millis()</code> 是开机以来的毫秒数，除以 1000 就是秒——屏幕“动”起来了。', code: LCD_CLOCK, program: 2 }
+            { text: '做个秒表：把 <code>loop()</code> 改成每 0.2 秒在第 2 行开头打印 <code>millis()/1000</code>。<code>millis()</code> 是开机以来的毫秒数，除以 1000 就是秒——屏幕“动”起来了。后面的 Science Robo 还在：屏幕上的字不会自己消失，只有被新字盖住才会变。', code: LCD_CLOCK, program: 2 }
           ],
           smoke: [
             { expect: { serial: 'Found address: 39 (0x27)' } },

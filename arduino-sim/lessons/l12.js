@@ -192,7 +192,7 @@ void loop()
 <h3 class="mt">四个程序共用一个骨架</h3>
 <div class="flow">
   <div><b>1 读</b><br><code>digitalRead()</code></div>
-  <div><b>2 打印</b><br><code>Serial.println()</code></div>
+  <div><b>2 打印</b> <span class="small muted">实验 02 起</span><br><code>Serial.println()</code></div>
   <div class="on"><b>3 判断</b><br><code>if … else</code></div>
   <div><b>4 输出</b><br><code>digitalWrite()</code></div>
 </div>
@@ -330,7 +330,7 @@ value = digitalRead(7);  // 听一次</code></pre>
           ],
           tasks: [
             { text: '按住按键：LED 亮了吗？松开呢？同时看右下角“变量”里的 <code>value</code>，和“引脚”里 D7、D11 的变化。' },
-            { text: '速度选 <b>0.1× 慢动作</b>，勾上“跟随行”：按住和松开时，高亮的执行行分别走 if 还是 else？' },
+            { text: '速度选 <b>0.1× 慢动作</b>，“跟随行”保持勾选：按住和松开时，高亮的执行行分别走 if 还是 else？' },
             { text: '反过来：把第 13 行的 <code>LOW</code> 改成 <code>HIGH</code> 再运行——松开时灯亮，按下时灯灭。', code: BUTTON.replace('if( value == LOW )', 'if( value == HIGH )') },
             { text: '试一次最常见的坑：把 <code>==</code> 写成一个 <code>=</code>，即 <code>if( value = LOW )</code>。能运行吗？按下时灯亮不亮？编辑器给了什么提示？', code: BUTTON.replace('if( value == LOW )', 'if( value = LOW )') },
             { text: '让按键“开口说话”：在 setup() 里加 <code>Serial.begin(9600);</code>，在读按键那一行 <code>value = digitalRead(keypad_pin);</code> 后面加 <code>Serial.println(value);</code>。看串口监视器：松开是几，按下是几？', code: BTN_TALK }
@@ -384,7 +384,8 @@ value = digitalRead(7);  // 听一次</code></pre>
   ${warnCard('以为 HIGH 就是“按下”', '这块按键模块按下时反而是 LOW。换一个模块，先用串口看看它按下时读到几。')}
   ${warnCard('按键接到了 D0 / D1', '这两个脚兼做串口，可能让上传失败、读数不准。按指南接 D7。')}
   ${warnCard('模块没供电', 'V、G 没接好时，模块上的 Power 灯不亮，按了也没反应。')}
-</div>`
+</div>
+<div class="callout mt"><span class="ico">${I('list')}</span><div><b>排查三步：电源 → 输入 → 输出</b><p>① 模块的 Power 灯亮吗？② 按下时 <code>value</code> 变成 0 吗？（实验室看“变量”，实物加一句 <code>Serial.println(value);</code>）③ D11 输出 HIGH 时灯亮吗？哪一步不对，就查哪一段接线或代码。</p></div></div>`
       },
 
       // ================================================================ 实验 02 触摸开关
@@ -424,7 +425,7 @@ value = digitalRead(7);  // 听一次</code></pre>
         body: `
 <div class="grid-2 stretch">
   <div class="card"><h3>${ico('target')}实验目的</h3><ol><li>了解触摸开关模块的工作原理；</li><li>用 Arduino 读取触摸开关，控制 LED 灯亮灭。</li></ol></div>
-  <div class="card"><h3>${ico('book')}实验原理（原文）</h3><p>用手指触摸触摸开关模块，当 Arduino UNO 板检测到触摸开关模块输出高电平，控制 LED 灯亮，否则 LED 灯灭。</p><p class="small muted">原文写的是“负责 LED 灯灭”，“负责”应为“否则”。</p></div>
+  <div class="card"><h3>${ico('book')}实验原理（原文）</h3><p>“使用 Arduino 控制触摸开关控制 LED 灯亮灭，用手指触摸触摸开关模块，当 Arduino UNO 板检测到触摸开关模块输出高电平，控制 LED 灯亮，<strong>负责</strong> LED 灯灭。”</p><p class="small muted">“负责”是错字，应为“否则”：摸到灯亮，否则灯灭。</p></div>
 </div>
 <div class="mt"><p class="small muted">组件</p>${chips(['Arduino UNO R3 主板', '面包板', 'USB 数据线', '触摸开关模块 ×1', 'LED 模块 ×1', '若干跳线'])}</div>
 <div class="grid-2 stretch mt">
@@ -620,7 +621,7 @@ val=digitalRead(SensorPin);</code></pre>
       {
         kind: 'code',
         title: '代码逐行看懂：和按键实验是同一个骨架',
-        desc: '读 → 打印 → 判断 → 输出，四步不变；只是换成 10 号脚，条件写成 val==0（0 就是 LOW）。',
+        desc: '还是“读 → 判断 → 输出”，中间多了串口打印；换成 10 号脚，条件写成 val==0（0 就是 LOW）。',
         file: 'limit_switch.ino', code: LIMIT, from: 1, to: 22, hl: [2, 7, 14],
         notes: [
           { line: [1, 3], text: '11 接 LED，10 接限位开关（按键实验接的是 7 号），<code>val</code> 装读数。' },
@@ -873,7 +874,8 @@ ${warnCard('压下了，灯却不亮？', '先看串口：数字会变 0，说�
   ${warnCard('数字乱跳', '多半是 S 线没插牢在 12 号脚，或者模块正在被晃动。')}
   ${warnCard('以为灯会闪', '第 16 行注释说“LED 闪烁”，但第 20 行的 <code>delay</code> 被注释掉了，灯是常亮的。想闪，按任务 4 加 delay。')}
   ${warnCard('蜂鸣器不响', '有源蜂鸣器给高电平就响；不响先查 13 号脚和 V、G。实验室里要先点“开启声音”才有声音。')}
-</div>`
+</div>
+<div class="callout mt"><span class="ico">${I('bulb')}</span><div><b>调试小技巧：先安静地观察</b><p>先按任务 5 把蜂鸣器那句注释掉，只看灯和串口：摆几个姿势，弄清哪种读到 0；规律确定了，再去掉 <code>//</code> 让蜂鸣器响。</p></div></div>`
       },
 
       // ================================================================ 小结
@@ -881,7 +883,7 @@ ${warnCard('压下了，灯却不亮？', '先看串口：数字会变 0，说�
         kind: 'summary',
         kicker: '1-2 开关类传感器　/　小结',
         title: '本节小结：四个传感器，一个骨架',
-        desc: '四个程序都是“读 → 打印 → 判断 → 输出”；变的只是引脚号，以及触发时读到 0 还是 1。',
+        desc: '四个程序都是“读 → 判断 → 输出”（实验 02 起中间多了“打印”）；变的只是引脚号，以及触发时读到 0 还是 1。',
         items: [
           { title: '数字输入', text: '<code>pinMode(引脚, INPUT)</code> + <code>digitalRead()</code>：答案只有 1（HIGH）和 0（LOW）。' },
           { title: '== 是比较，= 是赋值', text: '<code>if( value = LOW )</code> 能运行，但条件永远不成立。' },

@@ -511,7 +511,7 @@ ${callout('list', '组件清单', 'Arduino UNO R3 主板 · 面包板 · USB 数
   <div class="card">
     <h3><span class="ico">${I('list')}</span>带参数的函数：能“点单”的菜谱</h3>
     <p>点奶茶要报甜度、冰量；调用 <code>setColor()</code> 要报红、绿、蓝三个亮度，<b>按顺序</b>装进 <code>red</code>、<code>green</code>、<code>blue</code>。</p>
-    ${snip('setColor(255, 128, 0);  // 红 + 半个绿 ≈ 橙\n//       red  green blue')}
+    ${snip('setColor(255, 128, 0);  // 橙色\n//       red  green blue')}
     ${callout('warn', '常见错误', '参数顺序弄反，颜色就错了：第 1 个永远是红色。', 'warn')}
   </div>
 </div>`
@@ -599,11 +599,11 @@ ${callout('list', '组件清单', 'Arduino UNO R3 主板 · 面包板 · USB 数
         side: `
 ${callout('check', '原指南结论', 'RGB LED 先亮红色，然后绿色、蓝色，循环往复。（原文“呈圆形闪烁”是机翻，意思是“循环闪烁”。）')}
 <div class="card">
-  <h3><span class="ico">${I('eye')}</span>亮度随时间变化（看一种颜色）</h3>
-  <p class="small"><b>原程序</b>：渐亮后突然熄灭，像锯齿</p>
-  ${curve([[0, 0], [0.28, 1], [0.36, 1], [0.36, 0], [0.64, 1], [0.72, 1], [0.72, 0], [1, 1]], '原程序：渐亮后突然熄灭，像锯齿')}
+  <h3><span class="ico">${I('eye')}</span>灯有多亮（红 → 绿 → 蓝接力）</h3>
+  <p class="small"><b>原程序</b>：渐亮、停一下、突然熄灭，像锯齿</p>
+  ${curve([[0, 0], [0.28, 1], [0.36, 1], [0.36, 0], [0.64, 1], [0.72, 1], [0.72, 0], [1, 1]], '原程序：渐亮、停一下、突然熄灭，像锯齿')}
   <p class="small"><b>加上渐暗（实验室任务 3）</b>：一呼一吸，像山峰</p>
-  ${curve([[0, 0], [0.25, 1], [0.5, 0], [0.75, 1], [1, 0]], '加上渐暗：一呼一吸，像山峰')}
+  ${curve([[0, 0], [0.2, 1], [0.28, 1], [0.48, 0], [0.68, 1], [0.76, 1], [0.96, 0], [1, 0.2]], '加上渐暗：一呼一吸，像山峰')}
 </div>`
       },
       {
@@ -777,7 +777,7 @@ ${callout('check', '原指南结论', '上传程序后旋转电位器，可以�
 <div class="card warn">
   <h3><span class="ico red">${I('warn')}</span>按原接法转不满 180°</h3>
   ${table(['电位器接', '最大读数', '÷ 4', '舵机'], [['3.3V', '≈ 675', '168', '168°'], ['5V', '1023', '255', '按 180° 处理']])}
-  <p class="small mt-s">接 5V 却仍然 ÷ 4：读数超过 720 以后都算出 180 以上，旋钮最后一段“白转”。</p>
+  <p class="small mt-s">接 5V 却仍然 ÷ 4：读数到 720 就算出 180，再往后都是 180 以上，旋钮最后约 30% 的行程“白转”。</p>
 </div>
 <div class="card ok">
   <h3><span class="ico">${I('check')}</span>最稳妥：接 5V + map()</h3>
@@ -796,7 +796,7 @@ ${callout('check', '原指南结论', '上传程序后旋转电位器，可以�
             { type: 'servo', pin: 7, label: '舵机 信号线→D7' }
           ],
           tasks: [
-            { text: '先运行原程序，慢慢拧到底：读数超过 720 以后 angle 超过 180，舵机停在 180° 不动——最后约四分之一圈旋钮“白转”。' },
+            { text: '先运行原程序，慢慢拧到底：读数到 720 时 angle 已经是 180（720 ÷ 4），再往后算出 181、182……舵机停在 180° 不动——旋钮最后约 30% 的行程“白转”。' },
             { text: '把第 13 行改成 <code>int angle = map(readValue, 0, 1023, 0, 180);</code>：旋钮从头到尾正好对应 0～180°。', code: SERVO_MAP1023 },
             { text: '想反着转？把 <code>map</code> 的最后两个数换成 <code>180, 0</code>：旋钮往右拧，舵机往左转。', code: SERVO_MAPREV }
           ],
@@ -860,6 +860,7 @@ ${callout('list', '组件清单', 'Arduino UNO R3 主板 · USB 数据线 · 摇
     <li><b>VRx → X-out</b>：左右那个电位器。</li>
     <li><b>VRy → Y-out</b>：上下那个电位器。</li>
     <li><b>SW → Bt</b>：经 R1（10K）接 VCC，松开是高电平，按下接地变低电平。</li>
+    <li><b>D0 / D1</b>：电源灯、按键灯（按下 SW 就亮），电路自己点亮，不用写程序。</li>
   </ol>
 </div>
 <div class="card">
@@ -908,7 +909,7 @@ ${callout('info', '你的摇杆不一样？', '每个摇杆的静止值都有一
   <div class="card">
     <h3><span class="ico">${I('bolt')}</span>内部上拉：芯片里的“弹簧”</h3>
     <p>1-2 课学过上拉电阻：像弹簧把引脚拉在高电平。扩展板的按键没带，就打开引脚里面那一颗。</p>
-    ${snip('pinMode(2, INPUT);\ndigitalWrite(2, HIGH);    // 老写法：两句\npinMode(2, INPUT_PULLUP); // 新写法：一句')}
+    ${snip('// 老写法：两句\npinMode(2, INPUT);\ndigitalWrite(2, HIGH);\n// 新写法：一句\npinMode(2, INPUT_PULLUP);')}
     <p><b>效果</b>：松开读到 <code>HIGH</code>，按下读到 <code>LOW</code>。</p>
     ${callout('warn', '常见错误', '只写 INPUT 不开上拉：松开时引脚“悬空”，读数乱跳。', 'warn')}
   </div>
@@ -1024,7 +1025,7 @@ ${callout('info', '你的摇杆不一样？', '每个摇杆的静止值都有一
   ${fig('joystick_result_photo.jpg', '原指南实物图：扩展板插在 UNO 上')}
   ${fig('joystick_serial_buttons.jpg', '原指南串口截图：up / down / right / left，再依次按下各个按键')}
 </div>
-<div class="mt">${warnCard('原文与程序不符', '<p>原指南说：“当您往上拨时，对应的 LED 灯就会亮起，每个方位都有对应的 LED 灯。”但这段程序<b>只在串口打印</b>，并不控制 LED；扩展板上亮着的小灯是板子自带的指示灯。以串口里的文字为准。</p>')}</div>`
+<div class="mt">${warnCard('原文与程序不符', '<p>原指南说：“当您往上拨时，对应的 LED 灯就会亮起，每个方位都有对应的 LED 灯。”但这段程序<b>只在串口打印</b>，并不控制 LED；扩展板上亮着的小灯是板子自带的指示灯（就像原理图里的 D0 电源灯、D1 按键灯），不归程序管。以串口里的文字为准。</p>')}</div>`
       },
       {
         kind: 'html', title: '常见坑与挑战：摇杆遥控舵机',

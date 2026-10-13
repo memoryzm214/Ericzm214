@@ -365,7 +365,7 @@ void loop()
           baud: 9600,
           tasks: [
             { text: '运行后慢慢转电位器：读数在 0～1023 之间变，电压在 0～5V 之间变。LED（和 UNO 板上的 L 灯）亮 1 秒、灭 1 秒。' },
-            { text: '把电位器下面的滑块拖到 39%：读数 399、电压 1.95，和原指南的截图一样。验算：399 ÷ 1023 × 5 ≈ 1.95。' },
+            { text: '把电位器下面的滑块拖到 39% 左右，再用键盘 ← → 微调，让读数停在 399：电压 1.95，和原指南的截图一样。验算：399 ÷ 1023 × 5 ≈ 1.95。' },
             { text: '切到“原指南原样”点 ▶ 运行：红色错误指向第几行？把第 23 行的 <code>}</code> 挪到最后一行，再运行。', code: AD, program: 1 },
             { text: '把第 15 行的 <code>( ( float )value )</code> 改成 <code>value</code>：电压几乎总是 0.00——两个整数相除，小数被扔掉了。', code: AD.replace('voltage = ( ( float )value )/1023 ;', 'voltage = value/1023 ;'), program: 0 },
             { text: '把两个 <code>delay(1000)</code> 都改成 <code>delay(100)</code>：每 0.2 秒刷新一次，转旋钮时数字跟得更紧。', code: AD.replace(/delay\(1000\)/g, 'delay(100)'), program: 0 }
@@ -690,7 +690,7 @@ ${callout('question', '水往低处流', '正极在 5V 的“高处”，引脚�
             { text: '运行后看一看：第 1 轮是“单灯跑”，第 2 轮的 led_flash() 变成了什么？选 0.1× 慢动作、勾上“跟随行”，看执行到哪一行。' },
             { text: '串口监视器每轮出现一行 <code>start flash led !</code>。把波特率改成 9600 会怎样？再改回 115200。' },
             { text: '把 loop() 里的顺序换成 <code>led_flash(); led_turn_on(); led_turn_off();</code>：每一轮都能看到单灯跑了吗？', code: FLOW_ORDER },
-            { text: '把第 2 行的 <code>flash_speed</code> 改成 300：水流变慢；再试试 5——快到眼睛看着像一直亮着。', code: FLOW.replace('int flash_speed = 100 ;', 'int flash_speed = 300 ;') },
+            { text: '把第 2 行的 <code>flash_speed</code> 改成 300：水流变慢；再试试 5：一轮只要 0.12 秒，快到看不出“流”的方向，只见一排灯在闪。', code: FLOW.replace('int flash_speed = 100 ;', 'int flash_speed = 300 ;') },
             { text: '把数组倒过来写成 <code>{ 9 , 8 , 7 , 6 , 5 , 4 , 3 , 2 }</code>：水流方向反过来了吗？', code: FLOW.replace('{ 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 }', '{ 9 , 8 , 7 , 6 , 5 , 4 , 3 , 2 }') }
           ],
           smoke: [
@@ -749,7 +749,7 @@ ${callout('question', '水往低处流', '正极在 5V 的“高处”，引脚�
   <thead><tr><th></th><th>有源</th><th>无源</th></tr></thead>
   <tbody>
     <tr><td class="l">内部振荡器</td><td>有</td><td>没有</td></tr>
-    <tr><td class="l">通电以后</td><td>直接响</td><td>不响，要喂 2～5 kHz 方波</td></tr>
+    <tr><td class="l">通电以后</td><td>直接响</td><td>不响，要喂方波（原指南：2～5 kHz）</td></tr>
     <tr><td class="l">音调</td><td>固定一种</td><td>随频率变，能“唱歌”</td></tr>
     <tr><td class="l">程序怎么写</td><td>HIGH 响，LOW 停</td><td>飞快地来回切换 HIGH / LOW</td></tr>
   </tbody>
@@ -1051,7 +1051,7 @@ ${callout('eye', '三样一起看', '拿磁铁慢慢靠近再拿开：灯、蜂�
 <div class="grid-3">
   ${tile('GVS', '三针一排', '每个数字脚旁都有 G、V、S', 'turq')}
   ${tile('插', '直接插', '杜邦线直插，不用面包板')}
-  ${tile('0 改', '不改程序', '引脚号不变：13、12、11', 'dark')}
+  ${tile('不改', '程序不用改', '引脚号还是 13、12、11', 'dark')}
 </div>
 ${card('plug', '对准排针', '<p>磁簧开关：G 接 −，V 接中间脚，S 接 S。</p><p>LED、蜂鸣器：+ 接 S，− 接 G。</p>')}`
       },
