@@ -333,7 +333,7 @@ value = digitalRead(7);  // 听一次</code></pre>
             { text: '速度选 <b>0.1× 慢动作</b>，勾上“跟随行”：按住和松开时，高亮的执行行分别走 if 还是 else？' },
             { text: '反过来：把第 13 行的 <code>LOW</code> 改成 <code>HIGH</code> 再运行——松开时灯亮，按下时灯灭。', code: BUTTON.replace('if( value == LOW )', 'if( value == HIGH )') },
             { text: '试一次最常见的坑：把 <code>==</code> 写成一个 <code>=</code>，即 <code>if( value = LOW )</code>。能运行吗？按下时灯亮不亮？编辑器给了什么提示？', code: BUTTON.replace('if( value == LOW )', 'if( value = LOW )') },
-            { text: '让按键“开口说话”：在 setup() 里加 <code>Serial.begin(9600);</code>，在第 12 行后面加 <code>Serial.println(value);</code>。看串口监视器：松开是几，按下是几？', code: BTN_TALK }
+            { text: '让按键“开口说话”：在 setup() 里加 <code>Serial.begin(9600);</code>，在读按键那一行 <code>value = digitalRead(keypad_pin);</code> 后面加 <code>Serial.println(value);</code>。看串口监视器：松开是几，按下是几？', code: BTN_TALK }
           ],
           smoke: [
             { expect: { pin: [11, 0], var: ['value', 1], part: ['led', 'brightness', '0.000'] } },
@@ -540,7 +540,7 @@ val=digitalRead(SensorPin);</code></pre>
         img: ['img/l12/touch_result_photo.jpg', 'img/l12/touch_shield_photo.jpg'],
         captions: ['原指南：手指触摸后，RGB 模块亮红灯', '原指南：Sensor V5.0 扩展板接法'],
         side: `
-<div class="callout note"><span class="ico">${I('plug')}</span><div><b>原指南：扩展板接法</b><p>如果你的套件中有 Sensor V5.0 扩展板，可以照右图接线：模块直接插到对应引脚的 G、V、S 三针座上，程序不用改。</p></div></div>
+<div class="callout note"><span class="ico">${I('plug')}</span><div><b>原指南：扩展板接法</b><p>如果你的套件中有 Sensor V5.0 扩展板，可以照“Sensor V5.0 扩展板接法”那张照片接线：模块直接插到对应引脚的 G、V、S 三针座上，程序不用改。</p></div></div>
 <div class="table-wrap"><table class="table">
   <thead><tr><th>串口</th><th>手指</th><th>灯</th></tr></thead>
   <tbody><tr><td class="mono">0</td><td>没摸 / 松开</td><td>灭</td></tr>
@@ -814,9 +814,9 @@ ${warnCard('压下了，灯却不亮？', '先看串口：数字会变 0，说�
           baud: 9600,
           tasks: [
             { text: '运行后先别动（滑块 0°，放平）：串口里 val 是几？灯亮吗？蜂鸣器响吗？' },
-            { text: '把“倾斜”滑块拖到 <b>+30°</b>（帽盖端朝下），再拖到 <b>−30°</b>（导针端朝下），最后放回 0° 点“碰一下”。记下四种姿势的 val 和报警情况：哪几种读到 0？' },
+            { text: '把“倾斜”滑块拖到 <b>+30°</b>（帽盖端朝下），再拖到 <b>−30°</b>（导针端朝下），最后放回 0° 点“碰一下”。连同任务 1 的“放平”，记下这四种姿势的 val 和报警情况：哪几种读到 0？' },
             { text: '本模拟里放平就读到 0，原程序会一直响。改成“平时安静、一碰就响”的防盗报警：把第 16 行的 <code>val==0</code> 改成 <code>val==1</code>，滑块放 0°，再点“碰一下”。', code: TILT.replace('if(val==0)', 'if(val==1)') },
-            { text: '让报警真的“闪”起来：把 if 里的两句换成亮 0.1 秒、灭 0.1 秒（载入参考代码看看）。把 100 改成 300，节奏会怎样？', code: TILT_BLINK },
+            { text: '让报警真的“闪”起来：把第 20 行换成 <code>delay(100);</code>，再关灯、关蜂鸣器，再 <code>delay(100);</code>——亮 0.1 秒、灭 0.1 秒（载入参考代码看看）。把两个 100 都改成 300，节奏会怎样？', code: TILT_BLINK },
             { text: '调试时太吵？在第 19 行前面加 <code>//</code>，把蜂鸣器那句“注释掉”：只亮灯，不响。', code: TILT.replace('    digitalWrite(Buzzer_pin,HIGH);', '    // digitalWrite(Buzzer_pin,HIGH);') }
           ],
           smoke: [
@@ -861,7 +861,7 @@ ${warnCard('压下了，灯却不亮？', '先看串口：数字会变 0，说�
     <tr><td class="l">轻轻碰一下</td><td class="muted">？</td><td class="muted">？</td></tr>
   </tbody>
 </table></div></div>
-<div class="callout note"><span class="ico">${I('eye')}</span><div><b>找规律</b><p>读到 0 的姿势就会报警。实验室里你已经填过一次；拿实物再填一次，和模拟比一比——以串口里看到的为准。</p></div></div>`
+<div class="callout note"><span class="ico">${I('eye')}</span><div><b>找规律</b><p>读到 0 的姿势就会报警。实验室的任务 1、2 你已经观察过一次；拿实物再填一次，和模拟比一比——以串口里看到的为准。</p></div></div>`
       },
       {
         kind: 'html',
