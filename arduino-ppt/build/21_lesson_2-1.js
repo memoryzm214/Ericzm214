@@ -408,6 +408,15 @@ function chips(s, list, o) {
   return y + h;
 }
 
+// Wiring table whose right column holds Chinese text: same look as V.wiring, but only the
+// Arduino-pin column is monospace (CJK in a mono column renders with odd spacing). Returns bottom y.
+function wiringCN(s, o) {
+  const rowH = o.rowH || 0.3;
+  const rows = [[o.left || 'Arduino UNO', o.right], ...o.rows];
+  V.table(s, rows, { x: o.x, y: o.y, w: o.w, colW: o.colW || [o.w / 2, o.w / 2], rowH, size: o.size || 12, monoCols: [0], boldCols: [0], align: ['center', 'center'] });
+  return o.y + rowH * rows.length;
+}
+
 // Colour interpolation inside the palette (for brightness ramps).
 function lerp(a, c, t) {
   const pa = [0, 2, 4].map((i) => parseInt(a.slice(i, i + 2), 16)), pc = [0, 2, 4].map((i) => parseInt(c.slice(i, i + 2), 16));
@@ -546,9 +555,9 @@ function buildPWM({ deck, I, slide }) {
     const iw = 4.55;
     V.imageBox(s, { file: 'l21/pwm_wiring.jpg', x: L, y: TOP, w: iw, h: CH, diagram: true, caption: '原指南只有接线图，右表是从图上读出的' });
     const rx = L + iw + 0.35, rw = G.R - rx;
-    const by = V.wiring(s, {
+    const by = wiringCN(s, {
       x: rx, y: TOP, w: rw, right: '元件', colW: [1.25, rw - 1.25], rowH: 0.29,
-      rows: [['5V', '电位器 一端'], ['A0', '电位器 中间脚'], ['GND', '电位器 另一端'], ['11', 'LED 长脚（正极）'], ['GND', '220Ω 电阻 → LED 短脚']],
+      rows: [['5V', '电位器一端'], ['A0', '电位器中间脚'], ['GND', '电位器另一端'], ['11', 'LED 长脚（正极）'], ['GND', '220Ω 电阻 → LED 短脚']],
     });
     const cy = by + 0.3;
     txt(s, '组件清单', { x: rx, y: cy, w: rw, h: 0.26, size: 12, bold: true, color: P.muted, valign: 'middle' });
@@ -626,7 +635,7 @@ function buildPWM({ deck, I, slide }) {
   // ---------------------------------------------------------------- code 2/2
   s = slide({
     title: '代码逐行看懂（2/2）：读数、换算、输出',
-    desc: 'loop() 不停地重复：读旋钮 → 换成 0～1 的比例 → 换成 PWM 值 → 点亮 LED，同时把三个数打印出来',
+    desc: 'loop() 反复做：读旋钮 → 算出 0～1 的比例（注释写“计算电压”，其实没乘 5）→ 换成 PWM 值 → 点亮 LED',
     notes: '高亮的四行就是上一页的四步。第 16 行先用 (float) 把读数变成小数再除以 1023，得到 0～1 的比例——原注释写“计算电压”，其实没有乘 5，所以它并不是电压。第 19 行乘 256 再用 (int) 去掉小数，得到 PWM 值；读数满 1023 时会算出 256，这个坑后面专门讲。其余几行把三个数打印到同一行，delay(0) 等于不等待。',
   });
   {
@@ -651,7 +660,7 @@ function buildPWM({ deck, I, slide }) {
     notes: '上传程序后打开串口监视器（9600），一边转旋钮一边看灯和数字。提醒学生两点：voltage 只在 0.00～1.00 之间变化，因为程序算的是比例；截图是“两行一组”，而这段程序打印的是一行三项，说明截图来自旧版程序，以自己屏幕上的输出为准。',
   });
   {
-    const pw = 3.55, sw = 3.2, ph = 2.45;
+    const pw = 3.4, sw = 3.2, ph = 2.45;
     V.imageBox(s, { file: 'l21/pwm_result_photo.jpg', x: L, y: TOP, w: pw, h: ph, caption: '原指南实物图' });
     const cy = TOP + ph + 0.3, chh = BOT - cy;
     V.card(s, { x: L, y: cy, w: pw, h: chh, fill: P.turqPale });
@@ -661,8 +670,8 @@ function buildPWM({ deck, I, slide }) {
     const nx = sx + sw + 0.3, nw = G.R - nx;
     txt(s, '读懂截图', { x: nx, y: TOP, w: nw, h: 0.3, size: 13, bold: true, valign: 'middle' });
     const notes = [
-      [B('voltage 只到 1.00', { breakLine: true }), R('程序算的是 0～1 的比例，没有乘 5')],
-      [B('格式略有不同', { breakLine: true }), R('截图两行一组，程序是一行三项——截图来自旧版程序')],
+      [B('voltage 只到 1.00', { breakLine: true }), R('程序算的是 0～1', { breakLine: true }), R('的比例，没有乘 5')],
+      [B('格式略有不同', { breakLine: true }), R('截图：两行一组', { breakLine: true }), R('程序：一行三项', { breakLine: true }), R('截图来自旧版程序')],
     ];
     let ny = TOP + 0.42;
     notes.forEach((t) => {
@@ -824,9 +833,12 @@ function buildRGB({ deck, I, slide }) {
       V.text(s, [M(labs[i][0], { bold: true, breakLine: true }), R(labs[i][1], { color: P.muted })], { x: c - 0.45, y: ly + 0.02, w: 0.9, h: 0.44, size: 11.5, align: 'center', valign: 'top', lineSpacingMultiple: 1.0 });
     });
     y = ly + 0.46 + 0.16;
-    const mh = miniCode(s, 'setColor(255, 128, 0);  // 红 + 半个绿 ≈ 橙\nsetColor(255, 255, 0);  // 红 + 绿 = 黄', { x: rx + 0.2, y, w: rw - 0.4, size: 11 });
-    y += mh + 0.16;
-    txt(s, [B('常见错误　', { color: P.red }), R('参数按顺序对号入座：第 1 个永远是红色。')], { x: rx + 0.2, y, w: rw - 0.4, h: BOT - 0.1 - y, size: 12, oneLine: true });
+    const mh = miniCode(s, 'setColor(255, 128, 0);  // 红 + 半个绿 ≈ 橙', { x: rx + 0.2, y, w: rw - 0.4, size: 11 });
+    y += mh + 0.22;
+    const rh = BOT - 0.12 - y;
+    if (rh < 0.4) warn(`setColor warn card too short ${rh.toFixed(2)}`);
+    V.card(s, { x: rx + 0.2, y, w: rw - 0.4, h: rh, fill: P.white, line: P.red, lineW: 1 });
+    txt(s, [B('常见错误　', { color: P.red }), R('参数要按顺序：第 1 个永远是红色。')], { x: rx + 0.34, y, w: rw - 0.68, h: rh, size: 12, valign: 'middle', oneLine: true });
   }
 
   // ---------------------------------------------------------------- code 1/3
@@ -841,8 +853,8 @@ function buildRGB({ deck, I, slide }) {
     V.explain(s, b, { x: L + cw + 0.35, w: G.R - (L + cw + 0.35), title: '逐行看懂', maxY: BOT, gap: 0.14, items: [
       { line: [1, 3], text: '起外号：RED 是 11，\nGREEN 是 10，BLUE 是 9' },
       { line: [5, 10], text: 'setup()：三个颜色脚都设为输出' },
-      { line: 12, text: '定义 setColor()：三个参数\nred、green、blue 装三个亮度' },
-      { line: [14, 16], text: '三个亮度分别交给三路 PWM：\n红、绿、蓝同时调好' },
+      { line: 12, text: '定义 setColor()，带三个参数' },
+      { line: [14, 16], text: 'red、green、blue 三个亮度\n分别交给三路 PWM' },
     ] });
   }
 
@@ -1047,7 +1059,7 @@ function buildServo({ deck, I, slide }) {
   s = slide({
     title: '舵机的控制：脉冲宽度决定角度',
     desc: '每 20ms 发一个脉冲，高电平持续 0.5～2.5ms：0.5ms 转到 0°，1.5ms 转到 90°，2.5ms 转到 180°',
-    notes: '舵机听懂的“暗号”是脉冲宽度：像按门铃，每 20 毫秒按一次，按住的时间越长，角度越大。左下图三行分别是最小、中间、最大脉冲。原指南这里有一句机翻，意思是：从中间位置（1.5ms，90°）转到最小角度和转到最大角度，转过的角度相等。舵机要一直收到脉冲才能稳住角度——这些脉冲稍后交给 Servo 库来发。',
+    notes: '舵机听懂的“暗号”是脉冲宽度：像按门铃，每 20 毫秒按一次，按住的时间越长，角度越大。左下图三行分别是最小、中间、最大脉冲。原指南这里有一句机翻，意思是：从中间位置（1.5ms，90°）转到最小角度和转到最大角度，转过的角度相等。舵机要一直收到脉冲才能稳住角度——这些脉冲稍后交给 Servo 库来发。原指南还提醒：不同品牌、甚至同一品牌的不同舵机，最小和最大脉宽可能略有不同，所以 0° 和 180° 不一定分毫不差。',
   });
   {
     const lw = 5.35;
@@ -1064,7 +1076,7 @@ function buildServo({ deck, I, slide }) {
     ], { x: rx, y: TOP, w: rw, colW: [1.75, rw - 1.75], rowH, size: 12, monoCols: [0], align: ['center', 'center'] });
     const ty = TOP + 6 * rowH + 0.3;
     tipBox(s, { x: rx, y: ty, w: rw, h: BOT - ty, kind: 'note', title: '要点', size: 12,
-      text: '• 小于 1.5ms：逆时针转\n• 大于 1.5ms：顺时针转\n• 中间位置到两头的转角相等\n• 要一直发脉冲，角度才能保持' }, I.clock);
+      text: '• 小于 1.5ms：比中间偏逆时针\n• 大于 1.5ms：比中间偏顺时针\n• 中间位置到两头的转角相等\n• 要一直发脉冲，角度才能保持' }, I.clock);
   }
 
   // ---------------------------------------------------------------- wiring
@@ -1077,8 +1089,8 @@ function buildServo({ deck, I, slide }) {
     const iw = 4.1;
     V.imageBox(s, { file: 'l21/servo_pot_wiring.jpg', x: L, y: TOP, w: iw, h: CH, diagram: true, caption: '原指南接线图' });
     const rx = L + iw + 0.35, rw = G.R - rx, tw = (rw - 0.3) / 2, rowH = 0.31;
-    V.wiring(s, { x: rx, y: TOP, w: tw, right: '电位器', left: 'Arduino', rowH, size: 12, colW: [tw * 0.45, tw * 0.55], rows: [[{ text: '3.3V', color: P.red, bold: true }, '左脚'], ['A0', '中间脚'], ['GND', '右脚']] });
-    V.wiring(s, { x: rx + tw + 0.3, y: TOP, w: tw, right: '舵机', left: 'Arduino', rowH, size: 12, colW: [tw * 0.45, tw * 0.55], rows: [['5V', '红线'], ['GND', '黑 / 棕线'], ['7', '黄 / 橙线']] });
+    wiringCN(s, { x: rx, y: TOP, w: tw, right: '电位器', left: 'Arduino', rowH, size: 12, colW: [tw * 0.45, tw * 0.55], rows: [[{ text: '3.3V', color: P.red, bold: true }, '左脚'], ['A0', '中间脚'], ['GND', '右脚']] });
+    wiringCN(s, { x: rx + tw + 0.3, y: TOP, w: tw, right: '舵机', left: 'Arduino', rowH, size: 12, colW: [tw * 0.45, tw * 0.55], rows: [['5V', '红线'], ['GND', '黑（棕）线'], ['7', '黄（橙）线']] });
     const ny = TOP + 4 * rowH + 0.1;
     txt(s, [B('注意　', { color: P.red }), R('电位器接 3.3V，不是 5V；下图是舵机的三根线')], { x: rx, y: ny, w: rw, h: 0.28, size: 12, valign: 'middle', oneLine: true });
     const wy = ny + 0.28 + 0.2;
@@ -1125,11 +1137,9 @@ function buildServo({ deck, I, slide }) {
     const cw = 5.6, ch = 2.75;
     const b = code(s, { x: L, y: TOP, w: cw, h: ch, size: 11, code: SERVO_CODE, from: 1, to: 9, hl: [1, 2, 8], file: 'servo_knob.ino', right: '第 1–9 行', allowWrap: true });
     V.explain(s, b, { x: L + cw + 0.35, w: G.R - (L + cw + 0.35), title: '逐行看懂', maxY: BOT, gap: 0.12, items: [
-      { line: 1, text: '引入 Servo 库（IDE 自带）' },
-      { line: 2, text: '创建舵机对象 myservo' },
+      { line: [1, 2], text: '引入 IDE 自带的 Servo 库\n创建舵机对象 myservo' },
       { line: [3, 4], text: 'A0 接电位器，7 号脚接舵机' },
-      { line: 7, text: '7 号脚设为输出（可省略）' },
-      { line: 8, text: 'myservo 和 7 号脚配对' },
+      { line: [7, 8], text: '7 号脚设为输出（可省略）\nmyservo 和 7 号脚配对' },
     ] });
     const ty = TOP + ch + 0.3;
     tipBox(s, { x: L, y: ty, w: cw, h: BOT - ty, kind: 'note', size: 12, text: [B('原注释有误　'), R('第 8 行写的 pin 9 是旧注释，实为 7 号脚')] }, I.book);
@@ -1161,8 +1171,8 @@ function buildServo({ deck, I, slide }) {
   // ---------------------------------------------------------------- result + why not 180
   s = slide({
     title: '实验结果：旋钮转到哪，舵机就转到哪',
-    desc: '上传程序后转动电位器，舵机跟着转；按原接法电位器接 3.3V，实际最大约 168°，改用 map() 能转满',
-    notes: '先演示：转动电位器，舵机跟着转。再算一笔账：电位器接 3.3V，A0 最大读数约 3.3 ÷ 5 × 1023 ≈ 675，除以 4 约 168°，所以转到底也到不了 180°。如果电位器改接 5V，读数能到 1023，除以 4 得 255，超过 180 的部分舵机都停在 180°，旋钮最后一段就没反应了。最稳妥的是电位器接 5V，再用 map(readValue, 0, 1023, 0, 180)；想反着转，就把最后两个数换成 180, 0。',
+    desc: '转动电位器，舵机跟着转；按原接法电位器接 3.3V，实际最大约 168°——改接 5V 再用 map() 就能转满',
+    notes: '先演示：转动电位器，舵机跟着转。再算一笔账：电位器接 3.3V，A0 最大读数约 3.3 ÷ 5 × 1023 ≈ 675，除以 4 约 168°，所以转到底也到不了 180°。如果电位器改接 5V 但仍除以 4，读数到 1023 时得 255，Servo 库把超过 180 的都当 180，旋钮最后一段就没反应了。最稳妥的是电位器接 5V，再用 map(readValue, 0, 1023, 0, 180)（注意：仍接 3.3V 时这样写只能转到约 118°）；想反着转，就把最后两个数换成 180, 0。',
   });
   {
     const pw = 3.9;
@@ -1213,10 +1223,10 @@ function shieldMap(s, x, y, w, h) {
   V.pill(s, { x: cx + 0.05, y: ey, w: 0.75, h: 0.28, text: 'F → 7', size: 10.5, fill: P.white, line: P.gray2, mono: true });
 }
 
-// Dead-zone ruler zoomed to 495..555. Axis label on the left, red marker = resting value.
+// Dead-zone ruler zoomed to 505..540. Axis label on the left, red marker = resting value.
 function zoomRuler(s, o) {
   const { x, y, w, label } = o, lw = 0.75, bx = x + lw + 0.05, bw = x + w - bx, h = 0.32;
-  const lo = 495, hi = 555;
+  const lo = 505, hi = 540;
   const X = (v) => bx + bw * (v - lo) / (hi - lo);
   const ly = y + 0.38;
   txt(s, label, { x, y: ly - 0.08, w: lw, h: 0.48, size: 12, bold: true, valign: 'middle', lineSpacingMultiple: 1.0 });
@@ -1356,7 +1366,7 @@ function buildJoystick({ deck, I, slide }) {
     V.imageBox(s, { file: 'l21/joystick_serial_xy.jpg', x: L, y: TOP, w: iw, h: CH, caption: '原指南串口截图：x: 525 / y: 518 交替出现', fill: P.white, line: P.gray2 });
     const rx = L + iw + 0.35, rw = G.R - rx;
     txt(s, '静止值正好落在“死区”里', { x: rx, y: TOP, w: rw, h: 0.3, size: 13, bold: true, valign: 'middle', oneLine: true });
-    txt(s, '尺子只画了中间 495～555 这一段；红三角 = 静止值', { x: rx, y: TOP + 0.32, w: rw, h: 0.22, size: 10, color: P.muted, valign: 'middle', oneLine: true });
+    txt(s, '尺子只画了中间 505～540 这一段；红三角 = 静止值', { x: rx, y: TOP + 0.32, w: rw, h: 0.22, size: 10, color: P.muted, valign: 'middle', oneLine: true });
     zoomRuler(s, { x: rx, y: TOP + 0.66, w: rw, label: [B('X 轴', { breakLine: true }), R('左右', { fontSize: 10.5, color: P.muted })], marker: 525, ticks: [520, 530], zones: [
       { from: 0, to: 520, fill: P.turq, text: '← left' },
       { from: 520, to: 530, fill: P.ink, text: '死区' },
@@ -1519,13 +1529,13 @@ function buildJoystick({ deck, I, slide }) {
   s = slide({
     title: '常见坑与动手改一改',
     desc: '读数乱跳先查上拉、方向误报就调死区；学会了读摇杆，就能用它控制实验三的舵机',
-    notes: '左边三个坑按出现频率排：按键乱报，多半是没开上拉；摇杆不动也报方向，说明你的摇杆静止值和截图不同，先用程序①测一下再改死区；按住按键时方向不打印，是 else if 的优先级，不是坏了。右边的挑战把实验三和实验四连起来：摇杆的 X 读数用 map 换成角度，直接送给舵机，就是一个遥控云台的雏形。',
+    notes: '左边三个坑按出现频率排：按键乱报，多半是没开上拉；摇杆不动也报方向，说明你的摇杆静止值和截图不同，先用程序①测一下再改死区；按住按键时方向不打印，是 else if 的优先级，不是坏了。右边的挑战把实验三和实验四连起来：摇杆的 X 读数用 map 换成角度，直接送给舵机，就是一个遥控云台的雏形。注意扩展板占用了 2～8 号脚，实验三用的 7 号脚正好是 F 键，舵机信号线要改接 9 号脚，并写 myservo.attach(9)。',
   });
   {
     const lw = 4.35, th = (CH - 0.6) / 3;
     const W = [
       ['按键乱报、自己“按下”', '多半没开上拉：检查 setup() 里的 HIGH。'],
-      ['不推也报方向', '静止值不同：先跑程序①，再改 520、530。'],
+      ['不推也报方向', '静止值不同：先跑程序①，再改死区的数字。'],
       ['按住按键时方向不打印', '这是 else if 的优先级，不是坏了。'],
     ];
     W.forEach(([t, d], i) => tipBox(s, { x: L, y: TOP + i * (th + 0.3), w: lw, h: th, kind: 'warn', title: t, text: d, size: 12 }, I.warn_w));
@@ -1537,13 +1547,13 @@ function buildJoystick({ deck, I, slide }) {
     V.numCircle(s, 1, { x: rx + 0.2, y, d: 0.28, size: 10.5 });
     txt(s, '用新写法打开上拉：7 行就够', { x: rx + 0.58, y: y - 0.02, w: rw - 0.78, h: 0.32, size: 12.5, bold: true, valign: 'middle', oneLine: true });
     y += 0.38;
-    y += miniCode(s, 'pinMode(BUTTON_UP, INPUT_PULLUP);', { x: rx + 0.58, y, w: rw - 0.78, size: 10.5 }) + 0.26;
+    y += miniCode(s, 'pinMode(BUTTON_UP, INPUT_PULLUP);', { x: rx + 0.58, y, w: rw - 0.78, size: 10.5 }) + 0.22;
     V.numCircle(s, 2, { x: rx + 0.2, y, d: 0.28, size: 10.5 });
     txt(s, '摇杆遥控舵机（接上实验三的舵机）', { x: rx + 0.58, y: y - 0.02, w: rw - 0.78, h: 0.32, size: 12.5, bold: true, valign: 'middle', oneLine: true });
     y += 0.38;
-    y += miniCode(s, 'int x = analogRead(PIN_ANALOG_X);\nint angle = map(x, 0, 1023, 0, 180);\nmyservo.write(angle);', { x: rx + 0.58, y, w: rw - 0.78, size: 10.5 }) + 0.12;
-    txt(s, '别忘了 #include <Servo.h> 和 attach()', { x: rx + 0.58, y, w: rw - 0.78, h: 0.26, size: 12, color: P.muted, valign: 'middle', oneLine: true });
-    y += 0.26;
+    y += miniCode(s, 'int x = analogRead(PIN_ANALOG_X);\nint angle = map(x, 0, 1023, 0, 180);\nmyservo.write(angle);', { x: rx + 0.58, y, w: rw - 0.78, size: 10.5 }) + 0.1;
+    txt(s, [R('信号线改接 9 号脚：7 号被 F 键占了', { breakLine: true }), R('别忘了 #include <Servo.h> 和 attach(9)')], { x: rx + 0.58, y, w: rw - 0.78, h: 0.48, size: 12, color: P.muted, oneLine: true, lineSpacingMultiple: 1.1 });
+    y += 0.48;
     if (y > BOT - 0.1) warn(`joystick try overflow ${y.toFixed(2)}`);
   }
 }
