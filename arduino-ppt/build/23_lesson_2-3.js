@@ -337,7 +337,8 @@ function warnCard(s, ic, title, body, o) {
   V.iconCircle(s, ic, { x: o.x + pad, y: o.y + pad, d, fill: P.red });
   txt(s, title, { x: o.x + pad + d + 0.12, y: o.y + pad, w: o.w - 2 * pad - d - 0.12, h: d, size: o.titleSize || 13.5, bold: true, color: P.red, valign: 'middle' });
   const by = o.y + pad + d + 0.1;
-  txt(s, body, { x: o.x + pad, y: by, w: o.w - 2 * pad, h: o.y + o.h - pad + 0.04 - by, size: o.size || 12 });
+  if (body) txt(s, body, { x: o.x + pad, y: by, w: o.w - 2 * pad, h: o.y + o.h - pad + 0.04 - by, size: o.size || 12 });
+  return by;
 }
 
 // Red-outlined row: icon on the left (vertically centred), red title + body to the right.
@@ -385,7 +386,7 @@ function fbox(s, o) {
 function partsCard(s, I, o) {
   V.card(s, { x: o.x, y: o.y, w: o.w, h: o.h, fill: o.fill });
   txt(s, o.title || '组件清单（原指南）', { x: o.x + 0.18, y: o.y + 0.12, w: o.w - 0.36, h: 0.3, size: 13, bold: true, valign: 'middle' });
-  const cols = o.cols || 2, rh = o.rowH || 0.34, d = 0.28;
+  const cols = o.cols || 2, rh = o.rowH || 0.34, d = o.d || 0.28;
   const colW = o.colW || Array(cols).fill((o.w - 0.36) / cols);
   const rowsN = Math.ceil(o.items.length / cols);
   o.items.forEach((it, i) => {
@@ -533,12 +534,12 @@ function charGrid(s, o) {
       ['信号线', '3 根：11、10、9', '1 根：10 号脚'],
       ['单独控制', '1 颗灯', '12 颗，还能再串'],
       ['调颜色', 'analogWrite()', '用库发颜色数据'],
-    ], { x: G.L, y, w: lw, colW: [0.95, 1.6, 1.6], rowH: 0.34, size: 12, boldCols: [0] });
+    ], { x: G.L, y, w: lw, colW: [0.88, 1.77, 1.5], rowH: 0.34, size: 12, boldCols: [0] });
     if (y + 4 * 0.34 > G.bottom) warn('compare table overflow');
     const rx = 4.9, rw = G.R - rx;
-    V.imageBox(s, { file: 'l23/ws_module_photo.jpg', x: rx, y: G.top, w: rw, h: 2.05 });
-    const py = G.top + 2.05 + 0.3;
-    partsCard(s, I, { x: rx, y: py, w: rw, h: G.bottom - py, colW: [2.72, rw - 0.36 - 2.72], byCol: true, rowH: 0.3, items: [
+    V.imageBox(s, { file: 'l23/ws_module_photo.jpg', x: rx, y: G.top, w: rw, h: 1.98 });
+    const py = G.top + 1.98 + 0.3;
+    partsCard(s, I, { x: rx, y: py, w: rw, h: G.bottom - py, colW: [2.72, rw - 0.36 - 2.72], byCol: true, rowH: 0.36, d: 0.26, items: [
       { ic: 'chip', t: 'Arduino UNO R3 主板' }, { ic: 'ring', t: 'WS2812b RGB LED 模块 ×1' },
       { ic: 'usb', t: 'USB 数据线' }, { ic: 'cable', t: '若干跳线' },
     ] });
@@ -616,7 +617,7 @@ function charGrid(s, o) {
   s = slide({
     title: '接线：信号线接 10 号脚',
     desc: '只要三根线：10 号脚 → R（信号），5V → V，GND → G；D 脚空着，留给下一个灯环',
-    notes: '照接线表接三根线，接线前先拔掉 USB。灯环背面 4 根排针从左到右是 D、R、V、G：R 是信号输入，要接 10 号脚；D 是信号输出，这次空着不接。最常见的错误是把信号线插到了相邻的 D 脚上，灯就不会亮。',
+    notes: '照接线表接三根线，接线前先拔掉 USB。从灯环正面看，4 根排针从左到右是 D、R、V、G：R 是信号输入，要接 10 号脚；D 是信号输出，这次空着不接。最常见的错误是把信号线插到了相邻的 D 脚上，灯就不会亮。',
   });
   {
     const lw = 3.3;
@@ -734,7 +735,7 @@ function charGrid(s, o) {
     warnRow(s, I.times_w, '只写不寄 = 灯不变', '写完 setPixelColor() 却忘了 show()，灯一点反应都没有。', { x: G.L, y: wy, w: lw, h: G.bottom - wy });
     // right: Color() + brightness
     const rx = G.L + lw + 0.3, rw = G.R - rx;
-    const ah = 1.85;
+    const ah = 1.9;
     V.card(s, { x: rx, y: G.top, w: rw, h: ah });
     V.iconCircle(s, I.palette, { x: rx + 0.2, y: G.top + 0.16, d: 0.38 });
     txt(s, 'pixels.Color(红, 绿, 蓝)', { x: rx + 0.7, y: G.top + 0.16, w: rw - 0.85, h: 0.38, size: 13, bold: true, mono: true, valign: 'middle' });
@@ -744,16 +745,16 @@ function charGrid(s, o) {
       txt(s, c, { x: rx + 0.24, y: yy, w: 1.75, h: 0.28, size: 12, mono: true, bold: true, valign: 'middle' });
       txt(s, '→ ' + t, { x: rx + 2.0, y: yy, w: rw - 2.15, h: 0.28, size: 12, valign: 'middle' });
     });
-    txt(s, '三个数各 0～255，可混出约 1677 万种颜色', { x: rx + 0.24, y: G.top + 1.5, w: rw - 0.4, h: 0.26, size: 12, color: P.muted, valign: 'middle' });
+    txt(s, '三个数各 0～255，可混出约 1677 万种颜色', { x: rx + 0.24, y: G.top + 1.53, w: rw - 0.4, h: 0.26, size: 12, color: P.muted, valign: 'middle' });
     const gy = G.top + ah + 0.3, gh = G.bottom - gy;
     V.card(s, { x: rx, y: gy, w: rw, h: gh, fill: P.turqPale });
     V.iconCircle(s, I.sun, { x: rx + 0.2, y: gy + 0.14, d: 0.36 });
     txt(s, 'setBrightness(30)：亮度上限', { x: rx + 0.66, y: gy + 0.14, w: rw - 0.8, h: 0.36, size: 13, bold: true, valign: 'middle' });
-    const barX = rx + 0.24, barW = rw - 0.48, barY = gy + 0.62;
+    const barX = rx + 0.24, barW = rw - 0.48, barY = gy + 0.58;
     V.card(s, { x: barX, y: barY, w: barW, h: 0.2, fill: P.white, line: P.gray2, radius: 0.1 });
     V.card(s, { x: barX, y: barY, w: Math.max(0.24, barW * 30 / 255), h: 0.2, fill: P.turqDeep, radius: 0.1 });
     V.text(s, '30 / 255 ≈ 12%', { x: barX + barW * 30 / 255 + 0.12, y: barY - 0.04, w: 1.6, h: 0.28, size: 11, bold: true, valign: 'middle' });
-    txt(s, '不刺眼、更省电：12 颗灯全亮白光约 0.7 A，电脑 USB 口一般只能给 0.5 A。', { x: rx + 0.24, y: barY + 0.32, w: rw - 0.44, h: gy + gh - 0.08 - (barY + 0.32), size: 12 });
+    txt(s, '不刺眼、更省电：12 颗灯全亮白光约 0.7 A，电脑 USB 口一般只能给 0.5 A。', { x: rx + 0.24, y: barY + 0.3, w: rw - 0.44, h: gy + gh - 0.08 - (barY + 0.32), size: 12 });
   }
 
   // ================================================================ 10 code 1/2
@@ -766,9 +767,9 @@ function charGrid(s, o) {
     const cw = 5.15;
     const b = codeBlock(s, { x: G.L, y: G.top, w: cw, h: G.ch, code: WS_CODE, from: 1, to: 13, hl: [1, 6, 10, 11, 12], file: 'ws2812_ring.ino', right: '第 1–13 行' });
     const ex = G.L + cw + 0.32, ew = G.R - ex;
-    explain(s, b, { x: ex, w: ew, title: '逐行看懂', maxY: G.bottom, gap: 0.08, items: [
+    explain(s, b, { x: ex, w: ew, title: '逐行看懂', maxY: G.bottom, gap: 0.14, items: [
       { line: 1, text: '引入 NeoPixel 库（要先安装）' },
-      { line: [3, 5], text: '起外号 LED_Pin＝10、PIXEL_COUNT＝12；count 也是 12' },
+      { line: [3, 5], text: '起外号：信号脚 10、灯数 12\n变量 count 也存 12' },
       { line: 6, text: '创建灯环对象 pixels：管 12 颗灯、接 10 号脚' },
       { line: [8, 9], text: 'setup() 开始，只运行一次' },
       { line: [10, 11], text: 'begin() 让管家开工；show() 发出空草稿，先把灯全关掉' },
@@ -798,7 +799,7 @@ function charGrid(s, o) {
     V.card(s, { x: G.L, y: ry, w: G.cw, h: rh });
     V.iconCircle(s, I.stopwatch, { x: G.L + 0.2, y: ry + 0.16, d: 0.38 });
     txt(s, '慢动作回放', { x: G.L + 0.7, y: ry + 0.16, w: 2.5, h: 0.38, size: 14, bold: true, valign: 'middle' });
-    txt(s, '每圈多亮一颗；12 圈不到 10 毫秒，看起来就是“一起亮”。', { x: G.L + 0.2, y: ry + 0.64, w: 3.3, h: rh - 0.74, size: 12 });
+    txt(s, '每圈多亮一颗；12 圈不到 10 毫秒，看起来就是“一起亮”。', { x: G.L + 0.2, y: ry + 0.6, w: 3.3, h: rh - 0.66, size: 12 });
     const rowsR = [['i = 0', 1], ['i = 1', 2], ['i = 11', 12]];
     const d = 0.22, dg = 0.08, lx0 = G.L + 3.85, lx = lx0 + 0.85, rp = 0.3, ry0 = ry + (rh - 3 * rp) / 2;
     rowsR.forEach(([lab, k], j) => {
@@ -842,7 +843,7 @@ function charGrid(s, o) {
   // ================================================================ 13 pitfalls + try
   s = slide({
     title: '常见坑与动手改一改',
-    desc: '灯不亮先查库和接线；跑通以后，改两三行代码，就能换颜色、做出“一颗颗亮起”的效果',
+    desc: '灯不亮先查库和接线；跑通以后，改几行代码，就能换颜色、做出“一颗颗亮起”的效果',
     notes: '左边三个坑按出现频率排序：没装库编译不过、信号线插错脚、亮度太高供电不足。右边两个小挑战：挑战 1 只改三个数字；挑战 2 在 show() 后面加一个 delay，就能看清“一颗一颗亮”的过程，再用 clear() 清空草稿、show() 寄出，灯就全灭，然后循环重来。可以让学生比较 delay(100) 和 delay(30) 的区别。',
   });
   {
@@ -858,7 +859,7 @@ function charGrid(s, o) {
     txt(s, [B('挑战 1　'), R('换个颜色：改第 18 行的三个数')], { x: rx + 0.2, y, w: rw - 0.4, h: 0.28, size: 12.5, valign: 'middle' });
     y += 0.34;
     y += miniCode(s, 'pixels.Color(127, 127, 127)  // 原来：白\npixels.Color(0, 0, 127)      // 改成：蓝', { x: rx + 0.2, y, w: rw - 0.4, size: 10.5, hl: [1] }) + 0.16;
-    txt(s, [B('挑战 2　'), R('一颗颗亮起再全灭（第 19 行后加）')], { x: rx + 0.2, y, w: rw - 0.4, h: 0.28, size: 12.5, valign: 'middle' });
+    txt(s, [B('挑战 2　'), R('一颗颗亮起再全灭（高亮行为新增）')], { x: rx + 0.2, y, w: rw - 0.4, h: 0.28, size: 12.5, valign: 'middle' });
     y += 0.34;
     y += miniCode(s, '    delay(100);      // 新增：每颗停 0.1 秒\n  }\n  pixels.clear();    // 新增：草稿全清空\n  pixels.show();     // 新增：寄出 = 全灭\n  delay(500);        // 新增：停 0.5 秒', { x: rx + 0.2, y, w: rw - 0.4, size: 10.5, hl: [0, 2, 3, 4] });
     if (y > G.bottom - 0.1) warn('try card overflow');
@@ -915,11 +916,11 @@ function charGrid(s, o) {
     notes: '实验目的和原理照原指南念。右下角解释为什么要用转接板：不带转接板时，1602 至少要占 6 个 IO 口（RS、E 和 4 根数据线），再加上电源、背光、对比度的线，面包板上一大把；带了转接板，只要 SDA、SCL 两根信号线，省下来的口可以接别的传感器。组件里的 LCD 一定要是“带转接板”的那种。',
   });
   {
-    const w = (G.cw - 0.35) / 2, h = 1.12;
+    const w = (G.cw - 0.35) / 2, h = 1.04;
     V.tip(s, { x: G.L, y: G.top, w, h, kind: 'note', title: '实验目的', text: '通过 Arduino UNO R3 主控板控制 LCD1602 液晶显示屏显示字符。', size: 12.5 }, I.target);
     V.tip(s, { x: G.L + w + 0.35, y: G.top, w, h, kind: 'tip', title: '实验原理', text: 'UNO 主控板与串行 LCD1602 相连，使用 I2C 通信，控制液晶屏显示字符。', size: 12.5 }, I.book);
     const by = G.top + h + 0.3, bh = G.bottom - by, pw = 3.75;
-    partsCard(s, I, { x: G.L, y: by, w: pw, h: bh, cols: 1, rowH: 0.31, items: [
+    partsCard(s, I, { x: G.L, y: by, w: pw, h: bh, cols: 1, rowH: 0.34, d: 0.26, items: [
       { ic: 'chip', t: 'Arduino Uno R3 主板' }, { ic: 'grid', t: '面包板' }, { ic: 'usb', t: 'USB 数据线' },
       { ic: 'desktop', t: '带转接板的 LCD1602 显示屏' }, { ic: 'cable', t: '若干跳线' },
     ] });
@@ -927,14 +928,14 @@ function charGrid(s, o) {
     txt(s, '为什么要带转接板？', { x: rx, y: by, w: rw, h: 0.3, size: 13.5, bold: true, valign: 'middle' });
     const cy = by + 0.4, chh = G.bottom - cy, cw = (rw - 0.3) / 2;
     const cmp = [
-      { fill: P.card, big: '6 个', t: '不带转接板', d: '至少占 6 个 IO 口（RS、E、D4～D7），另有电源、背光、对比度的线' },
+      { fill: P.card, big: '6 个', t: '不带转接板', d: '要占 6 个 IO 口：RS、E 和 4 根数据线，还有电源、背光等线' },
       { fill: P.turq, big: '2 个', t: '带转接板', d: '只占 A4、A5 两个口，一共 4 根线；省下的口留给别的传感器' },
     ];
     cmp.forEach((c, i) => {
       const x = rx + i * (cw + 0.3);
       V.card(s, { x, y: cy, w: cw, h: chh, fill: c.fill });
       V.text(s, c.big, { x: x + 0.18, y: cy + 0.1, w: 1.2, h: 0.5, size: 24, bold: true });
-      txt(s, c.t, { x: x + 1.2, y: cy + 0.16, w: cw - 1.3, h: 0.4, size: 13, bold: true, valign: 'middle' });
+      txt(s, c.t, { x: x + 1.05, y: cy + 0.16, w: cw - 1.15, h: 0.4, size: 13, bold: true, valign: 'middle' });
       txt(s, c.d, { x: x + 0.18, y: cy + 0.66, w: cw - 0.34, h: chh - 0.72, size: 12 });
     });
   }
@@ -958,12 +959,12 @@ function charGrid(s, o) {
     seg(s, ax + aw, sdaY, lineEnd, sdaY, { color: P.turqDeep, width: 2.25 });
     seg(s, ax + aw, sclY, lineEnd, sclY, { color: P.ink, width: 2.25 });
     txt(s, 'SDA 数据线', { x: ax + aw + 0.1, y: sdaY - 0.3, w: 1.3, h: 0.24, size: 10.5, bold: true, color: P.turqDeep, valign: 'middle' });
-    txt(s, 'SCL 时钟线（打节拍）', { x: ax + aw + 0.1, y: sclY - 0.3, w: 2.0, h: 0.24, size: 10.5, bold: true, valign: 'middle' });
+    txt(s, 'SCL 时钟线', { x: ax + aw + 0.1, y: sclY - 0.3, w: 1.1, h: 0.24, size: 10.5, bold: true, valign: 'middle' });
     // devices
-    const dy = ay + ah + 0.45, dh = 0.82, dw = 1.08;
+    const dy = ay + ah + 0.45, dh = 0.82, dw = 1.0;
     const devs = [
-      { x: 2.15, t: 'LCD1602', a: '0x27', on: true },
-      { x: 3.5, t: '另一块 LCD', a: '0x26', on: false },
+      { x: 2.45, t: 'LCD1602', a: '0x27', on: true },
+      { x: 3.68, t: '另一块 LCD', a: '0x26', on: false },
       { x: lineEnd - dw, t: 'OLED 屏', a: '0x3C', on: false },
     ];
     devs.forEach((d0) => {
@@ -976,8 +977,9 @@ function charGrid(s, o) {
       txt(s, d0.t, { x: d0.x + 0.04, y: dy + 0.06, w: dw - 0.08, h: 0.3, size: 11.5, bold: true, align: 'center', valign: 'middle' });
       V.pill(s, { x: d0.x + (dw - 0.62) / 2, y: dy + 0.44, w: 0.62, h: 0.26, text: d0.a, size: 10.5, mono: true, fill: d0.on ? P.turq : P.ink, color: d0.on ? P.ink : P.white });
     });
-    V.iconCircle(s, I.home, { x: G.L + 0.3, y: dy + 0.18, d: 0.46 });
-    txt(s, '门牌号\n（地址）', { x: G.L + 0.84, y: dy + 0.1, w: 1.0, h: 0.62, size: 11, bold: true, valign: 'middle', lineSpacingMultiple: 1.05 });
+    V.iconCircle(s, I.home, { x: G.L + 0.1, y: dy + 0.18, d: 0.46 });
+    txt(s, '门牌号\n（地址）', { x: G.L + 0.64, y: dy + 0.1, w: 0.9, h: 0.62, size: 11, bold: true, valign: 'middle', lineSpacingMultiple: 1.05 });
+    V.arrow(s, G.L + 1.4, dy + 0.57, 2.45 + (dw - 0.62) / 2 - 0.06, dy + 0.57, { color: P.muted, width: 1 });
     // analogy strip
     const sy = dy + dh + 0.3, sh = G.bottom - sy;
     V.card(s, { x: G.L, y: sy, w: lw, h: sh, fill: P.turqPale });
@@ -1043,7 +1045,7 @@ function charGrid(s, o) {
     const lw = 4.6;
     let y = iconCard(s, I.door, '像挨家挨户敲门', { x: G.L, y: G.top, w: lw, h: G.ch });
     const doors = ['8', '9', '…', '39', '…', '119'];
-    const dw = 0.52, dgap = 0.14, dh = 0.5;
+    const dw = 0.48, dgap = 0.1, dh = 0.5;
     let dx = G.L + 0.2;
     doors.forEach((dn) => {
       if (dn === '…') { V.text(s, '…', { x: dx, y, w: 0.3, h: dh, size: 14, color: P.muted, align: 'center', valign: 'middle' }); dx += 0.3 + dgap; return; }
@@ -1058,16 +1060,16 @@ function charGrid(s, o) {
     y += miniCode(s, '#include <Wire.h>             // IDE 自带\nWire.begin();                 // 加入 I2C 总线\nWire.beginTransmission(39);   // 敲 39 号门\nWire.endTransmission() == 0   // 0 = 有人应答', { x: G.L + 0.2, y, w: lw - 0.4, size: 10 }) + 0.14;
     txt(s, [R('程序里用 '), M('for (byte i = 8; i < 120; i++)'), R(' 从 8 号敲到 119 号。')], { x: G.L + 0.2, y, w: lw - 0.4, h: G.bottom - 0.1 - y, size: 12 });
     // right
-    const rx = G.L + lw + 0.3, rw = G.R - rx, ah = 1.95;
+    const rx = G.L + lw + 0.3, rw = G.R - rx, ah = 1.8;
     let ry = iconCard(s, I.calc, '同一个数，两种写法', { x: rx, y: G.top, w: rw, h: ah, d: 0.4 });
     const rr = [['Serial.print(i, DEC)', '→ 39'], ['Serial.print(i, HEX)', '→ 27']];
     rr.forEach(([c, o2], i) => {
       txt(s, c, { x: rx + 0.2, y: ry + i * 0.3, w: 2.35, h: 0.28, size: 11.5, mono: true, bold: true, valign: 'middle' });
       txt(s, o2, { x: rx + 2.6, y: ry + i * 0.3, w: rw - 2.8, h: 0.28, size: 12, mono: true, valign: 'middle' });
     });
-    txt(s, [B('byte', { fontFace: V.MONO }), R('：装 0～255 的小整数，放地址正好够用')], { x: rx + 0.2, y: ry + 0.7, w: rw - 0.4, h: G.top + ah - 0.06 - (ry + 0.7), size: 12 });
+    txt(s, [B('byte', { fontFace: V.MONO }), R('：装 0～255 的小整数，放地址正好够用')], { x: rx + 0.2, y: ry + 0.66, w: rw - 0.4, h: 0.3, size: 12, valign: 'middle' });
     const wy = G.top + ah + 0.3;
-    warnCard(s, I.warn_w, '原指南程序少了一行', [R('在最前面补上 '), M('#include <Wire.h>', { bold: true }), R('，否则编译报错：', { breakLine: true }), M("'Wire' was not declared in this scope")], { x: rx, y: wy, w: rw, h: G.bottom - wy });
+    warnCard(s, I.warn_w, '原指南程序少了一行', [R('在最前面补上 '), M('#include <Wire.h>', { bold: true }), R('。', { breakLine: true }), R('不补这一行，编译会报错：', { breakLine: true }), M("'Wire' was not declared in this scope")], { x: rx, y: wy, w: rw, h: G.bottom - wy });
   }
 
   // ================================================================ 21 scan code 1/2
@@ -1077,21 +1079,21 @@ function charGrid(s, o) {
     notes: '整个扫描程序都写在 setup() 里，只运行一次。第 3 行的英文注释说的是 Leonardo 板要等串口连上，UNO 上第 4 行会马上通过。第 9 行的 for 循环和流水灯里学过的一样，只是计数器换成了 byte 类型。第 11 行最关键：endTransmission() 返回 0，说明这个地址上有设备回应。再提醒一次：最前面要补 #include <Wire.h>。',
   });
   {
-    const cw = 5.15, chh = 2.85;
-    const b = codeBlock(s, { x: G.L, y: G.top, w: cw, h: chh, code: SCAN_CODE, from: 1, to: 11, hl: [8, 9, 10, 11], file: 'i2c_scanner.ino', right: '第 1–11 行' });
-    const wy = G.top + chh + 0.3;
-    V.card(s, { x: G.L, y: wy, w: cw, h: G.bottom - wy, fill: P.white, line: P.red, lineW: 1 });
-    V.iconCircle(s, I.warn_w, { x: G.L + 0.14, y: wy + (G.bottom - wy - 0.32) / 2, d: 0.32, fill: P.red });
-    txt(s, [R('原指南漏了一行：第 1 行之前要加 '), M('#include <Wire.h>', { bold: true })], { x: G.L + 0.58, y: wy, w: cw - 0.7, h: G.bottom - wy, size: 12, color: P.red, valign: 'middle' });
+    const cw = 5.15, chh = 2.97;
+    const b = codeBlock(s, { x: G.L, y: G.top, w: cw, h: chh, size: 11, code: SCAN_CODE, from: 1, to: 11, hl: [8, 9, 10, 11], file: 'i2c_scanner.ino', right: '第 1–11 行' });
     const ex = G.L + cw + 0.32, ew = G.R - ex;
-    explain(s, b, { x: ex, w: ew, title: '逐行看懂', maxY: G.bottom, gap: 0.1, items: [
+    explain(s, b, { x: ex, w: ew, title: '逐行看懂', maxY: G.top + chh, gap: 0.06, items: [
       { line: [1, 2], text: '全部写在 setup() 里：扫描一次就够' },
-      { line: [3, 4], text: '打开串口 9600，等它准备好（UNO 马上通过）' },
-      { line: [5, 7], text: '打印标题；count 记录找到几个设备' },
-      { line: 8, text: '加入 I2C 总线（SDA = A4，SCL = A5）' },
-      { line: 9, text: 'i 从 8 数到 119，挨个试' },
-      { line: [10, 11], text: '敲 i 号的门；返回 0 = 有设备应答' },
+      { line: [3, 4], text: '打开串口 9600，等它准备好' },
+      { line: [5, 7], text: '打印标题；count 用来计数' },
+      { line: [8, 9], text: '启动 I2C；i 从 8 数到 119' },
+      { line: [10, 11], text: '敲 i 号的门：返回 0 = 有应答' },
     ] });
+    // the guide's listing lacks #include <Wire.h>: one full-width red line under both columns
+    const wy = G.top + chh + 0.3, wh = G.bottom - wy;
+    V.card(s, { x: G.L, y: wy, w: G.cw, h: wh, fill: P.white, line: P.red, lineW: 1 });
+    V.iconCircle(s, I.warn_w, { x: G.L + 0.14, y: wy + (wh - 0.28) / 2, d: 0.28, fill: P.red });
+    txt(s, [R('原指南这段程序漏了第一行：要在第 1 行之前补上 '), M('#include <Wire.h>', { bold: true }), R('，否则编译报错。')], { x: G.L + 0.54, y: wy, w: G.cw - 0.68, h: wh, size: 12, color: P.red, valign: 'middle' });
   }
 
   // ================================================================ 22 scan code 2/2
@@ -1105,11 +1107,11 @@ function charGrid(s, o) {
     const b = codeBlock(s, { x: G.L, y: G.top, w: cw, h: G.ch, code: SCAN_CODE, from: 12, to: 28, hl: [13, 15, 17], file: 'i2c_scanner.ino', right: '第 12–28 行' });
     const ex = G.L + cw + 0.32, ew = G.R - ex;
     explain(s, b, { x: ex, w: ew, title: '逐行看懂', maxY: G.bottom, gap: 0.1, items: [
-      { line: [12, 16], text: '拼出一行 “Found address: 39 (0x27)”：DEC 印十进制，HEX 印十六进制' },
+      { line: [12, 16], text: '拼出一行：DEC 印出 39，HEX 印出 27，前后补上 “(0x” 和 “)”' },
       { line: [17, 18], text: 'count 加 1；稍等 1 毫秒（注释：也许不需要）' },
       { line: [19, 20], text: '应答处理结束；for 循环结束' },
-      { line: [21, 24], text: '打印 “Done.” 和 “Found 1 device(s).”' },
-      { line: [26, 28], text: 'loop() 空着；想再扫一次，按复位键' },
+      { line: [21, 24], text: '打印 Done. 和找到的设备总数' },
+      { line: [26, 28], text: 'loop() 空着；重扫按复位键' },
     ] });
   }
 
@@ -1125,7 +1127,7 @@ function charGrid(s, o) {
     const rx = G.L + iw + 0.3, rw = G.R - rx;
     txt(s, '每一行是哪句代码打印的', { x: rx, y: G.top, w: rw, h: 0.3, size: 13.5, bold: true, valign: 'middle' });
     const out = [['I2C scanner. Scanning ...', '第 6 行'], ['Found address: 39 (0x27)', '第 12–16 行'], ['Done.', '第 21 行'], ['Found 1 device(s).', '第 22–24 行']];
-    const tagW = 1.1, oy = G.top + 0.4, orh = 0.38, og = 0.1;
+    const tagW = 1.1, oy = G.top + 0.4, orh = 0.34, og = 0.08;
     out.forEach(([o2, tag], i) => {
       const yy = oy + i * (orh + og);
       V.card(s, { x: rx, y: yy, w: rw - tagW - 0.12, h: orh, fill: P.card, radius: 0.06 });
@@ -1134,7 +1136,7 @@ function charGrid(s, o) {
       V.pill(s, { x: rx + rw - tagW, y: yy + (orh - 0.26) / 2, w: tagW, h: 0.26, text: tag, size: 10 });
     });
     const ty = oy + 4 * (orh + og) - og + 0.3;
-    V.tip(s, { x: rx, y: ty, w: rw, h: G.bottom - ty, kind: 'note', title: '原指南提示', text: '很多转接板默认是 0x27，但最好自己扫一下。扫出 0x3F，程序②里的 0x27 也要改成 0x3F。', size: 12 }, I.search);
+    V.tip(s, { x: rx, y: ty, w: rw, h: G.bottom - ty, kind: 'note', title: '最好自己扫一下', text: '原指南：很多转接板默认是 0x27，但要以扫描结果为准。若扫出 0x3F，程序②里的 0x27 也要改成 0x3F。', size: 12 }, I.search);
   }
 
   // ================================================================ 24 syntax 5: lcd object + setCursor
@@ -1156,18 +1158,18 @@ function charGrid(s, o) {
     // right: grid
     const rx = G.L + lw + 0.3, rw = G.R - rx;
     txt(s, '像在格子本上写字：先列后行，从 0 数', { x: rx, y: G.top, w: rw, h: 0.3, size: 13.5, bold: true, valign: 'middle' });
-    const gx = rx + 0.38, cwid = (rw - 0.42) / 16, gy = G.top + 0.72, gch = 0.4;
-    txt(s, '列 →', { x: rx, y: gy - 0.27, w: 0.4, h: 0.22, size: 10, color: P.muted, valign: 'middle' });
+    const gx = rx + 0.62, cwid = (rw - 0.66) / 16, gy = G.top + 0.72, gch = 0.4;
+    txt(s, '列 →', { x: rx + 0.02, y: gy - 0.27, w: 0.5, h: 0.22, size: 10, color: P.muted, valign: 'middle' });
     charGrid(s, { x: gx, y: gy, cw: cwid, ch: gch, colNums: true, rowNums: true, hl: [[0, 0], [4, 1]], text: ['H               ', '    S           '], size: 12 });
-    txt(s, '行', { x: rx, y: gy + gch * 2 + 0.02, w: 0.34, h: 0.22, size: 10, color: P.muted, align: 'right', valign: 'middle' });
-    const ly = gy + 2 * gch + 0.32;
+    txt(s, '行\n↓', { x: rx, y: gy + 0.1, w: 0.24, h: 2 * gch - 0.2, size: 10, color: P.muted, align: 'center', valign: 'middle', lineSpacingMultiple: 1.0 });
+    const ly = gy + 2 * gch + 0.22;
     const L2 = [['setCursor(0,0)', '第 1 行第 1 格'], ['setCursor(4,1)', '第 2 行第 5 格']];
     L2.forEach(([c, t], i) => {
-      V.pill(s, { x: rx, y: ly + i * 0.36, w: 1.55, h: 0.28, text: c, size: 10.5, mono: true });
-      txt(s, '→ ' + t, { x: rx + 1.67, y: ly + i * 0.36 - 0.02, w: rw - 1.7, h: 0.32, size: 12.5, valign: 'middle' });
+      V.pill(s, { x: rx, y: ly + i * 0.34, w: 1.55, h: 0.28, text: c, size: 10.5, mono: true });
+      txt(s, '→ ' + t, { x: rx + 1.67, y: ly + i * 0.34 - 0.02, w: rw - 1.7, h: 0.32, size: 12.5, valign: 'middle' });
     });
-    const wy = ly + 2 * 0.36 + 0.24;
-    warnCard(s, I.times_w, '行、列都从 0 开始', [M('setCursor(1,1)'), R(' 不是第 1 行第 1 格，而是第 2 行第 2 格。')], { x: rx, y: wy, w: rw, h: G.bottom - wy });
+    const wy = ly + 2 * 0.34 + 0.22;
+    warnRow(s, I.times_w, '行、列都从 0 开始', [M('setCursor(1,1)'), R(' 指的是第 2 行、第 2 格。')], { x: rx, y: wy, w: rw, h: G.bottom - wy });
   }
 
   // ================================================================ 25 lcd code 1/2
@@ -1180,13 +1182,12 @@ function charGrid(s, o) {
     const cw = 5.15;
     const b = codeBlock(s, { x: G.L, y: G.top, w: cw, h: G.ch, code: LCD_CODE, from: 1, to: 10, hl: [4, 8, 10], file: 'lcd1602_hello.ino', right: '第 1–10 行' });
     const ex = G.L + cw + 0.32, ew = G.R - ex;
-    explain(s, b, { x: ex, w: ew, title: '逐行看懂', maxY: G.bottom, gap: 0.1, items: [
+    explain(s, b, { x: ex, w: ew, title: '逐行看懂', maxY: G.bottom, gap: 0.06, items: [
       { line: [1, 2], text: '引入 Wire（I2C，IDE 自带）和 LiquidCrystal_I2C（要安装）' },
-      { line: 4, text: '创建 lcd 对象：地址 0x27、16 列、2 行（地址要和扫描结果一致）' },
+      { line: 4, text: '创建 lcd 对象：地址 0x27、16 列、2 行。注意：地址要和程序①扫描到的一致' },
       { line: [6, 7], text: 'setup()：只运行一次' },
-      { line: 8, text: 'init()：屏幕开工（像灯环的 begin()）' },
-      { line: 9, text: '注释：下面开始往屏幕上写字' },
-      { line: 10, text: 'backlight()：打开背光' },
+      { line: 8, text: 'init()：屏幕开工，像 begin()' },
+      { line: [9, 10], text: '注释；backlight() 开背光' },
     ] });
   }
 
@@ -1197,31 +1198,34 @@ function charGrid(s, o) {
     notes: '第 11 行的注释写成了 “go to start of 2nd line”，这是原程序抄错了：(0,0) 是第 1 行第 1 格，第 13 行的 (4,1) 才是第 2 行。Hello Word 也是原程序的拼写，正确应为 Hello World，学生可以自己改过来。数一数：Science Robot 有 13 个字符，从第 5 格开始只剩 12 格，最后的 t 显示不出来。字写一次就会一直留在屏幕上，所以 loop() 空着也没关系。',
   });
   {
-    const cw = 5.15;
-    const b = codeBlock(s, { x: G.L, y: G.top, w: cw, h: 2.35, code: LCD_CODE, from: 11, to: 19, hl: [11, 12, 13, 14], file: 'lcd1602_hello.ino', right: '第 11–19 行' });
+    const cw = 5.15, chh = 2.36;
+    const b = codeBlock(s, { x: G.L, y: G.top, w: cw, h: chh, size: 11, code: LCD_CODE, from: 11, to: 19, hl: [11, 12, 13, 14], file: 'lcd1602_hello.ino', right: '第 11–19 行' });
     const ex = G.L + cw + 0.32, ew = G.R - ex;
-    explain(s, b, { x: ex, w: ew, title: '逐行看懂', maxY: G.bottom, gap: 0.1, items: [
-      { line: 11, text: '落笔到第 1 行第 1 格（注释写成 2nd line，是原程序的笔误）' },
-      { line: 12, text: '写 “Hello Word”（原拼写，应为 World）' },
-      { line: 13, text: '落笔到第 2 行第 5 格' },
-      { line: 14, text: '写 “Science Robot”：13 个字符只剩 12 格，t 显示不出来' },
-      { line: [17, 19], text: 'loop() 空着：字写一次就一直留在屏幕上' },
+    const ey = explain(s, b, { x: ex, w: ew, title: '逐行看懂', maxY: 3.2, gap: 0.06, items: [
+      { line: [11, 12], text: '(0,0) 是第 1 行第 1 格，写 “Hello Word”' },
+      { line: [13, 14], text: '(4,1) 是第 2 行第 5 格，写 “Science Robot”' },
+      { line: [17, 19], text: 'loop() 空着：字会一直留着' },
     ] });
+    // the guide program's two slips (comment on line 11, spelling on line 12)
+    const wy = Math.max(ey - 0.06 + 0.3, 3.5);
+    const wby = warnCard(s, I.warn_w, '原程序的两处笔误', null, { x: ex, y: wy, w: ew, h: G.bottom - wy });
+    numList(s, ['第 11 行注释 2nd line 应为第 1 行', '“Hello Word” 应为 Hello World'], { x: ex + 0.18, y: wby + 0.02, w: ew - 0.36, size: 12, d: 0.24, gap: 0.1, fill: P.red, color: P.white });
+    if (wby + 0.02 + 2 * 0.3 + 0.1 > G.bottom - 0.1) warn('slip list overflow');
     // count the cells on line 2
-    const ry = G.top + 2.35 + 0.3, rh = G.bottom - ry;
+    const ry = G.top + chh + 0.3, rh = G.bottom - ry;
     V.card(s, { x: G.L, y: ry, w: cw, h: rh });
-    txt(s, '数一数第 2 行的格子', { x: G.L + 0.18, y: ry + 0.1, w: 3, h: 0.28, size: 13, bold: true, valign: 'middle' });
-    const cwid = 0.27, gx = G.L + 0.24, gy = ry + 0.62;
+    txt(s, [B('数一数第 2 行：'), R('编号 16 的格子不存在，t 看不见', { color: P.red })], { x: G.L + 0.18, y: ry + 0.06, w: cw - 0.36, h: 0.28, size: 12.5, valign: 'middle' });
+    const cwid = 0.27, gx = G.L + 0.24, gy = ry + 0.52;
     const line2 = '    Science Robot';
     for (let c = 0; c < 17; c++) {
       const x = gx + c * cwid, out = c === 16;
-      if (!out) s.addShape('rect', { x: x + 0.01, y: gy + 0.01, w: cwid - 0.02, h: 0.36, fill: { color: c >= 4 ? P.turqPale : P.white }, line: { color: P.gray2, width: 0.75 } });
-      else V.card(s, { x: x + 0.03, y: gy + 0.01, w: cwid - 0.02, h: 0.36, fill: P.white, line: P.red, lineW: 1, radius: 0.04 });
+      if (!out) s.addShape('rect', { x: x + 0.01, y: gy + 0.01, w: cwid - 0.02, h: 0.34, fill: { color: c >= 4 ? P.turqPale : P.white }, line: { color: P.gray2, width: 0.75 } });
+      else V.card(s, { x: x + 0.03, y: gy + 0.01, w: cwid - 0.02, h: 0.34, fill: P.white, line: P.red, lineW: 1, radius: 0.04 });
       const chx = line2[c];
-      if (chx && chx !== ' ') V.text(s, chx, { x, y: gy, w: cwid, h: 0.38, size: 12, bold: true, mono: true, color: out ? P.red : P.ink, align: 'center', valign: 'middle' });
-      if (c === 0 || c === 4 || c === 15) V.text(s, String(c), { x, y: gy - 0.24, w: cwid, h: 0.2, size: 10, mono: true, color: P.muted, align: 'center', valign: 'middle' });
+      if (chx && chx !== ' ') V.text(s, chx, { x, y: gy, w: cwid, h: 0.36, size: 12, bold: true, mono: true, color: out ? P.red : P.ink, align: 'center', valign: 'middle' });
+      if (c === 0 || c === 4 || c === 15) V.text(s, String(c), { x, y: gy - 0.2, w: cwid, h: 0.18, size: 10, mono: true, color: P.muted, align: 'center', valign: 'middle' });
     }
-    txt(s, '第 16 格不存在 → t 看不见', { x: gx, y: gy + 0.44, w: cw - 0.5, h: 0.26, size: 11.5, color: P.red, valign: 'middle' });
+    if (gy + 0.36 > G.bottom - 0.06) warn('cell row too low');
   }
 
   // ================================================================ 27 result
@@ -1231,17 +1235,17 @@ function charGrid(s, o) {
     notes: '先展示原指南的结果照片，再说明：照片里的 Hello, world! 和我们这段程序的文字不同，说明照片拍的是另一版程序，不是我们看错了。按本页的程序上传，屏幕应该像右边那样：第 1 行 Hello Word，第 2 行从第 5 格开始 Science Robo。如果背光亮了但看不到字，就进入下一页的排错。',
   });
   {
-    const iw = 5.1;
+    const iw = 4.8;
     V.imageBox(s, { file: 'l23/lcd_result_photo.jpg', x: G.L, y: G.top, w: iw, h: G.ch, caption: '原指南结果照片（显示 “Hello, world!”，来自另一版程序）' });
     const rx = G.L + iw + 0.3, rw = G.R - rx;
     txt(s, '按本节程序，屏幕应该是这样', { x: rx, y: G.top, w: rw, h: 0.3, size: 13.5, bold: true, valign: 'middle' });
-    const cwid = (rw - 0.3) / 16, gch = 0.42, gx = rx + 0.15, gy = G.top + 0.55;
+    const cwid = (rw - 0.3) / 16, gch = 0.36, gx = rx + 0.15, gy = G.top + 0.5;
     charGrid(s, { x: gx, y: gy, cw: cwid, ch: gch, lcd: true, text: ['Hello Word      ', '    Science Robo'], size: 11.5 });
-    const ty = gy + 2 * gch + 0.1 + 0.3;
-    V.tip(s, { x: rx, y: ty, w: rw, h: 1.15, kind: 'note', title: '照片和程序为什么不一样', text: '照片里的文字来自另一版程序；我们以本页程序为准。', size: 12 }, I.eye);
-    const t2 = ty + 1.15 + 0.3;
-    V.tip(s, { x: rx, y: t2, w: rw, h: G.bottom - t2, kind: 'tip', text: '想显示 Hello World？把第 12 行的 Word 改成 World 再上传。', size: 12 }, I.pen);
-    if (G.bottom - t2 < 0.6) warn('result tip short');
+    const ty = gy + 2 * gch + 0.1 + 0.3, th = 0.86;
+    V.tip(s, { x: rx, y: ty, w: rw, h: th, kind: 'note', title: '照片和程序为什么不一样', text: '照片拍的是另一版程序，以本页为准。', size: 12 }, I.eye);
+    const t2 = ty + th + 0.3;
+    V.tip(s, { x: rx, y: t2, w: rw, h: G.bottom - t2, kind: 'tip', title: '想显示 Hello World？', text: '把第 12 行的 Word 改成 World 再上传。', size: 12 }, I.pen);
+    if (G.bottom - t2 < 0.86) warn('result tip short');
   }
 
   // ================================================================ 28 troubleshooting + try
@@ -1256,24 +1260,23 @@ function charGrid(s, o) {
     V.card(s, { x: G.L, y: G.top, w: lw, h: ch, fill: P.turqPale });
     V.iconCircle(s, I.adjust, { x: G.L + 0.18, y: G.top + 0.16, d: 0.38 });
     txt(s, '背光亮了，却不显示字？', { x: G.L + 0.66, y: G.top + 0.16, w: 2.6, h: 0.38, size: 14, bold: true, valign: 'middle' });
-    const pw = 1.85;
+    const pw = 1.6;
     V.imageBox(s, { file: 'l23/lcd_module_photo1.jpg', x: G.L + lw - pw - 0.14, y: G.top + 0.14, w: pw, h: ch - 0.28, fill: P.white, caption: '蓝色方块 = 电位器', capH: 0.26 });
-    numList(s, ['原指南：调转接板背面的蓝色电位器', '用小螺丝刀慢慢转', '满屏黑方块是转过头了，转到字清楚为止'], { x: G.L + 0.18, y: G.top + 0.68, w: lw - pw - 0.5, size: 12, d: 0.24, gap: 0.08 });
+    const nl = numList(s, ['原指南：调背面的蓝色电位器', '用小螺丝刀慢慢转', '满屏黑方块＝转过头，往回调'], { x: G.L + 0.18, y: G.top + 0.7, w: lw - pw - 0.5, size: 12, d: 0.24, gap: 0.12 });
+    if (nl > G.top + ch - 0.1) warn('pot list overflow');
     const wy = G.top + ch + 0.3, wh = G.bottom - wy, ww = (lw - 0.3) / 2;
-    warnCard(s, I.times_w, '只有黑方块', '地址不对或程序没跑：先用程序①核对地址。', { x: G.L, y: wy, w: ww, h: wh, titleSize: 13 });
-    warnCard(s, I.times_w, '扫不到设备', 'Found 0 device(s)：查 SDA、SCL 是否接反或松动。', { x: G.L + ww + 0.3, y: wy, w: ww, h: wh, titleSize: 13 });
+    warnCard(s, I.times_w, '只有一排黑方块', '地址不对或程序没跑：用程序①核对地址。', { x: G.L, y: wy, w: ww, h: wh, titleSize: 13 });
+    warnCard(s, I.times_w, '扫出 0 个设备', '查 SDA、SCL 是否接反、松动。', { x: G.L + ww + 0.3, y: wy, w: ww, h: wh, titleSize: 13 });
     const rx = G.L + lw + 0.3, rw = G.R - rx;
     let y = iconCard(s, I.wrench, '动手改一改', { x: rx, y: G.top, w: rw, h: G.ch });
-    txt(s, [B('挑战 1　'), R('显示你的名字（拼音）')], { x: rx + 0.2, y, w: rw - 0.4, h: 0.28, size: 12.5, valign: 'middle' });
+    txt(s, [B('挑战 1　'), R('显示你的名字（只能用英文字母）')], { x: rx + 0.2, y, w: rw - 0.4, h: 0.28, size: 12.5, valign: 'middle' });
     y += 0.32;
-    y += miniCode(s, 'lcd.print("Li Ming");', { x: rx + 0.2, y, w: rw - 0.4, size: 10.5 }) + 0.06;
-    txt(s, '字库里没有汉字，只能写英文字母和符号', { x: rx + 0.2, y, w: rw - 0.4, h: 0.26, size: 11, color: P.muted, valign: 'middle' });
-    y += 0.36;
+    y += miniCode(s, 'lcd.print("Li Ming");', { x: rx + 0.2, y, w: rw - 0.4, size: 10.5 }) + 0.16;
     txt(s, [B('挑战 2　'), R('做个秒表：把 loop() 改成')], { x: rx + 0.2, y, w: rw - 0.4, h: 0.28, size: 12.5, valign: 'middle' });
     y += 0.32;
-    y += miniCode(s, 'void loop()\n{\n  lcd.setCursor(0,1);\n  lcd.print(millis()/1000);\n  delay(200);\n}', { x: rx + 0.2, y, w: rw - 0.4, size: 10.5, hl: [2, 3, 4] }) + 0.06;
+    y += miniCode(s, 'void loop() {\n  lcd.setCursor(0,1);\n  lcd.print(millis()/1000);\n  delay(200);\n}', { x: rx + 0.2, y, w: rw - 0.4, size: 10.5, hl: [1, 2, 3] }) + 0.06;
     txt(s, '第 2 行左边会显示开机后的秒数', { x: rx + 0.2, y, w: rw - 0.4, h: 0.26, size: 11, color: P.muted, valign: 'middle' });
-    if (y + 0.26 > G.bottom - 0.04) warn('lcd try card overflow');
+    if (y + 0.26 > G.bottom - 0.08) warn('lcd try card overflow');
   }
 
   // ================================================================ 29 summary
@@ -1292,17 +1295,17 @@ function charGrid(s, o) {
       [R('创建对象：'), M('pixels'), R(' / '), M('lcd')],
       [R('对象.函数() 下命令：'), M('show()'), R('、'), M('print()')],
     ];
-    const ly = numList(s, chain, { x: G.L, y: G.top + 0.5, w: lw, size: 13, gap: 0.24, d: 0.32 });
-    const ty = Math.max(ly + 0.3, 4.05), th = G.bottom - ty;
+    const ly = numList(s, chain, { x: G.L, y: G.top + 0.5, w: lw, size: 13, gap: 0.2, d: 0.32 });
+    const ty = Math.max(ly + 0.3, 3.95), th = G.bottom - ty;
     V.card(s, { x: G.L, y: ty, w: lw, h: th, fill: P.turqPale });
     V.iconCircle(s, I.search, { x: G.L + 0.16, y: ty + (th - 0.38) / 2, d: 0.38 });
-    txt(s, [B('排错口诀　'), R('编译报错先查库，没反应先查线和地址。')], { x: G.L + 0.66, y: ty, w: lw - 0.8, h: th, size: 12.5, valign: 'middle' });
+    txt(s, [B('排错口诀', { breakLine: true }), R('编译报错 → 先查库', { breakLine: true }), R('没有反应 → 先查线和地址')], { x: G.L + 0.66, y: ty, w: lw - 0.8, h: th, size: 12.5, valign: 'middle' });
     if (th < 0.6) warn('summary tip short');
     tileGrid(s, {
       x: 4.85, y: G.top, w: G.R - 4.85, h: G.ch, cols: 2,
       items: [
         { fill: P.turq, big: '#include', bigMono: true, bigSize: 22, title: '库', sub: '别人写好的“扩展包”，\n装一次就能用' },
-        { fill: P.gray1, big: 'show()', bigMono: true, bigSize: 22, title: '先写草稿再寄出', sub: 'setPixelColor 只写草稿，\nshow 才发出去' },
+        { fill: P.gray1, big: 'show()', bigMono: true, bigSize: 22, title: '先写草稿再寄出', sub: 'setPixelColor 写草稿\nshow() 才寄出' },
         { fill: P.ink, big: '0x27', bigMono: true, bigSize: 22, title: 'I2C 门牌号', sub: '两根线挂多台设备，\n0x27 就是 39' },
         { fill: P.white, big: '(列, 行)', bigSize: 22, title: 'setCursor', titleMono: true, sub: '先列后行，\n都从 0 开始数' },
       ],

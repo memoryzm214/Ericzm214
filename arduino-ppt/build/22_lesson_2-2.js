@@ -491,7 +491,7 @@ function dial(s, cx, cy, r, deg) {
   const deck = await V.Deck.create({ label: '2-2　测距、通信与环境感知', title: '2-2 测距、通信与环境感知：超声波 · 串口调节舵机 · 红外避障 · 温湿度传感器' });
   const I = await deck.loadIcons({
     bulb: 'FaLightbulb', warn: 'FaExclamation', check: 'FaCheck', times: 'FaTimes', chip: 'FaMicrochip', grid: 'FaTh',
-    usb: 'TbDeviceUsb', cable: 'MdCable', volume: 'FaVolumeUp', target: 'FaBullseye', book: 'FaBook', search: 'FaSearch',
+    usb: 'FaUsb', cable: 'MdCable', volume: 'FaVolumeUp', target: 'FaBullseye', book: 'FaBook', search: 'FaSearch',
     wrench: 'FaWrench', eye: 'FaEye', redo: 'FaRedo', clock: 'FaClock', ruler: 'FaRulerHorizontal', tower: 'FaBroadcastTower',
     keyboard: 'FaKeyboard', cog: 'FaCog', cogs: 'FaCogs', thermo: 'FaThermometerHalf', tint: 'FaTint', envelope: 'FaEnvelope',
     link: 'FaLink', puzzle: 'FaPuzzlePiece', battery: 'FaBatteryFull', robot: 'FaRobot', car: 'FaCar', stopwatch: 'FaStopwatch',
@@ -714,7 +714,7 @@ function dial(s, cx, cy, r, deg) {
   {
     const gap = 0.3, w = (G.cw - 2 * gap) / 3;
     const C = [
-      { icon: I.tag, title: 'const 常量', text: '像门牌号：钉上去就不再改。用名字代替数字，好读，又防止误改。', code: 'const int TrigPin = 2;\nTrigPin = 5;   // 报错', mistake: '给 const 再赋值会编译报错：要改，就改它的初始值。' },
+      { icon: I.tag, title: 'const 常量', text: '像门牌号：钉上去就不改了。用名字代替数字，好读又防误改。', code: 'const int TrigPin = 2;\nTrigPin = 5;   // 报错', mistake: '给 const 再赋值会编译报错：要改，就改它的初始值。' },
       { icon: I.clock, title: 'delayMicroseconds()', mono: true, titleSize: 12, text: '更细的计时单位：1 秒 = 1000 毫秒 = 1000000 微秒（μs）。', code: 'delayMicroseconds(10);\ndelay(1000);  // 1 秒', mistake: 'delay(0.01) 不等于 10μs：delay() 只认整数毫秒。' },
       { icon: I.stopwatch, title: 'pulseIn(引脚, HIGH)', mono: true, titleSize: 12, text: '像秒表：Echo 一变高就开始计时，变低就停表，返回多少微秒。', code: 'pulseIn(EchoPin, HIGH)\n// → 高电平的微秒数', mistake: '没收到回声时，等约 1 秒后返回 0：读数是 0 先查线。' },
     ];
@@ -732,7 +732,7 @@ function dial(s, cx, cy, r, deg) {
     const b = codeBlock2(s, { x: G.L, y: G.top, w: cw, h: chh, code: ULTRA_CODE, from: 1, to: 10, hl: [1, 2, 3, 7, 8], file: 'ultrasonic.ino', right: '第 1–10 行' });
     const ex = G.L + cw + 0.35, ew = G.R - ex;
     V.explain(s, b, { x: ex, w: ew, title: '逐行看懂', maxY: G.top + chh, gap: 0.12, items: [
-      { line: [1, 2], text: 'const 常量：Trig 接 2 号脚，Echo 接 3 号脚，运行中不会变' },
+      { line: [1, 2], text: 'const 常量：Trig 接 2 号脚、\nEcho 接 3 号脚，运行中不会变' },
       { line: 3, text: 'float 小数变量，用来装算出的距离' },
       { line: 6, text: '打开串口，速度 9600' },
       { line: [7, 8], text: 'Trig 设为输出、Echo 设为输入' },
@@ -756,7 +756,7 @@ function dial(s, cx, cy, r, deg) {
       { line: [13, 14], text: 'Trig 先拉低 2 微秒，“清零”' },
       { line: [15, 17], text: '高电平 10 微秒再拉低 = “喊一声”，模块自动发出 8 个脉冲' },
       { line: 18, text: 'Echo 高电平的微秒数 ÷ 58 = 厘米；写成 58.00 才保留小数' },
-      { line: [19, 22], text: '拼成一行 distance is :8.57cm，再换行' },
+      { line: [19, 22], text: '拼成 distance is :8.57cm，\n最后 println() 换行' },
       { line: 23, text: '等 1 秒，再测下一次' },
     ] });
   }
@@ -862,7 +862,7 @@ function dial(s, cx, cy, r, deg) {
   s = slide({
     title: '实验目的、组件与接线',
     desc: '舵机三根线：黑线接 GND，红线接 VCC（5V），黄色信号线接 13 号脚',
-    notes: '先读实验目的和原理：在串口监视器里输入角度，舵机就转到那个角度。接线只有三根，信号线接 13 号脚。我们手里的 SG90 舵机，线色常见是棕、红、橙，分别对应表里的黑、红、黄，不要因为颜色不一样就接错。原指南还建议接上 9V 电池一起供电，下一页的实物照片里可以看到。',
+    notes: '先读实验目的和原理：在串口监视器里输入角度，舵机就转到那个角度。接线只有三根，信号线接 13 号脚。我们手里的 SG90 舵机，线色常见是棕、红、橙，分别对应表里的黑、红、黄，不要因为颜色不一样就接错。原指南还建议接上 9V 电池一起供电，后面“实验步骤”页的实物照片里可以看到。',
   });
   {
     const iw = 3.7;
@@ -935,7 +935,7 @@ function dial(s, cx, cy, r, deg) {
       { line: [1, 2], text: '引入舵机库，创建舵机对象 myservo（2-1 学过）' },
       { line: 3, text: '信号线接 13 号脚' },
       { line: [4, 5], text: 'char 装 1 个字符；angle 装角度' },
-      { line: 6, text: 'String 字符串 temp：先放空的 ""，用来拼字符' },
+      { line: 6, text: 'String 字符串 temp：\n先放一个空串 ""，用来拼字符' },
       { line: [9, 11], text: '开串口 9600；13 号脚设为输出；attach 把舵机“绑”到 13 号脚' },
     ] });
   }
@@ -977,7 +977,7 @@ function dial(s, cx, cy, r, deg) {
   s = slide({
     title: '代码逐行看懂（3/3）：拼好的数字交给舵机',
     desc: '收到新输入就把文字变成数字、在串口回一句，再清空 temp；舵机始终转到 angle 度',
-    notes: '第 21 行判断 temp 是不是空的：不空，说明刚收到新输入。第 23 行用 toInt() 把文字变成数字，第 24、25 行在串口回一句 Servo degree:，方便我们确认。第 28 行清空 temp，原注释 Please see temporary variables 是机翻，意思是“清空临时变量”。第 29 行才是真正让舵机转动的一句；没有新输入时 angle 不变，舵机就保持原角度。',
+    notes: '第 21 行判断 temp 是不是空的：不空，说明刚收到新输入。第 23 行用 toInt() 把文字变成数字，第 24、25 行在串口回一句 Servo degree:，方便我们确认。第 28 行清空 temp，原注释 Please see temporary variables 是机翻，意思是“清空临时变量”。第 29 行才是真正让舵机转动的一句；没有新输入时 angle 不变，舵机就保持原角度。第 30 行的 delay(100) 还有个隐藏作用：9600 波特率下每个字符约 1 毫秒才到，等这 0.1 秒，整串数字基本到齐，while 才能一次读完。',
   });
   {
     const cw = 5.3;
@@ -1215,7 +1215,7 @@ function dial(s, cx, cy, r, deg) {
   s = slide({
     title: '实验结果：挡一下，灯亮、蜂鸣器响',
     desc: '把手挡在红外模块前：模块绿灯亮、RGB 模块亮红灯、蜂鸣器响；手拿开，全部熄灭',
-    notes: '原指南的实验结果只有两张照片。右边照片里，红外模块上的两个绿灯都亮了（一个是电源灯，一个是检测到障碍物的指示灯），RGB 模块亮红灯。让学生打开串口监视器，挡一下、拿开，看 0 和 1 的变化。检测距离不合适时，用螺丝刀拧蓝色电位器调节。',
+    notes: '原指南的实验结果只有两张照片。中间那张照片里，红外模块上的两个绿灯都亮了（一个是电源灯，一个是检测到障碍物的指示灯），RGB 模块亮红灯。让学生打开串口监视器，挡一下、拿开，看 0 和 1 的变化。检测距离不合适时，用螺丝刀拧蓝色电位器调节。',
   });
   {
     const p1 = 2.35;
@@ -1455,6 +1455,13 @@ function dial(s, cx, cy, r, deg) {
       x: xs[1], y: G.top, w: ws[1], h: G.ch, icon: I.tag, title: '#define 起外号', compact: true,
       text: '像“查找替换”：编译前把名字换成后面的值。',
       code: '#define DHT11PIN 8',
+      extra: (y) => {
+        // show what the find-and-replace does to line 16 of this program
+        const ex = xs[1] + 0.18, ew = ws[1] - 0.36;
+        label(s, '程序第 16 行，编译前：', { x: ex, y, w: ew, h: 0.28, size: 12, color: P.muted });
+        const h = miniCode(s, 'DHT11.read(DHT11PIN);\n// ↓ 替换成\nDHT11.read(8);', { x: ex, y: y + 0.3, w: ew, h: 0.7, size: 10, hl: [2] });
+        return y + 0.3 + h;
+      },
       mistake: '末尾加分号：分号也会被替换进去。',
     });
     conceptCard(s, I, {
@@ -1525,18 +1532,18 @@ function dial(s, cx, cy, r, deg) {
     notes: '第 16 行 DHT11.read() 读一次温湿度，返回值 chk 是结果码，0 表示读取成功，这个程序没有用它，课后可以加上判断。第 18–20 行在第一行显示 Tep: 24.00C，Tep 是原程序对 Temp 的简写；第 22–24 行在第二行显示湿度。第 25 行 delay(200) 偏短：DHT11 两次读取最好间隔 1 秒以上，原指南也说间隔 5 秒以上最准确，建议改成 delay(2000)。',
   });
   {
-    const cw = 4.75, chh = 3.06;
+    const cw = 4.75, chh = 3.0;
     const b = codeBlock2(s, { x: G.L, y: G.top, w: cw, h: chh, code: DHT_CODE, from: 15, to: 26, hl: [16, 17, 19, 21, 23, 25], file: 'dht11_lcd.ino', right: '第 15–26 行' });
     const ex = G.L + cw + 0.35, ew = G.R - ex;
     V.explain(s, b, { x: ex, w: ew, title: '逐行看懂', maxY: G.bottom, gap: 0.1, items: [
-      { line: 16, text: '读一次温湿度；chk 是结果码（0 为成功），没用到' },
+      { line: 16, text: '读一次温湿度；\nchk 是结果码（0 为成功），没用到' },
       { line: 17, text: '光标移到第 1 行开头' },
       { line: [18, 20], text: '显示 Tep: 24.00C（Tep 即 Temp）' },
       { line: 21, text: '光标移到第 2 行开头' },
       { line: [22, 24], text: '显示 Hum: 46.00%' },
       { line: 25, text: '等 0.2 秒再读（偏短，见常见坑）' },
     ] });
-    const ty = G.top + chh + 0.25;
+    const ty = G.top + chh + 0.3;
     V.card(s, { x: G.L, y: ty, w: cw, h: G.bottom - ty, fill: P.white, line: P.red, lineW: 1 });
     txt(s, [R('第 25 行偏短：', { bold: true, color: P.red }), R('DHT11 两次读取最好隔 1 秒以上')], { x: G.L + 0.16, y: ty + 0.03, w: cw - 0.32, h: G.bottom - ty - 0.06, size: 12, valign: 'middle' });
   }
