@@ -407,6 +407,9 @@ async function testLab(page, mode, id, idx, full) {
 
 // ------------------------------------------------------------------ walk a lesson
 async function walkLesson(page, mode, id, full) {
+  // a fresh document per lesson: a hash change alone would keep page-wide state (sound on/off,
+  // the AudioContext counter) from the previous lesson, making results depend on the run order
+  await page.goto('about:blank');
   await page.goto(INDEX + '#' + id);
   await page.waitForFunction(id => window.SIM && SIM.deck && SIM.deck.current.id === id && SIM.deck.current.mode === 'deck', id, { timeout: 8000 });
   const slides = await page.evaluate(id => SIM.deck.lessons[id].slides.map(s => ({ kind: s.kind, title: String(s.title || '').replace(/<[^>]*>/g, '') })), id);

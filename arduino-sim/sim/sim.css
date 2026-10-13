@@ -393,7 +393,7 @@ a.btn { text-decoration: none; }
 .callout { display: flex; gap: 12px; align-items: flex-start; background: var(--turq-pale); border-radius: var(--radius); padding: 14px 16px; font-size: 14px; line-height: 1.65; }
 .callout > .ico { width: 30px; height: 30px; }
 .callout > div { min-width: 0; }
-.callout b:first-child { display: block; margin-bottom: 2px; }
+.callout > div > b:first-child { display: block; margin-bottom: 2px; }
 .callout p { margin: 0; }
 .callout.warn { background: var(--red-pale); }
 .callout.warn > .ico { background: var(--red); color: #fff; }
