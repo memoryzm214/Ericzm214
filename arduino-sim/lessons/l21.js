@@ -408,7 +408,7 @@ ${callout('flag', '实验目的', '之前用按键（数字信号）控制灯的
           baud: 9600,
           tasks: [
             { text: '运行后慢慢拧电位器：LED 亮度和串口里的 <code>value1</code>、<code>voltage</code>、<code>PWM</code> 一起变。voltage 最大只到 1.00——它是比例，不是电压。' },
-            { text: '把滑块拖到 25%：读数 256、比例 0.25、PWM 64。再把旋钮拧到底（读数 1023）：PWM 变成 <b>256</b>，灯反而灭了！看右下角“引脚”里 D11 的 PWM 条。' },
+            { text: '把滑块拖到 25%：读数 256、比例 0.25、PWM 64。再把旋钮拧到底（读数 1023）：PWM 变成 <b>256</b>，灯反而灭了！再看“引脚”面板里的 D11：25% 时是一根 PWM 64 的条，拧到底却变成了 LOW。' },
             { text: '用 <code>map()</code> 一步换算，不会越界：把第 19 行改成 <code>value = map(value, 0, 1023, 0, 255);</code>，再拧到底：PWM 正好 255，最亮。', code: PWM_MAP },
             { text: '在任务 3 的基础上打印真实电压：把第 16 行改成 <code>voltage = ( float )value /1023 * 5 ;</code>，拧到底显示 5.00。', code: PWM_VOLT },
             { text: '旋钮反着调：在任务 3 的基础上把 <code>map</code> 的最后两个数对调成 <code>255, 0</code>——越拧越暗。', code: PWM_REV }
@@ -689,12 +689,12 @@ ${callout('question', '打个比方', '像开车盯着车道线：偏左就往�
       {
         kind: 'wiring', title: '接线：电位器接 3.3V 和 A0，舵机信号接 7',
         desc: '电位器左脚接 3.3V、右脚接 GND、中间脚接 A0；舵机红线接 5V、黑（棕）线接 GND、黄（橙）线接 7 号脚。',
-        img: 'img/l21/servo_pot_wiring.jpg', caption: '原指南接线图',
+        img: 'img/l21/servo_pot_wiring.jpg', caption: '原指南接线图：舵机和电位器都接在面包板上方的电源轨上，电源轨的红线接 UNO 的 5V',
         tables: [
           { left: 'Arduino Uno', right: '电位器', rows: [['3.3V', '左脚'], ['A0', '中间脚'], ['GND', '右脚']] },
           { left: 'Arduino Uno', right: '舵机', rows: [['5V', '红线'], ['GND', '黑（棕）线'], ['7', '黄（橙）线：信号']] }
         ],
-        note: '<span>电位器接的是 <b>3.3V</b>，不是 5V（原指南原文如此）：A0 最大只能读到约 675，实验室里会看到它的影响。原指南这里只有文字说明，两张表是照文字整理的。</span>',
+        note: '<span>原指南的文字写电位器左脚接 <b>3.3V</b>（两张表照文字整理）：A0 最大只能读到约 675，舵机转不满 180°。可接线图里电位器和舵机共用 <b>5V</b> 电源轨。两种都做：实验室①按文字接 3.3V，实验室②按图接 5V。</span>',
         side: fig('servo_wires.jpg', '原指南：舵机三根线 (0V) GND · (+5V) · (PWM) 信号线，可转 180°。SG90 实物是棕、红、橙三色：棕 = GND，橙 = 信号。')
       },
       {
@@ -738,7 +738,7 @@ ${callout('question', '打个比方', '像开车盯着车道线：偏左就往�
       },
       {
         kind: 'lab', title: '动手实验室①：旋钮控制舵机（电位器接 3.3V）',
-        desc: '点 ▶ 运行，拖动电位器旋钮，看舵机的角度。这里的电位器和原指南一样接在 3.3V 上。',
+        desc: '点 ▶ 运行，拖动电位器旋钮，看舵机的角度。这里的电位器按原指南的文字说明接在 3.3V 上。',
         lab: {
           programs: [
             { name: 'servo_knob.ino', label: '舵机程序（补好 }）', code: SERVO, note: '在原指南程序的最后补上了 <code>loop()</code> 的右大括号 <code>}</code>，其余一字未改。' },
@@ -770,24 +770,24 @@ ${callout('question', '打个比方', '像开车盯着车道线：偏左就往�
       },
       {
         kind: 'figure', title: '实验结果：旋钮转到哪，舵机就转到哪',
-        desc: '转动电位器，舵机跟着转。按原接法（电位器接 3.3V）最大约 168°；改接 5V 再用 map()，就能正好转满 0～180°。',
+        desc: '转动电位器，舵机跟着转。按原指南文字的接法（电位器接 3.3V）最大约 168°；接 5V 再用 map()，就能正好转满 0～180°。',
         img: 'img/l21/servo_pot_result_photo.jpg', caption: '原指南实物图',
         side: `
 ${callout('check', '原指南结论', '上传程序后旋转电位器，可以改变舵机的角度，舵机的角度为 0～180 度，为之后的机械臂打下基础。')}
 <div class="card warn">
-  <h3><span class="ico red">${I('warn')}</span>按原接法转不满 180°</h3>
+  <h3><span class="ico red">${I('warn')}</span>接 3.3V 转不满 180°</h3>
   ${table(['电位器接', '最大读数', '÷ 4', '舵机'], [['3.3V', '≈ 675', '168', '168°'], ['5V', '1023', '255', '按 180° 处理']])}
   <p class="small mt-s">接 5V 却仍然 ÷ 4：读数到 720 就算出 180，再往后都是 180 以上，旋钮最后约 30% 的行程“白转”。</p>
 </div>
 <div class="card ok">
   <h3><span class="ico">${I('check')}</span>最稳妥：接 5V + map()</h3>
   ${snip('int angle = map(readValue, 0, 1023, 0, 180);')}
-  <p class="small">下一页的实验室把电位器改接到 5V，试一试。</p>
+  <p class="small">下一页的实验室按原指南接线图把电位器接到 5V，试一试。</p>
 </div>`
       },
       {
         kind: 'lab', title: '动手实验室②：电位器改接 5V，用 map() 转满 180°',
-        desc: '这个实验室里电位器左脚改接 5V（读数能到 1023）。先看原程序的 ÷ 4 会怎样，再用 map() 修好。',
+        desc: '这个实验室按原指南接线图的画法，电位器左脚接 5V（读数能到 1023）。先看原程序的 ÷ 4 会怎样，再用 map() 修好。',
         lab: {
           programs: [{ name: 'servo_knob_5v.ino', label: '舵机程序（电位器接 5V）', code: SERVO, note: '和上一个实验室同一段程序（已补好 }）；只是电位器左脚改接到了 5V。' }],
           parts: [
@@ -978,7 +978,7 @@ ${callout('info', '你的摇杆不一样？', '每个摇杆的静止值都有一
           tasks: [
             { text: '程序①：运行后先不碰摇杆，串口里 x、y 是多少？（525 / 518，和原指南截图一样）再把摇杆推到右上角，x、y 怎么变？' },
             { text: '切到“程序②”运行：往上下左右推，再逐个按住 A～F 和 K，串口打印什么？原指南说“对应的 LED 灯会亮起”——程序里其实没有控制 LED，以串口为准。' },
-            { text: 'else if 的优先级：点一下摇杆，按住键盘 → 不放（一直打印 right），再同时按住 C 键：变成只打印 Button C。换成同时按住 K 键呢？两行都会打印——K 是独立的 if。' },
+            { text: 'else if 的优先级（要用电脑键盘）：点一下摇杆，按住键盘 → 不放（一直打印 right），再同时按住 C 键：变成只打印 Button C。换成同时按住 K 键呢？两行都会打印——K 是独立的 if。' },
             { text: '用新写法打开上拉：把 setup() 里的 14 行改成 7 行 <code>pinMode(按键, INPUT_PULLUP);</code>，按键照样能用。', code: JOY2_PULLUP, program: 1 },
             { text: '去掉上拉试试：删掉第 16 行 <code>digitalWrite(BUTTON_UP, HIGH);</code> 再运行：不碰任何按键，串口也会乱报 Button A——2 号脚“悬空”了。', code: JOY2_FLOAT, program: 1 }
           ],

@@ -442,7 +442,7 @@ ${warn('读数忽大忽小', '超声波碰到斜面、软布、海绵会被反�
         img: 'img/l22/servo_pulse_angles.jpg', caption: '原指南：最小 / 中间 / 最大脉冲 → 0° / 90° / 180°',
         side: `
 ${table(['高电平宽度', '舵机角度'], [['0.5ms', '0°'], ['1.0ms', '45°'], { hl: true, cells: ['1.5ms', '90°（中间）'] }, ['2.0ms', '135°'], ['2.5ms', '180°']])}
-${warn('图和正文不一样', '周期图上写 1ms–2ms，正文写 0.5ms–2.5ms。原文也说：不同品牌、甚至同一品牌的舵机，最大值和最小值都可能不同。好在 Servo 库会替我们换算，程序里只写 <code>write(角度)</code>。')}`
+${warn('图和正文不一样', '上一页的周期图上写 1ms–2ms，正文写 0.5ms–2.5ms。原文也说：不同品牌、甚至同一品牌的舵机，最大值和最小值都可能不同。好在 Servo 库会替我们换算，程序里只写 <code>write(角度)</code>。')}`
       },
       {
         kind: 'wiring', title: '接线：信号线接 13 号脚',
@@ -492,10 +492,10 @@ ${callout('list', '组件清单', 'Keywish Arduino Uno R3 主板 · USB 数据�
           { line: 15, text: '<code>while</code>：串口里还有没读的字符，就继续。<code>if</code> 只判断一次，<code>while</code> 会一直重复。' },
           { line: 17, text: '<code>read()</code> 取出 1 个字符，放进 <code>inByte</code>。' },
           { line: 18, text: '把 <code>inByte</code> 接到 <code>temp</code> 的末尾。' },
-          { line: 19, text: '字符全部读完，跳出 while。' }
+          { line: 19, text: '串口里没有字符了，跳出 while。' }
         ],
         foot: `<div class="grid-2">
-  <div class="card pale"><h3><span class="ico">${I('reset')}</span>输入 180 时，while 转 3 圈</h3><div class="flow"><div>第 1 圈 <b class="mono">"1"</b></div><div>第 2 圈 <b class="mono">"18"</b></div><div class="on">第 3 圈 <b class="mono">"180"</b></div></div></div>
+  <div class="card pale"><h3><span class="ico">${I('reset')}</span>输入 180 时，while 一般转 3 圈</h3><div class="flow"><div>第 1 圈 <b class="mono">"1"</b></div><div>第 2 圈 <b class="mono">"18"</b></div><div class="on">第 3 圈 <b class="mono">"180"</b></div></div></div>
   ${warn('原指南这里印错了', '原指南（PDF）把第 18 行的注释折成了两行：照抄的话，第二行前面没有 <code>//</code>，不是注释，编译会报错。这里已合回一行；实验室的“原指南原样”标签能看到报错。')}
 </div>`
       },
@@ -509,7 +509,7 @@ ${callout('list', '组件清单', 'Keywish Arduino Uno R3 主板 · USB 数据�
           { line: [24, 25], text: '串口回一句 <code>Servo degree: 180</code>，方便确认。' },
           { line: 26, text: '只是注释：真正让舵机转的是第 29 行。' },
           { line: 28, text: '清空 <code>temp</code>，等下一次输入。原注释 “Please see temporary variables” 是机翻，意思是“清空临时变量”。' },
-          { line: [29, 30], text: '舵机转到 <code>angle</code> 度；没有新输入时 angle 不变，舵机保持原位。等 0.1 秒，下一次的整串数字也有时间到齐。' }
+          { line: [29, 30], text: '舵机转到 <code>angle</code> 度；没有新输入时 angle 不变，舵机保持原位。等 0.1 秒：这期间新发来的字符先存在串口里，下一圈一起读出来。' }
         ]
       },
       {
@@ -545,20 +545,22 @@ ${callout('play', '在模拟器里', '下一页实验室的串口监视器在右
           baud: 9600,
           lineEnding: 'none',
           tasks: [
-            { text: '输入 <code>90</code> 点发送：串口回 <code>Servo degree: 90</code>，舵机转到 90°。再照原指南依次输入 0、90、180、90。' },
+            { text: '输入 <code>90</code> 点发送：串口回 <code>Servo degree: 90</code>，舵机转到 90°。再照原指南依次输入 0、90、180、90。偶尔回了两行（比如 9 和 0）？这是原程序把字符拆开了，再发一次就好，原因见后面的“常见坑”页。' },
             { text: '发送 <code>180</code> 后看右下角“变量”里的 <code>inByte</code>：是 <code>\'0\'(48)</code>，也就是最后读到的那个字符。串口一次只给 1 个字符，三个字符拼成 "180" 才 <code>toInt()</code>。' },
             { text: '把行结束符改成“换行”，输入框空着点发送：舵机跳回 0°！换行符被拼进了 temp，<code>toInt()</code> 得到 0。试完改回“没有结束符”。' },
             { text: '发送 <code>200</code>：串口打印 200，舵机却最多转到 180°。在第 23 行后面加一行 <code>angle = constrain(angle, 0, 180);</code>，再发 200：打印和实际一致了。', code: SERVO_LIMIT },
             { text: '切到“原指南原样”点 ▶ 运行：红色错误指向第 19 行。把第 19 行接回第 18 行末尾（合成一行注释），再运行。', code: SERVO, program: 1 }
           ],
+          // The guide program splits a number about 1 send in 50 (a character arrives while the while-loop
+          // is reading, see the pitfall page), so each multi-digit send is repeated once after a pause.
           smoke: [
             { expect: { servo: [13, 0, 2] }, timeout: 3000 },
-            { send: '90', ending: 'none' },
+            { send: '90', ending: 'none' }, { wait: 300 }, { send: '90' },
             { expect: { serial: 'Servo degree: 90', servo: [13, 90, 2], read: ['servo', '90°'], var: ['inByte', '/48/'] }, timeout: 4000 },
             { send: '', ending: 'nl' },
             { expect: { serial: 'Servo degree: 0', servo: [13, 0, 2] }, timeout: 4000 },
             { task: 4, run: true },
-            { send: '200', ending: 'none' },
+            { send: '200', ending: 'none' }, { wait: 300 }, { send: '200' },
             { expect: { serial: 'Servo degree: 180', noSerial: 'Servo degree: 200', servo: [13, 180, 2] }, timeout: 4000 },
             { tab: 1, run: true },
             { expect: { state: 'error', status: '/^编译错误：第 19 行：.*Continue/', errLine: 19 } }
@@ -581,11 +583,12 @@ ${callout('play', '在模拟器里', '下一页实验室的串口监视器在右
 ${callout('check', '原指南结论', '在串口监视器分别输入以上舵机角度值之后，会发现舵机会转动。')}`
       },
       {
-        kind: 'html', title: '常见坑：行结束符、供电和超出范围的角度',
+        kind: 'html', title: '常见坑：行结束符、拆开的数字、供电和角度范围',
         desc: '舵机乱跳，先看串口监视器右下角的设置，再看供电。',
         body: `
-<div class="grid-3 stretch">
+<div class="grid-2 stretch">
   ${warn('空着点“发送”，舵机跳回 0°', '行结束符选了“换行”时，空着发送也会送出一个换行符：temp 不为空，<code>toInt()</code> 得到 0。选“没有结束符”就不会这样。')}
+  ${warn('偶尔转错：“180”被拆成“1”和“80”', '9600 波特率下每个字符要约 1 毫秒才到，<code>while</code> 却读得飞快。loop() 碰巧在字符还没到齐时去读，就会先读到 "1"、下一圈才读到 "80"：舵机先转到 1°，再转到 80°。几十次里会碰到一次，实验室里也能遇到。在第 18 行后面加一行 <code>delay(2);</code>，等下一个字符到了再判断，就不会拆开。')}
   ${warn('舵机抖动、板子反复重启', '舵机转动的瞬间电流很大，只靠 USB 供电会“掉电”。按原指南插上电池一起供电。')}
   ${warn('打印 200，却只转到 180°', 'Servo 库最多转到 180°，串口却照样打印 200。加一行 <code>constrain</code>，打印和实际就一致了。')}
 </div>
@@ -736,7 +739,7 @@ ${callout('reset', '调距离', '用螺丝刀拧模块上的蓝色电位器，�
         desc: '有 Sensor V5.0 扩展板时，用杜邦线直插更方便；一直报警、黑色物体测不到，是两个最常见的问题。',
         img: 'img/l22/ir_shield_photo.jpg', caption: '原指南：扩展板接法',
         side: `
-${callout('plug', '原指南', '如果你的套件中有 Sensor V5.0 扩展板，可以按照左图接线，更加方便。引脚号不变，程序不用改。')}
+${callout('plug', '原指南', '如果你的套件中有 Sensor V5.0 扩展板，可以按照图里的方法接线，更加方便。引脚号不变，程序不用改。')}
 ${warn('一直在报警', '检测距离调得太远，或模块正对着桌面、墙面。拧蓝色电位器调近，直到前方没东西时绿灯熄灭。')}
 ${warn('黑色物体测不到', '黑色表面会吸收红外线，反光太弱，要靠得更近才能检测到。')}`
       },
@@ -775,7 +778,7 @@ ${warn('黑色物体测不到', '黑色表面会吸收红外线，反光太弱�
         kind: 'html', title: 'DHT11 怎么“说话”：一根线、四个步骤',
         desc: '像课堂点名：主机 Arduino 先喊，从机 DHT11 才回答。一次对话分四步：起始 → 响应 → 40 位数据 → 结束。',
         body: `
-${fig('dht_timing_sequence.jpg', '原指南：完整时序图（The time sequence diagram）。粗线是主机 Arduino 发出的（host signal），细线是 DHT11 发出的（slave signal）')}
+${fig('dht_timing_sequence.jpg', '原指南：完整时序图（The time sequence diagram）。粗线是主机 Arduino 发出的（host signal），细线是 DHT11 发出的（slave signal）。点图可放大')}
 <div class="flow mt">
   <div><b>① 起始</b><br>Arduino 把线拉低 &gt;18ms：“点名”</div>
   <div><b>② 响应</b><br>DHT11 拉低、拉高各 80µs：“到！”</div>
@@ -917,7 +920,7 @@ ${fig('dht_timing_sequence.jpg', '原指南：完整时序图（The time sequenc
             { text: '拧 LCD 下面的“背面对比度旋钮”：太低看不见字，太高满屏方块。屏幕亮了却没有字，先查它。' },
             { text: '把第 25 行的 <code>delay(200)</code> 改成 <code>delay(2000)</code>：每 2 秒读一次，符合 DHT11 的要求。拖滑块，LCD 最多 2 秒后才变。', code: DHT_SLOW },
             { text: '在第 25 行前面加一句 <code>Serial.println(<wbr>DHT11.humidity);</code>：串口监视器里也能看湿度（setup() 里已经打开了串口）。同一个数据，可以同时显示在两个地方。', code: DHT_SERIAL },
-            { text: '把第 7 行的地址 <code>0x27</code> 改成 <code>0x3F</code>：屏幕不亮、也没有字，卡片提示“地址不对”。地址必须和屏幕一致（常见 0x27，有的屏是 0x3F）。', code: DHT_3F }
+            { text: '把第 7 行的地址 <code>0x27</code> 改成 <code>0x3F</code>：屏幕上一个字也没有，卡片提示“地址不对”。地址必须和屏幕一致（常见 0x27，有的屏是 0x3F）。', code: DHT_3F }
           ],
           smoke: [
             { expect: { lcd: ['Tep: 24.00C', 'Hum: 46.00%'], part: ['lcd1602', 'backlight', '1'] }, timeout: 3000 },
@@ -947,7 +950,7 @@ ${callout('hand', '试一试', '对着传感器哈一口气，湿度很快上升
         desc: '有 Sensor V5.0 扩展板时接线更方便；读得太勤、LCD 没字是两个最常见的问题。',
         img: 'img/l22/dht_shield_photo.jpg', caption: '原指南：扩展板接法（屏幕显示 Tep:30 C / Hum:45 %）',
         side: `
-${callout('plug', '原指南', '套件中有 Sensor V5.0 扩展板时，可以按照左图接线，更加方便。照片里屏幕显示“Tep:30 C / Hum:45 %”，没有小数，是另一版程序的显示格式，不影响接线。')}
+${callout('plug', '原指南', '套件中有 Sensor V5.0 扩展板时，可以按照图里的方法接线，更加方便。照片里屏幕显示“Tep:30 C / Hum:45 %”，没有小数，是另一版程序的显示格式，不影响接线。')}
 ${warn('读得太勤', '<code>delay(200)</code> 太短：DHT11 两次读取最好间隔 1 秒以上，改成 <code>delay(2000)</code> 更稳。')}
 ${warn('LCD 亮了却没有字', '先拧背面蓝色电位器调对比度；还不行就查地址：常见是 0x27，有的屏是 0x3F。')}`
       },
