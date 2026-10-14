@@ -220,7 +220,7 @@ ${callout('play', '每个实验都有一个“动手实验室”', '在网页里
       {
         kind: 'figure',
         title: '认识 WS2812b RGB 灯环',
-        desc: '原指南：12 位 RGB 灯环由 12 颗 WS2812 RGB 灯珠串联组成，每颗灯珠里都集成了一个芯片，只需要一个 IO 口就可以驱动整个模块。',
+        desc: '原指南：12 位 RGB 灯环采用 12 颗 WS2812 RGB 灯珠串联组成，只需要一个 IO 口就可以驱动此模块；每颗灯珠内部都集成了一个芯片。',
         img: 'img/l23/ws_module_photo.jpg',
         caption: '原指南：RGB LED 环形灯（正面 / 背面），正面下方 4 根针依次是 D、R、V、G',
         side: `
@@ -491,7 +491,7 @@ ${warnCard('原指南的两处笔误', '<p>“1602 表示每行 2 行和 16 个�
         body: `
 <div class="grid-3 stretch">
   ${card('target', '实验目的（原指南）', '<p>通过 Arduino UNO R3 主控板控制 LCD1602 液晶显示屏显示字符。</p>')}
-  ${card('bulb', '实验原理（原指南）', '<p>Arduino UNO R3 主控板和串行 LCD1602 液晶显示屏连接，使用 I2C 通信，控制 LCD1602 显示字符。</p>')}
+  ${card('bulb', '实验原理（原指南）', '<p>通过 Arduino UNO R3 主控板和串行 LCD1602 液晶显示屏连接，使用 I2C 通信，控制 LCD1602 液晶显示屏显示字符。</p>')}
   ${card('list', '组件清单', chips(['Arduino Uno R3 主板', '面包板', 'USB 数据线', '带转接板的 LCD1602 显示屏', '若干跳线']))}
 </div>
 <h3 class="mt">为什么要带转接板？</h3>
@@ -612,7 +612,8 @@ ${callout('info', '背光亮 ≠ 能显示字', '背光亮只说明电源接对�
   <div class="stack">
     <div class="card">
       <h3>${ico('send')}每一行是哪句代码打印的</h3>
-      <div class="table-wrap"><table class="table">
+      <p class="small">原指南：上传后打开菜单 <b>工具 → 串口监视器</b>，把右下角的波特率改为 <b>9600</b>，即可读出 I2C 地址。</p>
+      <div class="table-wrap mt-s"><table class="table">
         <tbody>
           <tr><td class="l mono">I2C scanner. Scanning ...</td><td>第 7 行</td></tr>
           <tr class="hl"><td class="l mono">Found address: 39 (0x27)</td><td>第 13–17 行</td></tr>
@@ -621,7 +622,7 @@ ${callout('info', '背光亮 ≠ 能显示字', '背光亮只说明电源接对�
         </tbody>
       </table></div>
     </div>
-    ${callout('question', '扫出来不是 0x27？', '比如是 0x3F，程序②第 4 行的 <code>0x27</code> 也要改成 <code>0x3F</code>。显示 <code>Found 0 device(s).</code>：先查 SDA、SCL 两根线。', 'gray')}
+    ${callout('question', '扫出来不是 0x27？', '原指南提醒：很多转接板默认是 0x27，但最好自己扫一下，以防后面的实验出错。比如扫出 0x3F，程序②第 4 行的 <code>0x27</code> 也要改成 <code>0x3F</code>；显示 <code>Found 0 device(s).</code>：先查 SDA、SCL 两根线。', 'gray')}
   </div>
 </div>`
       },

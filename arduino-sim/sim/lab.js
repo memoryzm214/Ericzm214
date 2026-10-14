@@ -828,6 +828,8 @@
         const errs = ((res && res.errors) || []).map(normErr);
         if (!errs.length) errs.push({ line: 0, msg: '编译失败' });
         runner = null;
+        // nothing was uploaded: an old run's output would look like it came from the broken program
+        clearSerial(); renderSerial();
         ed.setErr(errs.map(e => e.line));
         errs.slice(0, 5).forEach(e => addMsg('err', esc(e.msg), e.line ? { text: `跳到第 ${e.line} 行`, fn: () => ed.gotoLine(e.line) } : null));
         state = 'error'; rootEl.dataset.state = 'error';

@@ -567,7 +567,7 @@ pre.snippet code { background: none; padding: 0; font-size: inherit; color: inhe
 .vars td.n { font-family: var(--font-code); color: var(--fg); white-space: nowrap; max-width: 10em; overflow: hidden; text-overflow: ellipsis; }
 .vars td.t { color: var(--muted); font-size: 11px; white-space: nowrap; }
 .vars td.t span { display: inline-block; max-width: 6.6em; overflow: hidden; text-overflow: ellipsis; vertical-align: bottom; }
-.vars td.v { font-family: var(--font-code); color: var(--turq-ink); text-align: right; font-weight: 600; overflow-wrap: anywhere; }
+.vars td.v { font-family: var(--font-code); color: var(--turq-ink); text-align: right; font-weight: 600; overflow-wrap: anywhere; min-width: 7em; }
 .vars .empty, .pins .empty { color: var(--muted); font-size: 12px; padding: 2px 0; }
 .vars tr.changed td.v { background: var(--turq-pale); }
 .pins td.p { font-family: var(--font-code); font-weight: 600; width: 34px; }
@@ -613,7 +613,7 @@ pre.snippet code { background: none; padding: 0; font-size: inherit; color: inhe
 .part-row { display: flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--muted); }
 .part-row > span:first-child { flex: none; min-width: 2.6em; }
 .part-row output { font-family: var(--font-code); font-size: 11px; color: var(--fg); min-width: 3.4em; text-align: right; }
-.part-row.knob-row { justify-content: center; gap: 8px; }
+.part-row.knob-row { justify-content: flex-start; gap: 8px; } /* not centred: a hint that changes width must not move the knob mid-drag */
 .part-row.knob-row > span:first-child { min-width: 0; }
 .part-row.knob-row output { min-width: 0; }
 .part-btns { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
