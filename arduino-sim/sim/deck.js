@@ -56,6 +56,12 @@
     get(k) { try { return root.localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { if (v == null) root.localStorage.removeItem(k); else root.localStorage.setItem(k, v); } catch (e) { /* */ } }
   };
+  // single-file build (tools/make_single.py): window.SIM_ASSETS maps 'img/…' paths to data: URIs,
+  // so every slide picture (src) and its zoom target (data-zoom) comes from inside the page
+  function withAssets(html) {
+    const A = root.SIM_ASSETS;
+    return A ? String(html).replace(/(src|data-zoom)="(img\/[^"]+)"/g, (m, k, p) => A[p] ? `${k}="${A[p]}"` : m) : html;
+  }
   function h(tag, attrs, html) {
     const e = doc.createElement(tag);
     if (attrs) for (const k in attrs) {
@@ -66,7 +72,7 @@
       else if (k.startsWith('on') && typeof v === 'function') e.addEventListener(k.slice(2), v);
       else e.setAttribute(k, v === true ? '' : v);
     }
-    if (html != null) e.innerHTML = html;
+    if (html != null) e.innerHTML = withAssets(html);
     return e;
   }
 
