@@ -35,7 +35,8 @@
        itself, so a lesson that does not exist yet causes no 404 / ERR_FILE_NOT_FOUND console error:
        its home card simply shows “制作中”. (Integration change; see AUTHORING_LESSONS.md.)
 
-   SIM.deck.boot({lessons:[ids], base:'lessons/', autoload:false}) — `lessons` is the home order.
+   SIM.deck.boot({lessons:[ids], base:'lessons/', autoload:false, org}) — `lessons` is the home order;
+   `org` is the footer line on cover / end slides (default: the school name).
    Ids in that list that have not registered by boot time are marked “制作中” (autoload:true would
    inject their scripts instead, at the cost of a console error for each missing file). Any other id
    in the hash (e.g. #_demo) is loaded on demand from lessons/<id>.js.
@@ -136,6 +137,7 @@
 
   // ------------------------------------------------------------------ state
   let booted = false, base = 'lessons/', order = [];
+  let org = '湖北工业大学 · 工业设计学院'; // footer line on cover / end slides; boot({org}) overrides it
   let homeEl = null, deckEl = null, mainEl = null, topEls = {}, dotsEl = null, progEl = null, prevBtn = null, nextBtn = null;
   const view = { mode: 'home', id: null, idx: 0, pendingId: null, lab: null, ro: null, lightbox: null };
 
@@ -406,7 +408,7 @@
         `<div class="cover-in"><div class="kicker">${kicker}</div><h1>${s.title || esc(L.title)}</h1>` +
         `${s.subtitle || L.subtitle ? `<p class="subtitle">${s.subtitle || L.subtitle}</p>` : ''}` +
         `<button type="button" class="btn start">开始学习${icon('right')}</button>` +
-        `${cubes('cubes')}<div class="org">${s.meta || '湖北工业大学 · 工业设计学院'}</div></div>`);
+        `${cubes('cubes')}<div class="org">${s.meta || esc(org)}</div></div>`);
       el.querySelector('.start').addEventListener('click', () => go(view.idx + 1));
       return el;
     },
@@ -420,7 +422,7 @@
         `<h1>${s.title || '本课结束'}</h1>${s.subtitle ? `<p class="subtitle">${s.subtitle}</p>` : ''}` +
         `<div class="end-actions"><a class="btn start" href="#">${icon('home')}回到首页</a>` +
         (nl ? `<a class="btn ghost-dark" href="#${esc(nextId)}">下一课：${esc(nl.no || '')} ${esc(strip(nl.title))}${icon('right')}</a>` : '') + '</div>' +
-        `${cubes('cubes')}<div class="org">${s.meta || '湖北工业大学 · 工业设计学院'}</div></div>`);
+        `${cubes('cubes')}<div class="org">${s.meta || esc(org)}</div></div>`);
     },
     section(s, L) {
       const tiles = (s.tiles || []).slice(0, 4);
@@ -583,6 +585,7 @@
     opts = opts || {};
     booted = true;
     base = opts.base || 'lessons/';
+    if (opts.org != null) org = String(opts.org);
     order = (opts.lessons || ['l12', 'l13', 'l21', 'l22', 'l23']).slice();
     homeEl = doc.getElementById(opts.home || 'home');
     deckEl = doc.getElementById(opts.deck || 'deck');
