@@ -978,7 +978,7 @@ ${callout('info', '你的摇杆不一样？', '每个摇杆的静止值都有一
           tasks: [
             { text: '程序①：运行后先不碰摇杆，串口里 x、y 是多少？（525 / 518，和原指南截图一样）再把摇杆推到右上角，x、y 怎么变？' },
             { text: '切到“程序②”运行：往上下左右推，再逐个按住 A～F 和 K，串口打印什么？原指南说“对应的 LED 灯会亮起”——程序里其实没有控制 LED，以串口为准。' },
-            { text: 'else if 的优先级（要用电脑键盘）：点一下摇杆，按住键盘 → 不放（一直打印 right），再同时按住 C 键：变成只打印 Button C。换成同时按住 K 键呢？两行都会打印——K 是独立的 if。' },
+            { text: 'else if 的优先级：把摇杆推到右边不放（一直打印 right），再同时按住 C 键：变成只打印 Button C。换成同时按住 K 键呢？两行都会打印——K 是独立的 if。电脑上：点一下摇杆，再按住键盘的 → 和 C；手机上：一根手指推住摇杆，另一根手指按住 C。' },
             { text: '用新写法打开上拉：把 setup() 里的 14 行改成 7 行 <code>pinMode(按键, INPUT_PULLUP);</code>，按键照样能用。', code: JOY2_PULLUP, program: 1 },
             { text: '去掉上拉试试：删掉第 16 行 <code>digitalWrite(BUTTON_UP, HIGH);</code> 再运行：不碰任何按键，串口也会乱报 Button A——2 号脚“悬空”了。', code: JOY2_FLOAT, program: 1 }
           ],

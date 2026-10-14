@@ -637,6 +637,10 @@ pre.snippet code { background: none; padding: 0; font-size: inherit; color: inhe
 .part .hit { cursor: pointer; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
 .part .hit:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 .part .drag { cursor: grab; touch-action: none; }
+/* browsers ignore touch-action on SVG children (<g class="drag|hit">), so set it on their <svg>:
+   otherwise a finger drag on the joystick, magnet or obstacle scrolls the page instead */
+.part svg:has(.drag), .part svg:has(.hit),
+.part[data-type="joystick"] svg, .part[data-type="reed"] svg, .part[data-type="ultrasonic"] svg, .part[data-type="ir"] svg { touch-action: none; }
 .part .drag:active { cursor: grabbing; }
 .part .drag:focus-visible { outline: none; }
 .part .drag:focus-visible .focus-ring { stroke: var(--focus); stroke-width: 2.5; }
