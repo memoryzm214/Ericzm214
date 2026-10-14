@@ -212,6 +212,8 @@ Icons: `.ico` (turquoise circle), `.ico.dark .ico.red .ico.gray .ico.lg`.
 Tiles: `.tile` with `<div class="n">D7</div><b>标题</b><span>说明</span>`, plus `.tile.turq .tile.dark .tile.white`.
 Callouts: `.callout` (pale turquoise), `.callout.warn`, `.callout.note` (amber), `.callout.gray`. Structure:
 `<div class="callout"><span class="ico">${I('question')}</span><div><b>打个比方</b><p>…</p></div></div>`.
+Title rule (callouts, summary items, task-slide items): only a `<b>` that **opens** the text becomes a block title;
+a `<b>` after some words (`电位器接的是 <b>3.3V</b>`) and any `<b>` inside a `<p>` stay inline.
 Tags: `.tag`, `.tag.turq .tag.pale .tag.dark .tag.red .tag.outline .tag.line`.
 Figures: `<figure class="figure"><img src="img/l12/x.jpg" alt="…"><figcaption>…</figcaption></figure>` (click to zoom).
 Tables: `<div class="table-wrap"><table class="table">…</table></div>` (`td.l` left-aligns, `tr.hl` highlights a row).
