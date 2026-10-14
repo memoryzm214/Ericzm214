@@ -68,13 +68,13 @@
             if (--this.need === 0) out += this._flush();
             continue;
           }
-          out += '�'; this.pend = []; this.need = 0;
+          out += '\uFFFD'; this.pend = []; this.need = 0;
         }
         if (b < 0x80) out += String.fromCharCode(b);
         else if (b >= 0xC2 && b < 0xE0) { this.pend = [b]; this.need = 1; }
         else if (b >= 0xE0 && b < 0xF0) { this.pend = [b]; this.need = 2; }
         else if (b >= 0xF0 && b < 0xF5) { this.pend = [b]; this.need = 3; }
-        else out += '�';
+        else out += '\uFFFD';
       }
       return out;
     }
