@@ -716,7 +716,7 @@ function dial(s, cx, cy, r, deg) {
     const C = [
       { icon: I.tag, title: 'const 常量', text: '像门牌号：钉上去就不改了。用名字代替数字，好读又防误改。', code: 'const int TrigPin = 2;\nTrigPin = 5;   // 报错', mistake: '给 const 再赋值会编译报错：要改，就改它的初始值。' },
       { icon: I.clock, title: 'delayMicroseconds()', mono: true, titleSize: 12, text: '更细的计时单位：1 秒 = 1000 毫秒 = 1000000 微秒（μs）。', code: 'delayMicroseconds(10);\ndelay(1000);  // 1 秒', mistake: 'delay(0.01) 不等于 10μs：delay() 只认整数毫秒。' },
-      { icon: I.stopwatch, title: 'pulseIn(引脚, HIGH)', mono: true, titleSize: 12, text: '像秒表：Echo 一变高就开始计时，变低就停表，返回多少微秒。', code: 'pulseIn(EchoPin, HIGH)\n// → 高电平的微秒数', mistake: '没收到回声时，等约 1 秒后返回 0：读数是 0 先查线。' },
+      { icon: I.stopwatch, title: 'pulseIn(引脚, HIGH)', mono: true, titleSize: 12, text: '像秒表：Echo 一变高就开始计时，变低就停表，返回多少微秒。', code: 'pulseIn(EchoPin, HIGH)\n// → 高电平的微秒数', mistake: 'Echo 一直没变高（线没插牢）时，等约 1 秒返回 0：读数是 0 先查线。' },
     ];
     C.forEach((c, i) => conceptCard(s, I, { ...c, x: G.L + i * (w + gap), y: G.top, w, h: G.ch }));
   }
@@ -997,7 +997,7 @@ function dial(s, cx, cy, r, deg) {
   s = slide({
     title: '实验步骤：接上电池，打开串口监视器',
     desc: '程序烧录后先不要拔 USB 线，再把电池插头插到 UNO 上一起供电，然后打开 IDE 的串口监视器',
-    notes: '按原指南的三步做：烧录后不拔 USB，因为串口监视器要通过 USB 和电脑通信；插上电池，是因为舵机转动时电流大，只靠 USB 供电可能不稳；然后点 IDE 右上角的“串口监视器”。中间的截图只看红框里的按钮就好，截图里的代码和我们的程序版本略有不同。',
+    notes: '按原指南的三步做：烧录后不拔 USB，因为串口监视器要通过 USB 和电脑通信；插上电池，是因为舵机转动时电流大，只靠 USB 供电可能不稳——插上 9V 电池后 UNO 会自动改用电池供电；然后点 IDE 右上角的“串口监视器”。中间的截图只看红框里的按钮就好，截图里的代码和我们的程序版本略有不同。',
   });
   {
     const pw = 2.6;
@@ -1008,7 +1008,7 @@ function dial(s, cx, cy, r, deg) {
     label(s, '三步走', { x: rx, y: G.top, w: rw, h: 0.32, size: 15, bold: true });
     const ly = numList(s, [
       '烧录后先别拔 USB 线',
-      '插上电池：舵机耗电大，帮 USB 分担供电',
+      '插上电池：UNO 改用电池供电，舵机大电流不再压在 USB 上',
       '点 IDE 右上角“串口监视器”，选 9600',
     ], { x: rx, y: G.top + 0.46, w: rw, size: 12.5, gap: 0.2, d: 0.32 });
     const ty = Math.max(ly + 0.3, 4.1);
@@ -1057,7 +1057,7 @@ function dial(s, cx, cy, r, deg) {
   {
     const lw = 4.4, gap = 0.3, wh = (G.ch - gap) / 2;
     warnCard(s, I.times_w, '空着点“发送”，舵机跳回 0°', '行结束符选了“换行”时，空着发送也会送出一个换行符：temp 不为空，toInt() 得到 0。选“没有结束符”就不会这样。', { x: G.L, y: G.top, w: lw, h: wh });
-    warnCard(s, I.times_w, '舵机抖动、板子反复重启', '舵机转动的瞬间电流很大，只靠 USB 供电会“掉电”。按原指南插上电池一起供电。', { x: G.L, y: G.top + wh + gap, w: lw, h: wh });
+    warnCard(s, I.times_w, '舵机抖动、板子反复重启', '舵机转动的瞬间电流很大，只靠 USB 供电会“掉电”。按原指南插上电池供电。', { x: G.L, y: G.top + wh + gap, w: lw, h: wh });
     const rx = G.L + lw + 0.3, rw = G.R - rx;
     let y = iconCard(s, I.lock, '挑战：只接受 0～180', { x: rx, y: G.top, w: rw, h: G.ch, d: 0.4, titleSize: 14.5 });
     txt(s, '输入 200 时，串口照样打印 Servo degree: 200，可舵机最多只转到 180°。在第 23 行后面加一行：', { x: rx + 0.2, y, w: rw - 0.4, h: 0.62, size: 12 });
@@ -1510,7 +1510,7 @@ function dial(s, cx, cy, r, deg) {
   s = slide({
     title: '代码逐行看懂（1/2）：库、对象和准备工作',
     desc: '引入三个库，给 8 号脚起外号，创建传感器对象 DHT11 和屏幕对象 lcd，再初始化屏幕',
-    notes: '前三行引入三个库：Wire 负责 I2C 通信，dht11 负责读温湿度，LiquidCrystal_I2C 负责 I2C 液晶屏；第 2 行 #include 后面少了空格，也能正常编译。第 7 行创建屏幕对象 lcd，括号里依次是 I2C 地址 0x27、16 列、2 行。第 9 行把 8 号脚设为输出，其实 dht11 库读数时会自己切换输入输出。第 12 行打开了串口，但这个程序没有用串口打印。',
+    notes: '前三行引入三个库：Wire 负责 I2C 通信，dht11 负责读温湿度，LiquidCrystal_I2C 负责 I2C 液晶屏；第 2 行 #include 后面少了空格，也能正常编译。第 7 行创建屏幕对象 lcd，括号里依次是 I2C 地址 0x27、16 列、2 行；原指南把这行末尾的英文注释折成了两行，照抄要把 backpack 接回本行，否则编译报错，这里已经合回一行。第 9 行把 8 号脚设为输出，其实 dht11 库读数时会自己切换输入输出。第 12 行打开了串口，但这个程序没有用串口打印。',
   });
   {
     const cw = 5.25;

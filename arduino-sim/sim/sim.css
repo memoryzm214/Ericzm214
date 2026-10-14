@@ -567,7 +567,7 @@ pre.snippet code { background: none; padding: 0; font-size: inherit; color: inhe
 .vars td.n { font-family: var(--font-code); color: var(--fg); white-space: nowrap; max-width: 10em; overflow: hidden; text-overflow: ellipsis; }
 .vars td.t { color: var(--muted); font-size: 11px; white-space: nowrap; }
 .vars td.t span { display: inline-block; max-width: 6.6em; overflow: hidden; text-overflow: ellipsis; vertical-align: bottom; }
-.vars td.v { font-family: var(--font-code); color: var(--turq-ink); text-align: right; font-weight: 600; overflow-wrap: anywhere; min-width: 7em; }
+.vars td.v { font-family: var(--font-code); color: var(--turq-ink); text-align: right; font-weight: 600; overflow-wrap: anywhere; }
 .vars .empty, .pins .empty { color: var(--muted); font-size: 12px; padding: 2px 0; }
 .vars tr.changed td.v { background: var(--turq-pale); }
 .pins td.p { font-family: var(--font-code); font-weight: 600; width: 34px; }

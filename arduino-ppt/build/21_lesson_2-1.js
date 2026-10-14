@@ -1385,13 +1385,13 @@ function buildJoystick({ deck, I, slide }) {
   s = slide({
     title: '新语法：内部上拉电阻和 else if',
     desc: '先 INPUT 再写 HIGH，就打开了引脚内部的上拉电阻（等同 INPUT_PULLUP）；else if 从上往下问，第一个成立就停',
-    notes: '左边：1-2 课的按键模块里有一颗上拉电阻，像弹簧把引脚拉在高电平；这块扩展板的按键没有自带，就用芯片引脚里面的那颗。老写法是先 pinMode 设为 INPUT，再 digitalWrite 写 HIGH；新写法一句 INPUT_PULLUP。所以松开读到 HIGH，按下读到 LOW。右边：else if 像排队过安检，一个个问，第一个“是”就进门，后面的都不问了；如果写成一串独立的 if，几个条件同时成立时会打印好几行。',
+    notes: '左边：1-2 课的按键模块里有一颗上拉电阻，像弹簧把引脚拉在高电平；这块扩展板上有没有上拉电阻都不要紧，程序直接打开芯片引脚里面的那颗。老写法是先 pinMode 设为 INPUT，再 digitalWrite 写 HIGH；新写法一句 INPUT_PULLUP。所以松开读到 HIGH，按下读到 LOW。右边：else if 像排队过安检，一个个问，第一个“是”就进门，后面的都不问了；如果写成一串独立的 if，几个条件同时成立时会打印好几行。',
   });
   {
     const w = (CW - 0.3) / 2, iw = w - 0.4;
     // left card: internal pull-up
     let y = iconCard(s, I.arrowUp, '内部上拉：芯片里的“弹簧”', { x: L, y: TOP, w, h: CH, titleSize: 14 });
-    txt(s, '1-2 课学过上拉电阻：像弹簧把引脚拉在高电平。扩展板的按键没带，就打开引脚里面那一颗。', { x: L + 0.2, y, w: iw, h: 0.5, size: 12 });
+    txt(s, '1-2 课学过上拉电阻：像弹簧把引脚拉在高电平。这里由程序打开引脚里面那一颗。', { x: L + 0.2, y, w: iw, h: 0.5, size: 12 });
     y += 0.6;
     y += miniCode(s, 'pinMode(2, INPUT);\ndigitalWrite(2, HIGH);    // 老写法：两句\npinMode(2, INPUT_PULLUP); // 新写法：一句', { x: L + 0.2, y, w: iw, size: 10.5, hl: [2] }) + 0.14;
     txt(s, [B('效果：'), R('松开读到 '), M('HIGH', { bold: true }), R('，按下读到 '), M('LOW', { bold: true })], { x: L + 0.2, y, w: iw, h: 0.28, size: 12, valign: 'middle', oneLine: true });
@@ -1514,7 +1514,7 @@ function buildJoystick({ deck, I, slide }) {
   s = slide({
     title: '实验结果：推摇杆、按按键，串口报出来',
     desc: '往上下左右推，串口打印 up / down / left / right；按下按键，打印 Button A～F（或 k）is pressed',
-    notes: '上传程序②后打开串口监视器（9600），先推摇杆四个方向，再逐个按 A～F 键，最后按下摇杆。原指南的结论说“往上拨时对应的 LED 灯会亮起”，但这段程序只在串口打印，并不控制 LED；扩展板上亮着的小灯是板子自带的指示灯。以串口里的文字为准。',
+    notes: '上传程序②后打开串口监视器（9600），先推摇杆四个方向，再逐个按 A～F 键，最后按下摇杆。原指南的结论说“往上拨时对应的 LED 灯会亮起”，但这段程序只在串口打印，并不控制 LED；扩展板上也没有每个方向对应的灯，原理图里的两颗指示灯属于单独的摇杆模块。以串口里的文字为准。',
   });
   {
     const pw = 4.3, ph = 2.55;

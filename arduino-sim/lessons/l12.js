@@ -296,7 +296,7 @@ value = digitalRead(7);  // 听一次</code></pre>
         file: 'key_led.ino', code: BUTTON, from: 1, to: 9, hl: [1, 2, 3, 6, 7],
         notes: [
           { line: [1, 2], text: '起名字：<code>led_out</code> 是 11 号（接 LED），<code>keypad_pin</code> 是 7 号（接按键）。' },
-          { line: 3, text: '<code>value</code>：装读数的盒子，先空着——loop() 一开始就会把读数放进来。' },
+          { line: 3, text: '<code>value</code>：装读数的盒子，没写初值，开机自动是 0——loop() 一开始就会把读数放进来。' },
           { line: 4, text: '<code>setup()</code>：通电后只运行一次。' },
           { line: [6, 7], text: '11 号设成 OUTPUT（嘴巴），7 号设成 INPUT（耳朵）。' },
           { line: 8, text: '开机先让 LED 熄灭。' }
@@ -795,7 +795,7 @@ ${warnCard('压下了，灯却不亮？', '先看串口：数字会变 0，说�
           { line: 15, text: '把 val 打印到串口——观察就靠它。' },
           { line: 16, text: 'val 是 0 就报警。注释说“LED 闪烁”也是笔误：灯是常亮的。' },
           { line: [18, 19], text: '灯亮、蜂鸣器响。' },
-          { line: 20, text: '这句被 <code>//</code> 注释掉了，不执行——所以灯不闪。' },
+          { line: 20, text: '这句被 <code>//</code> 注释掉了，不执行。就算恢复它，if 里也没有关灯的语句，灯还是常亮——想闪，要像任务 4 那样加上关灯和 delay。' },
           { line: [22, 26], text: '否则：灯灭、蜂鸣器停。' }
         ],
         foot: warnCard('原程序有三处注释和代码对不上', '第 9 行（INPUT 写成“输出接口”）、第 14 行（读的是 12 号脚，不是 A5）、第 16 行（灯常亮，不是闪烁）。都不影响运行。')
@@ -872,7 +872,7 @@ ${warnCard('压下了，灯却不亮？', '先看串口：数字会变 0，说�
 <div class="grid-2 stretch">
   ${warnCard('一直报警，停不下来', '先看串口：一直是 0，说明模块此刻的姿势正好读到 0（本模拟放平就是 0）。换个姿势放，或像任务 3 那样把条件改成 <code>val==1</code>。')}
   ${warnCard('数字乱跳', '多半是 S 线没插牢在 12 号脚，或者模块正在被晃动。')}
-  ${warnCard('以为灯会闪', '第 16 行注释说“LED 闪烁”，但第 20 行的 <code>delay</code> 被注释掉了，灯是常亮的。想闪，按任务 4 加 delay。')}
+  ${warnCard('以为灯会闪', '第 16 行注释说“LED 闪烁”，可 if 里只有点亮、没有熄灭，灯是常亮的；只恢复第 20 行的 delay 也不会闪。想闪，按任务 4 加上关灯和 delay。')}
   ${warnCard('蜂鸣器不响', '有源蜂鸣器给高电平就响；不响先查 13 号脚和 V、G。实验室里要先点“开启声音”才有声音。')}
 </div>
 <div class="callout mt"><span class="ico">${I('bulb')}</span><div><b>调试小技巧：先安静地观察</b><p>先按任务 5 把蜂鸣器那句注释掉，只看灯和串口：摆几个姿势，弄清哪种读到 0；规律确定了，再去掉 <code>//</code> 让蜂鸣器响。</p></div></div>`

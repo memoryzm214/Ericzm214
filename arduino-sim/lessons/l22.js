@@ -336,7 +336,7 @@ ${callout('list', '组件清单', 'Arduino UNO R3 主板 · 面包板 · USB 数
 <div class="grid-3">
   ${card('flag', 'const 常量', `<p>像门牌号：钉上去就不改了。用名字代替数字，好读又防误改。</p>${snip('const int TrigPin = 2;\nTrigPin = 5;   // 报错')}${mistake('给 <code>const</code> 再赋值会编译报错：要改，就改它的初始值。')}`)}
   ${card('clock', 'delayMicroseconds()', `<p>更细的计时单位：1 秒 = 1000 毫秒 = 1000000 微秒（µs）。</p>${snip('delayMicroseconds(10); // 10 微秒\ndelay(1000);           // 1 秒')}${mistake('<code>delay(0.01)</code> 不等于 10µs：<code>delay()</code> 只认整数毫秒，0.01 会变成 0。')}`)}
-  ${card('target', 'pulseIn(引脚, HIGH)', `<p>像秒表：Echo 一变高就开始计时，变低就停表，返回多少微秒。</p>${snip('pulseIn(EchoPin, HIGH)\n// → 高电平的微秒数')}${mistake('没收到回声时，等约 1 秒后返回 0：读数是 0，先查线。')}`)}
+  ${card('target', 'pulseIn(引脚, HIGH)', `<p>像秒表：Echo 一变高就开始计时，变低就停表，返回多少微秒。</p>${snip('pulseIn(EchoPin, HIGH)\n// → 高电平的微秒数')}${mistake('Echo 一直没变高（比如线没插牢）时，等约 1 秒后返回 0：读数是 0，先查线。')}`)}
 </div>`
       },
       {
@@ -524,7 +524,7 @@ ${callout('list', '组件清单', 'Keywish Arduino Uno R3 主板 · USB 数据�
   <h3><span class="ico">${I('list')}</span>真实硬件上三步走</h3>
   <ol class="steps">
     <li>烧录后先别拔 USB 线：串口监视器要靠它和电脑“聊天”。</li>
-    <li>插上电池：舵机转动时电流大，帮 USB 分担供电。</li>
+    <li>插上电池：UNO 自动改用电池供电，舵机的大电流不再压在 USB 上。</li>
     <li>点 IDE 右上角“串口监视器”，选 9600 波特率、“没有结束符”。</li>
   </ol>
 </div>
@@ -884,7 +884,7 @@ ${fig('dht_timing_sequence.jpg', '原指南：完整时序图（The time sequenc
         notes: [
           { line: [1, 3], text: '引入三个库：Wire（I2C 通信）、dht11（读温湿度）、LiquidCrystal_I2C（I2C 液晶屏）。第 2 行 <code>#include</code> 后面少个空格，也能编译。' },
           { line: [5, 6], text: '8 号脚起外号 <code>DHT11PIN</code>；创建传感器对象 <code>DHT11</code>。' },
-          { line: 7, text: '创建屏幕对象 <code>lcd</code>：I2C 地址 0x27，16 列 2 行。' },
+          { line: 7, text: '创建屏幕对象 <code>lcd</code>：I2C 地址 0x27，16 列 2 行。原指南把末尾注释折成两行，照抄要把 backpack 接回本行，否则编译报错。' },
           { line: 9, text: '8 号脚先设为输出（dht11 库读数时会自己切换输入输出）。' },
           { line: [10, 12], text: '初始化屏幕、打开背光；打开串口（这个程序没用串口打印）。' }
         ]

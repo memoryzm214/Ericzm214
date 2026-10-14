@@ -908,7 +908,7 @@ ${callout('info', '你的摇杆不一样？', '每个摇杆的静止值都有一
 <div class="grid-2 stretch">
   <div class="card">
     <h3><span class="ico">${I('bolt')}</span>内部上拉：芯片里的“弹簧”</h3>
-    <p>1-2 课学过上拉电阻：像弹簧把引脚拉在高电平。扩展板的按键没带，就打开引脚里面那一颗。</p>
+    <p>1-2 课学过上拉电阻：像弹簧把引脚拉在高电平。扩展板上有没有上拉电阻都不要紧：程序直接打开引脚里面那一颗。</p>
     ${snip('// 老写法：两句\npinMode(2, INPUT);\ndigitalWrite(2, HIGH);\n// 新写法：一句\npinMode(2, INPUT_PULLUP);')}
     <p><b>效果</b>：松开读到 <code>HIGH</code>，按下读到 <code>LOW</code>。</p>
     ${callout('warn', '常见错误', '只写 INPUT 不开上拉：松开时引脚“悬空”，读数乱跳。', 'warn')}
@@ -1025,7 +1025,7 @@ ${callout('info', '你的摇杆不一样？', '每个摇杆的静止值都有一
   ${fig('joystick_result_photo.jpg', '原指南实物图：扩展板插在 UNO 上')}
   ${fig('joystick_serial_buttons.jpg', '原指南串口截图：up / down / right / left，再依次按下各个按键')}
 </div>
-<div class="mt">${warnCard('原文与程序不符', '<p>原指南说：“当您往上拨时，对应的 LED 灯就会亮起，每个方位都有对应的 LED 灯。”但这段程序<b>只在串口打印</b>，并不控制 LED；扩展板上亮着的小灯是板子自带的指示灯（就像原理图里的 D0 电源灯、D1 按键灯），不归程序管。以串口里的文字为准。</p>')}</div>`
+<div class="mt">${warnCard('原文与程序不符', '<p>原指南说：“当您往上拨时，对应的 LED 灯就会亮起，每个方位都有对应的 LED 灯。”但这段程序<b>只在串口打印</b>，并不控制 LED；扩展板上也没有每个方向对应的灯；原理图里的 D0 电源灯、D1 按键灯属于单独的摇杆模块，也不归程序管。以串口里的文字为准。</p>')}</div>`
       },
       {
         kind: 'html', title: '常见坑与挑战：摇杆遥控舵机',

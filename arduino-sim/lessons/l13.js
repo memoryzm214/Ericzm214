@@ -574,7 +574,7 @@ ${callout('info', '变大还是变小？', '取决于模块内部电路，原指
   </ol>
   <p class="small muted mt-s">注：原指南这里把两种颜色的材料印成了同一个名字，记结论就好。</p>
 </div>
-${callout('flag', '实验目的', '让灯光像流水一样：先让单个灯从左到右跑一趟，再让所有灯依次点亮，如此循环。<br>清单：UNO 主板 · 面包板 · USB 线 · LED ×8 · 1k 电阻 ×8 · 跳线')}`
+${callout('flag', '实验目的', '让灯光像流水一样：单个灯先从 D2 跑到 D9，再让所有灯依次点亮，如此循环。照原指南接线，D2 在最右边，所以看起来是从右往左“流”（模拟器也按这个顺序画）。<br>清单：UNO 主板 · 面包板 · USB 线 · LED ×8 · 1k 电阻 ×8 · 跳线')}`
       },
       {
         kind: 'html', title: '为什么要串电阻：限流电阻',
@@ -631,7 +631,7 @@ ${callout('question', '水往低处流', '正极在 5V 的“高处”，引脚�
         file: 'flowing_led.ino', code: FLOW, from: 1, to: 14, hl: [1, 2, 10, 11, 12],
         notes: [
           { line: [1, 2], text: '数组：<code>led_array[0]</code> 是 2，<code>[7]</code> 是 9；每一步停 100 毫秒。' },
-          { line: 4, text: '注释：从左到右一个一个闪（form 是 from 的笔误，不影响程序）。' },
+          { line: 4, text: '注释：一个一个闪（form 是 from 的笔误，不影响程序）。注释写“从左到右”，但照原指南接线 D2 在最右边，实际是从右往左流。' },
           { line: 5, text: '自定义函数：把“单灯跑一趟”打包。' },
           { line: 8, text: 'i 从 0 数到 7，8 盏灯挨个处理。' },
           { line: [10, 12], text: '拉低 → 这盏<b>亮</b>；等 0.1 秒；拉高 → 熄灭，换下一盏。记住：这里 LOW 才是亮。' }
@@ -683,7 +683,7 @@ ${callout('question', '水往低处流', '正极在 5V 的“高处”，引脚�
           programs: [{ name: 'flowing_led.ino', label: '流水灯', code: FLOW }],
           parts: [
             { type: 'board' },
-            { type: 'ledBar', pins: [2, 3, 4, 5, 6, 7, 8, 9], activeLow: true, label: '8 个 LED 短脚→D2～D9，长脚接 5V' }
+            { type: 'ledBar', pins: [9, 8, 7, 6, 5, 4, 3, 2], activeLow: true, label: '8 个 LED 短脚→D2～D9（照原指南：D9 在最左），长脚接 5V' }
           ],
           baud: 115200,
           tasks: [
@@ -695,7 +695,7 @@ ${callout('question', '水往低处流', '正极在 5V 的“高处”，引脚�
           ],
           smoke: [
             { expect: { part: ['ledBar', 'lit', '/^D\\d$/'], serial: 'start flash led !' }, timeout: 1500 },
-            { expect: { part: ['ledBar', 'lit', 'D2,D3,D4,D5,D6,D7,D8,D9'] }, timeout: 4000 },
+            { expect: { part: ['ledBar', 'lit', 'D9,D8,D7,D6,D5,D4,D3,D2'] }, timeout: 4000 },
             { baud: 9600, expect: { garbled: true } },
             { baud: 115200, wait: 200, expect: { garbled: false } },
             { task: 3, run: true },
@@ -763,7 +763,7 @@ ${callout('question', '打个比方', '有源蜂鸣器像带节拍器的音乐�
         tables: [
           { left: 'Arduino UNO R3', right: 'buzzer', rows: [['VCC', 'V'], ['GND', 'G'], ['9', 'S']] }
         ],
-        note: '表里的 VCC 就是 UNO 上的 5V。模块三根针：标“−”的接 GND，中间接 5V，标“S”的接信号（数字口）。',
+        note: '表里的 VCC 就是 UNO 上的 5V。模块三根针按旁边印的字接：V/VCC 接 5V，G/GND 接 GND，S 或 I/O 接信号（9 号脚），不要只看位置。',
         side: `${callout('list', '组件清单', 'Arduino Uno 主板 · 面包板 · USB 数据线 · 有源蜂鸣器模块 ×1 · 无源蜂鸣器模块 ×1 · 若干跳线', 'gray')}`
       },
       {
